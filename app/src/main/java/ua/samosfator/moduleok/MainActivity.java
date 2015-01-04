@@ -41,8 +41,8 @@ public class MainActivity extends ActionBarActivity {
         switch (id) {
             case R.id.action_settings:
                 return true;
-            case R.id.action_exit:
-                finish();
+            case R.id.action_refresh:
+                Toast.makeText(this, "Implement refreshing!", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show();
