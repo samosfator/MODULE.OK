@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ua.samosfator.moduleok.NavigationDrawerFragment">
+    tools:context="ua.samosfator.moduleok.NavigationDrawerFragment"
+    android:background="@color/grey_200">
 
     <Button
         style="?android:attr/buttonStyleSmall"
