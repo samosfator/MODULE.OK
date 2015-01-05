@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.SectionAdapter;
 
 public class NavigationDrawerFragment extends Fragment {
@@ -56,13 +57,12 @@ public class NavigationDrawerFragment extends Fragment {
         return layout;
     }
 
-    public static List<String> getSections() {
-        List<String> sections = new ArrayList<>();
-        sections.add("Section 1");
-        sections.add("Section 2");
-        sections.add("Section 3");
-        sections.add("Section 4");
-        sections.add("Log in"); //TODO: Log out in case of logged-in
+    public static List<DrawerSection> getSections() {
+        List<DrawerSection> sections = new ArrayList<>();
+        sections.add(new DrawerSection("Section 1", R.drawable.ic_login_grey600_24dp));
+        sections.add(new DrawerSection("Section 2", R.drawable.ic_logout_grey600_24dp));
+        sections.add(new DrawerSection("Section 3", R.drawable.ic_login_grey600_24dp));
+        sections.add(new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp));//TODO: Log out in case of logged-in
         return sections;
     }
 

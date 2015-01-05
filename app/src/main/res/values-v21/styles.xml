@@ -2,6 +2,6 @@
 <resources>
     <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme using Material Design here. -->
-        <item name="android:navigationBarColor">@color/nav_bar_color</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
     </style>
 </resources>

@@ -16,9 +16,9 @@ import ua.samosfator.moduleok.R;
 public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHolder> {
 
     private LayoutInflater inflater;
-    private List<String> data = Collections.emptyList();
+    private List<DrawerSection> data = Collections.emptyList();
 
-    public SectionAdapter(Context context, List<String> data) {
+    public SectionAdapter(Context context, List<DrawerSection> data) {
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -32,8 +32,9 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
 
     @Override
     public void onBindViewHolder(SectionViewHolder holder, int position) {
-        String current = data.get(position);
-        holder.title.setText(current);
+        DrawerSection currentSection = data.get(position);
+        holder.title.setText(currentSection.getTitle());
+        holder.title.setCompoundDrawablesWithIntrinsicBounds(currentSection.getIconId(), 0, 0, 0);
     }
 
     @Override
@@ -43,12 +44,10 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
 
     class SectionViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
-        private ImageView icon;
 
         public SectionViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.section_text);
-            icon = (ImageView) itemView.findViewById(R.id.section_icon);
         }
     }
 }

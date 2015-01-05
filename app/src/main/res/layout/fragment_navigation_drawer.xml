@@ -5,10 +5,46 @@
     tools:context="ua.samosfator.moduleok.NavigationDrawerFragment"
     android:background="@color/grey_200">
 
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/drawer_list">
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/accout_info_linearLayout">
 
-    </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/abc_primary_text_material_dark"
+            android:text="Голубєв Владислав" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="start"
+            android:padding="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/linearLayout"
+            android:id="@+id/textView2"
+            android:textColor="@color/abc_secondary_text_material_dark"
+            android:textSize="14sp"
+            android:text="ПЗС-12"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/accout_info_linearLayout"
+        android:layout_height="wrap_content"
+        android:id="@+id/drawer_list" />
 </RelativeLayout>

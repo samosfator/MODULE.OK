@@ -7,14 +7,14 @@
         <!-- Customize your theme here. -->
 
         <!-- colorPrimary is used for the default action bar background -->
-        <item name="colorPrimary">@color/indigo_500</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
 
         <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">@color/indigo_700</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
         <!-- colorAccent is used as the default value for colorControlActivated
              which is used to tint widgets -->
-        <item name="colorAccent">@color/yellow_A400</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight & colorSwitchThumbNormal. -->
@@ -23,7 +23,7 @@
     <style name="ToolbarTheme">
         <!-- android:textColorPrimary is the  color of the title text
        in the Toolbar, in the Theme.AppCompat theme:  -->
-        <item name="android:textColorPrimary">@color/abc_primary_text_material_dark</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
 
         <!-- android:textColorPrimaryInverse is the  color of the title
              text in the Toolbar, in the Theme.AppCompat.Light theme:  -->
@@ -36,10 +36,9 @@
               when running on API 21, but not on older versions of
               Android, so this is only necessary to support older
               Android versions.-->
-        <item name="actionMenuTextColor">@color/yellow_A700</item>
         <!-- android:textColorSecondary is the color of the menu
              overflow icon (three vertical dots) -->
-        <item name="android:textColorSecondary">@color/abc_secondary_text_material_dark</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
 
         <!-- This would set the toolbar's background color,
               but setting this also changes the popup menu's background,

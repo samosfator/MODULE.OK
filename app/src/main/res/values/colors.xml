@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="nav_bar_color">#303f9f</color>
-    
+    <color name="colorPrimary">@color/light_green_500</color>
+    <color name="colorPrimaryDark">@color/light_green_700</color>
+    <color name="colorAccent">#3B7080</color>
+    <color name="textColorPrimary">@color/abc_primary_text_material_dark</color>
+    <color name="textColorSecondary">@color/abc_secondary_text_material_dark</color>
+
     <color name="red_50">#fde0dc</color>
     <color name="red_100">#f9bdbb</color>
     <color name="red_200">#f69988</color>

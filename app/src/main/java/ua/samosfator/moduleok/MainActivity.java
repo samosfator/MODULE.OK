@@ -39,8 +39,6 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_settings:
-                return true;
             case R.id.action_refresh:
                 Toast.makeText(this, "Implement refreshing!", Toast.LENGTH_SHORT).show();
                 break;
