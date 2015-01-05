@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:orientation="vertical"
         android:gravity="center_vertical"
         android:paddingTop="8dp"
@@ -16,30 +16,31 @@
         android:id="@+id/accout_info_linearLayout">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginLeft="16dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="4dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="16dp"
             android:textColor="@color/abc_primary_text_material_dark"
-            android:text="Голубєв Владислав" />
+            android:text="Голубєв Владислав"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="start"
-            android:padding="8dp"
-            android:paddingRight="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_below="@+id/linearLayout"
+            android:paddingLeft="8dp"
+            android:layout_marginLeft="8dp"
             android:id="@+id/textView2"
             android:textColor="@color/abc_secondary_text_material_dark"
-            android:textSize="14sp"
+            android:textSize="12sp"
+            android:textStyle="bold"
             android:text="ПЗС-12"
-            android:textStyle="bold" />
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
-import ua.samosfator.moduleok.recyclerview.SectionAdapter;
+import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -27,6 +27,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    private List<DrawerSection> mSections;
 
     private RecyclerView mRecyclerView;
     private SectionAdapter mSectionAdapter;
@@ -44,6 +45,15 @@ public class NavigationDrawerFragment extends Fragment {
         if (savedInstanceState == null) {
             mFromSavedInstanceState = true;
         }
+        initSections();
+    }
+
+    private void initSections() {
+        mSections = new ArrayList<>();
+        mSections.add(new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp));
+        mSections.add(new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp));
+        mSections.add(new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp));
+        mSections.add(new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp));//TODO: Log out in case of logged-in
     }
 
     @Override
@@ -51,19 +61,10 @@ public class NavigationDrawerFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
-        mSectionAdapter = new SectionAdapter(getActivity(), getSections());
+        mSectionAdapter = new SectionAdapter(getActivity(), mSections);
         mRecyclerView.setAdapter(mSectionAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return layout;
-    }
-
-    public static List<DrawerSection> getSections() {
-        List<DrawerSection> sections = new ArrayList<>();
-        sections.add(new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp));
-        sections.add(new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp));
-        sections.add(new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp));
-        sections.add(new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp));//TODO: Log out in case of logged-in
-        return sections;
     }
 
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
