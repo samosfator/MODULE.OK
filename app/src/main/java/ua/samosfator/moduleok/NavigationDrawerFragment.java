@@ -28,8 +28,8 @@ public class NavigationDrawerFragment extends Fragment {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
 
-    private RecyclerView recyclerView;
-    private SectionAdapter sectionAdapter;
+    private RecyclerView mRecyclerView;
+    private SectionAdapter mSectionAdapter;
 
     private boolean mUserSawDrawer;
     private boolean mFromSavedInstanceState;
@@ -50,18 +50,18 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
-        sectionAdapter = new SectionAdapter(getActivity(), getSections());
-        recyclerView.setAdapter(sectionAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
+        mSectionAdapter = new SectionAdapter(getActivity(), getSections());
+        mRecyclerView.setAdapter(mSectionAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return layout;
     }
 
     public static List<DrawerSection> getSections() {
         List<DrawerSection> sections = new ArrayList<>();
-        sections.add(new DrawerSection("Section 1", R.drawable.ic_login_grey600_24dp));
-        sections.add(new DrawerSection("Section 2", R.drawable.ic_logout_grey600_24dp));
-        sections.add(new DrawerSection("Section 3", R.drawable.ic_login_grey600_24dp));
+        sections.add(new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp));
+        sections.add(new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp));
+        sections.add(new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp));
         sections.add(new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp));//TODO: Log out in case of logged-in
         return sections;
     }
