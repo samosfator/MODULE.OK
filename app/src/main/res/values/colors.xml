@@ -4,6 +4,8 @@
     <color name="colorPrimary">@color/light_green_500</color>
     <color name="colorPrimaryDark">@color/light_green_700</color>
     <color name="colorAccent">#3B7080</color>
+    <color name="colorControlNormal">@color/colorPrimary</color>
+    <color name="colorControlActivated">@color/colorAccent</color>
     <color name="textColorPrimary">@color/abc_primary_text_material_dark</color>
     <color name="textColorSecondary">@color/abc_secondary_text_material_dark</color>
 
