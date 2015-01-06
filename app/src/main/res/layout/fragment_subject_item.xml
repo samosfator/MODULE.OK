@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/subject_score"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/score_wrapper_size"
+        android:layout_height="@dimen/score_wrapper_size"
         android:text="75"
         android:textColor="@color/textColorPrimary"
         android:gravity="center"
@@ -24,11 +24,12 @@
         android:layout_height="match_parent"
         tools:ignore="RtlHardcoded,RtlSymmetry">
 
-        <TextView
+        <me.grantland.widget.AutofitTextView
             android:id="@+id/subject_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Філософія"
+            android:singleLine="true"
             android:textColor="@color/primary_text_default_material_light"
             android:layout_gravity="center_vertical"
             android:textSize="20sp" />

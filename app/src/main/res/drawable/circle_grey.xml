@@ -3,8 +3,8 @@
     android:shape="oval">
     <solid android:color="@color/grey_600" />
     <size
-        android:width="60dp"
-        android:height="60dp" />
+        android:width="@dimen/score_wrapper_size"
+        android:height="@dimen/score_wrapper_size" />
     <stroke
         android:width="2dp"
         android:color="#FFFFFF" />
