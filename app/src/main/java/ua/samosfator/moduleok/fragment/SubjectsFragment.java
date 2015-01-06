@@ -25,8 +25,17 @@ public class SubjectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
-        student = new Student(getMainPageHtml());
+        initStudent();
         return rootView;
+    }
+
+    private void initStudent() {
+        Student storedStudent = Student.readSavedStudent();
+        if (storedStudent != null) {
+            student = storedStudent;
+        } else {
+            student = new Student(getMainPageHtml());
+        }
     }
 
     private String getMainPageHtml() {
