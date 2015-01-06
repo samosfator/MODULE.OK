@@ -46,7 +46,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserSawDrawer = Boolean.valueOf(readFromPreferences(getActivity(), KEY_USER_SAW_DRAWER, "false"));
+        mUserSawDrawer = Boolean.valueOf(Preferences.read(KEY_USER_SAW_DRAWER, "false"));
         if (savedInstanceState == null) {
             mFromSavedInstanceState = true;
         }
@@ -103,7 +103,7 @@ public class NavigationDrawerFragment extends Fragment {
                 super.onDrawerOpened(drawerView);
                 if (!mUserSawDrawer) {
                     mUserSawDrawer = true;
-                    saveToPreferences(getActivity(), KEY_USER_SAW_DRAWER, String.valueOf(mUserSawDrawer));
+                    Preferences.save(KEY_USER_SAW_DRAWER, String.valueOf(mUserSawDrawer));
                 }
                 getActivity().invalidateOptionsMenu();
             }
@@ -126,17 +126,5 @@ public class NavigationDrawerFragment extends Fragment {
                 mDrawerToggle.syncState();
             }
         });
-    }
-
-    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(preferenceName, preferenceValue);
-        editor.apply();
-    }
-
-    public static String readFromPreferences(Context context, String preferenceName, String defaultValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(preferenceName, defaultValue);
     }
 }
