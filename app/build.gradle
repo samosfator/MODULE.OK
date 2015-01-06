@@ -25,5 +25,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'org.jsoup:jsoup:1.8.1'
     compile 'org.apache.commons:commons-lang3:3.3.2'
-    compile 'org.lucasr.dspec:dspec:0.1.1'
+    compile 'com.rengwuxian.materialedittext:library:1.7.1'
 }

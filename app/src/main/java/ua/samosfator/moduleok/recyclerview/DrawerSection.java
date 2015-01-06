@@ -1,12 +1,13 @@
 package ua.samosfator.moduleok.recyclerview;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 
 public class DrawerSection {
     private String title;
     private int iconId;
 
-    private Intent intent;
+    private Fragment fragment;
 
     public DrawerSection(String title, int iconId) {
         this.title = title;
@@ -21,11 +22,11 @@ public class DrawerSection {
         return iconId;
     }
 
-    public Intent getIntent() {
-        return intent;
+    public Fragment getFragment() {
+        return fragment;
     }
 
-    public void setIntent(Intent intent) {
-        this.intent = intent;
+    public void setFragment(Fragment fragment) {
+        this.fragment = fragment;
     }
 }

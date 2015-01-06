@@ -14,19 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+
+        <FrameLayout
+            android:id="@+id/main_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="ua.samosfator.moduleok.MainActivity">
-
-            <TextView
-                android:text="@string/hello_world"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/textView" />
-
-        </RelativeLayout>
+            android:layout_height="match_parent">
+        </FrameLayout>
 
         <fragment
             android:name="ua.samosfator.moduleok.NavigationDrawerFragment"

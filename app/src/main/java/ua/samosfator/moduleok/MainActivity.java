@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import ua.samosfator.moduleok.NavigationDrawerFragment;
+import ua.samosfator.moduleok.R;
+
 
 public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
@@ -16,6 +19,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Preferences.init(getApplicationContext());
 
         toolbar = (Toolbar) findViewById(R.id.app_toolbar);
         toolbar.setTitle(R.string.main_toolbar_text);

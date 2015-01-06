@@ -14,5 +14,8 @@
     <string name="title_activity_modules">ModulesActivity</string>
     <string name="title_activity_stats">StatsActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="login_editText_hint">Login</string>
+    <string name="password_editText_hint">Password</string>
+    <string name="login_explanation">Please, enter your login and password that you use for mod.tanet.edu.te.ua</string>
 
 </resources>
