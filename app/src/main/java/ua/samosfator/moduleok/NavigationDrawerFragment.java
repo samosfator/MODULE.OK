@@ -87,6 +87,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.main_container, mSections.get(position).getFragment())
                         .commit();
+                mDrawerLayout.closeDrawers();
             }
         }));
         return layout;
