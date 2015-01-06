@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:orientation="horizontal"
+    tools:context="ua.samosfator.moduleok.fragment.SubjectsFragment">
+
+    <TextView
+        android:id="@+id/subject_score"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="75"
+        android:textColor="@color/textColorPrimary"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:background="@drawable/circle_cyan" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent"
+        tools:ignore="RtlHardcoded,RtlSymmetry">
+
+        <TextView
+            android:id="@+id/subject_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Філософія"
+            android:textColor="@color/primary_text_default_material_light"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="2dp"
+            android:paddingTop="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/subject_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02.02.14"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/subject_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="40%"
+                android:paddingLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,13 +1,8 @@
 package ua.samosfator.moduleok;
 
-import com.cedarsoftware.util.io.JsonReader;
-import com.cedarsoftware.util.io.JsonWriter;
-
 import org.apache.commons.lang3.text.WordUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-import java.io.IOException;
 
 import ua.samosfator.moduleok.parser.Semesters;
 
@@ -32,28 +27,6 @@ public class Student {
 
         this.group = getGroup();
         this.semesters = new Semesters(getMainPageDocument().html());
-
-        store();
-    }
-
-    public static Student readSavedStudent() {
-        String studentJson = Preferences.read("student", "");
-        if (studentJson.length() > 10) {
-            try {
-                return (Student) JsonReader.jsonToJava(studentJson);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    private void store() {
-        try {
-            Preferences.save("student", JsonWriter.objectToJson(this));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private String getName() {
@@ -94,5 +67,9 @@ public class Student {
 
     private Document getMainPageDocument() {
         return Jsoup.parse(mainPageHtml);
+    }
+
+    public Semesters getSemesters() {
+        return semesters;
     }
 }

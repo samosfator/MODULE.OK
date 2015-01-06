@@ -26,7 +26,6 @@ import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
 
 public class NavigationDrawerFragment extends Fragment {
 
-    public static final String PREF_FILE_NAME = "NavigationDrawerFragment";
     public static final String KEY_USER_SAW_DRAWER = "user_saw_drawer";
 
     private ActionBarDrawerToggle mDrawerToggle;
