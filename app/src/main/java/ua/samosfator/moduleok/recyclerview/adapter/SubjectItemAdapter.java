@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -37,6 +38,7 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
             R.drawable.circle_red,
             R.drawable.circle_teal
     };
+    private List<Integer> usedDrawables = new ArrayList<>();
 
     public SubjectItemAdapter(Context context, List<Subject> data) {
         inflater = LayoutInflater.from(context);
@@ -68,14 +70,22 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
         private TextView subjectName;
         private TextView subjectScore;
         private TextView subjectDate;
-        private ImageView icon;
 
         public SubjectItemViewHolder(View itemView) {
             super(itemView);
             subjectName = (TextView) itemView.findViewById(R.id.subject_name);
             subjectScore = (TextView) itemView.findViewById(R.id.subject_score);
-            subjectScore.setBackgroundResource(drawableCircles[new Random().nextInt(drawableCircles.length)]);
+            subjectScore.setBackgroundResource(getRandomUniqueDrawable());
             subjectDate = (TextView) itemView.findViewById(R.id.subject_date);
+        }
+
+        private int getRandomUniqueDrawable() {
+            int randInt = new Random().nextInt(drawableCircles.length);
+            while (usedDrawables.contains(randInt)) {
+                randInt = new Random().nextInt(drawableCircles.length);
+            }
+            usedDrawables.add(randInt);
+            return drawableCircles[randInt];
         }
     }
 }
