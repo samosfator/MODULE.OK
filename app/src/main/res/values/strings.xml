@@ -17,5 +17,6 @@
     <string name="login_editText_hint">Login</string>
     <string name="password_editText_hint">Password</string>
     <string name="login_explanation">Please, enter your login and password that you use for mod.tanet.edu.te.ua</string>
+    <string name="wrong_credentials_text">Wrong login or password</string>
 
 </resources>

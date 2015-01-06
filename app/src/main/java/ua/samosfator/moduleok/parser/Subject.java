@@ -75,6 +75,10 @@ public class Subject implements Serializable {
         this.sourceHtml = html;
     }
 
+    public Module getLastModule() {
+        return modules.get(modules.size() - 1);
+    }
+
     public static Subject fromHtml(String html, Semester semester) {
         Elements cells = Jsoup.parse(html, "", Parser.xmlParser()).select("td");
 
@@ -94,6 +98,4 @@ public class Subject implements Serializable {
     public String toString() {
         return "\nSubject: \"" + name + "\" - " + controlType.getControlName() + " - " + totalScore + "\n\t\tModules(" + modules.size() + "): " + modules;
     }
-
-
 }

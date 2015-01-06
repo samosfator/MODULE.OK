@@ -1,7 +1,5 @@
 package ua.samosfator.moduleok;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,11 @@ import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
 
 public class NavigationDrawerFragment extends Fragment {
 
-    public static final String PREF_FILE_NAME = "NavigationDrawerFragment";
     public static final String KEY_USER_SAW_DRAWER = "user_saw_drawer";
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private List<DrawerSection> mSections;
+    public static List<DrawerSection> mSections;
 
     private RecyclerView mRecyclerView;
     private SectionAdapter mSectionAdapter;

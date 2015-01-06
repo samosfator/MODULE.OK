@@ -1,36 +1,90 @@
 package ua.samosfator.moduleok.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
+
+import ua.samosfator.moduleok.Auth;
+import ua.samosfator.moduleok.NavigationDrawerFragment;
 import ua.samosfator.moduleok.R;
 
 
 public class LoginFragment extends Fragment {
 
+    private MaterialEditText login_txt;
+    private MaterialEditText password_txt;
+    private Button login_button;
+
     public LoginFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
+        login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
+        password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
+        login_button = (Button) rootView.findViewById(R.id.login_btn);
 
-        Button login_button = (Button) rootView.findViewById(R.id.login_btn);
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                enableInputs(false);
 
+                final String login = login_txt.getText().toString();
+                final String password = password_txt.getText().toString();
+
+                final Auth auth = new Auth();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        auth.signIn(login, password);
+
+                        if (auth.isSuccess()) {
+                            openSubjectsFragment();
+                        } else {
+                            showError();
+                        }
+                    }
+                }).start();
             }
         });
 
         return rootView;
     }
 
+    private void openSubjectsFragment() {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.main_container, NavigationDrawerFragment.mSections.get(0).getFragment())
+                        .commit();
+            }
+        });
+    }
 
+    private void showError() {
+        password_txt.setError(getString(R.string.wrong_credentials_text));
+        enableInputs(true);
+    }
+
+    private void enableInputs(final boolean bool) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                login_txt.setEnabled(bool);
+                password_txt.setEnabled(bool);
+                login_button.setEnabled(bool);
+            }
+        });
+    }
 }

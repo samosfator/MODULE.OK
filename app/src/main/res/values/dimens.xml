@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_drawer_width">280dp</dimen>
     <dimen name="login_fields_with">270dp</dimen>
+    <dimen name="score_wrapper_size">50dp</dimen>
 </resources>
