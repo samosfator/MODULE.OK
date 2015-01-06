@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import ua.samosfator.moduleok.NavigationDrawerFragment;
+import ua.samosfator.moduleok.R;
+
 
 public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;

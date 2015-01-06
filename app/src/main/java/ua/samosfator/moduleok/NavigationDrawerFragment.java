@@ -1,7 +1,6 @@
 package ua.samosfator.moduleok;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +18,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.samosfator.moduleok.fragment.LoginFragment;
+import ua.samosfator.moduleok.fragment.ModulesFragment;
+import ua.samosfator.moduleok.fragment.SubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
@@ -56,19 +58,18 @@ public class NavigationDrawerFragment extends Fragment {
         mSections = new ArrayList<>();
 
         DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
-//        subjectsSection.setIntent(new Intent(currentActivity, SubjectsActivity.class));
+        subjectsSection.setFragment(new SubjectsFragment());
         mSections.add(subjectsSection);
 
         DrawerSection modulesSection = new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp);
-//        modulesSection.setIntent(new Intent(currentActivity, ModulesActivity.class));
+        modulesSection.setFragment(new ModulesFragment());
         mSections.add(modulesSection);
 
-        DrawerSection statsSection = new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp);
-//        statsSection.setIntent(new Intent(currentActivity, StatsActivity.class));
-        mSections.add(statsSection);
+//        DrawerSection statsSection = new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp);
+//        mSections.add(statsSection);
 
         DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
-//        loginSection.setIntent(new Intent(currentActivity, LoginActivity.class));
+        loginSection.setFragment(new LoginFragment());
         mSections.add(loginSection);
     }
 
@@ -83,7 +84,9 @@ public class NavigationDrawerFragment extends Fragment {
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(mSections.get(position).getIntent());
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.main_container, mSections.get(position).getFragment())
+                        .commit();
             }
         }));
         return layout;
