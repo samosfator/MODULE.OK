@@ -18,43 +18,40 @@ import ua.samosfator.moduleok.R;
 
 public class LoginFragment extends Fragment {
 
+    private MaterialEditText login_txt;
+    private MaterialEditText password_txt;
+    private Button login_button;
+
     public LoginFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-        final MaterialEditText login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
-        final MaterialEditText password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
-        final Button login_button = (Button) rootView.findViewById(R.id.login_btn);
+        login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
+        password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
+        login_button = (Button) rootView.findViewById(R.id.login_btn);
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login_txt.setEnabled(false);
-                password_txt.setEnabled(false);
-                login_button.setEnabled(false);
+                enableInputs(false);
 
                 final String login = login_txt.getText().toString();
                 final String password = password_txt.getText().toString();
 
                 final Auth auth = new Auth();
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         auth.signIn(login, password);
 
                         if (auth.isSuccess()) {
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    getFragmentManager().beginTransaction()
-                                            .replace(R.id.main_container, NavigationDrawerFragment.mSections.get(0).getFragment())
-                                            .commit();
-                                }
-                            });
+                            openSubjectsFragment();
+                        } else {
+                            showError();
                         }
                     }
                 }).start();
@@ -64,5 +61,30 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
+    private void openSubjectsFragment() {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.main_container, NavigationDrawerFragment.mSections.get(0).getFragment())
+                        .commit();
+            }
+        });
+    }
 
+    private void showError() {
+        password_txt.setError(getString(R.string.wrong_credentials_text));
+        enableInputs(true);
+    }
+
+    private void enableInputs(final boolean bool) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                login_txt.setEnabled(bool);
+                password_txt.setEnabled(bool);
+                login_button.setEnabled(bool);
+            }
+        });
+    }
 }
