@@ -1,10 +1,12 @@
 package ua.samosfator.moduleok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
@@ -49,24 +52,24 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void initSections() {
-//        FragmentActivity currentActivity = getActivity();
-//        mSections = new ArrayList<>();
-//
-//        DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
+        FragmentActivity currentActivity = getActivity();
+        mSections = new ArrayList<>();
+
+        DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
 //        subjectsSection.setIntent(new Intent(currentActivity, SubjectsActivity.class));
-//        mSections.add(subjectsSection);
-//
-//        DrawerSection modulesSection = new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp);
+        mSections.add(subjectsSection);
+
+        DrawerSection modulesSection = new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp);
 //        modulesSection.setIntent(new Intent(currentActivity, ModulesActivity.class));
-//        mSections.add(modulesSection);
-//
-//        DrawerSection statsSection = new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp);
+        mSections.add(modulesSection);
+
+        DrawerSection statsSection = new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp);
 //        statsSection.setIntent(new Intent(currentActivity, StatsActivity.class));
-//        mSections.add(statsSection);
-//
-//        DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
+        mSections.add(statsSection);
+
+        DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
 //        loginSection.setIntent(new Intent(currentActivity, LoginActivity.class));
-//        mSections.add(loginSection);
+        mSections.add(loginSection);
     }
 
     @Override
