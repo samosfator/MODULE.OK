@@ -58,6 +58,7 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(current.getLastModule().getFormattedDate());
         holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
+        holder.subjectScore.setBackgroundResource(getDrawableDependsOnScore(current.getLastModule().getScore()));
     }
 
     @Override
@@ -75,17 +76,28 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
             super(itemView);
             subjectName = (TextView) itemView.findViewById(R.id.subject_name);
             subjectScore = (TextView) itemView.findViewById(R.id.subject_score);
-            subjectScore.setBackgroundResource(getRandomUniqueDrawable());
             subjectDate = (TextView) itemView.findViewById(R.id.subject_date);
         }
+    }
 
-        private int getRandomUniqueDrawable() {
-            int randInt = new Random().nextInt(drawableCircles.length);
-            while (usedDrawables.contains(randInt)) {
-                randInt = new Random().nextInt(drawableCircles.length);
-            }
-            usedDrawables.add(randInt);
-            return drawableCircles[randInt];
+    private int getDrawableDependsOnScore(int score) {
+        if (score >= 90 && score <= 100) {
+            return R.drawable.circle_5;
+        } else if (score >= 75 && score < 90) {
+            return R.drawable.circle_4;
+        } else if(score >= 60 && score < 75) {
+            return R.drawable.circle_3;
+        } else {
+            return R.drawable.circle_2;
         }
+    }
+
+    private int getRandomUniqueDrawable() {
+        int randInt = new Random().nextInt(drawableCircles.length);
+        while (usedDrawables.contains(randInt)) {
+            randInt = new Random().nextInt(drawableCircles.length);
+        }
+        usedDrawables.add(randInt);
+        return drawableCircles[randInt];
     }
 }
