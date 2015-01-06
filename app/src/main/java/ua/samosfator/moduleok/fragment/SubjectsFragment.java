@@ -53,6 +53,9 @@ public class SubjectsFragment extends Fragment {
     private void setAccountInfo() {
         TextView studentName_TextView = (TextView) getActivity().findViewById(R.id.student_name_txt);
         TextView studentGroup_TextView = (TextView) getActivity().findViewById(R.id.student_group_txt);
+
+        studentName_TextView.setText(mStudent.getNameSurname());
+        studentGroup_TextView.setText(mStudent.getGroupName());
     }
 
     private void initStudent() {

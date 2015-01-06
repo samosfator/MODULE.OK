@@ -29,6 +29,14 @@ public class Student {
         this.semesters = new Semesters(getMainPageDocument().html());
     }
 
+    public String getNameSurname() {
+        return getName() + " " + getSurName();
+    }
+
+    public String getGroupName() {
+        return getGroup();
+    }
+
     private String getName() {
         if (this.name != null) return this.name;
         return getNameParts()[1];

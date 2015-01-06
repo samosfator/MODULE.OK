@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
-import me.grantland.widget.AutofitHelper;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.parser.Subject;
 
