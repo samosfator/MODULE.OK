@@ -1,7 +1,5 @@
 package ua.samosfator.moduleok;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,7 +30,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private List<DrawerSection> mSections;
+    public static List<DrawerSection> mSections;
 
     private RecyclerView mRecyclerView;
     private SectionAdapter mSectionAdapter;
