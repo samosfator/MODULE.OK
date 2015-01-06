@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.parser.Subject;
@@ -18,6 +19,24 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
 
     private LayoutInflater inflater;
     private List<Subject> data = Collections.emptyList();
+
+    private int[] drawableCircles = {
+            R.drawable.circle_blue,
+            R.drawable.circle_brown,
+            R.drawable.circle_cyan,
+            R.drawable.circle_deeppurple,
+            R.drawable.circle_green,
+            R.drawable.circle_grey,
+            R.drawable.circle_indigo,
+            R.drawable.circle_lightblue,
+            R.drawable.circle_lightgreen,
+            R.drawable.circle_lime,
+            R.drawable.circle_orange,
+            R.drawable.circle_pink,
+            R.drawable.circle_purple,
+            R.drawable.circle_red,
+            R.drawable.circle_teal
+    };
 
     public SubjectItemAdapter(Context context, List<Subject> data) {
         inflater = LayoutInflater.from(context);
@@ -55,6 +74,7 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
             super(itemView);
             subjectName = (TextView) itemView.findViewById(R.id.subject_name);
             subjectScore = (TextView) itemView.findViewById(R.id.subject_score);
+            subjectScore.setBackgroundResource(drawableCircles[new Random().nextInt(drawableCircles.length)]);
             subjectDate = (TextView) itemView.findViewById(R.id.subject_date);
         }
     }

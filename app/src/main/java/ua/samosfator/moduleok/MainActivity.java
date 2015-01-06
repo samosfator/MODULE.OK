@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ua.samosfator.moduleok.NavigationDrawerFragment;
@@ -20,6 +21,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         Preferences.init(getApplicationContext());
         setContentView(R.layout.activity_main);
+        setAccountInfo();
 
         toolbar = (Toolbar) findViewById(R.id.app_toolbar);
         toolbar.setTitle(R.string.main_toolbar_text);
@@ -31,6 +33,13 @@ public class MainActivity extends ActionBarActivity {
         drawerFragment.setup(R.id.navigation_drawer_fragment, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
     }
 
+    private void setAccountInfo() {
+        TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
+        TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
+
+        studentName_TextView.setText(Auth.getCurrentStudent().getNameSurname());
+        studentGroup_TextView.setText(Auth.getCurrentStudent().getGroupName());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
