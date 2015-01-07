@@ -34,7 +34,13 @@ public class SubjectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
-        mSubjects = Auth.getCurrentStudent().getSemesters().getFirst().getSubjects();
+        try {
+            mSubjects = Auth.getCurrentStudent().getSemesters().getFirst().getSubjects();
+        } catch (IllegalArgumentException e) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.main_container, new LoginFragment())
+                    .commit();
+        }
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
         mSectionAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
         mRecyclerView.setAdapter(mSectionAdapter);

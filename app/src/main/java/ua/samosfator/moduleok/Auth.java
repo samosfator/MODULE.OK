@@ -1,5 +1,7 @@
 package ua.samosfator.moduleok;
 
+import android.util.Log;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,7 +46,7 @@ public class Auth {
         return success;
     }
 
-    public static Student getCurrentStudent() {
+    public static Student getCurrentStudent() throws IllegalArgumentException {
         if (student == null) {
             initStudent();
         }
@@ -56,9 +58,13 @@ public class Auth {
     }
 
     private static String getMainPageHtml() {
+        if (Preferences.read("SESSIONID", "").equals("")) {
+            throw new IllegalArgumentException("MUST LOG IN AT FIRST");
+        }
         final String savedMainPageHtml = Preferences.read("mainPageHtml", "");
         String mainPageHtml;
-        if (savedMainPageHtml.length() < 10) {
+
+        if (savedMainPageHtml.length() < 1400) {
             mainPageHtml = loadMainPage();
             Preferences.save("mainPageHtml", mainPageHtml);
         } else {

@@ -20,6 +20,7 @@
             <ViewFlipper
                 android:id="@+id/subject_score_view_flipper"
                 android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -27,7 +28,6 @@
                     android:layout_width="@dimen/score_wrapper_size"
                     android:layout_height="@dimen/score_wrapper_size"
                     android:text="75"
-                    android:layout_gravity="center_vertical"
                     android:textColor="@color/textColorPrimary"
                     android:gravity="center"
                     android:textSize="22sp"

@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import ua.samosfator.moduleok.NavigationDrawerFragment;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.fragment.LoginFragment;
+import ua.samosfator.moduleok.fragment.SubjectsFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -36,9 +38,19 @@ public class MainActivity extends ActionBarActivity {
     private void setAccountInfo() {
         TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
         TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
-
-        studentName_TextView.setText(Auth.getCurrentStudent().getNameSurname());
-        studentGroup_TextView.setText(Auth.getCurrentStudent().getGroupName());
+        if (Preferences.read("SESSIONID", "").equals("")) {
+            studentName_TextView.setText("Іван Іванов");
+            studentGroup_TextView.setText("АБВ-23");
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_container, new LoginFragment())
+                    .commit();
+        } else {
+            studentName_TextView.setText(Auth.getCurrentStudent().getNameSurname());
+            studentGroup_TextView.setText(Auth.getCurrentStudent().getGroupName());
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_container, new SubjectsFragment())
+                    .commit();
+        }
     }
 
     @Override

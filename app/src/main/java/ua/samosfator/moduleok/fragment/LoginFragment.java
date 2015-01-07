@@ -8,13 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.NavigationDrawerFragment;
 import ua.samosfator.moduleok.R;
-
 
 public class LoginFragment extends Fragment {
 
@@ -28,7 +28,7 @@ public class LoginFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
         login_button = (Button) rootView.findViewById(R.id.login_btn);
@@ -50,6 +50,7 @@ public class LoginFragment extends Fragment {
 
                         if (auth.isSuccess()) {
                             openSubjectsFragment();
+                            setAccountInfo();
                         } else {
                             showError();
                         }
@@ -59,6 +60,27 @@ public class LoginFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void setAccountInfo() {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView studentName_TextView = (TextView) getActivity().findViewById(R.id.student_name_txt);
+                    TextView studentGroup_TextView = (TextView) getActivity().findViewById(R.id.student_group_txt);
+
+                    studentName_TextView.setText(Auth.getCurrentStudent().getNameSurname());
+                    studentGroup_TextView.setText(Auth.getCurrentStudent().getGroupName());
+
+                    NavigationDrawerFragment.toggleLogout();
+                }
+            });
+        }
+    }
+
+    private void doSetAccountInfo() {
+
     }
 
     private void openSubjectsFragment() {

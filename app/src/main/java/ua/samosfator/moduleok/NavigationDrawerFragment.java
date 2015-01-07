@@ -12,12 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.samosfator.moduleok.fragment.LoginFragment;
+import ua.samosfator.moduleok.fragment.LogoutFragment;
 import ua.samosfator.moduleok.fragment.ModulesFragment;
 import ua.samosfator.moduleok.fragment.SubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
@@ -52,7 +52,6 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void initSections() {
-        FragmentActivity currentActivity = getActivity();
         mSections = new ArrayList<>();
 
         DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
@@ -66,9 +65,23 @@ public class NavigationDrawerFragment extends Fragment {
 //        DrawerSection statsSection = new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp);
 //        mSections.add(statsSection);
 
-        DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
-        loginSection.setFragment(new LoginFragment());
-        mSections.add(loginSection);
+        if (Preferences.read("SESSIONID", "").equals("")) {
+            DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
+            loginSection.setFragment(new LoginFragment());
+            mSections.add(loginSection);
+        } else {
+            toggleLogout();
+        }
+    }
+
+    public static void toggleLogout() {
+        DrawerSection logoutSection = new DrawerSection("Log out", R.drawable.ic_logout_grey600_24dp);
+        logoutSection.setFragment(new LogoutFragment());
+        if (mSections.size() == 2) {
+            mSections.add(logoutSection);
+        } else {
+            mSections.set(2, logoutSection);
+        }
     }
 
     @Override
