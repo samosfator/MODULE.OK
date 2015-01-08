@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.NavigationDrawerFragment;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
 
@@ -49,10 +51,10 @@ public class LoginFragment extends Fragment {
                         auth.signIn(login, password);
 
                         if (auth.isSuccess()) {
-                            openSubjectsFragment();
-                            setAccountInfo();
+                            EventBus.getDefault().post(new LoginEvent());
                         } else {
                             showError();
+                            enableInputs(true);
                         }
                     }
                 }).start();
@@ -62,41 +64,8 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
-    private void setAccountInfo() {
-        if (getActivity() != null) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    TextView studentName_TextView = (TextView) getActivity().findViewById(R.id.student_name_txt);
-                    TextView studentGroup_TextView = (TextView) getActivity().findViewById(R.id.student_group_txt);
-
-                    studentName_TextView.setText(Auth.getCurrentStudent().getNameSurname());
-                    studentGroup_TextView.setText(Auth.getCurrentStudent().getGroupName());
-
-                    NavigationDrawerFragment.toggleLogout();
-                }
-            });
-        }
-    }
-
-    private void doSetAccountInfo() {
-
-    }
-
-    private void openSubjectsFragment() {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, NavigationDrawerFragment.mSections.get(0).getFragment())
-                        .commit();
-            }
-        });
-    }
-
     private void showError() {
         password_txt.setError(getString(R.string.wrong_credentials_text));
-        enableInputs(true);
     }
 
     private void enableInputs(final boolean bool) {
