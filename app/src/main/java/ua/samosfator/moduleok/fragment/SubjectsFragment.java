@@ -12,9 +12,11 @@ import android.widget.ViewFlipper;
 
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.animation.AnimationFactory;
+import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.parser.Subject;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 import ua.samosfator.moduleok.recyclerview.adapter.SubjectItemAdapter;
@@ -30,17 +32,16 @@ public class SubjectsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
-        try {
-            mSubjects = Auth.getCurrentStudent().getSemesters().getFirst().getSubjects();
-        } catch (IllegalArgumentException e) {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.main_container, new LoginFragment())
-                    .commit();
-        }
+        tryInitSubjects();
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
         mSectionAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
         mRecyclerView.setAdapter(mSectionAdapter);
@@ -56,5 +57,27 @@ public class SubjectsFragment extends Fragment {
             }
         }));
         return rootView;
+    }
+
+    private void tryInitSubjects() {
+        try {
+            mSubjects = Auth.getCurrentStudent().getSemesters().getFirst().getSubjects();
+        } catch (IllegalArgumentException e) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.main_container, new LoginFragment())
+                    .commit();
+        }
+    }
+
+    public void onEvent(RefreshEvent event) {
+        Auth.refreshStudent();
+        tryInitSubjects();
+        mSectionAdapter.notifyItemRangeChanged(0, mSectionAdapter.getItemCount());
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }

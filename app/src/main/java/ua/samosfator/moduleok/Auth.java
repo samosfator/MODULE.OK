@@ -64,8 +64,13 @@ public class Auth {
         student = new Student(getMainPageHtml());
     }
 
+    public static void refreshStudent() {
+        if (!Auth.isLoggedIn()) return;
+        student = new Student(loadMainPage());
+    }
+
     private static String getMainPageHtml() {
-        if (Preferences.read("SESSIONID", "").equals("")) {
+        if (!Auth.isLoggedIn()) {
             throw new IllegalArgumentException("MUST LOG IN AT FIRST");
         }
         final String savedMainPageHtml = Preferences.read("mainPageHtml", "");
@@ -92,6 +97,6 @@ public class Auth {
     }
 
     public static boolean isLoggedIn() {
-        return ! Preferences.read("SESSIONID", "").equals("");
+        return !Preferences.read("SESSIONID", "").equals("");
     }
 }

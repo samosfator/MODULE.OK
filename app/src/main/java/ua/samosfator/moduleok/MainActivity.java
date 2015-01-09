@@ -12,6 +12,7 @@ import android.widget.Toast;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
+import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.fragment.SubjectsFragment;
@@ -112,7 +113,9 @@ public class MainActivity extends ActionBarActivity {
 
         switch (id) {
             case R.id.action_refresh:
-                Toast.makeText(this, "Implement refreshing!", Toast.LENGTH_SHORT).show();
+                EventBus.getDefault().post(new RefreshEvent());
+
+                Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show();
