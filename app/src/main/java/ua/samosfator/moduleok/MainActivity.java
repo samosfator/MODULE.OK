@@ -13,6 +13,7 @@ import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
+import ua.samosfator.moduleok.fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.fragment.SubjectsFragment;
 
 

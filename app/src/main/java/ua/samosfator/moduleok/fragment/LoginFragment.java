@@ -8,13 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
-import ua.samosfator.moduleok.NavigationDrawerFragment;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 
