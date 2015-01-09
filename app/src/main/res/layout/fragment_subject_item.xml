@@ -10,6 +10,8 @@
     <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         app:rippleDimension="10dp"
+        app:rippleHover="true"
+        app:rippleOverlay="true"
         android:layout_height="match_parent">
 
         <LinearLayout
