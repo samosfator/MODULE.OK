@@ -31,4 +31,5 @@ dependencies {
 //    compile 'me.grantland:autofittextview:0.2.+'
     compile 'com.balysv:material-ripple:0.9.5-SNAPSHOT@aar'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.7'
 }

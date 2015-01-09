@@ -2,6 +2,7 @@ package ua.samosfator.moduleok.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ import ua.samosfator.moduleok.recyclerview.adapter.SubjectItemAdapter;
 
 public class SubjectsFragment extends Fragment {
 
-    public static List<Subject> mSubjects;
+    private List<Subject> mSubjects;
 
     private RecyclerView mRecyclerView;
     private SubjectItemAdapter mSectionAdapter;
@@ -50,8 +51,12 @@ public class SubjectsFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 TextView subjectTotalScoreTextView = (TextView) view.findViewById(R.id.subject_total_score);
+
                 ViewFlipper viewFlipper = (ViewFlipper) view.findViewById(R.id.subject_score_view_flipper);
                 AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
+
+                System.out.println(subjectTotalScoreTextView.getText().toString());
+                System.out.println(mSubjects);
 
                 subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
             }
@@ -61,7 +66,8 @@ public class SubjectsFragment extends Fragment {
 
     private void tryInitSubjects() {
         try {
-            mSubjects = Auth.getCurrentStudent().getSemesters().getFirst().getSubjects();
+            int semester = getArguments().getInt("semester");
+            mSubjects = Auth.getCurrentStudent().getSemesters().get(semester).getSubjects();
         } catch (IllegalArgumentException e) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.main_container, new LoginFragment())

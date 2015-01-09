@@ -15,6 +15,7 @@ import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.NavigationDrawerFragment;
+import ua.samosfator.moduleok.fragment.SemesterSubjectsFragment;
 import ua.samosfator.moduleok.fragment.SubjectsFragment;
 
 
@@ -91,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void openSubjectsFragment() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new SubjectsFragment())
+                .replace(R.id.main_container, new SemesterSubjectsFragment())
                 .commit();
     }
 

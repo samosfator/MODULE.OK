@@ -21,10 +21,6 @@ import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
-import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.LogoutFragment;
-import ua.samosfator.moduleok.fragment.ModulesFragment;
-import ua.samosfator.moduleok.fragment.SubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
@@ -61,7 +57,7 @@ public class NavigationDrawerFragment extends Fragment {
         mSections = new ArrayList<>();
 
         DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
-        subjectsSection.setFragment(new SubjectsFragment());
+        subjectsSection.setFragment(new SemesterSubjectsFragment());
         mSections.add(subjectsSection);
 
         DrawerSection modulesSection = new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp);
