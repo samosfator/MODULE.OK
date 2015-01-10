@@ -1,12 +1,14 @@
-package ua.samosfator.moduleok.fragment;
+package ua.samosfator.moduleok;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.fragment.SubjectsFragment;
 
 public class SemestersPagerAdapter extends FragmentPagerAdapter {
 
