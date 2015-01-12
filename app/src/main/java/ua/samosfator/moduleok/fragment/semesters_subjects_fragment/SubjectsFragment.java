@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment;
+package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +17,7 @@ import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.animation.AnimationFactory;
 import ua.samosfator.moduleok.event.RefreshEvent;
+import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Subject;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 import ua.samosfator.moduleok.recyclerview.adapter.SubjectItemAdapter;

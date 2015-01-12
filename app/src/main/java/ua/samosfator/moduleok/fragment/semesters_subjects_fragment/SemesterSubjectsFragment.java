@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment;
+package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.astuetz.PagerSlidingTabStrip;
 
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.SemestersPagerAdapter;
 
 public class SemesterSubjectsFragment extends Fragment {
 

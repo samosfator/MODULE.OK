@@ -1,16 +1,15 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.fragment.SubjectsFragment;
+import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
 
-public class SemestersPagerAdapter extends FragmentPagerAdapter {
+class SemestersPagerAdapter extends FragmentPagerAdapter {
 
     private final String[] titles = {
             App.getContext().getString(R.string.first_semester_name),

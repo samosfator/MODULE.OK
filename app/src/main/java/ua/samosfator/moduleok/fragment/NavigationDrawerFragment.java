@@ -21,6 +21,8 @@ import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
+import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
+import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SemesterSubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;

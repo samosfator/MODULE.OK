@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ua.samosfator.moduleok.fragment.SemesterSubjectsFragment">
+    tools:context="ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SemesterSubjectsFragment">
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
