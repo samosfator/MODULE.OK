@@ -5,11 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="0dp"
     android:orientation="horizontal"
-    tools:context="ua.samosfator.moduleok.fragment.SubjectsFragment">
+    tools:context="ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment">
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         app:rippleDimension="10dp"
+        app:rippleHover="true"
+        app:rippleOverlay="true"
         android:layout_height="match_parent">
 
         <LinearLayout

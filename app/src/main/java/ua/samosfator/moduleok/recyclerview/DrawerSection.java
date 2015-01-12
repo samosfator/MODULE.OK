@@ -18,8 +18,16 @@ public class DrawerSection {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public int getIconId() {
         return iconId;
+    }
+
+    public void setIconId(int iconId) {
+        this.iconId = iconId;
     }
 
     public Fragment getFragment() {

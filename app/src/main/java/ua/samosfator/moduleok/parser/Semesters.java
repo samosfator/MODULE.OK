@@ -19,6 +19,12 @@ public class Semesters implements Serializable {
         second = new Semester(semesterElements.get(1));
     }
 
+    public Semester get(int index) {
+        if (index == 0) return first;
+        if (index == 1) return second;
+        return first;
+    }
+
     public Semester getFirst() {
         return first;
     }

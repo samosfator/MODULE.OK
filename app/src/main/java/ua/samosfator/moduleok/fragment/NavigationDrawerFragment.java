@@ -1,9 +1,8 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,10 +15,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.LogoutFragment;
-import ua.samosfator.moduleok.fragment.ModulesFragment;
-import ua.samosfator.moduleok.fragment.SubjectsFragment;
+import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.Auth;
+import ua.samosfator.moduleok.Preferences;
+import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.event.LoginEvent;
+import ua.samosfator.moduleok.event.LogoutEvent;
+import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
+import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SemesterSubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
@@ -44,6 +47,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         mUserSawDrawer = Boolean.valueOf(Preferences.read(KEY_USER_SAW_DRAWER, "false"));
         if (savedInstanceState == null) {
             mFromSavedInstanceState = true;
@@ -55,7 +59,7 @@ public class NavigationDrawerFragment extends Fragment {
         mSections = new ArrayList<>();
 
         DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
-        subjectsSection.setFragment(new SubjectsFragment());
+        subjectsSection.setFragment(new SemesterSubjectsFragment());
         mSections.add(subjectsSection);
 
         DrawerSection modulesSection = new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp);
@@ -65,23 +69,45 @@ public class NavigationDrawerFragment extends Fragment {
 //        DrawerSection statsSection = new DrawerSection("Stats", R.drawable.ic_poll_grey600_24dp);
 //        mSections.add(statsSection);
 
-        if (Preferences.read("SESSIONID", "").equals("")) {
-            DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
-            loginSection.setFragment(new LoginFragment());
-            mSections.add(loginSection);
+        addLoginOrLogoutSection();
+    }
+
+    private void addLoginOrLogoutSection() {
+        if (Auth.isLoggedIn()) {
+            addLogoutSection();
         } else {
-            toggleLogout();
+            addLoginSection();
         }
     }
 
-    public static void toggleLogout() {
+    private void addLogoutSection() {
         DrawerSection logoutSection = new DrawerSection("Log out", R.drawable.ic_logout_grey600_24dp);
         logoutSection.setFragment(new LogoutFragment());
         if (mSections.size() == 2) {
             mSections.add(logoutSection);
         } else {
             mSections.set(2, logoutSection);
+            mSectionAdapter.notifyItemChanged(2);
         }
+    }
+
+    public void addLoginSection() {
+        DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
+        loginSection.setFragment(new LoginFragment());
+        if (mSections.size() == 2) {
+            mSections.add(loginSection);
+        } else {
+            mSections.set(2, loginSection);
+            mSectionAdapter.notifyItemChanged(2);
+        }
+    }
+
+    public void onEvent(LoginEvent event) {
+        addLoginOrLogoutSection();
+    }
+
+    public void onEvent(LogoutEvent event) {
+        addLoginOrLogoutSection();
     }
 
     @Override
@@ -137,5 +163,11 @@ public class NavigationDrawerFragment extends Fragment {
                 mDrawerToggle.syncState();
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }
