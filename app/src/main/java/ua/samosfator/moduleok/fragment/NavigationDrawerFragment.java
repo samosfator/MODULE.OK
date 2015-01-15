@@ -27,7 +27,7 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
-import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SemesterSubjectsFragment;
+import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
@@ -39,8 +39,6 @@ public class NavigationDrawerFragment extends Fragment {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     public static List<DrawerSection> mSections;
-
-    private Spinner mSemesterSpinner;
 
     private RecyclerView mRecyclerView;
     private SectionAdapter mSectionAdapter;
@@ -70,7 +68,7 @@ public class NavigationDrawerFragment extends Fragment {
         mSections = new ArrayList<>();
 
         DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
-        subjectsSection.setFragment(new SemesterSubjectsFragment());
+        subjectsSection.setFragment(new SubjectsFragment());
         mSections.add(subjectsSection);
 
         DrawerSection modulesSection = new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp);
@@ -131,7 +129,7 @@ public class NavigationDrawerFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
-        initSemesterSpinner(layout);
+        SemesterSpinner.init(layout);
 
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
         mSectionAdapter = new SectionAdapter(getActivity(), mSections);
@@ -147,29 +145,6 @@ public class NavigationDrawerFragment extends Fragment {
             }
         }));
         return layout;
-    }
-
-    private void initSemesterSpinner(View layout) {
-        mSemesterSpinner = (Spinner) layout.findViewById(R.id.semester_spinner);
-
-        ArrayAdapter<CharSequence> semesterSpinnerAdapter = ArrayAdapter.createFromResource(
-                App.getContext(), R.array.semesters, R.layout.spinner_item
-        );
-        mSemesterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setItemColorLight(parent);
-            }
-
-            private void setItemColorLight(AdapterView<?> parent) {
-                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.textColorPrimary));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        mSemesterSpinner.setAdapter(semesterSpinnerAdapter);
     }
 
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {

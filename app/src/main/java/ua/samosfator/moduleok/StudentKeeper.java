@@ -1,10 +1,9 @@
 package ua.samosfator.moduleok;
 
-import android.util.Log;
-
 public class StudentKeeper {
 
     private static Student student;
+    private static int currentSemester;
 
     public static void initStudent() {
         student = new Student(PageLoader.getMainPageHtml());
@@ -20,5 +19,13 @@ public class StudentKeeper {
             initStudent();
         }
         return student;
+    }
+
+    public static int getCurrentSemesterIndex() {
+        return currentSemester;
+    }
+
+    public static void setCurrentSemesterIndex(int currentSemester) {
+        StudentKeeper.currentSemester = currentSemester;
     }
 }
