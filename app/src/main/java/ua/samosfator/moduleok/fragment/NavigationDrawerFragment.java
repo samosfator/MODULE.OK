@@ -47,9 +47,16 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
         initDrawerState(savedInstanceState);
         initSections();
+    }
+
+    @Override
+    public void onResume() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+        super.onResume();
     }
 
     private void initDrawerState(Bundle savedInstanceState) {

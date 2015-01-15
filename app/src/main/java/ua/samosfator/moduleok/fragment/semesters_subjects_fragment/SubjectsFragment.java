@@ -42,8 +42,10 @@ public class SubjectsFragment extends Fragment {
 
     @Override
     public void onResume() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         super.onResume();
-        EventBus.getDefault().register(this);
     }
 
     @Override

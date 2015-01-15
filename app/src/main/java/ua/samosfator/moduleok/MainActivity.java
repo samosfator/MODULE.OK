@@ -1,9 +1,12 @@
 package ua.samosfator.moduleok;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -25,7 +28,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        EventBus.getDefault().register(this);
         Preferences.init(getApplicationContext());
 
         setContentView(R.layout.activity_main);
@@ -34,6 +36,17 @@ public class MainActivity extends ActionBarActivity {
 
         initToolbar();
         initNavigationDrawer();
+    }
+
+    @Override
+    protected void onResume() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+
+        Log.d("[MainActivity#onResume]", "MainActivity is registred for events: " + EventBus.getDefault().isRegistered(this));
+
+        super.onResume();
     }
 
     private void initToolbar() {
@@ -50,6 +63,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onEvent(LoginEvent event) {
+
+        Log.d("[MainActivity#onEvent(LoginEvent)]", "LoginEvent is running");
+
         setAccountInfo();
     }
 
@@ -80,12 +96,18 @@ public class MainActivity extends ActionBarActivity {
         final TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
         final TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
 
-        runOnUiThread(new Runnable() {
+        Log.d("MainActivity#setAccountInfo()", "Initialized studentName_TextView and studentGroup_TextView");
+
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
                 try {
                     studentName_TextView.setText(StudentKeeper.getCurrentStudent().getNameSurname());
                     studentGroup_TextView.setText(StudentKeeper.getCurrentStudent().getGroupName());
+
+                    Log.d("MainActivity#setAccountInfo()", StudentKeeper.getCurrentStudent().getNameSurname() +
+                            " " + StudentKeeper.getCurrentStudent().getGroupName());
+
                     openSubjectsFragment();
                 } catch (SessionIdExpiredException e) {
                     eraseAccountInfo();
