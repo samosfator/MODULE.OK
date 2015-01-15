@@ -22,4 +22,9 @@
     <string name="first_semester_name">First semester</string>
     <string name="second_semester_name">Second semester</string>
 
+
+    <string-array name="semesters">
+        <item>@string/first_semester_name</item>
+        <item>@string/second_semester_name</item>
+    </string-array>
 </resources>

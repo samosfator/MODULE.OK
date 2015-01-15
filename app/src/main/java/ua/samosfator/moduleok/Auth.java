@@ -16,32 +16,45 @@ public class Auth {
 
     private boolean success;
 
-    private static Student student;
-
     public void signIn(String login, String password) {
         EventBus.getDefault().register(this);
+        downloadSessionId(login, password);
+    }
 
+    private void downloadSessionId(String login, String password) {
         Connection.Response loginResponse = null;
         try {
-            loginResponse = Jsoup.connect("http://mod.tanet.edu.te.ua/site/login")
-                    .userAgent(USER_AGENT)
-                    .data("LoginForm[login]", login)
-                    .data("LoginForm[password]", password)
-                    .data("LoginForm[rememberMe]", "1")
-                    .data("yt0", "Увійти")
-                    .method(Connection.Method.POST)
-                    .execute();
+            loginResponse = downloadLoginResponse(login, password);
             Document loginDocument = loginResponse.parse();
-            success = !(loginDocument.text().contains(INCORRECT_PASSWORD_MESSAGE));
-            if (success) {
-                Preferences.save("SESSIONID", loginResponse.cookie("PHPSESSID"));
-                success = true;
-            } else {
-                Preferences.save("SESSIONID", "");
-                success = false;
-            }
+            success = getLoginSuccess(loginDocument);
+            saveSessionId(loginResponse);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private Connection.Response downloadLoginResponse(String login, String password) throws IOException {
+        Connection.Response loginResponse;
+        loginResponse = Jsoup.connect("http://mod.tanet.edu.te.ua/site/login")
+                .userAgent(USER_AGENT)
+                .data("LoginForm[login]", login)
+                .data("LoginForm[password]", password)
+                .data("LoginForm[rememberMe]", "1")
+                .data("yt0", "Увійти")
+                .method(Connection.Method.POST)
+                .execute();
+        return loginResponse;
+    }
+
+    private boolean getLoginSuccess(Document loginDocument) {
+        return !(loginDocument.text().contains(INCORRECT_PASSWORD_MESSAGE));
+    }
+
+    private void saveSessionId(Connection.Response loginResponse) {
+        if (success) {
+            Preferences.save("SESSIONID", loginResponse.cookie("PHPSESSID"));
+        } else {
+            Preferences.save("SESSIONID", "");
         }
     }
 
@@ -49,51 +62,8 @@ public class Auth {
         return success;
     }
 
-    public static Student getCurrentStudent() {
-        if (student == null) {
-            initStudent();
-        }
-        return student;
-    }
-
     public void onEvent(LoginEvent event) {
-        initStudent();
-    }
-
-    private static void initStudent() {
-        student = new Student(getMainPageHtml());
-    }
-
-    public static void refreshStudent() {
-        if (!Auth.isLoggedIn()) return;
-        student = new Student(loadMainPage());
-    }
-
-    private static String getMainPageHtml() {
-        if (!Auth.isLoggedIn()) {
-            throw new IllegalArgumentException("MUST LOG IN AT FIRST");
-        }
-        final String savedMainPageHtml = Preferences.read("mainPageHtml", "");
-        String mainPageHtml;
-
-        if (savedMainPageHtml.length() < 1400) {
-            mainPageHtml = loadMainPage();
-            Preferences.save("mainPageHtml", mainPageHtml);
-        } else {
-            mainPageHtml = savedMainPageHtml;
-        }
-        return mainPageHtml;
-    }
-
-    private static String loadMainPage() {
-        LoadPageAsyncTask loadPageAsyncTask = new LoadPageAsyncTask();
-        loadPageAsyncTask.execute();
-        try {
-            return loadPageAsyncTask.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        return "";
+        StudentKeeper.initStudent();
     }
 
     public static boolean isLoggedIn() {

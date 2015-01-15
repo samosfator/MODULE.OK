@@ -15,6 +15,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.animation.AnimationFactory;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
@@ -64,7 +65,7 @@ public class SubjectsFragment extends Fragment {
     private void tryInitSubjects() {
         try {
             int semester = getArguments().getInt("semester");
-            mSubjects = Auth.getCurrentStudent().getSemesters().get(semester).getSubjects();
+            mSubjects = StudentKeeper.getCurrentStudent().getSemesters().get(semester).getSubjects();
         } catch (IllegalArgumentException e) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.main_container, new LoginFragment())
@@ -73,7 +74,7 @@ public class SubjectsFragment extends Fragment {
     }
 
     public void onEvent(RefreshEvent event) {
-        Auth.refreshStudent();
+        StudentKeeper.refreshStudent();
         tryInitSubjects();
         mSectionAdapter.notifyItemRangeChanged(0, mSectionAdapter.getItemCount());
     }

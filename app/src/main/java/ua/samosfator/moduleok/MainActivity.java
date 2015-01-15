@@ -82,9 +82,14 @@ public class MainActivity extends ActionBarActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                studentName_TextView.setText(Auth.getCurrentStudent().getNameSurname());
-                studentGroup_TextView.setText(Auth.getCurrentStudent().getGroupName());
-                openSubjectsFragment();
+                try {
+                    studentName_TextView.setText(StudentKeeper.getCurrentStudent().getNameSurname());
+                    studentGroup_TextView.setText(StudentKeeper.getCurrentStudent().getGroupName());
+                    openSubjectsFragment();
+                } catch (SessionIdExpiredException e) {
+                    eraseAccountInfo();
+                    openLoginFragment();
+                }
             }
         });
     }

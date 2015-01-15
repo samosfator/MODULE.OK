@@ -29,9 +29,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-        login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
-        password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
-        login_button = (Button) rootView.findViewById(R.id.login_btn);
+        initViews(rootView);
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +58,12 @@ public class LoginFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void initViews(View rootView) {
+        login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
+        password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
+        login_button = (Button) rootView.findViewById(R.id.login_btn);
     }
 
     private void showError() {

@@ -80,4 +80,14 @@ public class Student {
     public Semesters getSemesters() {
         return semesters;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", group='" + group + '\'' +
+                '}';
+    }
 }

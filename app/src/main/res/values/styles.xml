@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="AppTheme.Base"/>
+    <style name="AppTheme" parent="AppTheme.Base" />
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -45,5 +45,4 @@
               even if we define popupTheme for our <Toolbar> -->
         <!-- <item name="android:background">@color/color_primary</item> -->
     </style>
-
 </resources>

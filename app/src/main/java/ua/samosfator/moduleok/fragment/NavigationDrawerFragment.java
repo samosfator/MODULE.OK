@@ -11,11 +11,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
@@ -35,6 +40,8 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     public static List<DrawerSection> mSections;
 
+    private Spinner mSemesterSpinner;
+
     private RecyclerView mRecyclerView;
     private SectionAdapter mSectionAdapter;
 
@@ -48,11 +55,15 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        initDrawerState(savedInstanceState);
+        initSections();
+    }
+
+    private void initDrawerState(Bundle savedInstanceState) {
         mUserSawDrawer = Boolean.valueOf(Preferences.read(KEY_USER_SAW_DRAWER, "false"));
         if (savedInstanceState == null) {
             mFromSavedInstanceState = true;
         }
-        initSections();
     }
 
     private void initSections() {
@@ -103,7 +114,12 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public void onEvent(LoginEvent event) {
-        addLoginOrLogoutSection();
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                addLoginOrLogoutSection();
+            }
+        });
     }
 
     public void onEvent(LogoutEvent event) {
@@ -114,6 +130,9 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
+        initSemesterSpinner(layout);
+
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
         mSectionAdapter = new SectionAdapter(getActivity(), mSections);
         mRecyclerView.setAdapter(mSectionAdapter);
@@ -130,6 +149,31 @@ public class NavigationDrawerFragment extends Fragment {
         return layout;
     }
 
+    private void initSemesterSpinner(View layout) {
+        mSemesterSpinner = (Spinner) layout.findViewById(R.id.semester_spinner);
+
+        ArrayAdapter<CharSequence> semesterSpinnerAdapter = ArrayAdapter.createFromResource(
+                App.getContext(),
+                R.array.semesters,
+                R.layout.spinner_item
+        );
+        mSemesterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setItemColorLight(parent);
+            }
+
+            private void setItemColorLight(AdapterView<?> parent) {
+                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.textColorPrimary));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        mSemesterSpinner.setAdapter(semesterSpinnerAdapter);
+    }
+
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
@@ -139,10 +183,14 @@ public class NavigationDrawerFragment extends Fragment {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 if (!mUserSawDrawer) {
-                    mUserSawDrawer = true;
-                    Preferences.save(KEY_USER_SAW_DRAWER, String.valueOf(mUserSawDrawer));
+                    saveUserSawDrawerState();
                 }
                 getActivity().invalidateOptionsMenu();
+            }
+
+            private void saveUserSawDrawerState() {
+                mUserSawDrawer = true;
+                Preferences.save(KEY_USER_SAW_DRAWER, String.valueOf(mUserSawDrawer));
             }
 
             @Override
