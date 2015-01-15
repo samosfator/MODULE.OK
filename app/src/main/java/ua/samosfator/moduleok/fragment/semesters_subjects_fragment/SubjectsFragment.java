@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -16,6 +17,8 @@ import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import io.codetail.animation.SupportAnimator;
+import io.codetail.animation.ViewAnimationUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.animation.AnimationFactory;
@@ -45,7 +48,7 @@ public class SubjectsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
         initSubjects();
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
         mSectionAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
@@ -62,7 +65,27 @@ public class SubjectsFragment extends Fragment {
                 subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
             }
         }));
+        rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                addCircularRevealAnimation(rootView);
+            }
+        });
         return rootView;
+    }
+
+    private void addCircularRevealAnimation(View rootView) {
+        View myView = rootView.findViewById(R.id.subjects_recycler_view);
+
+        int cx = (myView.getLeft() + myView.getRight()) / 2 + myView.getRight() / 3;
+        int cy = (myView.getTop() + myView.getBottom()) / 2 + myView.getBottom() / 3;
+
+        int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
+
+        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setDuration(500);
+        animator.start();
     }
 
     private void initSubjects() {
@@ -93,9 +116,6 @@ public class SubjectsFragment extends Fragment {
 
         initSubjects();
         rerenderSubjectsList();
-
-        Log.d("SubjectsFragment#onEvent(SemesterChangedEvent)",
-                "Rerendered subjects:" + mSubjects);
     }
 
     private void rerenderSubjectsList() {

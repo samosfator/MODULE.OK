@@ -11,16 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
@@ -129,8 +124,6 @@ public class NavigationDrawerFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
-        SemesterSpinner.init(layout);
-
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
         mSectionAdapter = new SectionAdapter(getActivity(), mSections);
         mRecyclerView.setAdapter(mSectionAdapter);
@@ -150,6 +143,7 @@ public class NavigationDrawerFragment extends Fragment {
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
+        SemesterSpinner.init(mDrawerLayout);
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(),
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override

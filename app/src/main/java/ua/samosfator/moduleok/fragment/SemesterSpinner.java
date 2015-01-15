@@ -1,5 +1,6 @@
 package ua.samosfator.moduleok.fragment;
 
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,13 +16,15 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 class SemesterSpinner {
 
     private static Spinner mSemesterSpinner;
+    private static DrawerLayout mDrawerLayout;
     private static ArrayAdapter<CharSequence> semesterSpinnerAdapter;
 
     private SemesterSpinner() {
     }
 
-    public static void init(View parentLayout) {
-        mSemesterSpinner = (Spinner) parentLayout.findViewById(R.id.semester_spinner);
+    public static void init(DrawerLayout drawerLayout) {
+        mSemesterSpinner = (Spinner) drawerLayout.findViewById(R.id.semester_spinner);
+        SemesterSpinner.mDrawerLayout = drawerLayout;
         initAdapter();
         initOnItemSelectedListener();
         mSemesterSpinner.setAdapter(semesterSpinnerAdapter);
@@ -40,6 +43,7 @@ class SemesterSpinner {
                 setItemColorLight(parent);
                 StudentKeeper.setCurrentSemesterIndex(position);
                 EventBus.getDefault().post(new SemesterChangedEvent());
+                mDrawerLayout.closeDrawers();
             }
 
             private void setItemColorLight(AdapterView<?> parent) {

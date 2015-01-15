@@ -17,7 +17,12 @@ allprojects {
         jcenter()
         maven {
             url 'http://dl.bintray.com/amulyakhare/maven'
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+        flatDir {
+            dirs 'lib'
         }
     }
 }
