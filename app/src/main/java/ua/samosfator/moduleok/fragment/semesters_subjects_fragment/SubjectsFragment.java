@@ -65,12 +65,6 @@ public class SubjectsFragment extends Fragment {
                 subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
             }
         }));
-//        mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-//            @Override
-//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-//                addCircularRevealAnimation(rootView);
-//            }
-//        });
         return rootView;
     }
 

@@ -143,7 +143,9 @@ public class NavigationDrawerFragment extends Fragment {
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
+
         SemesterSpinner.init(mDrawerLayout);
+
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(),
                 drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override

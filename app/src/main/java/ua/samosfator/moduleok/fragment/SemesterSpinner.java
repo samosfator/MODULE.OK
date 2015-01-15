@@ -28,6 +28,7 @@ class SemesterSpinner {
         initAdapter();
         initOnItemSelectedListener();
         mSemesterSpinner.setAdapter(semesterSpinnerAdapter);
+        mSemesterSpinner.setSelection(StudentKeeper.getCurrentSemesterIndex());
     }
 
     private static void initAdapter() {
