@@ -153,9 +153,7 @@ public class NavigationDrawerFragment extends Fragment {
         mSemesterSpinner = (Spinner) layout.findViewById(R.id.semester_spinner);
 
         ArrayAdapter<CharSequence> semesterSpinnerAdapter = ArrayAdapter.createFromResource(
-                App.getContext(),
-                R.array.semesters,
-                R.layout.spinner_item
+                App.getContext(), R.array.semesters, R.layout.spinner_item
         );
         mSemesterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
