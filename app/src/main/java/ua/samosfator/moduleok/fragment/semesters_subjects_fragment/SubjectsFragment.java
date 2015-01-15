@@ -65,24 +65,22 @@ public class SubjectsFragment extends Fragment {
                 subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
             }
         }));
-        rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                addCircularRevealAnimation(rootView);
-            }
-        });
+//        mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                addCircularRevealAnimation(rootView);
+//            }
+//        });
         return rootView;
     }
 
-    private void addCircularRevealAnimation(View rootView) {
-        View myView = rootView.findViewById(R.id.subjects_recycler_view);
+    private void addCircularRevealAnimation() {
+        int cx = (mRecyclerView.getLeft() + mRecyclerView.getRight()) / 2 + mRecyclerView.getRight() / 3;
+        int cy = (mRecyclerView.getTop() + mRecyclerView.getBottom()) / 2 + mRecyclerView.getBottom() / 3;
 
-        int cx = (myView.getLeft() + myView.getRight()) / 2 + myView.getRight() / 3;
-        int cy = (myView.getTop() + myView.getBottom()) / 2 + myView.getBottom() / 3;
+        int finalRadius = Math.max(mRecyclerView.getWidth(), mRecyclerView.getHeight());
 
-        int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
-
-        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(mRecyclerView, cx, cy, 0, finalRadius);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.setDuration(500);
         animator.start();
@@ -115,6 +113,7 @@ public class SubjectsFragment extends Fragment {
                 "Current semesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
         initSubjects();
+        addCircularRevealAnimation();
         rerenderSubjectsList();
     }
 

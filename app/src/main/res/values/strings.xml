@@ -9,7 +9,7 @@
     <string name="action_refresh">Refresh</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open</string>
-    <string name="drawer_close">Clsoe</string>
+    <string name="drawer_close">Close</string>
     <string name="title_activity_subjects">SubjectsActivity</string>
     <string name="title_activity_modules">ModulesActivity</string>
     <string name="title_activity_stats">StatsActivity</string>
@@ -18,7 +18,7 @@
     <string name="password_editText_hint">Password</string>
     <string name="login_explanation">Please, enter your login and password that you use for mod.tanet.edu.te.ua</string>
     <string name="wrong_credentials_text">Wrong login or password</string>
-    <string name="action_refresh_toast">Refreshing...</string>
+    <string name="action_refresh_toast">Refreshing…</string>
     <string name="first_semester_name">First semester</string>
     <string name="second_semester_name">Second semester</string>
 
