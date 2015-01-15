@@ -50,7 +50,6 @@ public class Subject implements Serializable {
             setTotalScore(Integer.parseInt(strTotalScore));
         } catch (NumberFormatException e) {
             setTotalScore(0);
-            //TODO: Make a toast
             e.printStackTrace();
         }
     }
@@ -76,7 +75,11 @@ public class Subject implements Serializable {
     }
 
     public Module getLastModule() {
-        return modules.get(modules.size() - 1);
+        int lastModuleIndex = modules.size() - 1;
+        while (modules.get(lastModuleIndex).getScore() == 0) {
+            lastModuleIndex--;
+        }
+        return modules.get(lastModuleIndex);
     }
 
     public static Subject fromHtml(String html, Semester semester) {
