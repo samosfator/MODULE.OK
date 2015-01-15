@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
 
 class SemestersPagerAdapter extends FragmentPagerAdapter {
 

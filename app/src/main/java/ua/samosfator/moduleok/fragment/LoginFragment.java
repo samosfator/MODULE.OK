@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
-import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
 
 public class LoginFragment extends Fragment {
 

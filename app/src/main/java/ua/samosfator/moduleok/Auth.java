@@ -5,7 +5,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;

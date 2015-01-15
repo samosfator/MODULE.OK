@@ -2,8 +2,6 @@ package ua.samosfator.moduleok;
 
 import java.util.concurrent.ExecutionException;
 
-import javax.security.auth.login.LoginException;
-
 public class PageLoader {
 
     private final static int MIN_VALID_PAGE_SIZE = 1400;

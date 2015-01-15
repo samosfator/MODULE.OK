@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
