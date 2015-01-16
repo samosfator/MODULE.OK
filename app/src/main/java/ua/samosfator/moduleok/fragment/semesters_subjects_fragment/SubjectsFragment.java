@@ -1,7 +1,6 @@
 package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -73,7 +72,8 @@ public class SubjectsFragment extends Fragment {
             }
 
             @Override
-            public void onViewDetachedFromWindow(View v) { }
+            public void onViewDetachedFromWindow(View v) {
+            }
         });
 
         return rootView;

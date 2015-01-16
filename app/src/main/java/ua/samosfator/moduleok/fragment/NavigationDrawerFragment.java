@@ -19,7 +19,6 @@ import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.animation.CircularRevealAnimation;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;

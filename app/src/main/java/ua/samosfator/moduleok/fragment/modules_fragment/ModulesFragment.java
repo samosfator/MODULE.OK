@@ -3,19 +3,14 @@ package ua.samosfator.moduleok.fragment.modules_fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
 
-import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.animation.CircularRevealAnimation;
-import ua.samosfator.moduleok.event.RefreshEvent;
-import ua.samosfator.moduleok.event.SemesterChangedEvent;
 
 public class ModulesFragment extends Fragment {
 
@@ -36,7 +31,8 @@ public class ModulesFragment extends Fragment {
             }
 
             @Override
-            public void onViewDetachedFromWindow(View v) { }
+            public void onViewDetachedFromWindow(View v) {
+            }
         });
 
         return rootView;
