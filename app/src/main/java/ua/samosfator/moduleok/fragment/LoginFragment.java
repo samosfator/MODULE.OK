@@ -45,11 +45,14 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+        rootView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            public void onViewAttachedToWindow(View v) {
                 CircularRevealAnimation.addForView(v);
             }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) { }
         });
 
         return rootView;

@@ -1,6 +1,7 @@
 package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,11 +66,14 @@ public class SubjectsFragment extends Fragment {
             }
         }));
 
-        rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+        rootView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            public void onViewAttachedToWindow(View v) {
                 CircularRevealAnimation.addForView(v);
             }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) { }
         });
 
         return rootView;
