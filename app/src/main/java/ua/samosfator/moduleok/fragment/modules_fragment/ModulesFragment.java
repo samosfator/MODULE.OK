@@ -24,16 +24,17 @@ public class ModulesFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        CircularRevealAnimation.addForView(getView());
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_modules, container, false);
 
         initTabStrip(rootView);
+
+        rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                CircularRevealAnimation.addForView(v);
+            }
+        });
 
         return rootView;
     }

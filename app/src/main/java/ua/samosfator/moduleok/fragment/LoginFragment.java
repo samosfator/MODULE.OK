@@ -29,12 +29,6 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        CircularRevealAnimation.addForView(getView());
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initViews(rootView);
@@ -48,6 +42,13 @@ public class LoginFragment extends Fragment {
                 final String password = password_txt.getText().toString();
 
                 doLogin(login, password);
+            }
+        });
+
+        rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                CircularRevealAnimation.addForView(v);
             }
         });
 

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -16,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import io.codetail.animation.SupportAnimator;
-import io.codetail.animation.ViewAnimationUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.animation.AnimationFactory;
@@ -46,7 +43,6 @@ public class SubjectsFragment extends Fragment {
             EventBus.getDefault().register(this);
         }
         super.onResume();
-        CircularRevealAnimation.addForView(getView());
     }
 
     @Override
@@ -68,6 +64,14 @@ public class SubjectsFragment extends Fragment {
                 subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
             }
         }));
+
+        rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                CircularRevealAnimation.addForView(v);
+            }
+        });
+
         return rootView;
     }
 
