@@ -34,4 +34,5 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.jpardogo.materialtabstrip:library:1.0.7'
     compile 'ch.acra:acra:4.5.0'
+    compile "com.splunk.mint:mint:4.0.8"
 }

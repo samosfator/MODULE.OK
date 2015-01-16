@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.splunk.mint.Mint;
+
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
@@ -27,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Mint.initAndStartSession(MainActivity.this, "79d18253");
         Preferences.init(getApplicationContext());
 
         setContentView(R.layout.activity_main);
