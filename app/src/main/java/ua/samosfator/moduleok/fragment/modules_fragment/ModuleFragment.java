@@ -15,7 +15,6 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
-import ua.samosfator.moduleok.animation.CircularRevealAnimation;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
@@ -81,7 +80,6 @@ public class ModuleFragment extends Fragment {
                 "Current semesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
         initSubjects();
-        CircularRevealAnimation.addForView(mRecyclerView);
         rerenderModuleSubjectsList();
     }
 

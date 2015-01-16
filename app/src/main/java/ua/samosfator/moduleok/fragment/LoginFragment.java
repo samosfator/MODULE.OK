@@ -11,11 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.splunk.mint.Mint;
+import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.animation.CircularRevealAnimation;
 import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
@@ -42,17 +43,9 @@ public class LoginFragment extends Fragment {
                 final String password = password_txt.getText().toString();
 
                 doLogin(login, password);
-            }
-        });
 
-        rootView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-            @Override
-            public void onViewAttachedToWindow(View v) {
-                CircularRevealAnimation.addForView(v);
+                Mint.logEvent("log in", MintLogLevel.Info);
             }
-
-            @Override
-            public void onViewDetachedFromWindow(View v) { }
         });
 
         return rootView;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.splunk.mint.Mint;
+import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;
@@ -30,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(MainActivity.this, "79d18253");
+        Mint.logEvent("start MainActivity", MintLogLevel.Info);
         Preferences.init(getApplicationContext());
 
         setContentView(R.layout.activity_main);

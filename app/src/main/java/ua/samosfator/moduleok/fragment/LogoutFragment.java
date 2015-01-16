@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.splunk.mint.Mint;
+import com.splunk.mint.MintLogLevel;
+
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
@@ -23,6 +26,7 @@ public class LogoutFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_logout, container, false);
         Preferences.save("SESSIONID", "");
         EventBus.getDefault().post(new LogoutEvent());
+        Mint.logEvent("log out", MintLogLevel.Info);
         return rootView;
     }
 }

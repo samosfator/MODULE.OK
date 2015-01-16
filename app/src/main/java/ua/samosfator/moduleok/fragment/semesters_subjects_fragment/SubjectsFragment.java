@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.splunk.mint.Mint;
+import com.splunk.mint.MintLogLevel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +21,6 @@ import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.animation.AnimationFactory;
-import ua.samosfator.moduleok.animation.CircularRevealAnimation;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
@@ -42,6 +44,7 @@ public class SubjectsFragment extends Fragment {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+        Mint.logEvent("view SubjectsFragment", MintLogLevel.Info);
         super.onResume();
     }
 
@@ -64,17 +67,6 @@ public class SubjectsFragment extends Fragment {
                 subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
             }
         }));
-
-        rootView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-            @Override
-            public void onViewAttachedToWindow(View v) {
-                CircularRevealAnimation.addForView(v);
-            }
-
-            @Override
-            public void onViewDetachedFromWindow(View v) {
-            }
-        });
 
         return rootView;
     }
@@ -106,7 +98,6 @@ public class SubjectsFragment extends Fragment {
                 "Current semesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
         initSubjects();
-        CircularRevealAnimation.addForView(mRecyclerView);
         rerenderSubjectsList();
     }
 

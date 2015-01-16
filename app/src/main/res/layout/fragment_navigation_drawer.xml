@@ -25,7 +25,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="16dp"
             android:textColor="@color/abc_primary_text_material_dark"
-            android:text=""
+            android:text="Владилав Голубєв"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:textColor="@color/abc_secondary_text_material_dark"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:text=""
+            android:text="ПЗС-12"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <View

@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.splunk.mint.Mint;
+import com.splunk.mint.MintLogLevel;
 
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.animation.CircularRevealAnimation;
 
 public class ModulesFragment extends Fragment {
 
@@ -19,21 +20,16 @@ public class ModulesFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        Mint.logEvent("view ModulesFragment", MintLogLevel.Info);
+        super.onResume();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_modules, container, false);
 
         initTabStrip(rootView);
-
-        rootView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-            @Override
-            public void onViewAttachedToWindow(View v) {
-                CircularRevealAnimation.addForView(v);
-            }
-
-            @Override
-            public void onViewDetachedFromWindow(View v) {
-            }
-        });
 
         return rootView;
     }
