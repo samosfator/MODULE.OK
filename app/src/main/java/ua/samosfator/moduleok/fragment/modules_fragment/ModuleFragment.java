@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
+package ua.samosfator.moduleok.fragment.modules_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,35 +8,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import io.codetail.animation.SupportAnimator;
-import io.codetail.animation.ViewAnimationUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
-import ua.samosfator.moduleok.animation.AnimationFactory;
 import ua.samosfator.moduleok.animation.CircularRevealAnimation;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Subject;
-import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
-import ua.samosfator.moduleok.recyclerview.adapter.SubjectItemAdapter;
+import ua.samosfator.moduleok.recyclerview.adapter.ModuleSubjectItemAdapter;
 
-public class SubjectsFragment extends Fragment {
+public class ModuleFragment extends Fragment {
 
     private List<Subject> mSubjects = new ArrayList<>();
-
     private RecyclerView mRecyclerView;
-    private SubjectItemAdapter mSectionAdapter;
+    private ModuleSubjectItemAdapter moduleSubjectItemAdapter;
 
-    public SubjectsFragment() {
+    public ModuleFragment() {
         // Required empty public constructor
     }
 
@@ -46,28 +38,19 @@ public class SubjectsFragment extends Fragment {
             EventBus.getDefault().register(this);
         }
         super.onResume();
-        CircularRevealAnimation.addForView(getView());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_module, container, false);
+
         initSubjects();
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
-        mSectionAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
-        mRecyclerView.setAdapter(mSectionAdapter);
+
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.modules_subjects_recycler_view);
+        moduleSubjectItemAdapter = new ModuleSubjectItemAdapter(getActivity(), mSubjects, getArguments().getInt("module"));
+        mRecyclerView.setAdapter(moduleSubjectItemAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                TextView subjectTotalScoreTextView = (TextView) view.findViewById(R.id.subject_total_score);
 
-                ViewFlipper viewFlipper = (ViewFlipper) view.findViewById(R.id.subject_score_view_flipper);
-                AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
-
-                subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
-            }
-        }));
         return rootView;
     }
 
@@ -90,20 +73,20 @@ public class SubjectsFragment extends Fragment {
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
         initSubjects();
-        rerenderSubjectsList();
+        rerenderModuleSubjectsList();
     }
 
     public void onEvent(SemesterChangedEvent event) {
-        Log.d("[SubjectsFragment#onEvent(SemesterChangedEvent)]",
+        Log.d("[ModuleFragment#onEvent(SemesterChangedEvent)]",
                 "Current semesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
         initSubjects();
         CircularRevealAnimation.addForView(mRecyclerView);
-        rerenderSubjectsList();
+        rerenderModuleSubjectsList();
     }
 
-    private void rerenderSubjectsList() {
-        mSectionAdapter.notifyItemRangeChanged(0, mSectionAdapter.getItemCount());
+    private void rerenderModuleSubjectsList() {
+        moduleSubjectItemAdapter.notifyItemRangeChanged(0, moduleSubjectItemAdapter.getItemCount());
     }
 
     @Override

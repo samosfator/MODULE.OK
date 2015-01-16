@@ -5,15 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
+import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.R;
 
 class ModulesPagerAdapter extends FragmentPagerAdapter {
 
     private final String[] titles = {
-            "MODULE 1",
-            "MODULE 2",
-            "MODULE 3",
-            "MODULE 4"
+            App.getContext().getResources().getString(R.string.module_1_name),
+            App.getContext().getResources().getString(R.string.module_2_name),
+            App.getContext().getResources().getString(R.string.module_3_name),
+            App.getContext().getResources().getString(R.string.module_4_name)
     };
 
     public ModulesPagerAdapter(FragmentManager fm) {
@@ -32,13 +33,13 @@ class ModulesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        SubjectsFragment subjectsFragment = new SubjectsFragment();
+        ModuleFragment moduleFragment = new ModuleFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putInt("semester", position);
+        bundle.putInt("module", position);
 
-        subjectsFragment.setArguments(bundle);
+        moduleFragment.setArguments(bundle);
 
-        return subjectsFragment;
+        return moduleFragment;
     }
 }

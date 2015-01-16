@@ -20,7 +20,7 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
     private LayoutInflater inflater;
     private List<Subject> data = Collections.emptyList();
 
-    private int[] drawableCircles = {
+    static int[] drawableCircles = {
             R.drawable.circle_blue,
             R.drawable.circle_brown,
             R.drawable.circle_cyan,
@@ -79,7 +79,7 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
         }
     }
 
-    private int getDrawableDependsOnScore(int score) {
+    static int getDrawableDependsOnScore(int score) {
         if (score >= 90 && score <= 100) {
             return R.drawable.circle_5;
         } else if (score >= 75 && score < 90) {

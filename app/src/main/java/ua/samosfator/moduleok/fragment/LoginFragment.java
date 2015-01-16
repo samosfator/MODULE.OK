@@ -15,6 +15,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.animation.CircularRevealAnimation;
 import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
@@ -25,6 +26,12 @@ public class LoginFragment extends Fragment {
 
     public LoginFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        CircularRevealAnimation.addForView(getView());
     }
 
     @Override

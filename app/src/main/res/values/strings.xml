@@ -21,6 +21,10 @@
     <string name="action_refresh_toast">Refreshing…</string>
     <string name="first_semester_name">First semester</string>
     <string name="second_semester_name">Second semester</string>
+    <string name="module_1_name">MODULE 1</string>
+    <string name="module_2_name">MODULE 2</string>
+    <string name="module_3_name">MODULE 3</string>
+    <string name="module_4_name">Exam</string>
 
 
     <string-array name="semesters">
