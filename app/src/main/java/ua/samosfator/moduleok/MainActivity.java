@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mint.initAndStartSession(MainActivity.this, "79d18253");
+//        Mint.initAndStartSession(MainActivity.this, "79d18253");
         Mint.logEvent("start MainActivity", MintLogLevel.Info);
         Preferences.init(getApplicationContext());
 
