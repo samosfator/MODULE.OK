@@ -3,28 +3,25 @@
 
     <string name="app_name">MODULE.OK</string>
     <string name="title_activity_main">MODULE.OK</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="main_toolbar_text">MODULE.OK</string>
     <string name="action_refresh">Refresh</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="title_activity_subjects">SubjectsActivity</string>
-    <string name="title_activity_modules">ModulesActivity</string>
-    <string name="title_activity_stats">StatsActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
     <string name="login_editText_hint">Login</string>
     <string name="password_editText_hint">Password</string>
     <string name="login_explanation">Please, enter your login and password that you use for mod.tanet.edu.te.ua</string>
     <string name="wrong_credentials_text">Wrong login or password</string>
-    <string name="action_refresh_toast">Refreshing…</string>
+    <string name="action_refresh_toast">Refreshing</string>
+
     <string name="first_semester_name">First semester</string>
     <string name="second_semester_name">Second semester</string>
+
     <string name="module_1_name">MODULE 1</string>
     <string name="module_2_name">MODULE 2</string>
     <string name="module_3_name">MODULE 3</string>
-    <string name="module_4_name">Exam</string>
+    <string name="module_4_name">MODULE 4</string>
+    <string name="module_5_name">MODULE 5</string>
+    <string name="module_6_name">MODULE 6</string>
 
 
     <string-array name="semesters">
