@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.recyclerview.adapter;
+package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.parser.Subject;
 
@@ -19,25 +20,6 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
 
     private LayoutInflater inflater;
     private List<Subject> data = Collections.emptyList();
-
-    static int[] drawableCircles = {
-            R.drawable.circle_blue,
-            R.drawable.circle_brown,
-            R.drawable.circle_cyan,
-            R.drawable.circle_deeppurple,
-            R.drawable.circle_green,
-            R.drawable.circle_grey,
-            R.drawable.circle_indigo,
-            R.drawable.circle_lightblue,
-            R.drawable.circle_lightgreen,
-            R.drawable.circle_lime,
-            R.drawable.circle_orange,
-            R.drawable.circle_pink,
-            R.drawable.circle_purple,
-            R.drawable.circle_red,
-            R.drawable.circle_teal
-    };
-    private List<Integer> usedDrawables = new ArrayList<>();
 
     public SubjectItemAdapter(Context context, List<Subject> data) {
         inflater = LayoutInflater.from(context);
@@ -57,7 +39,7 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(current.getLastModule().getFormattedDate());
         holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
-        holder.subjectScore.setBackgroundResource(getDrawableDependsOnScore(current.getLastModule().getScore()));
+        holder.subjectScore.setBackgroundResource(DrawableUtils.getDrawableDependsOnScore(current.getLastModule().getScore()));
     }
 
     @Override
@@ -77,26 +59,5 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
             subjectScore = (TextView) itemView.findViewById(R.id.subject_score);
             subjectDate = (TextView) itemView.findViewById(R.id.subject_date);
         }
-    }
-
-    static int getDrawableDependsOnScore(int score) {
-        if (score >= 90 && score <= 100) {
-            return R.drawable.circle_5;
-        } else if (score >= 75 && score < 90) {
-            return R.drawable.circle_4;
-        } else if(score >= 60 && score < 75) {
-            return R.drawable.circle_3;
-        } else {
-            return R.drawable.circle_2;
-        }
-    }
-
-    private int getRandomUniqueDrawable() {
-        int randInt = new Random().nextInt(drawableCircles.length);
-        while (usedDrawables.contains(randInt)) {
-            randInt = new Random().nextInt(drawableCircles.length);
-        }
-        usedDrawables.add(randInt);
-        return drawableCircles[randInt];
     }
 }

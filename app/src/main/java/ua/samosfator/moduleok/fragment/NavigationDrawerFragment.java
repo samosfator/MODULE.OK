@@ -25,7 +25,6 @@ import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
-import ua.samosfator.moduleok.recyclerview.adapter.SectionAdapter;
 
 public class NavigationDrawerFragment extends Fragment {
 

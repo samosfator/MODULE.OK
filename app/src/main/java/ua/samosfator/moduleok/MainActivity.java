@@ -67,9 +67,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onEvent(LoginEvent event) {
-
-        Log.d("[MainActivity#onEvent(LoginEvent)]", "LoginEvent is running");
-
         setAccountInfo();
     }
 

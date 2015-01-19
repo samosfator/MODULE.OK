@@ -26,7 +26,6 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Subject;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
-import ua.samosfator.moduleok.recyclerview.adapter.SubjectItemAdapter;
 
 public class SubjectsFragment extends Fragment {
 

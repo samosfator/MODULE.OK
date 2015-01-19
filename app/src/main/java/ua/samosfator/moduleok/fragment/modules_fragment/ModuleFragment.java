@@ -19,11 +19,9 @@ import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Subject;
-import ua.samosfator.moduleok.recyclerview.adapter.ModuleSubjectItemAdapter;
 
 public class ModuleFragment extends Fragment {
 
-    private List<Subject> mSubjects = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private ModuleSubjectItemAdapter moduleSubjectItemAdapter;
 
@@ -42,36 +40,17 @@ public class ModuleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_module, container, false);
-
-        initSubjects();
-
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.modules_subjects_recycler_view);
-        moduleSubjectItemAdapter = new ModuleSubjectItemAdapter(getActivity(), mSubjects, getArguments().getInt("module"));
+        moduleSubjectItemAdapter = new ModuleSubjectItemAdapter(getActivity(), ModulesFragment.mSubjects, getArguments().getInt("module"));
         mRecyclerView.setAdapter(moduleSubjectItemAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return rootView;
     }
 
-    private void initSubjects() {
-        try {
-            int semester = StudentKeeper.getCurrentSemesterIndex();
-            mSubjects.clear();
-            mSubjects.addAll(StudentKeeper.getCurrentStudent().getSemesters().get(semester).getSubjects());
-        } catch (IllegalArgumentException e) {
-            openLoginFragment();
-        }
-    }
-
-    private void openLoginFragment() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new LoginFragment())
-                .commit();
-    }
-
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
-        initSubjects();
+        ModulesFragment.initSubjects();
         rerenderModuleSubjectsList();
     }
 
@@ -79,7 +58,7 @@ public class ModuleFragment extends Fragment {
         Log.d("[ModuleFragment#onEvent(SemesterChangedEvent)]",
                 "Current semesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
-        initSubjects();
+        ModulesFragment.initSubjects();
         rerenderModuleSubjectsList();
     }
 

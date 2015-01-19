@@ -12,6 +12,10 @@ import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.acra.sender.HttpSender;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 @ReportsCrashes(
         formUri = "http://moduleok.hol.es/index.php",
         reportType = HttpSender.Type.FORM,

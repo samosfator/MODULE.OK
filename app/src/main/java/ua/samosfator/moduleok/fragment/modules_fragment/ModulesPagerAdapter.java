@@ -10,15 +10,21 @@ import ua.samosfator.moduleok.R;
 
 class ModulesPagerAdapter extends FragmentPagerAdapter {
 
+    private final int TYPICAL_MODULES_COUNT = 4;
+    private int maxModulesCount = TYPICAL_MODULES_COUNT;
+
     private final String[] titles = {
             App.getContext().getResources().getString(R.string.module_1_name),
             App.getContext().getResources().getString(R.string.module_2_name),
             App.getContext().getResources().getString(R.string.module_3_name),
-            App.getContext().getResources().getString(R.string.module_4_name)
+            App.getContext().getResources().getString(R.string.module_4_name),
+            App.getContext().getResources().getString(R.string.module_5_name),
+            App.getContext().getResources().getString(R.string.module_6_name)
     };
 
-    public ModulesPagerAdapter(FragmentManager fm) {
+    public ModulesPagerAdapter(FragmentManager fm, int maxModulesCount) {
         super(fm);
+        this.maxModulesCount = maxModulesCount;
     }
 
     @Override
@@ -28,7 +34,7 @@ class ModulesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return titles.length;
+        return maxModulesCount;
     }
 
     @Override

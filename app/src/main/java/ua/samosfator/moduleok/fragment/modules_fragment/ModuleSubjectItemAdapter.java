@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.recyclerview.adapter;
+package ua.samosfator.moduleok.fragment.modules_fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.parser.Module;
 import ua.samosfator.moduleok.parser.Subject;
@@ -50,7 +51,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(currentModule.getFormattedDate());
         holder.subjectScore.setText(String.valueOf(currentModule.getScore()));
-        holder.subjectScore.setBackgroundResource(SubjectItemAdapter.getDrawableDependsOnScore(currentModule.getScore()));
+        holder.subjectScore.setBackgroundResource(DrawableUtils.getDrawableDependsOnScore(currentModule.getScore()));
     }
 
     @Override
