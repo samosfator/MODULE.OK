@@ -27,6 +27,8 @@
     <string name="modules_section">Modules</string>
     <string name="logout_section">Log out</string>
     <string name="login_section">Log in</string>
+    <string name="enter_login_message">Enter login, please</string>
+    <string name="enter_password_message">Enter password, please</string>
 
 
     <string-array name="semesters">

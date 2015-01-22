@@ -45,18 +45,12 @@ public class LoginFragment extends Fragment {
                     enableInputs(false);
                     doLogin(login, password);
                     Mint.logEvent("log in", MintLogLevel.Info);
-
-                }
-                else {
-
+                } else {
                     if (login.isEmpty()) {
-                        login_txt.setError("Введіть логін");
-
+                        login_txt.setError(getString(R.string.enter_login_message));
                     }
-
                     if (password.isEmpty()) {
-                        password_txt.setError("Введіть пароль");
-
+                        password_txt.setError(getString(R.string.enter_password_message));
                     }
                 }
             }
@@ -76,6 +70,7 @@ public class LoginFragment extends Fragment {
                     Log.d("LoginFragment#doLogin->auth.isSuccess()", String.valueOf(auth.isSuccess()));
                     EventBus.getDefault().post(new LoginEvent());
                 } else {
+                    showError();
                     enableInputs(true);
                 }
             }
@@ -87,7 +82,10 @@ public class LoginFragment extends Fragment {
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
     }
 
-
+    private void showError() {
+        login_txt.setError(" ");
+        password_txt.setError(getString(R.string.wrong_credentials_text));
+    }
 
     private void enableInputs(final boolean bool) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
