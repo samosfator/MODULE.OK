@@ -49,7 +49,7 @@ public class LoginFragment extends Fragment {
                 }
                 else {
 
-                    if (login.equals("")) {
+                    if (login.isEmpty()) {
                         login_txt.setError("Введіть логін");
 
                     }
