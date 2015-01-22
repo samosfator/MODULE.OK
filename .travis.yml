@@ -40,3 +40,8 @@ deploy:
   on:
     tags: true
     all_branches: true
+
+cache:
+  directories:
+  - $HOME/.gradle/caches
+  - $HOME/.gradle/wrapper
