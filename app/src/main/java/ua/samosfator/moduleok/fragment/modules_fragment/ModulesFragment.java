@@ -15,7 +15,6 @@ import com.splunk.mint.MintLogLevel;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.fragment.LoginFragment;

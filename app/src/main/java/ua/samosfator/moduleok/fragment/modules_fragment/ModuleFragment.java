@@ -9,16 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
-import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.parser.Subject;
 
 public class ModuleFragment extends Fragment {
 

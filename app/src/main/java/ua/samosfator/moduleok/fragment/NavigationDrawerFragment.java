@@ -68,11 +68,11 @@ public class NavigationDrawerFragment extends Fragment {
     private void initSections() {
         mSections = new ArrayList<>();
 
-        DrawerSection subjectsSection = new DrawerSection("Subjects", R.drawable.ic_format_list_numbers_grey600_24dp);
+        DrawerSection subjectsSection = new DrawerSection(getString(R.string.last_n_total_section), R.drawable.ic_format_list_numbers_grey600_24dp);
         subjectsSection.setFragment(new SubjectsFragment());
         mSections.add(subjectsSection);
 
-        DrawerSection modulesSection = new DrawerSection("Modules", R.drawable.ic_file_document_box_grey600_24dp);
+        DrawerSection modulesSection = new DrawerSection(getString(R.string.modules_section), R.drawable.ic_file_document_box_grey600_24dp);
         modulesSection.setFragment(new ModulesFragment());
         mSections.add(modulesSection);
 
@@ -91,7 +91,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void addLogoutSection() {
-        DrawerSection logoutSection = new DrawerSection("Log out", R.drawable.ic_logout_grey600_24dp);
+        DrawerSection logoutSection = new DrawerSection(getString(R.string.logout_section), R.drawable.ic_logout_grey600_24dp);
         logoutSection.setFragment(new LogoutFragment());
         if (mSections.size() == 2) {
             mSections.add(logoutSection);
@@ -102,7 +102,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public void addLoginSection() {
-        DrawerSection loginSection = new DrawerSection("Log in", R.drawable.ic_login_grey600_24dp);
+        DrawerSection loginSection = new DrawerSection(getString(R.string.login_section), R.drawable.ic_login_grey600_24dp);
         loginSection.setFragment(new LoginFragment());
         if (mSections.size() == 2) {
             mSections.add(loginSection);
