@@ -21,7 +21,7 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
-    CircularProgressButton new_loggin_btn;
+    private CircularProgressButton new_loggin_btn;
     private MaterialEditText login_txt;
     private MaterialEditText password_txt;
     private Button login_button;
@@ -38,21 +38,14 @@ public class LoginFragment extends Fragment {
         new_loggin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableInputs(false);
+                String login = login_txt.getText().toString();
+                String password = password_txt.getText().toString();
 
-
-                final String login = login_txt.getText().toString();
-                final String password = password_txt.getText().toString();
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        new_loggin_btn.setIndeterminateProgressMode(true); // turn on indeterminate progress
-                        new_loggin_btn.setProgress(50); // set progress > 0 & < 100 to display indeterminate progress
-                    }
-                });
-                doLogin(login, password);
-
-                Mint.logEvent("log in", MintLogLevel.Info);
+                if (!login.isEmpty() && !password.isEmpty()) {
+                    enableInputs(false);
+                    doLogin(login, password);
+                    Mint.logEvent("log in", MintLogLevel.Info);
+                }
             }
         });
 
@@ -66,20 +59,14 @@ public class LoginFragment extends Fragment {
             @Override
             public void run() {
                 auth.signIn(login, password);
-
-
                 if (auth.isSuccess()) {
-
                     Log.d("LoginFragment#doLogin->auth.isSuccess()", String.valueOf(auth.isSuccess()));
-
                     EventBus.getDefault().post(new LoginEvent());
-
                 } else {
                     showError();
                     enableInputs(true);
                 }
             }
-
         }).start();
     }
 
@@ -98,7 +85,8 @@ public class LoginFragment extends Fragment {
             public void run() {
                 login_txt.setEnabled(bool);
                 password_txt.setEnabled(bool);
-//                new_loggin_btn.setEnabled(bool);
+                new_loggin_btn.setIndeterminateProgressMode(!bool);
+                new_loggin_btn.setProgress(bool ? 0 : 50);
             }
         });
     }
