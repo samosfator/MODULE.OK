@@ -48,8 +48,10 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
 
         final Module currentModule = modules.get(moduleIndex);
 
+
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(currentModule.getFormattedDate());
+        holder.subjectWeight.setText(String.valueOf(currentModule.getWeight()+"%"));
         holder.subjectScore.setText(String.valueOf(currentModule.getScore()));
         holder.subjectScore.setBackgroundResource(DrawableUtils.getDrawableDependsOnScore(currentModule.getScore()));
     }
@@ -66,6 +68,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         private TextView subjectName;
         private TextView subjectScore;
         private TextView subjectDate;
+        private TextView subjectWeight;
 
         public ModuleSubjectItemViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +76,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
             subjectName = (TextView) itemView.findViewById(R.id.subject_name);
             subjectScore = (TextView) itemView.findViewById(R.id.subject_score);
             subjectDate = (TextView) itemView.findViewById(R.id.subject_date);
+            subjectWeight = (TextView) itemView.findViewById(R.id.subject_weight);
         }
     }
 }
