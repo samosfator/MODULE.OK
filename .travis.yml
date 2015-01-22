@@ -31,3 +31,12 @@ before_install:
 script:
   # By default Travis-ci executes './gradlew build connectedCheck' if no 'script:' section found.
   - ./gradlew build
+
+deploy:
+  provider: releases
+  api-key: "9deb0e36f005b5d0aa608eb8a18a66d152aded75 "
+  file: "./app/build/outputs/apk/app-debug.apk"
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
