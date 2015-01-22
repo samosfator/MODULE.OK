@@ -51,7 +51,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
 
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(currentModule.getFormattedDate());
-        holder.subjectWeight.setText(String.valueOf(currentModule.getWeight()+"%"));
+        holder.subjectWeight.setText(String.valueOf(currentModule.getWeight() + "%"));
         holder.subjectScore.setText(String.valueOf(currentModule.getScore()));
         holder.subjectScore.setBackgroundResource(DrawableUtils.getDrawableDependsOnScore(currentModule.getScore()));
     }

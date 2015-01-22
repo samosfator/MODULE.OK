@@ -36,7 +36,7 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.
         Subject current = data.get(position);
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(current.getLastModule().getFormattedDate());
-        holder.subjectWeight.setText(String.valueOf(current.getLastModule().getWeight()+"%"));
+        holder.subjectWeight.setText(String.valueOf(current.getLastModule().getWeight() + "%"));
         holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
         holder.subjectScore.setBackgroundResource(DrawableUtils.getDrawableDependsOnScore(current.getLastModule().getScore()));
     }
