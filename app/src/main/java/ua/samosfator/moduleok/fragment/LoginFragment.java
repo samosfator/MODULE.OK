@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.dd.CircularProgressButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
@@ -20,7 +21,7 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
-
+    CircularProgressButton new_loggin_btn;
     private MaterialEditText login_txt;
     private MaterialEditText password_txt;
     private Button login_button;
@@ -33,15 +34,22 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initViews(rootView);
-
-        login_button.setOnClickListener(new View.OnClickListener() {
+        new_loggin_btn = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
+        new_loggin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 enableInputs(false);
 
+
                 final String login = login_txt.getText().toString();
                 final String password = password_txt.getText().toString();
-
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        new_loggin_btn.setIndeterminateProgressMode(true); // turn on indeterminate progress
+                        new_loggin_btn.setProgress(50); // set progress > 0 & < 100 to display indeterminate progress
+                    }
+                });
                 doLogin(login, password);
 
                 Mint.logEvent("log in", MintLogLevel.Info);
@@ -59,23 +67,25 @@ public class LoginFragment extends Fragment {
             public void run() {
                 auth.signIn(login, password);
 
+
                 if (auth.isSuccess()) {
 
                     Log.d("LoginFragment#doLogin->auth.isSuccess()", String.valueOf(auth.isSuccess()));
 
                     EventBus.getDefault().post(new LoginEvent());
+
                 } else {
                     showError();
                     enableInputs(true);
                 }
             }
+
         }).start();
     }
 
     private void initViews(View rootView) {
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
-        login_button = (Button) rootView.findViewById(R.id.login_btn);
     }
 
     private void showError() {
@@ -88,7 +98,7 @@ public class LoginFragment extends Fragment {
             public void run() {
                 login_txt.setEnabled(bool);
                 password_txt.setEnabled(bool);
-                login_button.setEnabled(bool);
+//                new_loggin_btn.setEnabled(bool);
             }
         });
     }

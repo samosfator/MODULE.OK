@@ -35,4 +35,5 @@ dependencies {
     compile 'com.jpardogo.materialtabstrip:library:1.0.7'
     compile 'ch.acra:acra:4.5.0'
     compile "com.splunk.mint:mint:4.0.8"
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 }

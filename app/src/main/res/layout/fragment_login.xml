@@ -59,20 +59,33 @@
         android:layout_marginTop="8dp"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log in"
+    <!--<Button-->
+        <!--android:id="@+id/login_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Log in"-->
+        <!--android:background="@drawable/button_ripple"-->
+        <!--android:textColor="@color/textColorPrimary"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textSize="16sp"-->
+        <!--android:paddingLeft="32dp"-->
+        <!--android:paddingRight="32dp"-->
+        <!--android:layout_below="@+id/password_editText"-->
+        <!--android:layout_alignRight="@+id/password_editText"-->
+        <!--android:layout_alignEnd="@+id/password_editText"-->
+        <!--android:layout_marginTop="24dp" />-->
+    <com.dd.CircularProgressButton
+        android:id="@+id/btnWithText"
+        android:layout_width="196dp"
+        android:layout_height="64dp"
+        android:textColor="@color/cpb_white"
+        android:textSize="18sp"
+        app:cpb_textComplete="Complete"
+        app:cpb_textError="Error"
+        app:cpb_textIdle="Login"
         android:background="@drawable/button_ripple"
-        android:textColor="@color/textColorPrimary"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:layout_below="@+id/password_editText"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/password_editText"
-        android:layout_alignEnd="@+id/password_editText"
-        android:layout_marginTop="24dp" />
+        android:layout_alignEnd="@+id/password_editText" />
 
 </RelativeLayout>
