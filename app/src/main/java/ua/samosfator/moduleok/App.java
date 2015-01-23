@@ -3,6 +3,8 @@ package ua.samosfator.moduleok;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -41,6 +43,12 @@ public class App extends Application {
 
     public static Context getContext() {
         return mContext;
+    }
+
+    public static boolean hasInternetConnection() {
+        final ConnectivityManager conMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnected();
     }
 
     public static Point getScreenSize() {

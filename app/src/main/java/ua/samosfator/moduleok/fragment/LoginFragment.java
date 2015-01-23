@@ -16,6 +16,7 @@ import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
@@ -41,7 +42,7 @@ public class LoginFragment extends Fragment {
                 String login = login_txt.getText().toString();
                 String password = password_txt.getText().toString();
 
-                if (!login.isEmpty() && !password.isEmpty()) {
+                if (!login.isEmpty() && !password.isEmpty() && App.hasInternetConnection()) {
                     enableInputs(false);
                     doLogin(login, password);
                     Mint.logEvent("log in", MintLogLevel.Info);
@@ -53,11 +54,15 @@ public class LoginFragment extends Fragment {
                         password_txt.setError(getString(R.string.enter_password_message));
                     }
                 }
+                if (!App.hasInternetConnection()) {
+                    showInternetConnectionError();
+                }
             }
         });
 
         return rootView;
     }
+
 
     private void doLogin(final String login, final String password) {
         final Auth auth = new Auth();
@@ -70,7 +75,7 @@ public class LoginFragment extends Fragment {
                     Log.d("LoginFragment#doLogin->auth.isSuccess()", String.valueOf(auth.isSuccess()));
                     EventBus.getDefault().post(new LoginEvent());
                 } else {
-                    showError();
+                    showCredentialsError();
                     enableInputs(true);
                 }
             }
@@ -82,9 +87,13 @@ public class LoginFragment extends Fragment {
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
     }
 
-    private void showError() {
+    private void showCredentialsError() {
         login_txt.setError(" ");
         password_txt.setError(getString(R.string.wrong_credentials_text));
+    }
+    private void showInternetConnectionError() {
+        login_txt.setError(" ");
+        password_txt.setError(getString(R.string.no_internet_connection_text));
     }
 
     private void enableInputs(final boolean bool) {
