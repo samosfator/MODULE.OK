@@ -1,5 +1,8 @@
 package ua.samosfator.moduleok.fragment;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -77,6 +80,13 @@ public class LoginFragment extends Fragment {
                 } else {
                     showCredentialsError();
                     enableInputs(true);
+                }
+                final ConnectivityManager conMgr = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
+                if (activeNetwork != null && activeNetwork.isConnected()) {
+                    return;
+                } else {
+                    showInternetConnectionError();
                 }
             }
         }).start();
