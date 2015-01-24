@@ -84,10 +84,16 @@ public class LoginFragment extends Fragment {
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
     }
 
+    private void showInternetConnectionError() {
+        login_txt.setError(" ");
+        password_txt.setError(getString(R.string.no_internet_connection_text));
+    }
+
     private void showCredentialsError() {
         login_txt.setError(" ");
         password_txt.setError(getString(R.string.wrong_credentials_text));
     }
+
 
     private void enableInputs(final boolean bool) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
