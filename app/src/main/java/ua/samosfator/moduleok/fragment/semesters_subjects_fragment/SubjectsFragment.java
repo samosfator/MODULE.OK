@@ -32,7 +32,7 @@ public class SubjectsFragment extends Fragment {
     private List<Subject> mSubjects = new ArrayList<>();
 
     private RecyclerView mRecyclerView;
-    private SubjectItemAdapter mSectionAdapter;
+    private SubjectItemAdapter mSubjectItemAdapter;
 
     public SubjectsFragment() {
         // Required empty public constructor
@@ -57,12 +57,12 @@ public class SubjectsFragment extends Fragment {
     }
 
     private void initSectionAdapter() {
-        mSectionAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
+        mSubjectItemAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
     }
 
     private void initRecyclerView(View rootView) {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
-        mRecyclerView.setAdapter(mSectionAdapter);
+        mRecyclerView.setAdapter(mSubjectItemAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -91,11 +91,10 @@ public class SubjectsFragment extends Fragment {
         } catch (IllegalArgumentException e) {
             openLoginFragment();
         }
-        reRenderSubjectsList();
     }
 
     private void reRenderSubjectsList() {
-        mSectionAdapter.notifyItemRangeChanged(0, mSectionAdapter.getItemCount());
+        mSubjectItemAdapter.notifyItemRangeChanged(0, mSubjectItemAdapter.getItemCount());
     }
 
     private void openLoginFragment() {
@@ -107,12 +106,14 @@ public class SubjectsFragment extends Fragment {
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
         initSubjects();
+        reRenderSubjectsList();
     }
 
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
         initSubjects();
+        reRenderSubjectsList();
     }
 
     @Override

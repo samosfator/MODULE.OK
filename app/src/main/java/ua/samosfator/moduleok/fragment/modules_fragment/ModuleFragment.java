@@ -46,18 +46,17 @@ public class ModuleFragment extends Fragment {
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
         ModulesFragment.initSubjects();
-        rerenderModuleSubjectsList();
+        reRenderModuleSubjectsList();
     }
 
     public void onEvent(SemesterChangedEvent event) {
-        Log.d("[ModuleFragment#onEvent(SemesterChangedEvent)]",
-                "Current semesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
+        Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
         ModulesFragment.initSubjects();
-        rerenderModuleSubjectsList();
+        reRenderModuleSubjectsList();
     }
 
-    private void rerenderModuleSubjectsList() {
+    private void reRenderModuleSubjectsList() {
         moduleSubjectItemAdapter.notifyItemRangeChanged(0, moduleSubjectItemAdapter.getItemCount());
     }
 
