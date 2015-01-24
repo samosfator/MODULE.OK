@@ -42,8 +42,8 @@ public class ModulesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_modules, container, false);
         fragmentManager = getFragmentManager();
 
-        initTabStrip(rootView);
         initSubjects();
+        initTabStrip(rootView);
 
         return rootView;
     }
