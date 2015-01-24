@@ -1,8 +1,5 @@
 package ua.samosfator.moduleok.fragment;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.dd.CircularProgressButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -25,10 +21,9 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
-    private CircularProgressButton new_loggin_btn;
+    private CircularProgressButton login_button;
     private MaterialEditText login_txt;
     private MaterialEditText password_txt;
-    private Button login_button;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -38,8 +33,8 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initViews(rootView);
-        new_loggin_btn = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
-        new_loggin_btn.setOnClickListener(new View.OnClickListener() {
+        login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
+        login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String login = login_txt.getText().toString();
@@ -66,7 +61,6 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
-
     private void doLogin(final String login, final String password) {
         final Auth auth = new Auth();
 
@@ -75,18 +69,11 @@ public class LoginFragment extends Fragment {
             public void run() {
                 auth.signIn(login, password);
                 if (auth.isSuccess()) {
-                    Log.d("LoginFragment#doLogin->auth.isSuccess()", String.valueOf(auth.isSuccess()));
+                    Log.d("AUTH_STATUS", String.valueOf(auth.isSuccess()));
                     EventBus.getDefault().post(new LoginEvent());
                 } else {
                     showCredentialsError();
                     enableInputs(true);
-                }
-                final ConnectivityManager conMgr = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-                final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
-                if (activeNetwork != null && activeNetwork.isConnected()) {
-                    return;
-                } else {
-                    showInternetConnectionError();
                 }
             }
         }).start();
@@ -101,10 +88,6 @@ public class LoginFragment extends Fragment {
         login_txt.setError(" ");
         password_txt.setError(getString(R.string.wrong_credentials_text));
     }
-    private void showInternetConnectionError() {
-        login_txt.setError(" ");
-        password_txt.setError(getString(R.string.no_internet_connection_text));
-    }
 
     private void showInternetConnectionError() {
         login_txt.setError(" ");
@@ -117,8 +100,8 @@ public class LoginFragment extends Fragment {
             public void run() {
                 login_txt.setEnabled(bool);
                 password_txt.setEnabled(bool);
-                new_loggin_btn.setIndeterminateProgressMode(!bool);
-                new_loggin_btn.setProgress(bool ? 0 : 50);
+                login_button.setIndeterminateProgressMode(!bool);
+                login_button.setProgress(bool ? 0 : 50);
             }
         });
     }
