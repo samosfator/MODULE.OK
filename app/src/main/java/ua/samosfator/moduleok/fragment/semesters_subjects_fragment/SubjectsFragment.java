@@ -103,12 +103,14 @@ public class SubjectsFragment extends Fragment {
                 .commit();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
         initSubjects();
         reRenderSubjectsList();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 

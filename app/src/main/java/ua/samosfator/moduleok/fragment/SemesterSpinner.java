@@ -48,7 +48,8 @@ class SemesterSpinner {
             }
 
             private void setItemColorLight(AdapterView<?> parent) {
-                ((TextView) parent.getChildAt(0)).setTextColor(App.getContext().getResources().getColor(R.color.textColorPrimary));
+                int textColorPrimary = App.getContext().getResources().getColor(R.color.textColorPrimary);
+                ((TextView) parent.getChildAt(0)).setTextColor(textColorPrimary);
             }
 
             @Override

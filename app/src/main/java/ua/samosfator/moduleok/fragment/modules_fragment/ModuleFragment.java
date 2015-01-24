@@ -43,12 +43,11 @@ public class ModuleFragment extends Fragment {
         return rootView;
     }
 
-    public void onEvent(RefreshEvent event) {
-        StudentKeeper.refreshStudent();
-        ModulesFragment.initSubjects();
-        reRenderModuleSubjectsList();
+    private void reRenderModuleSubjectsList() {
+        moduleSubjectItemAdapter.notifyItemRangeChanged(0, moduleSubjectItemAdapter.getItemCount());
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
@@ -56,8 +55,11 @@ public class ModuleFragment extends Fragment {
         reRenderModuleSubjectsList();
     }
 
-    private void reRenderModuleSubjectsList() {
-        moduleSubjectItemAdapter.notifyItemRangeChanged(0, moduleSubjectItemAdapter.getItemCount());
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(RefreshEvent event) {
+        StudentKeeper.refreshStudent();
+        ModulesFragment.initSubjects();
+        reRenderModuleSubjectsList();
     }
 
     @Override

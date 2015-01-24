@@ -112,19 +112,6 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
-    public void onEvent(LoginEvent event) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                addLoginOrLogoutSection();
-            }
-        });
-    }
-
-    public void onEvent(LogoutEvent event) {
-        addLoginOrLogoutSection();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -165,7 +152,7 @@ public class NavigationDrawerFragment extends Fragment {
 
             private void saveUserSawDrawerState() {
                 mUserSawDrawer = true;
-                Preferences.save(KEY_USER_SAW_DRAWER, String.valueOf(mUserSawDrawer));
+                Preferences.save(KEY_USER_SAW_DRAWER, String.valueOf(true));
             }
 
             @Override
@@ -186,6 +173,21 @@ public class NavigationDrawerFragment extends Fragment {
                 mDrawerToggle.syncState();
             }
         });
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(LoginEvent event) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                addLoginOrLogoutSection();
+            }
+        });
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(LogoutEvent event) {
+        addLoginOrLogoutSection();
     }
 
     @Override

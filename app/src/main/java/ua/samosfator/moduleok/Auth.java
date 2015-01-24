@@ -21,7 +21,7 @@ public class Auth {
     }
 
     private void downloadSessionId(String login, String password) {
-        Connection.Response loginResponse = null;
+        Connection.Response loginResponse;
         try {
             loginResponse = downloadLoginResponse(login, password);
             Document loginDocument = loginResponse.parse();
@@ -61,6 +61,7 @@ public class Auth {
         return success;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LoginEvent event) {
         StudentKeeper.initStudent();
     }

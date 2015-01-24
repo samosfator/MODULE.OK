@@ -43,6 +43,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         registerClassForEventBus();
+        initNavigationDrawer();
         super.onResume();
     }
 
@@ -139,10 +140,12 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LoginEvent event) {
         setAccountInfo();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LogoutEvent event) {
         eraseAccountInfo();
     }
