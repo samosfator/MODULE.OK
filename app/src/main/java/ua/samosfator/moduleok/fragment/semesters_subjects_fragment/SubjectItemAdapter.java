@@ -14,7 +14,7 @@ import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.parser.Subject;
 
-public class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.SubjectItemViewHolder> {
+class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.SubjectItemViewHolder> {
 
     private LayoutInflater inflater;
     private List<Subject> data = Collections.emptyList();

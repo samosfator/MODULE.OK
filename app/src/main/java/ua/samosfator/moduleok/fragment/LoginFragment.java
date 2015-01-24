@@ -40,20 +40,10 @@ public class LoginFragment extends Fragment {
                 String login = login_txt.getText().toString();
                 String password = password_txt.getText().toString();
 
-                if (!login.isEmpty() && !password.isEmpty() && App.hasInternetConnection()) {
-                    enableInputs(false);
+                validateFields(login, password);
+
+                if (isReadyForLogin(login, password)) {
                     doLogin(login, password);
-                    Mint.logEvent("log in", MintLogLevel.Info);
-                } else {
-                    if (login.isEmpty()) {
-                        login_txt.setError(getString(R.string.enter_login_message));
-                    }
-                    if (password.isEmpty()) {
-                        password_txt.setError(getString(R.string.enter_password_message));
-                    }
-                }
-                if (!App.hasInternetConnection()) {
-                    showInternetConnectionError();
                 }
             }
         });
@@ -61,13 +51,32 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
+    private boolean isReadyForLogin(String login, String password) {
+        return !login.isEmpty() && !password.isEmpty() && App.hasInternetConnection();
+    }
+
+    private void validateFields(String login, String password) {
+        if (login.isEmpty()) {
+            login_txt.setError(getString(R.string.enter_login_message));
+        }
+        if (password.isEmpty()) {
+            password_txt.setError(getString(R.string.enter_password_message));
+        }
+        if (!App.hasInternetConnection()) {
+            showInternetConnectionError();
+        }
+    }
+
     private void doLogin(final String login, final String password) {
-        final Auth auth = new Auth();
+        enableInputs(false);
+        Mint.logEvent("log in", MintLogLevel.Info);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Auth auth = new Auth();
                 auth.signIn(login, password);
+
                 if (auth.isSuccess()) {
                     Log.d("AUTH_STATUS", String.valueOf(auth.isSuccess()));
                     EventBus.getDefault().post(new LoginEvent());
@@ -93,7 +102,6 @@ public class LoginFragment extends Fragment {
         login_txt.setError(" ");
         password_txt.setError(getString(R.string.wrong_credentials_text));
     }
-
 
     private void enableInputs(final boolean bool) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {

@@ -31,8 +31,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
     @Override
     public ModuleSubjectItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.fragment_subject_item, parent, false);
-        ModuleSubjectItemViewHolder viewHolder = new ModuleSubjectItemViewHolder(view);
-        return viewHolder;
+        return new ModuleSubjectItemViewHolder(view);
     }
 
     @Override
@@ -47,7 +46,6 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         }
 
         final Module currentModule = modules.get(moduleIndex);
-
 
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(currentModule.getFormattedDate());

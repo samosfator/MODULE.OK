@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
-
 
 public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
@@ -44,13 +42,14 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
+        registerClassForEventBus();
+        super.onResume();
+    }
+
+    private void registerClassForEventBus() {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-
-        Log.d("[MainActivity#onResume]", "MainActivity is registred for events: " + EventBus.getDefault().isRegistered(this));
-
-        super.onResume();
     }
 
     private void initToolbar() {
@@ -64,14 +63,6 @@ public class MainActivity extends ActionBarActivity {
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer_fragment);
         drawerFragment.setup(R.id.navigation_drawer_fragment, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
-    }
-
-    public void onEvent(LoginEvent event) {
-        setAccountInfo();
-    }
-
-    public void onEvent(LogoutEvent event) {
-        eraseAccountInfo();
     }
 
     private void eraseAccountInfo() {
@@ -89,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setAccountInfo() {
-        if (Preferences.read("SESSIONID", "").equals("")) {
+        if (!Auth.isLoggedIn()) {
             eraseAccountInfo();
             return;
         }
@@ -97,17 +88,12 @@ public class MainActivity extends ActionBarActivity {
         final TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
         final TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
 
-        Log.d("MainActivity#setAccountInfo()", "Initialized studentName_TextView and studentGroup_TextView");
-
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
                 try {
                     studentName_TextView.setText(StudentKeeper.getCurrentStudent().getNameSurname());
                     studentGroup_TextView.setText(StudentKeeper.getCurrentStudent().getGroupName());
-
-                    Log.d("MainActivity#setAccountInfo()", StudentKeeper.getCurrentStudent().getNameSurname() +
-                            " " + StudentKeeper.getCurrentStudent().getGroupName());
 
                     openSubjectsFragment();
                 } catch (SessionIdExpiredException e) {
@@ -143,7 +129,6 @@ public class MainActivity extends ActionBarActivity {
         switch (id) {
             case R.id.action_refresh:
                 EventBus.getDefault().post(new RefreshEvent());
-
                 Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -152,6 +137,14 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onEvent(LoginEvent event) {
+        setAccountInfo();
+    }
+
+    public void onEvent(LogoutEvent event) {
+        eraseAccountInfo();
     }
 
     @Override

@@ -10,11 +10,9 @@ import ua.samosfator.moduleok.R;
 
 public class SubjectItemFragment extends Fragment {
 
-
     public SubjectItemFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

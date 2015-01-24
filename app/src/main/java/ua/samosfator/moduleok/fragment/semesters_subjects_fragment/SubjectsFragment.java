@@ -51,23 +51,36 @@ public class SubjectsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
         initSubjects();
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
+        initSectionAdapter();
+        initRecyclerView(rootView);
+        return rootView;
+    }
+
+    private void initSectionAdapter() {
         mSectionAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
+    }
+
+    private void initRecyclerView(View rootView) {
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
         mRecyclerView.setAdapter(mSectionAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                TextView subjectTotalScoreTextView = (TextView) view.findViewById(R.id.subject_total_score);
+                setSubjectTotalScore(view, position);
+                animateSubjectTotalScoreChange(view);
+            }
 
+            private void animateSubjectTotalScoreChange(View view) {
                 ViewFlipper viewFlipper = (ViewFlipper) view.findViewById(R.id.subject_score_view_flipper);
                 AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
+            }
 
+            private void setSubjectTotalScore(View view, int position) {
+                TextView subjectTotalScoreTextView = (TextView) view.findViewById(R.id.subject_total_score);
                 subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
             }
         }));
-
-        return rootView;
     }
 
     private void initSubjects() {
@@ -78,6 +91,11 @@ public class SubjectsFragment extends Fragment {
         } catch (IllegalArgumentException e) {
             openLoginFragment();
         }
+        reRenderSubjectsList();
+    }
+
+    private void reRenderSubjectsList() {
+        mSectionAdapter.notifyItemRangeChanged(0, mSectionAdapter.getItemCount());
     }
 
     private void openLoginFragment() {
@@ -89,19 +107,12 @@ public class SubjectsFragment extends Fragment {
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
         initSubjects();
-        rerenderSubjectsList();
     }
 
     public void onEvent(SemesterChangedEvent event) {
-        Log.d("[SubjectsFragment#onEvent(SemesterChangedEvent)]",
-                "Current semesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
+        Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
 
         initSubjects();
-        rerenderSubjectsList();
-    }
-
-    private void rerenderSubjectsList() {
-        mSectionAdapter.notifyItemRangeChanged(0, mSectionAdapter.getItemCount());
     }
 
     @Override
