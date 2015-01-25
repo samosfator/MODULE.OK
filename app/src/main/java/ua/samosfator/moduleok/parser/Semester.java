@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Semester implements Serializable {
@@ -19,6 +20,20 @@ public class Semester implements Serializable {
 
     public Semester(Element semesterHtml) {
         this.semesterHtml = semesterHtml;
+    }
+
+    private Semester() {
+        //Required empty constructor
+    }
+
+    public static Semester emptySemester() {
+        Semester semester = new Semester();
+        semester.subjects = Collections.emptyList();
+        semester.subjectsCount = 0;
+        semester.semesterHtml = Jsoup.parse("");
+        semester.maxModuleCount = 0;
+
+        return semester;
     }
 
     public List<Subject> getSubjects() {
@@ -42,9 +57,9 @@ public class Semester implements Serializable {
     public int getMaxModuleCount() {
         if (maxModuleCount == 0) {
             for (int i = 0; i < getSubjectsCount(); i++) {
-                if (subjects == null) {
-                    getSubjects();
-                }
+                if (subjects == null) getSubjects();
+                if (subjects.size() == 0) return 0;
+
                 int moduleCountForSubject = getModulesFor(subjects.get(i)).size();
                 if (moduleCountForSubject > maxModuleCount) {
                     maxModuleCount = moduleCountForSubject;

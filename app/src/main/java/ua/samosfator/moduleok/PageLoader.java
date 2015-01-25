@@ -6,15 +6,15 @@ public class PageLoader {
 
     private final static int MIN_VALID_PAGE_SIZE = 1400;
 
-    public static String getMainPageHtml() {
+    public static String getMainPageHtml(boolean forceLoad) {
         if (!Auth.isLoggedIn()) {
             throw new IllegalArgumentException("MUST LOG IN AT FIRST");
         }
-        return loadMainPage();
+        return loadMainPage(forceLoad);
     }
 
-    private static String loadMainPage() {
-        if (mainPageIsValid(getSavedMainPage())) return getSavedMainPage();
+    private static String loadMainPage(boolean forceLoad) {
+        if (mainPageIsValid(getSavedMainPage()) && !forceLoad) return getSavedMainPage();
 
         String mainPageHtml = downloadMainPage();
 

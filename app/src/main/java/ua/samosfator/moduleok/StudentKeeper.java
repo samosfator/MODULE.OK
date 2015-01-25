@@ -14,12 +14,12 @@ public class StudentKeeper {
     }
 
     public static void initStudent() {
-        student = new Student(PageLoader.getMainPageHtml());
+        student = new Student(PageLoader.getMainPageHtml(false));
     }
 
     public static void refreshStudent() {
         if (!Auth.isLoggedIn()) return;
-        student = new Student(PageLoader.getMainPageHtml());
+        student = new Student(PageLoader.getMainPageHtml(true));
     }
 
     public static int getCurrentSemesterIndex() {
