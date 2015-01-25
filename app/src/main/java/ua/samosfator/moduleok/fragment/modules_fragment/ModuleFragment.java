@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEvent;
@@ -25,9 +26,7 @@ public class ModuleFragment extends Fragment {
 
     @Override
     public void onResume() {
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
+        App.registerClassForEventBus(this);
         super.onResume();
     }
 
@@ -50,10 +49,6 @@ public class ModuleFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    private void reRenderModuleSubjectsList() {
-        moduleSubjectItemAdapter.notifyItemRangeChanged(0, moduleSubjectItemAdapter.getItemCount());
-    }
-
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
@@ -67,6 +62,10 @@ public class ModuleFragment extends Fragment {
         StudentKeeper.refreshStudent();
         ModulesFragment.initSubjects();
         reRenderModuleSubjectsList();
+    }
+
+    private void reRenderModuleSubjectsList() {
+        moduleSubjectItemAdapter.notifyItemRangeChanged(0, moduleSubjectItemAdapter.getItemCount());
     }
 
     @Override

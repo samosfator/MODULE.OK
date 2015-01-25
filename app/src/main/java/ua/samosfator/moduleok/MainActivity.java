@@ -42,15 +42,9 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
-        registerClassForEventBus();
+        App.registerClassForEventBus(this);
         initNavigationDrawer();
         super.onResume();
-    }
-
-    private void registerClassForEventBus() {
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
     }
 
     private void initToolbar() {

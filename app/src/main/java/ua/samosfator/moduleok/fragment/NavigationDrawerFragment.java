@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
@@ -48,9 +49,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public void onResume() {
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
+        App.registerClassForEventBus(this);
         super.onResume();
     }
 

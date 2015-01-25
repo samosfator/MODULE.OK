@@ -15,8 +15,11 @@ import com.splunk.mint.MintLogLevel;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Semester;
 import ua.samosfator.moduleok.parser.Subject;
@@ -26,6 +29,7 @@ public class ModulesFragment extends Fragment {
     private static FragmentManager fragmentManager;
     private static int maxModulesCount;
     static List<Subject> mSubjects = new ArrayList<>();
+    private View rootView;
 
     public ModulesFragment() {
         // Required empty public constructor
@@ -33,13 +37,14 @@ public class ModulesFragment extends Fragment {
 
     @Override
     public void onResume() {
+        App.registerClassForEventBus(this);
         Mint.logEvent("view ModulesFragment", MintLogLevel.Info);
         super.onResume();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_modules, container, false);
+        rootView = inflater.inflate(R.layout.fragment_modules, container, false);
         fragmentManager = getFragmentManager();
 
         initSubjects();
@@ -73,5 +78,16 @@ public class ModulesFragment extends Fragment {
         fragmentManager.beginTransaction()
                 .replace(R.id.main_container, new LoginFragment())
                 .commit();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(RefreshEndEvent event) {
+        initTabStrip(rootView);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }

@@ -14,6 +14,8 @@ import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.acra.sender.HttpSender;
 
+import de.greenrobot.event.EventBus;
+
 @ReportsCrashes(
         formUri = "http://moduleok.hol.es/index.php",
         reportType = HttpSender.Type.FORM,
@@ -59,5 +61,11 @@ public class App extends Application {
             display.getSize(screenSize);
         }
         return screenSize;
+    }
+
+    public static void registerClassForEventBus(Object that) {
+        if (!EventBus.getDefault().isRegistered(that)) {
+            EventBus.getDefault().register(that);
+        }
     }
 }

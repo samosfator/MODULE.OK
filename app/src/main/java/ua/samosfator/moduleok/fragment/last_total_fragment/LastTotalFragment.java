@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.animation.AnimationFactory;
@@ -38,9 +39,7 @@ public class LastTotalFragment extends Fragment {
 
     @Override
     public void onResume() {
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
+        App.registerClassForEventBus(this);
         Mint.logEvent("view LastTotalFragment", MintLogLevel.Info);
         super.onResume();
     }
