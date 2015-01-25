@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
+package ua.samosfator.moduleok.fragment.last_total_fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -27,8 +27,7 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
     @Override
     public SubjectItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.fragment_subject_item, parent, false);
-        SubjectItemViewHolder viewHolder = new SubjectItemViewHolder(view);
-        return viewHolder;
+        return new SubjectItemViewHolder(view);
     }
 
     @Override

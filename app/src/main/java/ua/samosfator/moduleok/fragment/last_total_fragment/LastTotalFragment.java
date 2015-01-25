@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
+package ua.samosfator.moduleok.fragment.last_total_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,14 +27,12 @@ import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Subject;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
-public class SubjectsFragment extends Fragment {
+public class LastTotalFragment extends Fragment {
 
     private List<Subject> mSubjects = new ArrayList<>();
-
-    private RecyclerView mRecyclerView;
     private SubjectItemAdapter mSubjectItemAdapter;
 
-    public SubjectsFragment() {
+    public LastTotalFragment() {
         // Required empty public constructor
     }
 
@@ -43,13 +41,13 @@ public class SubjectsFragment extends Fragment {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-        Mint.logEvent("view SubjectsFragment", MintLogLevel.Info);
+        Mint.logEvent("view LastTotalFragment", MintLogLevel.Info);
         super.onResume();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_last_total, container, false);
         initSubjects();
         initSectionAdapter();
         initRecyclerView(rootView);
@@ -61,10 +59,10 @@ public class SubjectsFragment extends Fragment {
     }
 
     private void initRecyclerView(View rootView) {
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
-        mRecyclerView.setAdapter(mSubjectItemAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
+        recyclerView.setAdapter(mSubjectItemAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 setSubjectTotalScore(view, position);

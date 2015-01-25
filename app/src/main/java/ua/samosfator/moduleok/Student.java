@@ -37,6 +37,10 @@ public class Student {
         return getGroup();
     }
 
+    public Semesters getSemesters() {
+        return semesters;
+    }
+
     private String getName() {
         if (this.name != null) return this.name;
         return getNameParts()[1];
@@ -75,10 +79,6 @@ public class Student {
 
     private Document getMainPageDocument() {
         return Jsoup.parse(mainPageHtml);
-    }
-
-    public Semesters getSemesters() {
-        return semesters;
     }
 
     @Override

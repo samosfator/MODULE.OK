@@ -17,7 +17,6 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 
 public class ModuleFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
     private ModuleSubjectItemAdapter moduleSubjectItemAdapter;
 
     public ModuleFragment() {
@@ -35,12 +34,20 @@ public class ModuleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_module, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.modules_subjects_recycler_view);
-        moduleSubjectItemAdapter = new ModuleSubjectItemAdapter(getActivity(), ModulesFragment.mSubjects, getArguments().getInt("module"));
-        mRecyclerView.setAdapter(moduleSubjectItemAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        initModuleSubjectItemAdapter();
+        initRecyclerView(rootView);
         return rootView;
+    }
+
+    private void initModuleSubjectItemAdapter() {
+        moduleSubjectItemAdapter = new ModuleSubjectItemAdapter(getActivity(), ModulesFragment.mSubjects, getArguments().getInt("module"));
+    }
+
+    private void initRecyclerView(View rootView) {
+        if (moduleSubjectItemAdapter == null) initModuleSubjectItemAdapter();
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.modules_subjects_recycler_view);
+        recyclerView.setAdapter(moduleSubjectItemAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     private void reRenderModuleSubjectsList() {

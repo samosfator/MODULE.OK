@@ -67,7 +67,7 @@ public class Semester implements Serializable {
     public int getModulesCountFor(Subject subject) {
         Elements subjectHtmlRow = semesterHtml.select("tr:contains(" + subject.getName() + ")");
         Elements cells = Jsoup.parse(subjectHtmlRow.html(), "", Parser.xmlParser()).select("td");
-        int modulesCount = cutOddCellsFromSubjectRow(cells).size();
+        @SuppressWarnings("UnnecessaryLocalVariable") int modulesCount = cutOddCellsFromSubjectRow(cells).size();
         return modulesCount;
     }
 

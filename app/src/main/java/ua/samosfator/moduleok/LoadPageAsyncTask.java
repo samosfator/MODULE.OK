@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-public class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
+class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         Document mainPage = Jsoup.parse("<div id=\"content\"></div>");

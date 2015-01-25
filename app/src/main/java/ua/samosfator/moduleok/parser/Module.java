@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Module implements Serializable {
 
@@ -18,7 +19,7 @@ public class Module implements Serializable {
     private Date date;
     private int score;
 
-    private DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
+    private DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy", Locale.getDefault());
 
     public String getSubjectName() {
         return subjectName;

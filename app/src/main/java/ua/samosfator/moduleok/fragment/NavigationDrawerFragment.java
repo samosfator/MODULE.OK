@@ -21,8 +21,8 @@ import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
+import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
 import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
-import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
@@ -34,14 +34,10 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     public static List<DrawerSection> mSections;
 
-    private RecyclerView mRecyclerView;
     private SectionAdapter mSectionAdapter;
 
     private boolean mUserSawDrawer;
     private boolean mFromSavedInstanceState;
-
-    private View containerView;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +65,7 @@ public class NavigationDrawerFragment extends Fragment {
         mSections = new ArrayList<>();
 
         DrawerSection subjectsSection = new DrawerSection(getString(R.string.last_n_total_section), R.drawable.ic_format_list_numbers_grey600_24dp);
-        subjectsSection.setFragment(new SubjectsFragment());
+        subjectsSection.setFragment(new LastTotalFragment());
         mSections.add(subjectsSection);
 
         DrawerSection modulesSection = new DrawerSection(getString(R.string.modules_section), R.drawable.ic_file_document_box_grey600_24dp);
@@ -113,15 +109,23 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        initSectionAdapter();
+        initRecyclerView(layout);
+        return layout;
+    }
 
-        mRecyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
+    private void initSectionAdapter() {
         mSectionAdapter = new SectionAdapter(getActivity(), mSections);
-        mRecyclerView.setAdapter(mSectionAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+    }
+
+    private void initRecyclerView(View layout) {
+        if (mSectionAdapter == null) initSectionAdapter();
+        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.drawer_list);
+        recyclerView.setAdapter(mSectionAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 getFragmentManager().beginTransaction()
@@ -130,11 +134,10 @@ public class NavigationDrawerFragment extends Fragment {
                 mDrawerLayout.closeDrawers();
             }
         }));
-        return layout;
     }
 
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
-        containerView = getActivity().findViewById(fragmentId);
+        View containerView = getActivity().findViewById(R.id.navigation_drawer_fragment);
         mDrawerLayout = drawerLayout;
 
         SemesterSpinner.init(mDrawerLayout);

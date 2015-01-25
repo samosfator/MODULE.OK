@@ -6,12 +6,10 @@ import android.content.SharedPreferences;
 public class Preferences {
     private static final String PREF_FILE_NAME = "APP_SETTINGS";
     private static SharedPreferences sharedPreferences;
-    private static Context context;
 
     public static void init(Context applicationContext) {
         if (sharedPreferences == null) {
-            context = applicationContext;
-            sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+            sharedPreferences = applicationContext.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
         }
     }
 

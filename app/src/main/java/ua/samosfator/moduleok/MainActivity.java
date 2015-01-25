@@ -20,7 +20,7 @@ import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.NavigationDrawerFragment;
-import ua.samosfator.moduleok.fragment.semesters_subjects_fragment.SubjectsFragment;
+import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
 
 public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void openSubjectsFragment() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new SubjectsFragment())
+                .replace(R.id.main_container, new LastTotalFragment())
                 .commit();
     }
 

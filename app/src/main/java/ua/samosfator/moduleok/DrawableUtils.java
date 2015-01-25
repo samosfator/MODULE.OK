@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class DrawableUtils {
 
-    private static int[] drawableCircles = {
+    final private static int[] drawableCircles = {
             R.drawable.circle_blue,
             R.drawable.circle_brown,
             R.drawable.circle_cyan,
@@ -30,7 +30,7 @@ public class DrawableUtils {
             return R.drawable.circle_5;
         } else if (score >= 75 && score < 90) {
             return R.drawable.circle_4;
-        } else if(score >= 60 && score < 75) {
+        } else if (score >= 60 && score < 75) {
             return R.drawable.circle_3;
         } else {
             return R.drawable.circle_2;

@@ -21,57 +21,16 @@ public class Subject implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public CONTROL_TYPE getControlType() {
         return controlType;
-    }
-
-    public void setControlType(String strControlType) {
-        if (strControlType.contains("Екзамен")) {
-            setControlType(CONTROL_TYPE.EXAM);
-        } else {
-            setControlType(CONTROL_TYPE.CREDIT);
-        }
-    }
-
-    public void setControlType(CONTROL_TYPE controlType) {
-        this.controlType = controlType;
     }
 
     public int getTotalScore() {
         return totalScore;
     }
 
-    public void setTotalScore(String strTotalScore) {
-        try {
-            setTotalScore(Integer.parseInt(strTotalScore));
-        } catch (NumberFormatException e) {
-            setTotalScore(0);
-            e.printStackTrace();
-        }
-    }
-
-    public void setTotalScore(int totalScore) {
-        this.totalScore = totalScore;
-    }
-
     public List<Module> getModules() {
         return modules;
-    }
-
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
-    }
-
-    String getSourceHtml() {
-        return sourceHtml;
-    }
-
-    void setSourceHtml(String html) {
-        this.sourceHtml = html;
     }
 
     public Module getLastModule() {
@@ -80,6 +39,47 @@ public class Subject implements Serializable {
             lastModuleIndex--;
         }
         return modules.get(lastModuleIndex);
+    }
+
+    String getSourceHtml() {
+        return sourceHtml;
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
+    void setControlType(String strControlType) {
+        if (strControlType.contains("Екзамен")) {
+            setControlType(CONTROL_TYPE.EXAM);
+        } else {
+            setControlType(CONTROL_TYPE.CREDIT);
+        }
+    }
+
+    void setControlType(CONTROL_TYPE controlType) {
+        this.controlType = controlType;
+    }
+
+    void setTotalScore(String strTotalScore) {
+        try {
+            setTotalScore(Integer.parseInt(strTotalScore));
+        } catch (NumberFormatException e) {
+            setTotalScore(0);
+            e.printStackTrace();
+        }
+    }
+
+    void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    void setModules(List<Module> modules) {
+        this.modules = modules;
+    }
+
+    void setSourceHtml(String html) {
+        this.sourceHtml = html;
     }
 
     public static Subject fromHtml(String html, Semester semester) {

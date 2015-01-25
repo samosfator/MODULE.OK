@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.semesters_subjects_fragment;
+package ua.samosfator.moduleok.fragment.last_total_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
