@@ -3,6 +3,7 @@ package ua.samosfator.moduleok.fragment.last_total_fragment;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,15 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
             holder.subjectWeight.setVisibility(View.GONE);
             holder.subjectScore.setText(String.valueOf(current.getTotalScore()));
             holder.subjectScore.setTypeface(holder.subjectScore.getTypeface(), Typeface.BOLD);
+            if (isTotalScoreView(holder)) {
+                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getTotalScore()));
+            } else {
+                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
+            }
         } else {
             holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
+            holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
         }
-        holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
     }
 
     private boolean areAllModulesPassed(int subjectIndex) {
@@ -59,6 +65,11 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
             }
         }
         return allModulesPassed;
+    }
+
+    private boolean isTotalScoreView(SubjectItemViewHolder holder) {
+        String totalScoreName = App.getContext().getString(R.string.total_score_name);
+        return holder.subjectDate.getText().equals(totalScoreName);
     }
 
     @Override

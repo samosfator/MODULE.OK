@@ -1,6 +1,8 @@
 package ua.samosfator.moduleok.fragment.last_total_fragment;
 
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -11,7 +13,6 @@ import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.animation.AnimationFactory;
-import ua.samosfator.moduleok.parser.Module;
 import ua.samosfator.moduleok.parser.Subject;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
@@ -49,7 +50,12 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
         if (isTotalScoreView()) {
             subjectTotalScoreTextView.setText(String.valueOf(lastScore));
         } else {
-            subjectTotalScoreTextView.setText(String.valueOf(totalScore));
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    subjectTotalScoreTextView.setText(String.valueOf(totalScore));
+                }
+            }, 200);
         }
     }
 
@@ -59,8 +65,18 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
     }
 
     private void setSubjectTotalScoreBackground() {
-        int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(totalScore);
-        subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore);
+        if (isTotalScoreView()) {
+            int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(lastScore);
+            subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore);
+        } else {
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(totalScore);
+                    subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore);
+                }
+            }, 200);
+        }
     }
 
     private void animateSubjectTotalScoreChange(View view) {
@@ -79,7 +95,12 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
         if (isTotalScoreView()) {
             subjectTotalScoreTextView.setTypeface(null, Typeface.NORMAL);
         } else {
-            subjectTotalScoreTextView.setTypeface(null, Typeface.BOLD);
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    subjectTotalScoreTextView.setTypeface(null, Typeface.BOLD);
+                }
+            }, 200);
         }
     }
 }
