@@ -18,7 +18,7 @@
             android:id="@+id/student_name_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:paddingLeft="8dp"
             android:paddingBottom="4dp"
@@ -63,5 +63,6 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/account_info_linearLayout"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:id="@+id/drawer_list" />
 </RelativeLayout>
