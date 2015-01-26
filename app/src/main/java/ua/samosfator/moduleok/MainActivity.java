@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Mint.initAndStartSession(MainActivity.this, "79d18253");
+        Mint.initAndStartSession(MainActivity.this, "79d18253");
         Mint.logEvent("start MainActivity", MintLogLevel.Info);
         Preferences.init(getApplicationContext());
 
@@ -123,8 +123,12 @@ public class MainActivity extends ActionBarActivity {
 
         switch (id) {
             case R.id.action_refresh:
-                EventBus.getDefault().post(new RefreshEvent());
-                Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
+                if (App.hasInternetConnection()) {
+                    Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
+                    EventBus.getDefault().post(new RefreshEvent());
+                } else {
+                    Toast.makeText(this, getString(R.string.no_internet_connection_text), Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show();

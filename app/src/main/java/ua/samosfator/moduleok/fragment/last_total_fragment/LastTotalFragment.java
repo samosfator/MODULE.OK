@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
@@ -18,12 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
-import ua.samosfator.moduleok.animation.AnimationFactory;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;

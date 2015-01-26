@@ -12,7 +12,7 @@
     <string name="login_explanation">Please, enter your login and password that you use for mod.tanet.edu.te.ua</string>
     <string name="wrong_credentials_text">Wrong login or password</string>
     <string name="action_refresh_toast">Refreshing</string>
-    <string name="no_internet_connection_text">No connection</string>
+    <string name="no_internet_connection_text">No Internet Connection</string>
 
     <string name="first_semester_name">First semester</string>
     <string name="second_semester_name">Second semester</string>
@@ -30,8 +30,8 @@
     <string name="login_section">Log in</string>
     <string name="enter_login_message">Enter login, please</string>
     <string name="enter_password_message">Enter password, please</string>
-    <string name="total_score_name">Підсумкова</string>
 
+    <string name="total_score_name">Total score</string>
 
     <string-array name="semesters">
         <item>@string/first_semester_name</item>
