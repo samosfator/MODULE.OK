@@ -1,6 +1,7 @@
 package ua.samosfator.moduleok.fragment.last_total_fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.parser.Module;
 import ua.samosfator.moduleok.parser.Subject;
 
 class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.SubjectItemViewHolder> {
@@ -36,8 +39,26 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(current.getLastModule().getFormattedDate());
         holder.subjectWeight.setText(String.valueOf(current.getLastModule().getWeight() + "%"));
-        holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
-        holder.subjectScore.setBackgroundResource(DrawableUtils.getDrawableDependsOnScore(current.getLastModule().getScore()));
+        if (areAllModulesPassed(position)) {
+            holder.subjectDate.setText(App.getContext().getString(R.string.total_score_name));
+            holder.subjectWeight.setVisibility(View.GONE);
+            holder.subjectScore.setText(String.valueOf(current.getTotalScore()));
+            holder.subjectScore.setTypeface(holder.subjectScore.getTypeface(), Typeface.BOLD);
+        } else {
+            holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
+        }
+        holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
+    }
+
+    private boolean areAllModulesPassed(int subjectIndex) {
+        List<Module> modules = data.get(subjectIndex).getModules();
+        boolean allModulesPassed = true;
+        for (Module module : modules) {
+            if (module.getScore() == 0) {
+                allModulesPassed = false;
+            }
+        }
+        return allModulesPassed;
     }
 
     @Override

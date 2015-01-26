@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.animation.AnimationFactory;
@@ -61,23 +63,7 @@ public class LastTotalFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
         recyclerView.setAdapter(mSubjectItemAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                setSubjectTotalScore(view, position);
-                animateSubjectTotalScoreChange(view);
-            }
-
-            private void animateSubjectTotalScoreChange(View view) {
-                ViewFlipper viewFlipper = (ViewFlipper) view.findViewById(R.id.subject_score_view_flipper);
-                AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
-            }
-
-            private void setSubjectTotalScore(View view, int position) {
-                TextView subjectTotalScoreTextView = (TextView) view.findViewById(R.id.subject_total_score);
-                subjectTotalScoreTextView.setText(String.valueOf(mSubjects.get(position).getTotalScore()));
-            }
-        }));
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new SubjectItemOnClickListener(mSubjects)));
     }
 
     private void initSubjects() {

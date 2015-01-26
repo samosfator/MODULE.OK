@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class DrawableUtils {
 
-    final private static int[] drawableCircles = {
+    final private static int[] circleDrawables = {
             R.drawable.circle_blue,
             R.drawable.circle_brown,
             R.drawable.circle_cyan,
@@ -25,7 +25,7 @@ public class DrawableUtils {
     };
     private static List<Integer> usedDrawables = new ArrayList<>();
 
-    public static int getDrawableDependsOnScore(int score) {
+    public static int getScoreCircleDrawable(int score) {
         if (score >= 90 && score <= 100) {
             return R.drawable.circle_5;
         } else if (score >= 75 && score < 90) {
@@ -37,12 +37,12 @@ public class DrawableUtils {
         }
     }
 
-    public static int getRandomUniqueDrawable() {
-        int randInt = new Random().nextInt(drawableCircles.length);
+    public static int getScoreRandomUniqueCircleDrawable() {
+        int randInt = new Random().nextInt(circleDrawables.length);
         while (usedDrawables.contains(randInt)) {
-            randInt = new Random().nextInt(drawableCircles.length);
+            randInt = new Random().nextInt(circleDrawables.length);
         }
         usedDrawables.add(randInt);
-        return drawableCircles[randInt];
+        return circleDrawables[randInt];
     }
 }

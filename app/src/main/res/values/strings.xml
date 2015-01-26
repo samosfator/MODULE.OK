@@ -30,6 +30,7 @@
     <string name="login_section">Log in</string>
     <string name="enter_login_message">Enter login, please</string>
     <string name="enter_password_message">Enter password, please</string>
+    <string name="total_score_name">Підсумкова</string>
 
 
     <string-array name="semesters">
