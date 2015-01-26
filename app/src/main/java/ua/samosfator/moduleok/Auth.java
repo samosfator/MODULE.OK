@@ -16,7 +16,6 @@ public class Auth {
     private boolean success;
 
     public void signIn(String login, String password) {
-        EventBus.getDefault().register(this);
         downloadSessionId(login, password);
     }
 
@@ -59,11 +58,6 @@ public class Auth {
 
     public boolean isSuccess() {
         return success;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(LoginEvent event) {
-        StudentKeeper.initStudent();
     }
 
     public static boolean isLoggedIn() {

@@ -13,6 +13,11 @@ public class StudentKeeper {
         return student;
     }
 
+    public static Student forceInitAndGetCurrentStudent() {
+        initStudent();
+        return student;
+    }
+
     public static void initStudent() {
         student = new Student(PageLoader.getMainPageHtml(false));
     }

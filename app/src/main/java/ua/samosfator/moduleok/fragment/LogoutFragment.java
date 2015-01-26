@@ -24,6 +24,7 @@ public class LogoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_logout, container, false);
         Preferences.save("SESSIONID", "");
+        Preferences.save("mainPageHtml", "");
         EventBus.getDefault().post(new LogoutEvent());
         Mint.logEvent("log out", MintLogLevel.Info);
         return rootView;

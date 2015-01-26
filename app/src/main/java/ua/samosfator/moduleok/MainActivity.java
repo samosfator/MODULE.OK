@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
         Preferences.init(getApplicationContext());
 
         setContentView(R.layout.activity_main);
-        setAccountInfo();
+        initAndSetAccountInfo();
         StudentKeeper.initSemesterIndex();
 
         initToolbar();
@@ -74,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    private void setAccountInfo() {
+    private void initAndSetAccountInfo() {
         if (!Auth.isLoggedIn()) {
             eraseAccountInfo();
             return;
@@ -87,8 +87,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void run() {
                 try {
-                    studentName_TextView.setText(StudentKeeper.getCurrentStudent().getNameSurname());
-                    studentGroup_TextView.setText(StudentKeeper.getCurrentStudent().getGroupName());
+                    studentName_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getNameSurname());
+                    studentGroup_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getGroupName());
 
                     openSubjectsFragment();
                 } catch (SessionIdExpiredException e) {
@@ -140,7 +140,7 @@ public class MainActivity extends ActionBarActivity {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LoginEvent event) {
-        setAccountInfo();
+        initAndSetAccountInfo();
     }
 
     @SuppressWarnings("UnusedDeclaration")
