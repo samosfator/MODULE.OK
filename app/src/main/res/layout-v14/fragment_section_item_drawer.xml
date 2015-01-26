@@ -17,12 +17,13 @@
         android:paddingRight="16dp"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:fontFamily="sans-serif-light"
         android:gravity="center_vertical"
         android:drawableLeft="@drawable/ic_login_grey600_24dp"
-        android:drawablePadding="16dp"
+        android:drawablePadding="32dp"
         tools:ignore="RtlHardcoded"
         android:background="@drawable/item_ripple" />
 </com.balysv.materialripple.MaterialRippleLayout>
