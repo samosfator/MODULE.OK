@@ -38,17 +38,26 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
         totalScore = mSubjects.get(position).getTotalScore();
         lastScore = mSubjects.get(position).getLastModule().getScore();
 
-
+        animateSubjectTotalScoreChange(view);
         setSubjectScore();
         setSubjectTotalScoreBackground();
-        animateSubjectTotalScoreChange(view);
         toggleTotalScoreTypeface();
         toggleTotalMessage(position);
     }
 
+    private void animateSubjectTotalScoreChange(View view) {
+        ViewFlipper viewFlipper = (ViewFlipper) view.findViewById(R.id.subject_score_view_flipper);
+        AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
+    }
+
     private void setSubjectScore() {
         if (isTotalScoreView()) {
-            subjectTotalScoreTextView.setText(String.valueOf(lastScore));
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    subjectTotalScoreTextView.setText(String.valueOf(lastScore));
+                }
+            }, 200);
         } else {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
@@ -66,8 +75,14 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
 
     private void setSubjectTotalScoreBackground() {
         if (isTotalScoreView()) {
-            int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(lastScore);
-            subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore);
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(lastScore);
+                    subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore);
+                }
+            }, 200);
+
         } else {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
@@ -79,21 +94,26 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
         }
     }
 
-    private void animateSubjectTotalScoreChange(View view) {
-        ViewFlipper viewFlipper = (ViewFlipper) view.findViewById(R.id.subject_score_view_flipper);
-        AnimationFactory.flipTransition(viewFlipper, AnimationFactory.FlipDirection.LEFT_RIGHT);
-    }
-
-    private void toggleTotalMessage(int position) {
-        String totalScoreName = App.getContext().getString(R.string.total_score_name);
-        String subjectDateStr = mSubjects.get(position).getLastModule().getFormattedDate();
-        subjectDate.setText(isTotalScoreView() ? subjectDateStr : totalScoreName);
-        subjectWeight.setVisibility(isTotalScoreView() ? View.GONE : View.VISIBLE);
+    private void toggleTotalMessage(final int position) {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String totalScoreName = App.getContext().getString(R.string.total_score_name);
+                String subjectDateStr = mSubjects.get(position).getLastModule().getFormattedDate();
+                subjectDate.setText(isTotalScoreView() ? subjectDateStr : totalScoreName);
+                subjectWeight.setVisibility(isTotalScoreView() ? View.GONE : View.VISIBLE);
+            }
+        }, 100);
     }
 
     private void toggleTotalScoreTypeface() {
         if (isTotalScoreView()) {
-            subjectTotalScoreTextView.setTypeface(null, Typeface.NORMAL);
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    subjectTotalScoreTextView.setTypeface(null, Typeface.NORMAL);
+                }
+            }, 200);
         } else {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
