@@ -5,9 +5,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -34,21 +37,35 @@ public class LoginFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initViews(rootView);
         login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
+        password_txt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    validateAndStartLogin();
+                    return true;
+                }
+                return false;
+            }
+        });
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String login = login_txt.getText().toString();
-                String password = password_txt.getText().toString();
-
-                validateFields(login, password);
-
-                if (isReadyForLogin(login, password)) {
-                    doLogin(login, password);
-                }
+                validateAndStartLogin();
             }
         });
 
         return rootView;
+    }
+
+    private void validateAndStartLogin() {
+        String login = login_txt.getText().toString();
+        String password = password_txt.getText().toString();
+
+        validateFields(login, password);
+
+        if (isReadyForLogin(login, password)) {
+            doLogin(login, password);
+        }
     }
 
     private boolean isReadyForLogin(String login, String password) {
