@@ -1,7 +1,6 @@
 package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;

@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.event.ChangeSemesterSpinnerColor;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;

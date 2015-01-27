@@ -2,7 +2,6 @@ package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     public int getItemCount() {
         return data.size();
     }
-g
+
     class SectionViewHolder extends RecyclerView.ViewHolder {
         private Button section;
 

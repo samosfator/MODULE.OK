@@ -6,9 +6,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.event.LoginEvent;
-
 public class Auth {
     private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.45 Safari/537.36";
     private final String INCORRECT_PASSWORD_MESSAGE = "Не вірний логін/пароль.";
