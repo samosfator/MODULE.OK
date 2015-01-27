@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -15,14 +16,16 @@ import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.event.ChangeSemesterSpinnerColor;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
 
 public class MainActivity extends ActionBarActivity {
+
     private Toolbar toolbar;
 
     @Override
@@ -43,7 +46,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         App.registerClassForEventBus(this);
-        initNavigationDrawer();
         super.onResume();
     }
 

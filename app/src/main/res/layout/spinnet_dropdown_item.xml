@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    android:id="@android:id/text1"
+<CheckedTextView
+    android:id="@android:id/text2"
     style="?android:attr/spinnerDropDownItemStyle"
     android:singleLine="true"
-    android:textColor="@color/textColorPrimary"
+    android:textColor="@color/textColorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:text="First semester"

@@ -20,7 +20,7 @@
             android:layout_height="match_parent" />
 
         <fragment
-            android:name="ua.samosfator.moduleok.fragment.NavigationDrawerFragment"
+            android:name="ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment"
             android:id="@+id/navigation_drawer_fragment"
             tools:layout="@layout/fragment_navigation_drawer"
             android:layout_width="@dimen/nav_drawer_width"

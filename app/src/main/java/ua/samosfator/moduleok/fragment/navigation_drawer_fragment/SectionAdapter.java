@@ -1,15 +1,17 @@
-package ua.samosfator.moduleok.fragment;
+package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import java.util.Collections;
 import java.util.List;
 
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 
@@ -32,21 +34,29 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     @Override
     public void onBindViewHolder(SectionViewHolder holder, int position) {
         DrawerSection currentSection = data.get(position);
-        holder.title.setText(currentSection.getTitle());
-        holder.title.setCompoundDrawablesWithIntrinsicBounds(currentSection.getIconId(), 0, 0, 0);
+        holder.section.setText(currentSection.getTitle());
+        holder.section.setCompoundDrawablesWithIntrinsicBounds(currentSection.getIconId(), 0, 0, 0);
+        if (position == 0) {
+            highlightFirstSection(holder);
+        }
+    }
+
+    private void highlightFirstSection(SectionViewHolder holder) {
+        holder.section.setTextColor(App.getContext().getResources().getColor(R.color.colorAccent));
+        holder.section.setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
     }
 
     @Override
     public int getItemCount() {
         return data.size();
     }
-
+g
     class SectionViewHolder extends RecyclerView.ViewHolder {
-        private TextView title;
+        private Button section;
 
         public SectionViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.section_text);
+            section = (Button) itemView.findViewById(R.id.section_text);
         }
     }
 }
