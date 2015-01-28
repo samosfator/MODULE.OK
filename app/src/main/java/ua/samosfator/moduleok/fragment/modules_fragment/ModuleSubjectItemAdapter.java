@@ -58,7 +58,8 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
 
         holder.subjectName.setText(currentSubject.getName());
         holder.subjectDate.setText(currentModule.getFormattedDate());
-        holder.subjectWeight.setText(String.valueOf(currentModule.getWeight() + "%"));
+        holder.subjectWeight.setText(currentModule.getWeight() + "%");
+//        holder.subjectControlType.setText(String.valueOf(currentSubject.getControlType().getControlName() ));
         holder.subjectScore.setText(String.valueOf(currentModule.getScore()));
         holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(currentModule.getScore()));
     }
@@ -75,6 +76,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         private TextView subjectScore;
         private TextView subjectDate;
         private TextView subjectWeight;
+        private TextView subjectControlType;
 
         public ModuleSubjectItemViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +85,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
             subjectScore = (TextView) itemView.findViewById(R.id.subject_score);
             subjectDate = (TextView) itemView.findViewById(R.id.subject_date);
             subjectWeight = (TextView) itemView.findViewById(R.id.subject_weight);
+            subjectControlType = (TextView) itemView.findViewById(R.id.subject_control_type);
         }
     }
 }

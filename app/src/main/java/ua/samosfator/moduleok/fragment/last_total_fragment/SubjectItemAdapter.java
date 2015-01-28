@@ -38,7 +38,8 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
         Subject current = data.get(position);
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(current.getLastModule().getFormattedDate());
-        holder.subjectWeight.setText(String.valueOf(current.getLastModule().getWeight() + "%"));
+        holder.subjectWeight.setText(current.getLastModule().getWeight() + "%");
+//        holder.subjectControlType.setText(String.valueOf(current.getControlType().getControlName()));
         if (areAllModulesPassed(position)) {
             holder.subjectDate.setText(App.getContext().getString(R.string.total_score_name));
             holder.subjectWeight.setVisibility(View.GONE);
@@ -82,6 +83,7 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
         private TextView subjectScore;
         private TextView subjectDate;
         private TextView subjectWeight;
+        private TextView subjectControlType;
 
         public SubjectItemViewHolder(View itemView) {
             super(itemView);
@@ -89,6 +91,7 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
             subjectScore = (TextView) itemView.findViewById(R.id.subject_score);
             subjectDate = (TextView) itemView.findViewById(R.id.subject_date);
             subjectWeight = (TextView) itemView.findViewById(R.id.subject_weight);
+            subjectControlType = (TextView) itemView.findViewById(R.id.subject_control_type);
         }
     }
 }
