@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.recyclerview.DrawerSection;
 
@@ -35,7 +36,9 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
         DrawerSection currentSection = data.get(position);
         holder.section.setText(currentSection.getTitle());
         holder.section.setCompoundDrawablesWithIntrinsicBounds(currentSection.getIconId(), 0, 0, 0);
-        if (position == 0) {
+        if (Auth.isLoggedIn() && position == 0) {
+            highlightFirstSection(holder);
+        } else if (!Auth.isLoggedIn() && position == (data.size() - 1)) {
             highlightFirstSection(holder);
         }
     }
