@@ -59,29 +59,27 @@
         android:inputType="textPassword" />
 
     <com.balysv.materialripple.MaterialRippleLayout
-        android:layout_width="196dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/password_editText"
         android:layout_alignRight="@+id/password_editText"
         android:layout_alignEnd="@+id/password_editText"
+        android:layout_marginTop="42dp"
         app:rippleDimension="10dp"
         app:rippleHover="true"
         app:rippleOverlay="true">
 
+        <com.dd.CircularProgressButton
+            android:id="@+id/btnWithText"
+            android:layout_width="@dimen/login_fields_with"
+            android:layout_height="64dp"
+            android:textColor="@color/cpb_white"
+            android:textSize="18sp"
+            android:background="@drawable/button_ripple"
+            app:cpb_textIdle="@string/login_editText_hint"
+            app:cpb_colorIndicator="@color/colorAccent"
+            app:cpb_colorProgress="@color/grey_200"
+            app:cpb_selectorIdle="@drawable/btn_idle_state_selector" />
     </com.balysv.materialripple.MaterialRippleLayout>
-
-    <com.dd.CircularProgressButton
-        android:id="@+id/btnWithText"
-        android:layout_width="@dimen/login_fields_with"
-        android:layout_height="64dp"
-        android:textColor="@color/cpb_white"
-        android:textSize="18sp"
-        app:cpb_textIdle="@string/login_editText_hint"
-        android:background="@drawable/button_ripple"
-        app:cpb_selectorIdle="@drawable/btn_idle_state_selector"
-        android:layout_below="@+id/password_editText"
-        android:layout_alignRight="@+id/password_editText"
-        android:layout_alignEnd="@+id/password_editText"
-        android:layout_marginTop="42dp" />
 
 </RelativeLayout>
