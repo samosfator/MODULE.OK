@@ -27,6 +27,8 @@ android:
 
 before_install:
  - chmod +x gradlew
+ - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
+ - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
 
 script:
   # By default Travis-ci executes './gradlew build connectedCheck' if no 'script:' section found.
