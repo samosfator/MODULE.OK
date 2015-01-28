@@ -19,12 +19,7 @@ public class NavigationDrawerToggle extends ActionBarDrawerToggle {
         super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
         this.activity = (FragmentActivity) activity;
         drawerLayout.setDrawerListener(this);
-        drawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                syncState();
-            }
-        });
+        drawerLayout.post(this::syncState);
     }
 
     @Override

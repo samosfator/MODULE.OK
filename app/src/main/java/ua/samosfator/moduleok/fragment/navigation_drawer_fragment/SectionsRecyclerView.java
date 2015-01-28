@@ -101,12 +101,7 @@ public class SectionsRecyclerView {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LoginEvent event) {
-        mFragmentActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                addLoginOrLogoutSection();
-            }
-        });
+        mFragmentActivity.runOnUiThread(this::addLoginOrLogoutSection);
     }
 
     @SuppressWarnings("UnusedDeclaration")

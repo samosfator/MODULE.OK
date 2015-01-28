@@ -64,13 +64,10 @@ public class MainActivity extends ActionBarActivity {
         final TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
         final TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                studentName_TextView.setText("Іван Іванов");
-                studentGroup_TextView.setText("АБВ-23");
-                openLoginFragment();
-            }
+        runOnUiThread(() -> {
+            studentName_TextView.setText("Іван Іванов");
+            studentGroup_TextView.setText("АБВ-23");
+            openLoginFragment();
         });
     }
 
@@ -83,18 +80,15 @@ public class MainActivity extends ActionBarActivity {
         final TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
         final TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    studentName_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getNameSurname());
-                    studentGroup_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getGroupName());
+        new Handler(Looper.getMainLooper()).post(() -> {
+            try {
+                studentName_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getNameSurname());
+                studentGroup_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getGroupName());
 
-                    openSubjectsFragment();
-                } catch (SessionIdExpiredException e) {
-                    eraseAccountInfo();
-                    openLoginFragment();
-                }
+                openSubjectsFragment();
+            } catch (SessionIdExpiredException e) {
+                eraseAccountInfo();
+                openLoginFragment();
             }
         });
     }

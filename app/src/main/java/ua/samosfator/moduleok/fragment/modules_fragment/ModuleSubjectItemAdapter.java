@@ -35,28 +35,36 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
     }
 
     @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    @Override
     public void onBindViewHolder(ModuleSubjectItemViewHolder holder, int position) {
         final Subject current = data.get(position);
         final List<Module> modules = current.getModules();
         final int modulesCount = modules.size();
+        final boolean moduleIsPresent = moduleIndex < modulesCount;
 
-        if (moduleIndex >= modulesCount) {
-            holder.subjectItemLayout.removeAllViews();
-            return;
+        if (moduleIsPresent) {
+            displayThisModule(holder, current, modules);
+        } else {
+            doNotDisplayThisSubject(holder);
         }
+    }
 
+    private void displayThisModule(ModuleSubjectItemViewHolder holder, Subject currentSubject, List<Module> modules) {
         final Module currentModule = modules.get(moduleIndex);
 
-        holder.subjectName.setText(current.getName());
+        holder.subjectName.setText(currentSubject.getName());
         holder.subjectDate.setText(currentModule.getFormattedDate());
         holder.subjectWeight.setText(String.valueOf(currentModule.getWeight() + "%"));
         holder.subjectScore.setText(String.valueOf(currentModule.getScore()));
         holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(currentModule.getScore()));
     }
 
-    @Override
-    public int getItemCount() {
-        return data.size();
+    private void doNotDisplayThisSubject(ModuleSubjectItemViewHolder holder) {
+        holder.subjectItemLayout.removeAllViews();
     }
 
     class ModuleSubjectItemViewHolder extends RecyclerView.ViewHolder {

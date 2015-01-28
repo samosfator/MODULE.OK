@@ -30,12 +30,7 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
     }
 
     private void postRefreshEndEvent() {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                EventBus.getDefault().post(new RefreshEndEvent());
-            }
-        });
+        new Handler(Looper.getMainLooper()).post(() -> EventBus.getDefault().post(new RefreshEndEvent()));
     }
 
     private Document getFromRemoteSource() throws IOException {

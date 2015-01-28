@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,14 +36,26 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
         DrawerSection currentSection = data.get(position);
         holder.section.setText(currentSection.getTitle());
         holder.section.setCompoundDrawablesWithIntrinsicBounds(currentSection.getIconId(), 0, 0, 0);
-        if (Auth.isLoggedIn() && position == 0) {
-            highlightFirstSection(holder);
-        } else if (!Auth.isLoggedIn() && position == (data.size() - 1)) {
-            highlightFirstSection(holder);
+        highlightSection(holder, position);
+    }
+
+    private void highlightSection(SectionViewHolder holder, int position) {
+        if (isFirstSectionAndLoggedIn(position)) {
+            doHighlightSection(holder);
+        } else if (isLastSectionAndLoggedOut(position)) {
+            doHighlightSection(holder);
         }
     }
 
-    private void highlightFirstSection(SectionViewHolder holder) {
+    private boolean isFirstSectionAndLoggedIn(int position) {
+        return Auth.isLoggedIn() && position == 0;
+    }
+
+    private boolean isLastSectionAndLoggedOut(int position) {
+        return !Auth.isLoggedIn() && position == (data.size() - 1);
+    }
+
+    private void doHighlightSection(SectionViewHolder holder) {
         holder.section.setTextColor(App.getContext().getResources().getColor(R.color.colorAccent));
         holder.section.setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
     }
@@ -54,11 +66,11 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     }
 
     class SectionViewHolder extends RecyclerView.ViewHolder {
-        private Button section;
+        private TextView section;
 
         public SectionViewHolder(View itemView) {
             super(itemView);
-            section = (Button) itemView.findViewById(R.id.section_text);
+            section = (TextView) itemView.findViewById(R.id.section_text);
         }
     }
 }

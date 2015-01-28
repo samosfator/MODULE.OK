@@ -39,7 +39,8 @@ public class ModuleFragment extends Fragment {
     }
 
     private void initModuleSubjectItemAdapter() {
-        moduleSubjectItemAdapter = new ModuleSubjectItemAdapter(getActivity(), ModulesFragment.mSubjects, getArguments().getInt("module"));
+        moduleSubjectItemAdapter = new ModuleSubjectItemAdapter(getActivity(),
+                ModulesFragment.mSubjects, getArguments().getInt("module"));
     }
 
     private void initRecyclerView(View rootView) {
@@ -51,8 +52,6 @@ public class ModuleFragment extends Fragment {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(SemesterChangedEvent event) {
-        Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
-
         ModulesFragment.initSubjects();
         reRenderModuleSubjectsList();
     }

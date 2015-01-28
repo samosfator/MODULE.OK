@@ -1,5 +1,6 @@
 package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
 
+import android.content.res.Resources;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
@@ -51,11 +52,16 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
     }
 
     private void removeHighlightFromSections() {
+        Resources appResources = App.getContext().getResources();
+        int textColorPrimaryDark = appResources.getColor(R.color.textColorPrimaryDark);
+        int colorGrey200 = appResources.getColor(R.color.grey_200);
+
         for (int i = 0; i < mRecyclerView.getChildCount(); i++) {
-            TextView otherSectionTextView = mRecyclerView.getChildAt(i) instanceof MaterialRippleLayout ?
-                    ((TextView) ((MaterialRippleLayout) mRecyclerView.getChildAt(i)).getChildAt(0)) : (TextView) mRecyclerView.getChildAt(i);
-            otherSectionTextView.setTextColor(App.getContext().getResources().getColor(R.color.textColorPrimaryDark));
-            otherSectionTextView.setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_200));
+            View recyclerViewChild = mRecyclerView.getChildAt(i);
+            TextView otherSectionTextView = recyclerViewChild instanceof MaterialRippleLayout ?
+                    ((TextView) ((MaterialRippleLayout) recyclerViewChild).getChildAt(0)) : (TextView) recyclerViewChild;
+            otherSectionTextView.setTextColor(textColorPrimaryDark);
+            otherSectionTextView.setBackgroundColor(colorGrey200);
         }
     }
 }

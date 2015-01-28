@@ -52,19 +52,11 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
 
     private void setSubjectScore() {
         if (isTotalScoreView()) {
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    subjectTotalScoreTextView.setText(String.valueOf(lastScore));
-                }
-            }, 200);
+            new Handler(Looper.getMainLooper()).postDelayed(() ->
+                    subjectTotalScoreTextView.setText(String.valueOf(lastScore)), 200);
         } else {
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    subjectTotalScoreTextView.setText(String.valueOf(totalScore));
-                }
-            }, 200);
+            new Handler(Looper.getMainLooper()).postDelayed(() ->
+                    subjectTotalScoreTextView.setText(String.valueOf(totalScore)), 200);
         }
     }
 
@@ -75,52 +67,34 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
 
     private void setSubjectTotalScoreBackground() {
         if (isTotalScoreView()) {
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(lastScore);
-                    subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore);
-                }
-            }, 200);
+            int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(lastScore);
+            new Handler(Looper.getMainLooper()).postDelayed(() ->
+                    subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore), 200);
 
         } else {
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(totalScore);
-                    subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore);
-                }
-            }, 200);
+            int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(totalScore);
+            new Handler(Looper.getMainLooper()).postDelayed(() ->
+                    subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore), 200);
         }
     }
 
     private void toggleTotalMessage(final int position) {
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                String totalScoreName = App.getContext().getString(R.string.total_score_name);
-                String subjectDateStr = mSubjects.get(position).getLastModule().getFormattedDate();
-                subjectDate.setText(isTotalScoreView() ? subjectDateStr : totalScoreName);
-                subjectWeight.setVisibility(isTotalScoreView() ? View.GONE : View.VISIBLE);
-            }
+        String totalScoreName = App.getContext().getString(R.string.total_score_name);
+        String subjectDateStr = mSubjects.get(position).getLastModule().getFormattedDate();
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            subjectDate.setText(isTotalScoreView() ? subjectDateStr : totalScoreName);
+            subjectWeight.setVisibility(isTotalScoreView() ? View.GONE : View.VISIBLE);
         }, 100);
     }
 
     private void toggleTotalScoreTypeface() {
         if (isTotalScoreView()) {
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    subjectTotalScoreTextView.setTypeface(null, Typeface.NORMAL);
-                }
-            }, 200);
+            new Handler(Looper.getMainLooper()).postDelayed(() ->
+                    subjectTotalScoreTextView.setTypeface(null, Typeface.NORMAL), 200);
         } else {
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    subjectTotalScoreTextView.setTypeface(null, Typeface.BOLD);
-                }
-            }, 200);
+            new Handler(Looper.getMainLooper()).postDelayed(() ->
+                    subjectTotalScoreTextView.setTypeface(null, Typeface.BOLD), 200);
         }
     }
 }
