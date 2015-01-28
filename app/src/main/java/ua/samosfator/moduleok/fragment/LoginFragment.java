@@ -5,12 +5,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -37,22 +35,14 @@ public class LoginFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initViews(rootView);
         login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
-        password_txt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    validateAndStartLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        password_txt.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 validateAndStartLogin();
+                return true;
             }
+            return false;
         });
+        login_button.setOnClickListener(v -> validateAndStartLogin());
 
         return rootView;
     }
@@ -88,19 +78,16 @@ public class LoginFragment extends Fragment {
         enableInputs(false);
         Mint.logEvent("log in", MintLogLevel.Info);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Auth auth = new Auth();
-                auth.signIn(login, password);
+        new Thread(() -> {
+            Auth auth = new Auth();
+            auth.signIn(login, password);
 
-                if (auth.isSuccess()) {
-                    Log.d("AUTH_STATUS", String.valueOf(auth.isSuccess()));
-                    EventBus.getDefault().post(new LoginEvent());
-                } else {
-                    showCredentialsError();
-                    enableInputs(true);
-                }
+            if (auth.isSuccess()) {
+                Log.d("AUTH_STATUS", String.valueOf(auth.isSuccess()));
+                EventBus.getDefault().post(new LoginEvent());
+            } else {
+                showCredentialsError();
+                enableInputs(true);
             }
         }).start();
     }
@@ -121,14 +108,11 @@ public class LoginFragment extends Fragment {
     }
 
     private void enableInputs(final boolean bool) {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                login_txt.setEnabled(bool);
-                password_txt.setEnabled(bool);
-                login_button.setIndeterminateProgressMode(!bool);
-                login_button.setProgress(bool ? 0 : 50);
-            }
+        new Handler(Looper.getMainLooper()).post(() -> {
+            login_txt.setEnabled(bool);
+            password_txt.setEnabled(bool);
+            login_button.setIndeterminateProgressMode(!bool);
+            login_button.setProgress(bool ? 0 : 50);
         });
     }
 }
