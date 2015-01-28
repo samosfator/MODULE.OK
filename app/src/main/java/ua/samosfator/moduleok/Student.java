@@ -1,6 +1,5 @@
 package ua.samosfator.moduleok;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -70,7 +69,7 @@ public class Student {
     }
 
     private String getFullStudentName() {
-        return WordUtils.capitalizeFully(getPageTitle().split("\\(")[0].trim());
+        return capitalizeString(getPageTitle().split("\\(")[0].trim());
     }
 
     private String getPageTitle() {
@@ -79,6 +78,20 @@ public class Student {
 
     private Document getMainPageDocument() {
         return Jsoup.parse(mainPageHtml);
+    }
+
+    public static String capitalizeString(String string) {
+        char[] chars = string.toLowerCase().toCharArray();
+        boolean found = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (!found && Character.isLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                found = true;
+            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') {
+                found = false;
+            }
+        }
+        return String.valueOf(chars);
     }
 
     @Override
