@@ -24,6 +24,9 @@
     <string name="module_5_name">MODULE 5</string>
     <string name="module_6_name">MODULE 6</string>
 
+    <string name="sampleStudentName">Петро Баклан</string>
+    <string name="sampleStudentGroup">ПТН-23</string>
+
     <string name="last_n_total_section">Last &amp; Total</string>
     <string name="modules_section">Modules</string>
     <string name="logout_section">Log out</string>

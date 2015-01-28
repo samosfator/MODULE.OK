@@ -65,8 +65,8 @@ public class MainActivity extends ActionBarActivity {
         final TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
 
         runOnUiThread(() -> {
-            studentName_TextView.setText("Іван Іванов");
-            studentGroup_TextView.setText("АБВ-23");
+            studentName_TextView.setText(getString(R.string.sampleStudentName));
+            studentGroup_TextView.setText(getString(R.string.sampleStudentGroup));
             openLoginFragment();
         });
     }
