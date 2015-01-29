@@ -2,6 +2,8 @@ package ua.samosfator.moduleok;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -45,5 +47,15 @@ public class App extends Application {
         if (!EventBus.getDefault().isRegistered(that)) {
             EventBus.getDefault().register(that);
         }
+    }
+
+    public static String getVersion() {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            return packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException ignored) { }
+
+        return "";
     }
 }

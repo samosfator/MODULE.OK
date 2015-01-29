@@ -8,10 +8,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
-
-import java.util.List;
 
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
@@ -26,13 +25,13 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
 
     private FragmentActivity mFragmentActivity;
     private DrawerLayout mDrawerLayout;
-    private List<SectionDrawer> mSections;
     private RecyclerView mRecyclerView;
 
-    public SectionClickListener(FragmentActivity activity, DrawerLayout drawerLayout, List<SectionDrawer> sections, RecyclerView recyclerView) {
+    private static int versionClickCount;
+
+    public SectionClickListener(FragmentActivity activity, DrawerLayout drawerLayout, RecyclerView recyclerView) {
         mFragmentActivity = activity;
         mDrawerLayout = drawerLayout;
-        mSections = sections;
         mRecyclerView = recyclerView;
     }
 
@@ -41,7 +40,6 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         openSelectedSectionFragment(position);
         removeHighlightFromSections();
         highlightSelectedSection(view);
-        mDrawerLayout.closeDrawers();
     }
 
     private void openSelectedSectionFragment(int position) {
@@ -51,6 +49,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, new LastTotalFragment())
                         .commit();
+                mDrawerLayout.closeDrawers();
                 break;
             }
             //Modules
@@ -58,6 +57,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, new ModulesFragment())
                         .commit();
+                mDrawerLayout.closeDrawers();
                 break;
             }
             //Feedback
@@ -68,8 +68,17 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 App.getContext().startActivity(openVkGroupIntent);
                 break;
             }
-            //Log in / Log out
+            //App version
             case 3: {
+                versionClickCount++;
+                if (versionClickCount == 10) {
+                    Toast.makeText(App.getContext(), "Surprise!", Toast.LENGTH_SHORT).show();
+                    versionClickCount = 0;
+                }
+                break;
+            }
+            //Log in / Log out
+            case 4: {
                 if (Auth.isLoggedIn()) {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_container, new LogoutFragment())
@@ -79,6 +88,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                             .replace(R.id.main_container, new LoginFragment())
                             .commit();
                 }
+                mDrawerLayout.closeDrawers();
                 break;
             }
         }

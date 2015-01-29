@@ -14,10 +14,6 @@ import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
-import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.LogoutFragment;
-import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
-import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionsRecyclerView {
@@ -50,7 +46,7 @@ public class SectionsRecyclerView {
     }
 
     private void initOnClickListener(DrawerLayout drawerLayout) {
-        SectionClickListener sectionClickListener = new SectionClickListener(mFragmentActivity, drawerLayout, mSections, mRecyclerView);
+        SectionClickListener sectionClickListener = new SectionClickListener(mFragmentActivity, drawerLayout, mRecyclerView);
         RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener(mFragmentActivity, sectionClickListener);
         mRecyclerView.addOnItemTouchListener(recyclerItemClickListener);
     }
@@ -66,6 +62,9 @@ public class SectionsRecyclerView {
 
         SectionDrawer feedbackSection = new SectionDrawer(App.getContext().getString(R.string.feedback_section), R.drawable.ic_help_circle_grey600_24dp);
         mSections.add(feedbackSection);
+
+        SectionDrawer versionSection = new SectionDrawer("v." + App.getVersion(), R.drawable.ic_information_grey600_24dp);
+        mSections.add(versionSection);
     }
 
     private void addLoginOrLogoutSection() {
@@ -87,11 +86,11 @@ public class SectionsRecyclerView {
     }
 
     private void insertSectionToLastPosition(SectionDrawer section) {
-        if (mSections.size() == 3) {
+        if (mSections.size() == 4) {
             mSections.add(section);
         } else {
-            mSections.set(3, section);
-            mSectionAdapter.notifyItemChanged(3);
+            mSections.set(4, section);
+            mSectionAdapter.notifyItemChanged(4);
         }
     }
 
