@@ -1,6 +1,8 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
+package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
@@ -12,18 +14,22 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import java.util.List;
 
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.recyclerview.DrawerSection;
+import ua.samosfator.moduleok.fragment.LoginFragment;
+import ua.samosfator.moduleok.fragment.LogoutFragment;
+import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
 
     private FragmentActivity mFragmentActivity;
     private DrawerLayout mDrawerLayout;
-    private List<DrawerSection> mSections;
+    private List<SectionDrawer> mSections;
     private RecyclerView mRecyclerView;
 
-    public SectionClickListener(FragmentActivity activity, DrawerLayout drawerLayout, List<DrawerSection> sections, RecyclerView recyclerView) {
+    public SectionClickListener(FragmentActivity activity, DrawerLayout drawerLayout, List<SectionDrawer> sections, RecyclerView recyclerView) {
         mFragmentActivity = activity;
         mDrawerLayout = drawerLayout;
         mSections = sections;
@@ -39,9 +45,43 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
     }
 
     private void openSelectedSectionFragment(int position) {
-        mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, mSections.get(position).getFragment())
-                .commit();
+        switch (position) {
+            //Last & Total
+            case 0: {
+                mFragmentActivity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_container, new LastTotalFragment())
+                        .commit();
+                break;
+            }
+            //Modules
+            case 1: {
+                mFragmentActivity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_container, new ModulesFragment())
+                        .commit();
+                break;
+            }
+            //Feedback
+            case 2: {
+                Intent openVkGroupIntent = new Intent(Intent.ACTION_VIEW);
+                openVkGroupIntent.setData(Uri.parse("https://vk.com/moduleok"));
+                openVkGroupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                App.getContext().startActivity(openVkGroupIntent);
+                break;
+            }
+            //Log in / Log out
+            case 3: {
+                if (Auth.isLoggedIn()) {
+                    mFragmentActivity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.main_container, new LogoutFragment())
+                            .commit();
+                } else {
+                    mFragmentActivity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.main_container, new LoginFragment())
+                            .commit();
+                }
+                break;
+            }
+        }
     }
 
     private void highlightSelectedSection(View view) {

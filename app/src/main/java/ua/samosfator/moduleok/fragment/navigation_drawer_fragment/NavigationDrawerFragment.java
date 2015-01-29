@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.SectionsRecyclerView;
 
 public class NavigationDrawerFragment extends Fragment {
 

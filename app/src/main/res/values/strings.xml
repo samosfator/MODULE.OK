@@ -35,6 +35,7 @@
     <string name="enter_password_message">Enter password, please</string>
 
     <string name="total_score_name">Total score</string>
+    <string name="feedback_section">Feedback</string>
 
     <string-array name="semesters">
         <item>@string/first_semester_name</item>

@@ -1,14 +1,11 @@
-package ua.samosfator.moduleok.recyclerview;
+package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
 
-import android.support.v4.app.Fragment;
+public class SectionDrawer {
 
-public class DrawerSection {
     private String title;
     private int iconId;
 
-    private Fragment fragment;
-
-    public DrawerSection(String title, int iconId) {
+    public SectionDrawer(String title, int iconId) {
         this.title = title;
         this.iconId = iconId;
     }
@@ -27,13 +24,5 @@ public class DrawerSection {
 
     public void setIconId(int iconId) {
         this.iconId = iconId;
-    }
-
-    public Fragment getFragment() {
-        return fragment;
-    }
-
-    public void setFragment(Fragment fragment) {
-        this.fragment = fragment;
     }
 }

@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
+package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +13,13 @@ import java.util.List;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.recyclerview.DrawerSection;
 
 public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHolder> {
 
     private LayoutInflater inflater;
-    private List<DrawerSection> data = Collections.emptyList();
+    private List<SectionDrawer> data = Collections.emptyList();
 
-    public SectionAdapter(Context context, List<DrawerSection> data) {
+    public SectionAdapter(Context context, List<SectionDrawer> data) {
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -33,10 +32,15 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
 
     @Override
     public void onBindViewHolder(SectionViewHolder holder, int position) {
-        DrawerSection currentSection = data.get(position);
+        SectionDrawer currentSection = data.get(position);
         holder.section.setText(currentSection.getTitle());
         holder.section.setCompoundDrawablesWithIntrinsicBounds(currentSection.getIconId(), 0, 0, 0);
         highlightSection(holder, position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
     }
 
     private void highlightSection(SectionViewHolder holder, int position) {
@@ -58,11 +62,6 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     private void doHighlightSection(SectionViewHolder holder) {
         holder.section.setTextColor(App.getContext().getResources().getColor(R.color.colorAccent));
         holder.section.setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
     }
 
     class SectionViewHolder extends RecyclerView.ViewHolder {
