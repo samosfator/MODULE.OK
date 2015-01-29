@@ -6,7 +6,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+
+import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.event.UpdateTimeChange;
 
 public class Semesters implements Serializable {
 
@@ -15,7 +23,19 @@ public class Semesters implements Serializable {
     public Semesters(String html) {
         Document doc = Jsoup.parse(html);
         Elements semesterElements = doc.select(".items");
+        parseUpdateTime(doc.select(".updated_tag").first());
         addSemesters(semesterElements);
+    }
+
+    private void parseUpdateTime(Element updateTimeElement) {
+        String rawUpdateTime = updateTimeElement.text().replace("updated: ", "");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss", Locale.getDefault());
+        try {
+            App.setUpdateTime(dateFormat.parse(rawUpdateTime));
+            EventBus.getDefault().post(new UpdateTimeChange());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addSemesters(Elements semesterElements) {

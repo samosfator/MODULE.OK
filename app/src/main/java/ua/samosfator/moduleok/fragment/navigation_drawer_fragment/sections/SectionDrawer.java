@@ -14,7 +14,7 @@ public class SectionDrawer {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setText(String title) {
         this.title = title;
     }
 

@@ -27,8 +27,6 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
     private DrawerLayout mDrawerLayout;
     private RecyclerView mRecyclerView;
 
-    private static int versionClickCount;
-
     public SectionClickListener(FragmentActivity activity, DrawerLayout drawerLayout, RecyclerView recyclerView) {
         mFragmentActivity = activity;
         mDrawerLayout = drawerLayout;
@@ -60,8 +58,13 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 mDrawerLayout.closeDrawers();
                 break;
             }
-            //Feedback
+            //Update time
             case 2: {
+                Toast.makeText(App.getContext(), App.getContext().getString(R.string.last_synchronized_time), Toast.LENGTH_LONG).show();
+                break;
+            }
+            //Feedback
+            case 3: {
                 Intent openVkGroupIntent = new Intent(Intent.ACTION_VIEW);
                 openVkGroupIntent.setData(Uri.parse("https://vk.com/moduleok"));
                 openVkGroupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -69,16 +72,12 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 break;
             }
             //App version
-            case 3: {
-                versionClickCount++;
-                if (versionClickCount == 10) {
-                    Toast.makeText(App.getContext(), "Surprise!", Toast.LENGTH_SHORT).show();
-                    versionClickCount = 0;
-                }
+            case 4: {
+                Toast.makeText(App.getContext(), App.getContext().getString(R.string.app_version_hint), Toast.LENGTH_SHORT).show();
                 break;
             }
             //Log in / Log out
-            case 4: {
+            case 5: {
                 if (Auth.isLoggedIn()) {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_container, new LogoutFragment())

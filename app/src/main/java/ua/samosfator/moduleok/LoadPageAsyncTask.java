@@ -26,7 +26,7 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         postRefreshEndEvent();
-        return mainPage.select("#content").html();
+        return mainPage.html();
     }
 
     private void postRefreshEndEvent() {

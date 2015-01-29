@@ -14,6 +14,7 @@ import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
+import ua.samosfator.moduleok.event.UpdateTimeChange;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionsRecyclerView {
@@ -60,6 +61,9 @@ public class SectionsRecyclerView {
         SectionDrawer modulesSection = new SectionDrawer(App.getContext().getString(R.string.modules_section), R.drawable.ic_file_document_box_grey600_24dp);
         mSections.add(modulesSection);
 
+        SectionDrawer updateTimeSection = new SectionDrawer(App.getFormattedUpdateTime(), R.drawable.ic_timer_sand_grey600_24dp);
+        mSections.add(updateTimeSection);
+
         SectionDrawer feedbackSection = new SectionDrawer(App.getContext().getString(R.string.feedback_section), R.drawable.ic_help_circle_grey600_24dp);
         mSections.add(feedbackSection);
 
@@ -86,11 +90,11 @@ public class SectionsRecyclerView {
     }
 
     private void insertSectionToLastPosition(SectionDrawer section) {
-        if (mSections.size() == 4) {
+        if (mSections.size() == 5) {
             mSections.add(section);
         } else {
-            mSections.set(4, section);
-            mSectionAdapter.notifyItemChanged(4);
+            mSections.set(5, section);
+            mSectionAdapter.notifyItemChanged(5);
         }
     }
 
@@ -102,5 +106,10 @@ public class SectionsRecyclerView {
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LogoutEvent event) {
         addLoginOrLogoutSection();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(UpdateTimeChange event) {
+        mSections.get(Sections.UPDATE_TIME.INDEX).setText(App.getFormattedUpdateTime());
     }
 }
