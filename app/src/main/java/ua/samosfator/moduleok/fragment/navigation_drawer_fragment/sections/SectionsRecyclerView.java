@@ -43,7 +43,6 @@ public class SectionsRecyclerView {
     private void initSectionAdapter(FragmentActivity activity) {
         initSections();
         mSectionAdapter = new SectionAdapter(activity, mSections);
-        addLoginOrLogoutSection();
     }
 
     private void initOnClickListener(DrawerLayout drawerLayout) {
@@ -61,14 +60,19 @@ public class SectionsRecyclerView {
         SectionDrawer modulesSection = new SectionDrawer(App.getContext().getString(R.string.modules_section), R.drawable.ic_file_document_box_grey600_24dp);
         mSections.add(modulesSection);
 
+        addLoginOrLogoutSection();
+
+        SectionDrawer divider = new SectionDrawer("", R.drawable.abc_list_divider_mtrl_alpha);
+        mSections.add(divider);
+
         SectionDrawer updateTimeSection = new SectionDrawer(App.getFormattedUpdateTime(), R.drawable.ic_timer_sand_grey600_24dp);
         mSections.add(updateTimeSection);
 
-        SectionDrawer feedbackSection = new SectionDrawer(App.getContext().getString(R.string.feedback_section), R.drawable.ic_help_circle_grey600_24dp);
-        mSections.add(feedbackSection);
-
         SectionDrawer versionSection = new SectionDrawer("v." + App.getVersion(), R.drawable.ic_information_grey600_24dp);
         mSections.add(versionSection);
+
+SectionDrawer feedbackSection = new SectionDrawer(App.getContext().getString(R.string.feedback_section), R.drawable.ic_help_circle_grey600_24dp);
+        mSections.add(feedbackSection);
     }
 
     private void addLoginOrLogoutSection() {
@@ -90,11 +94,11 @@ public class SectionsRecyclerView {
     }
 
     private void insertSectionToLastPosition(SectionDrawer section) {
-        if (mSections.size() == 5) {
+        if (mSections.size() == 2) {
             mSections.add(section);
         } else {
-            mSections.set(5, section);
-            mSectionAdapter.notifyItemChanged(5);
+            mSections.set(2, section);
+            mSectionAdapter.notifyItemChanged(2);
         }
     }
 
@@ -110,6 +114,6 @@ public class SectionsRecyclerView {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(UpdateTimeChange event) {
-        mSections.get(Sections.UPDATE_TIME.INDEX).setText(App.getFormattedUpdateTime());
+        mSections.get(SectionsEnum.UPDATE_TIME.INDEX).setText(App.getFormattedUpdateTime());
     }
 }

@@ -35,49 +35,34 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
 
     @Override
     public void onItemClick(View view, int position) {
-        openSelectedSectionFragment(position);
-        removeHighlightFromSections();
-        highlightSelectedSection(view);
+        openSelectedSectionFragment(view, position);
     }
 
-    private void openSelectedSectionFragment(int position) {
-        switch (position) {
+    private void openSelectedSectionFragment(View view, int position) {
+        SectionsEnum clickedSection = SectionsEnum.getSectionById(position);
+        switch (clickedSection) {
             //Last & Total
-            case 0: {
+            case LAST_TOTAL: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, new LastTotalFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
+                removeHighlightFromSections();
+                highlightSelectedSection(view);
                 break;
             }
             //Modules
-            case 1: {
+            case MODULES: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, new ModulesFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
-                break;
-            }
-            //Update time
-            case 2: {
-                Toast.makeText(App.getContext(), App.getContext().getString(R.string.last_synchronized_time), Toast.LENGTH_LONG).show();
-                break;
-            }
-            //Feedback
-            case 3: {
-                Intent openVkGroupIntent = new Intent(Intent.ACTION_VIEW);
-                openVkGroupIntent.setData(Uri.parse("https://vk.com/moduleok"));
-                openVkGroupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                App.getContext().startActivity(openVkGroupIntent);
-                break;
-            }
-            //App version
-            case 4: {
-                Toast.makeText(App.getContext(), App.getContext().getString(R.string.app_version_hint), Toast.LENGTH_SHORT).show();
+                removeHighlightFromSections();
+                highlightSelectedSection(view);
                 break;
             }
             //Log in / Log out
-            case 5: {
+            case LOG_IN: {
                 if (Auth.isLoggedIn()) {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_container, new LogoutFragment())
@@ -88,8 +73,33 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                             .commit();
                 }
                 mDrawerLayout.closeDrawers();
+                removeHighlightFromSections();
+                highlightSelectedSection(view);
                 break;
             }
+            //Empty
+            case EMPTY: {
+                break;
+            }
+            //Update time
+            case UPDATE_TIME: {
+                Toast.makeText(App.getContext(), App.getContext().getString(R.string.last_synchronized_time), Toast.LENGTH_LONG).show();
+                break;
+            }
+            //Feedback
+            case FEEDBACK: {
+                Intent openVkGroupIntent = new Intent(Intent.ACTION_VIEW);
+                openVkGroupIntent.setData(Uri.parse("https://vk.com/moduleok"));
+                openVkGroupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                App.getContext().startActivity(openVkGroupIntent);
+                break;
+            }
+            //App version
+            case VERSION: {
+                Toast.makeText(App.getContext(), App.getContext().getString(R.string.app_version_hint), Toast.LENGTH_SHORT).show();
+                break;
+            }
+
         }
     }
 
