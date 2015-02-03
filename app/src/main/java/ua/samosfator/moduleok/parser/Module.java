@@ -21,15 +21,6 @@ public class Module implements Serializable {
 
     private DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy", Locale.getDefault());
 
-    public static Module emptyModule() {
-        Module emptyModule = new Module();
-        emptyModule.setSubjectName("");
-        emptyModule.setWeight(0);
-        emptyModule.setDate(new Date());
-        emptyModule.setScore(0);
-        return emptyModule;
-    }
-
     public String getSubjectName() {
         return subjectName;
     }
@@ -84,10 +75,10 @@ public class Module implements Serializable {
         }
     }
 
-
     void setScore(int score) {
         this.score = score;
     }
+
 
     public static Module fromHtml(String html, int moduleIndex) {
         Elements cells = Jsoup.parse(html, "", Parser.xmlParser()).select("td");

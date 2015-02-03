@@ -10,16 +10,15 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.event.UpdateTimeChangeEvent;
+import ua.samosfator.moduleok.event.UpdateTimeChange;
 
 public class Semesters implements Serializable {
 
-    private List<Semester> semesters = new ArrayList<>(2);
+    private ArrayList<Semester> semesters = new ArrayList<>(2);
 
     public Semesters(String html) {
         Document doc = Jsoup.parse(html);
@@ -33,14 +32,10 @@ public class Semesters implements Serializable {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss", Locale.getDefault());
         try {
             App.setUpdateTime(dateFormat.parse(rawUpdateTime));
-            postUpdateTimeChangeEvent();
+            EventBus.getDefault().post(new UpdateTimeChange());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    private void postUpdateTimeChangeEvent() {
-        EventBus.getDefault().post(new UpdateTimeChangeEvent());
     }
 
     private void addSemesters(Elements semesterElements) {

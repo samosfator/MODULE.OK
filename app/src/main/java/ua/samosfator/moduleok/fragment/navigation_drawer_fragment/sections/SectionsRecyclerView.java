@@ -1,7 +1,5 @@
 package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +14,7 @@ import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
-import ua.samosfator.moduleok.event.UpdateTimeChangeEvent;
+import ua.samosfator.moduleok.event.UpdateTimeChange;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionsRecyclerView {
@@ -111,10 +109,7 @@ public class SectionsRecyclerView {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(UpdateTimeChangeEvent event) {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            mSections.get(Sections.UPDATE_TIME.INDEX).setText(App.getFormattedUpdateTime());
-            mSectionAdapter.notifyItemChanged(Sections.UPDATE_TIME.INDEX);
-        });
+    public void onEvent(UpdateTimeChange event) {
+        mSections.get(Sections.UPDATE_TIME.INDEX).setText(App.getFormattedUpdateTime());
     }
 }

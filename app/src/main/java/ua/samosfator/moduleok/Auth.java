@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 public class Auth {
 
@@ -13,7 +14,7 @@ public class Auth {
 
     private boolean success;
 
-    public void signIn(String login, String password) {
+    public void signIn(String login, String password) throws UnknownHostException {
         downloadSessionId(login, password);
     }
 

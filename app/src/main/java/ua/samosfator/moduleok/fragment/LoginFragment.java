@@ -15,6 +15,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
+import java.net.UnknownHostException;
+
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
@@ -80,7 +82,11 @@ public class LoginFragment extends Fragment {
 
         new Thread(() -> {
             Auth auth = new Auth();
-            auth.signIn(login, password);
+            try {
+                auth.signIn(login, password);
+            } catch (UnknownHostException exception) {
+                showUnresolvedHostError();
+            }
 
             if (auth.isSuccess()) {
                 Log.d("AUTH_STATUS", String.valueOf(auth.isSuccess()));
@@ -105,6 +111,11 @@ public class LoginFragment extends Fragment {
     private void showCredentialsError() {
         login_txt.setError(" ");
         password_txt.setError(getString(R.string.wrong_credentials_text));
+    }
+
+    private void showUnresolvedHostError() {
+        login_txt.setError(" ");
+        password_txt.setError(getString(R.string.unresolved_host_error_text));
     }
 
     private void enableInputs(final boolean bool) {
