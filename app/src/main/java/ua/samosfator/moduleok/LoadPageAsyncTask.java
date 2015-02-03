@@ -20,8 +20,8 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
         Document mainPage = Jsoup.parse("<div id=\"content\"></div>");
         try {
 //            mainPage = getFromLocalSource();
-//            mainPage = getFromCustomRemoteSource();
-            mainPage = getFromRemoteSource();
+            mainPage = getFromCustomRemoteSource();
+//            mainPage = getFromRemoteSource();
         } catch (IOException e) {
             e.printStackTrace();
         }

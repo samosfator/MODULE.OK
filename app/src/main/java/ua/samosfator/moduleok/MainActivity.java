@@ -1,5 +1,6 @@
 package ua.samosfator.moduleok;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,6 +22,7 @@ import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
+import ua.samosfator.moduleok.notification.ScoreCheckerService;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -39,6 +41,8 @@ public class MainActivity extends ActionBarActivity {
 
         initToolbar();
         initNavigationDrawer();
+
+        startService(new Intent(this, ScoreCheckerService.class));
     }
 
     @Override

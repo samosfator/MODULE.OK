@@ -35,7 +35,7 @@ public class Subject implements Serializable {
 
     public Module getLastModule() {
         int lastModuleIndex = modules.size() - 1;
-        while (modules.get(lastModuleIndex).getScore() == 0) {
+        while (modules.get(lastModuleIndex).getScore() == 0 && lastModuleIndex > 0) {
             lastModuleIndex--;
         }
         return modules.get(lastModuleIndex);

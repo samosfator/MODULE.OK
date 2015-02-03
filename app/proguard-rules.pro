@@ -31,3 +31,9 @@
     public static int e(...);
 }
 -dontwarn java.lang.invoke.*
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+-keepclassmembers class * extends de.greenrobot.event.util.ThrowableFailureEvent {
+    (java.lang.Throwable);
+}

@@ -27,6 +27,10 @@ public class StudentKeeper {
         student = new Student(PageLoader.getMainPageHtml(true));
     }
 
+    public static void refreshStudentFromService() {
+        student = new Student(PageLoader.getMainPageHtml(true));
+    }
+
     public static int getCurrentSemesterIndex() {
         if (!semesterIsInit) initSemesterIndex();
         return currentSemester;
