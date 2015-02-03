@@ -33,7 +33,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         Mint.initAndStartSession(MainActivity.this, "79d18253");
         Mint.logEvent("start MainActivity", MintLogLevel.Info);
-        Preferences.init(getApplicationContext());
 
         setContentView(R.layout.activity_main);
         initAndSetAccountInfo();

@@ -3,7 +3,6 @@ package ua.samosfator.moduleok.event;
 import java.util.List;
 
 import ua.samosfator.moduleok.parser.Semester;
-import ua.samosfator.moduleok.parser.Subject;
 
 public class UpdateTimeChangeEvent {
 

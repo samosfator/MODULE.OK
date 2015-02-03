@@ -27,6 +27,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        Preferences.init(getApplicationContext());
     }
 
     public static Context getContext() {
@@ -60,7 +61,8 @@ public class App extends Application {
         try {
             packageInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
             return packageInfo.versionName;
-        } catch (PackageManager.NameNotFoundException ignored) { }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
 
         return "";
     }

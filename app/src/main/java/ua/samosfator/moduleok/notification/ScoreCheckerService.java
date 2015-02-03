@@ -6,8 +6,6 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import de.greenrobot.event.EventBus;
-
 public class ScoreCheckerService extends Service {
 
     private ScoreChecker scoreChecker;

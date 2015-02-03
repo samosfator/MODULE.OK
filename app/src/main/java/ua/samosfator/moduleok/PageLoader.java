@@ -22,7 +22,13 @@ public class PageLoader {
             Preferences.save("mainPageHtml", mainPageHtml);
             return mainPageHtml;
         } else {
-            throw new SessionIdExpiredException();
+            mainPageHtml = downloadMainPage();
+            if (mainPageIsValid(mainPageHtml)) {
+                Preferences.save("mainPageHtml", mainPageHtml);
+                return mainPageHtml;
+            } else {
+                throw new SessionIdExpiredException();
+            }
         }
     }
 
