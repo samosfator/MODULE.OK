@@ -42,6 +42,8 @@
     <string name="last_synchronized_time">Last synced with mod.tanet</string>
     <string name="surprise_message">Surprise!</string>
     <string name="app_version_hint">App version</string>
+    <string name="notification_new_score_available_title_text">New score available!</string>
+    <string name="notification_new_score_detailed_text">Open MODULE.OK to check it out!</string>
 
     <string-array name="semesters">
         <item>@string/first_semester_name</item>

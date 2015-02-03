@@ -123,7 +123,7 @@ public class ScoreChecker {
                     }
                 }
             };
-            scoreCheckTimer.schedule(refreshStudentTask, 0, 10000);
+            scoreCheckTimer.schedule(refreshStudentTask, 0, 2 * 60 * 60 * 1000);
             System.out.println(scoreCheckTimer);
         } else {
             Log.i(TAG, "No modules dates in the near 2 days");
