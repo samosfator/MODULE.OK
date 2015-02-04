@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
@@ -18,6 +21,10 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 public class ModuleFragment extends Fragment {
 
     private ModuleSubjectItemAdapter moduleSubjectItemAdapter;
+
+    ///////////////////
+    private Map<Integer, RecyclerView> cacheRecyclerView = new HashMap<>();
+    ////////////////////
 
     public ModuleFragment() {
         // Required empty public constructor
@@ -30,10 +37,19 @@ public class ModuleFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initModuleSubjectItemAdapter();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_module, container, false);
-        initModuleSubjectItemAdapter();
-        initRecyclerView(rootView);
+        if (cacheRecyclerView.get(getArguments().getInt("module")) == null) {
+            initRecyclerView(rootView);
+        } else {
+            cacheRecyclerView.get(getArguments().getInt("module"));
+        }
         return rootView;
     }
 
@@ -43,10 +59,11 @@ public class ModuleFragment extends Fragment {
     }
 
     private void initRecyclerView(View rootView) {
-        if (moduleSubjectItemAdapter == null) initModuleSubjectItemAdapter();
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.modules_subjects_recycler_view);
         recyclerView.setAdapter(moduleSubjectItemAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        cacheRecyclerView.put(getArguments().getInt("module"), recyclerView);
     }
 
     @SuppressWarnings("UnusedDeclaration")

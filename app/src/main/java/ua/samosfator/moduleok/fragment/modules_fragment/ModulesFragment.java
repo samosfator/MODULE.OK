@@ -30,6 +30,8 @@ public class ModulesFragment extends Fragment {
     private static int maxModulesCount;
     static List<Subject> mSubjects = new ArrayList<>();
     private View rootView;
+    private ModulesPagerAdapter modulesPagerAdapter;
+
 
     public ModulesFragment() {
         // Required empty public constructor
@@ -55,8 +57,9 @@ public class ModulesFragment extends Fragment {
 
     private void initTabStrip(View rootView) {
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.modules_viewpager);
-        ModulesPagerAdapter modulesPagerAdapter = new ModulesPagerAdapter(getChildFragmentManager(), maxModulesCount);
+        modulesPagerAdapter = new ModulesPagerAdapter(getChildFragmentManager(), maxModulesCount);
         pager.setAdapter(modulesPagerAdapter);
+        pager.setOffscreenPageLimit(maxModulesCount - 1);
 
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.modules_tabs);
         tabs.setViewPager(pager);
@@ -82,7 +85,9 @@ public class ModulesFragment extends Fragment {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
-        initTabStrip(rootView);
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_container, new ModulesFragment())
+                .commit();
     }
 
     @Override
