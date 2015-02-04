@@ -38,7 +38,7 @@ public class ScoreCheckerService extends Service {
     @Override
     public void onCreate() {
         App.registerClassForEventBus(this);
-        Toast.makeText(this, "Congrats! MyService Created", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Congrats! ScoreCheckerService Created", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onCreate");
     }
 
@@ -46,16 +46,14 @@ public class ScoreCheckerService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         startServiceTimer();
 
-        Toast.makeText(this, "My Service Started", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "ScoreCheckerService Started", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onStart");
         return 0;
     }
 
     @Override
     public void onDestroy() {
-//        EventBus.getDefault().unregister(this);
-
-        Toast.makeText(this, "MyService Stopped", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "ScoreCheckerService Stopped", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onDestroy");
 
         stopServiceTimer();

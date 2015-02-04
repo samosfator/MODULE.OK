@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
                 studentName_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getNameSurname());
                 studentGroup_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getGroupName());
 
-                openSubjectsFragment();
+                openLastTotalFragment();
             } catch (SessionIdExpiredException e) {
                 eraseAccountInfo();
                 openLoginFragment();
@@ -98,15 +98,15 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    private void openSubjectsFragment() {
+    private void openLastTotalFragment() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new LastTotalFragment())
+                .replace(R.id.main_container, FragmentUtils.getLastTotalFragment())
                 .commit();
     }
 
     private void openLoginFragment() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new LoginFragment())
+                .replace(R.id.main_container, FragmentUtils.getLoginFragment())
                 .commit();
     }
 

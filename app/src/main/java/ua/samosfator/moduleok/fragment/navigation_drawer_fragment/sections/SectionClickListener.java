@@ -15,6 +15,7 @@ import com.balysv.materialripple.MaterialRippleLayout;
 
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
+import ua.samosfator.moduleok.FragmentUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.LogoutFragment;
@@ -40,7 +41,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         switch (clickedSection) {
             case LAST_TOTAL: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, new LastTotalFragment())
+                        .replace(R.id.main_container, FragmentUtils.getLastTotalFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
                 highlightSelectedSection(view);
@@ -48,7 +49,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             }
             case MODULES: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, new ModulesFragment())
+                        .replace(R.id.main_container, FragmentUtils.getModulesFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
                 highlightSelectedSection(view);
@@ -57,11 +58,11 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             case LOG_IN: {
                 if (Auth.isLoggedIn()) {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, new LogoutFragment())
+                            .replace(R.id.main_container, FragmentUtils.getLogoutFragment())
                             .commit();
                 } else {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, new LoginFragment())
+                            .replace(R.id.main_container, FragmentUtils.getLoginFragment())
                             .commit();
                 }
                 mDrawerLayout.closeDrawers();

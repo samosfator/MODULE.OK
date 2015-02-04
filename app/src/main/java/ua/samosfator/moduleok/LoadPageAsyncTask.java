@@ -8,7 +8,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.RefreshEndEvent;

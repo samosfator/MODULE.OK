@@ -1,9 +1,5 @@
 package ua.samosfator.moduleok;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class DrawableUtils {
 
     public static int getScoreCircleDrawable(int score) {
