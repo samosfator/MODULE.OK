@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
         initToolbar();
         initNavigationDrawer();
 
-        if (Auth.isLoggedIn()) {
+        if (Auth.isLoggedIn() && App.hasInternetConnection()) {
             startService(new Intent(this, ScoreCheckerService.class));
         }
     }

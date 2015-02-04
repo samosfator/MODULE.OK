@@ -46,4 +46,3 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
         super.onPostExecute(s);
     }
 }
-g

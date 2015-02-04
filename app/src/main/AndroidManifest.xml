@@ -16,6 +16,12 @@
 
         <service android:enabled="true" android:name=".notification.ScoreCheckerService" />
 
+        <receiver android:name=".InternetConnectionReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main">
