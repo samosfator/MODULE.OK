@@ -15,8 +15,11 @@ import com.balysv.materialripple.MaterialRippleLayout;
 
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
-import ua.samosfator.moduleok.FragmentUtils;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.fragment.LoginFragment;
+import ua.samosfator.moduleok.fragment.LogoutFragment;
+import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
@@ -37,7 +40,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         switch (clickedSection) {
             case LAST_TOTAL: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, FragmentUtils.getLastTotalFragment())
+                        .replace(R.id.main_container, new LastTotalFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
                 highlightSelectedSection(view);
@@ -45,7 +48,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             }
             case MODULES: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, FragmentUtils.getModulesFragment())
+                        .replace(R.id.main_container, new ModulesFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
                 highlightSelectedSection(view);
@@ -54,11 +57,11 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             case LOG_IN: {
                 if (Auth.isLoggedIn()) {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, FragmentUtils.getLogoutFragment())
+                            .replace(R.id.main_container, new LogoutFragment())
                             .commit();
                 } else {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, FragmentUtils.getLoginFragment())
+                            .replace(R.id.main_container, new LoginFragment())
                             .commit();
                 }
                 mDrawerLayout.closeDrawers();
