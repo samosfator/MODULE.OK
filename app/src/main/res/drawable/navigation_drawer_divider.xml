@@ -5,5 +5,5 @@
         android:width="@dimen/login_fields_with"
         android:height="1dp"/>
     <solid
-        android:color="@color/grey_400"/>
+        android:color="@color/grey_500"/>
 </shape>
