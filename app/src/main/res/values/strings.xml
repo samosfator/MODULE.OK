@@ -27,6 +27,7 @@
 
     <string name="sampleStudentName">Петро Баклан</string>
     <string name="sampleStudentGroup">ПТН-23</string>
+    <string name="date_hour_divider">\'at\'</string>
 
     <string name="last_n_total_section">Last &amp; Total</string>
     <string name="modules_section">Modules</string>
@@ -40,7 +41,6 @@
     <string name="incorrect_message_message">Не вірний логін/пароль.</string>
     <string name="user_agent">Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.45 Safari/537.36</string>
     <string name="last_synchronized_time">Last synced with mod.tanet</string>
-    <string name="surprise_message">Surprise!</string>
     <string name="app_version_hint">App version</string>
     <string name="notification_new_score_available_title_text">New score available!</string>
     <string name="notification_new_score_detailed_text">Open MODULE.OK to check it out!</string>

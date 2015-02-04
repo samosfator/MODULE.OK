@@ -68,8 +68,9 @@ public class App extends Application {
     }
 
     public static String getFormattedUpdateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("kk:mm   dd.MM.yy ", Locale.getDefault());
-        if (updateTime == null) return "asdasdasdasdasd";
+        String formatTemplate = "dd.MM.yy " + mContext.getString(R.string.date_hour_divider) + " kk:mm";
+        DateFormat dateFormat = new SimpleDateFormat(formatTemplate, Locale.getDefault());
+        if (updateTime == null) return "";
         return dateFormat.format(updateTime);
     }
 

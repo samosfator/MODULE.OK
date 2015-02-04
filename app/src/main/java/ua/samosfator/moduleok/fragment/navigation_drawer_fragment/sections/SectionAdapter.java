@@ -70,7 +70,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     }
 
     private boolean isLastSectionAndLoggedOut(int position) {
-        return !Auth.isLoggedIn() && position == (data.size() - 1);
+        return !Auth.isLoggedIn() && position == SectionsEnum.LOG_IN.INDEX;
     }
 
     private void doHighlightSection(SectionViewHolder holder) {

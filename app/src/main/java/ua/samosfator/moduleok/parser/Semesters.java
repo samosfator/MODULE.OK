@@ -53,7 +53,6 @@ public class Semesters implements Serializable {
     }
 
     public Semester get(int index) {
-        assert index <= 1 && index >= 0;
         return semesters.get(index);
     }
 

@@ -71,7 +71,7 @@ public class SectionsRecyclerView {
         SectionDrawer versionSection = new SectionDrawer("v." + App.getVersion(), R.drawable.ic_information_grey600_24dp);
         mSections.add(versionSection);
 
-SectionDrawer feedbackSection = new SectionDrawer(App.getContext().getString(R.string.feedback_section), R.drawable.ic_help_circle_grey600_24dp);
+        SectionDrawer feedbackSection = new SectionDrawer(App.getContext().getString(R.string.feedback_section), R.drawable.ic_help_circle_grey600_24dp);
         mSections.add(feedbackSection);
     }
 
