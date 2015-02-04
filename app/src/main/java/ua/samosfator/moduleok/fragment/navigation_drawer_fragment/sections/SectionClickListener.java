@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -43,14 +44,14 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 openFragment(new LastTotalFragment());
 
                 mDrawerLayout.closeDrawers();
-                highlightSelectedSection(view);
+                SectionHighlighter.highlightSection(mRecyclerView, view);
                 break;
             }
             case MODULES: {
                 openFragment(new ModulesFragment());
 
                 mDrawerLayout.closeDrawers();
-                highlightSelectedSection(view);
+                SectionHighlighter.highlightSection(mRecyclerView, view);
                 break;
             }
             case LOG_IN: {
@@ -61,7 +62,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 }
 
                 mDrawerLayout.closeDrawers();
-                highlightSelectedSection(view);
+                SectionHighlighter.highlightSection(mRecyclerView, view);
                 break;
             }
             case EMPTY: {
@@ -89,31 +90,5 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         mFragmentActivity.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_container, fragment)
                 .commit();
-    }
-
-    private void highlightSelectedSection(View view) {
-        removeHighlightFromSections();
-
-        view = ((FrameLayout) view).getChildAt(0);
-        TextView sectionTextView = view instanceof MaterialRippleLayout ?
-                ((TextView) ((MaterialRippleLayout) view).getChildAt(0)) : (TextView) view;
-        sectionTextView.setTextColor(App.getContext().getResources().getColor(R.color.colorAccent));
-        sectionTextView.setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
-    }
-
-    private void removeHighlightFromSections() {
-        Resources appResources = App.getContext().getResources();
-        int textColorPrimaryDark = appResources.getColor(R.color.textColorPrimaryDark);
-        int colorGrey200 = appResources.getColor(R.color.grey_200);
-
-        for (int i = 0; i < mRecyclerView.getChildCount(); i++) {
-            if (i != SectionsEnum.EMPTY.INDEX) {
-                View recyclerViewChild = ((FrameLayout) mRecyclerView.getChildAt(i)).getChildAt(0);
-                TextView otherSectionTextView = recyclerViewChild instanceof MaterialRippleLayout ?
-                        ((TextView) (((MaterialRippleLayout) recyclerViewChild).getChildAt(0))) : (TextView) recyclerViewChild;
-                otherSectionTextView.setTextColor(textColorPrimaryDark);
-                otherSectionTextView.setBackgroundColor(colorGrey200);
-            }
-        }
     }
 }
