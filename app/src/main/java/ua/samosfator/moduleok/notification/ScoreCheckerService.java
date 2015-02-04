@@ -6,6 +6,9 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import ua.samosfator.moduleok.event.LoginEvent;
+import ua.samosfator.moduleok.event.LogoutEvent;
+
 public class ScoreCheckerService extends Service {
 
     private ScoreChecker scoreChecker;
@@ -38,5 +41,14 @@ public class ScoreCheckerService extends Service {
 
         scoreChecker.refreshStudentTask.cancel();
         scoreChecker.moduleDatesUpdateTask.cancel();
+    }
+
+    public void onEvent(LoginEvent event) {
+        scoreChecker.moduleDatesUpdateTimer.schedule(scoreChecker.moduleDatesUpdateTask, 0, 12 * 60 * 60 * 1000);
+    }
+
+    public void onEvent(LogoutEvent event) {
+        scoreChecker.moduleDatesUpdateTask.cancel();
+        scoreChecker.refreshStudentTask.cancel();
     }
 }

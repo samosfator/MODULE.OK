@@ -41,7 +41,9 @@ public class MainActivity extends ActionBarActivity {
         initToolbar();
         initNavigationDrawer();
 
-        startService(new Intent(this, ScoreCheckerService.class));
+        if (Auth.isLoggedIn()) {
+            startService(new Intent(this, ScoreCheckerService.class));
+        }
     }
 
     @Override

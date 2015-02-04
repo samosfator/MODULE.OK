@@ -19,7 +19,6 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         Document mainPage = Jsoup.parse("<div id=\"content\"></div>");
         try {
-//            mainPage = getFromLocalSource();
 //            mainPage = getFromCustomRemoteSource();
             mainPage = getFromRemoteSource();
         } catch (IOException e) {
@@ -34,7 +33,7 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
     }
 
     private Document getFromRemoteSource() throws IOException {
-        return Jsoup.connect("http://mod.tanet.edu.te.ua/index.php")
+        return Jsoup.connect("http://mod.tanet.edu.te.ua/ratings/index")
                 .cookie("PHPSESSID", Preferences.read("SESSIONID", "")).get();
     }
 
@@ -42,14 +41,9 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
         return Jsoup.connect("http://moduleok.hol.es/mock.html").get();
     }
 
-    private Document getFromLocalSource() throws IOException {
-        InputStream mockHtmlStream = App.getContext().getResources().openRawResource(R.raw.mock);
-        String relativeBaseUri = "http://mod.tanet.edu.te.ua/ratings/index";
-        return Jsoup.parse(mockHtmlStream, "UTF-8", relativeBaseUri);
-    }
-
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
     }
 }
+g

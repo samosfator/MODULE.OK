@@ -1,10 +1,5 @@
 package ua.samosfator.moduleok.notification;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -15,12 +10,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Auth;
-import ua.samosfator.moduleok.MainActivity;
-import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.SessionIdExpiredException;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.LoginEvent;
+import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.parser.Module;
 import ua.samosfator.moduleok.parser.Semester;
 import ua.samosfator.moduleok.parser.Semesters;
@@ -32,13 +25,12 @@ public class ScoreChecker {
 
     private static List<Date> modulesDates = new ArrayList<>();
 
-    private Timer scoreCheckTimer = new Timer("scoreCheckTimer");
-    private Timer moduleDatesUpdateTimer = new Timer("moduleDatesUpdateTimer");
+    Timer scoreCheckTimer = new Timer("scoreCheckTimer");
+    Timer moduleDatesUpdateTimer = new Timer("moduleDatesUpdateTimer");
     TimerTask refreshStudentTask;
     TimerTask moduleDatesUpdateTask;
 
     public ScoreChecker() {
-        App.registerClassForEventBus(this);
         moduleDatesUpdateTask = new TimerTask() {
             @Override
             public void run() {
@@ -52,9 +44,7 @@ public class ScoreChecker {
                 startNewScheduledChecking();
             }
         };
-        if (Auth.isLoggedIn()) {
-            moduleDatesUpdateTimer.schedule(moduleDatesUpdateTask, 0, 12 * 60 * 60 * 1000);
-        }
+        moduleDatesUpdateTimer.schedule(moduleDatesUpdateTask, 0, 12 * 60 * 60 * 1000);
     }
 
     private void initModulesDatesList() {
@@ -114,7 +104,8 @@ public class ScoreChecker {
                     String oldTime = App.getFormattedUpdateTime();
                     try {
                         StudentKeeper.refreshStudent();
-                    } catch (SessionIdExpiredException ignored) { }
+                    } catch (SessionIdExpiredException ignored) {
+                    }
                     String newTime = App.getFormattedUpdateTime();
 
                     Log.i(TAG, oldTime + " - " + newTime);
@@ -128,9 +119,5 @@ public class ScoreChecker {
         } else {
             Log.i(TAG, "No modules dates in the near 2 days");
         }
-    }
-
-    public void onEvent(LoginEvent event) {
-        moduleDatesUpdateTimer.schedule(moduleDatesUpdateTask, 0, 12 * 60 * 60 * 1000);
     }
 }

@@ -14,7 +14,7 @@ import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.event.UpdateTimeChange;
+import ua.samosfator.moduleok.event.UpdateTimeChangeEvent;
 
 public class Semesters implements Serializable {
 
@@ -32,7 +32,7 @@ public class Semesters implements Serializable {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss", Locale.getDefault());
         try {
             App.setUpdateTime(dateFormat.parse(rawUpdateTime));
-            EventBus.getDefault().post(new UpdateTimeChange());
+            EventBus.getDefault().post(new UpdateTimeChangeEvent());
         } catch (ParseException e) {
             e.printStackTrace();
         }

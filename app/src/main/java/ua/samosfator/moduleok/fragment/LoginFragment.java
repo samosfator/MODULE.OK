@@ -33,6 +33,13 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("login", login_txt.getText().toString());
+        outState.putString("pass", password_txt.getText().toString());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initViews(rootView);
@@ -101,6 +108,11 @@ public class LoginFragment extends Fragment {
     private void initViews(View rootView) {
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
+    }
+
+    private void restoreViews(Bundle savedInstanceState) {
+        login_txt.setText(savedInstanceState.getString("login"));
+        password_txt.setText(savedInstanceState.getString("pass"));
     }
 
     private void showInternetConnectionError() {

@@ -14,7 +14,7 @@ import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
-import ua.samosfator.moduleok.event.UpdateTimeChange;
+import ua.samosfator.moduleok.event.UpdateTimeChangeEvent;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionsRecyclerView {
@@ -113,7 +113,7 @@ public class SectionsRecyclerView {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(UpdateTimeChange event) {
+    public void onEvent(UpdateTimeChangeEvent event) {
         mSections.get(SectionsEnum.UPDATE_TIME.INDEX).setText(App.getFormattedUpdateTime());
     }
 }

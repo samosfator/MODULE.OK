@@ -36,33 +36,24 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
 
     @Override
     public void onItemClick(View view, int position) {
-        openSelectedSectionFragment(view, position);
-    }
-
-    private void openSelectedSectionFragment(View view, int position) {
         SectionsEnum clickedSection = SectionsEnum.getSectionById(position);
         switch (clickedSection) {
-            //Last & Total
             case LAST_TOTAL: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, new LastTotalFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
-                removeHighlightFromSections();
                 highlightSelectedSection(view);
                 break;
             }
-            //Modules
             case MODULES: {
                 mFragmentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, new ModulesFragment())
                         .commit();
                 mDrawerLayout.closeDrawers();
-                removeHighlightFromSections();
                 highlightSelectedSection(view);
                 break;
             }
-            //Log in / Log out
             case LOG_IN: {
                 if (Auth.isLoggedIn()) {
                     mFragmentActivity.getSupportFragmentManager().beginTransaction()
@@ -74,20 +65,16 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                             .commit();
                 }
                 mDrawerLayout.closeDrawers();
-                removeHighlightFromSections();
                 highlightSelectedSection(view);
                 break;
             }
-            //Empty
             case EMPTY: {
                 break;
             }
-            //Update time
             case UPDATE_TIME: {
-                Toast.makeText(App.getContext(), App.getContext().getString(R.string.last_synchronized_time), Toast.LENGTH_LONG).show();
+                Toast.makeText(App.getContext(), App.getContext().getString(R.string.last_synchronized_time), Toast.LENGTH_SHORT).show();
                 break;
             }
-            //Feedback
             case FEEDBACK: {
                 Intent openVkGroupIntent = new Intent(Intent.ACTION_VIEW);
                 openVkGroupIntent.setData(Uri.parse("https://vk.com/moduleok"));
@@ -95,16 +82,16 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 App.getContext().startActivity(openVkGroupIntent);
                 break;
             }
-            //App version
             case VERSION: {
                 Toast.makeText(App.getContext(), App.getContext().getString(R.string.app_version_hint), Toast.LENGTH_SHORT).show();
                 break;
             }
-
         }
     }
 
     private void highlightSelectedSection(View view) {
+        removeHighlightFromSections();
+
         view = ((FrameLayout) view).getChildAt(0);
         TextView sectionTextView = view instanceof MaterialRippleLayout ?
                 ((TextView) ((MaterialRippleLayout) view).getChildAt(0)) : (TextView) view;

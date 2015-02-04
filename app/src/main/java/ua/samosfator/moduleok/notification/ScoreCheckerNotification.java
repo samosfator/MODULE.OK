@@ -8,6 +8,9 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
+import com.splunk.mint.Mint;
+import com.splunk.mint.MintLogLevel;
+
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.MainActivity;
 import ua.samosfator.moduleok.R;
@@ -44,5 +47,7 @@ public class ScoreCheckerNotification {
         NotificationManager notificationManager =
                 (NotificationManager) App.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, mNotificationBuilder.build());
+
+        Mint.logEvent("Notification show", MintLogLevel.Info);
     }
 }
