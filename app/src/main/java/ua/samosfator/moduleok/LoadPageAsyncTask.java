@@ -23,12 +23,7 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        postRefreshEndEvent();
         return mainPage.html();
-    }
-
-    private void postRefreshEndEvent() {
-        new Handler(Looper.getMainLooper()).post(() -> EventBus.getDefault().post(new RefreshEndEvent()));
     }
 
     private Document getFromRemoteSource() throws IOException {

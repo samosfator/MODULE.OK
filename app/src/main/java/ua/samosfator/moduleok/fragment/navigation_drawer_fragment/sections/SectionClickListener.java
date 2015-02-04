@@ -3,6 +3,7 @@ package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
@@ -39,31 +40,26 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         SectionsEnum clickedSection = SectionsEnum.getSectionById(position);
         switch (clickedSection) {
             case LAST_TOTAL: {
-                mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, new LastTotalFragment())
-                        .commit();
+                openFragment(new LastTotalFragment());
+
                 mDrawerLayout.closeDrawers();
                 highlightSelectedSection(view);
                 break;
             }
             case MODULES: {
-                mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, new ModulesFragment())
-                        .commit();
+                openFragment(new ModulesFragment());
+
                 mDrawerLayout.closeDrawers();
                 highlightSelectedSection(view);
                 break;
             }
             case LOG_IN: {
                 if (Auth.isLoggedIn()) {
-                    mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, new LogoutFragment())
-                            .commit();
+                    openFragment(new LogoutFragment());
                 } else {
-                    mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, new LoginFragment())
-                            .commit();
+                    openFragment(new LoginFragment());
                 }
+
                 mDrawerLayout.closeDrawers();
                 highlightSelectedSection(view);
                 break;
@@ -87,6 +83,12 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 break;
             }
         }
+    }
+
+    private void openFragment(Fragment fragment) {
+        mFragmentActivity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_container, fragment)
+                .commit();
     }
 
     private void highlightSelectedSection(View view) {

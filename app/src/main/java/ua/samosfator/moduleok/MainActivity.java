@@ -18,6 +18,7 @@ import com.splunk.mint.MintLogLevel;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
+import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
@@ -145,6 +146,12 @@ public class MainActivity extends ActionBarActivity {
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LogoutEvent event) {
         eraseAccountInfo();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(RefreshEvent event) {
+        StudentKeeper.refreshStudent();
+        EventBus.getDefault().post(new RefreshEndEvent());
     }
 
     @Override

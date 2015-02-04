@@ -19,7 +19,7 @@ import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
-import ua.samosfator.moduleok.event.RefreshEvent;
+import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Subject;
@@ -63,9 +63,9 @@ public class LastTotalFragment extends Fragment {
 
     private void initSubjects() {
         try {
-            int semester = StudentKeeper.getCurrentSemesterIndex();
+            int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
             mSubjects.clear();
-            mSubjects.addAll(StudentKeeper.getCurrentStudent().getSemesters().get(semester).getSubjects());
+            mSubjects.addAll(StudentKeeper.getCurrentStudent().getSemesters().get(semesterIndex).getSubjects());
         } catch (IllegalArgumentException e) {
             openLoginFragment();
         }
@@ -82,8 +82,7 @@ public class LastTotalFragment extends Fragment {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(RefreshEvent event) {
-        StudentKeeper.refreshStudent();
+    public void onEvent(RefreshEndEvent event) {
         initSubjects();
         reRenderSubjectsList();
     }

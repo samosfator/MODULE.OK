@@ -14,8 +14,7 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.StudentKeeper;
-import ua.samosfator.moduleok.event.RefreshEvent;
+import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 
 public class ModuleFragment extends Fragment {
@@ -68,13 +67,6 @@ public class ModuleFragment extends Fragment {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(SemesterChangedEvent event) {
-        ModulesFragment.initSubjects();
-        reRenderModuleSubjectsList();
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(RefreshEvent event) {
-        StudentKeeper.refreshStudent();
         ModulesFragment.initSubjects();
         reRenderModuleSubjectsList();
     }
