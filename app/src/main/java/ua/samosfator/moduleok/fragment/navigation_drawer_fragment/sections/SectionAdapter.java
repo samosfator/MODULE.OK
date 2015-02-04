@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -33,9 +34,22 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     @Override
     public void onBindViewHolder(SectionViewHolder holder, int position) {
         SectionDrawer currentSection = data.get(position);
+        if (position == SectionsEnum.EMPTY.INDEX) {
+            makeViewADivider(holder);
+            return;
+        }
         holder.section.setText(currentSection.getTitle());
         holder.section.setCompoundDrawablesWithIntrinsicBounds(currentSection.getIconId(), 0, 0, 0);
         highlightSection(holder, position);
+    }
+
+    private void makeViewADivider(SectionViewHolder holder) {
+        holder.section.setText("");
+        holder.section.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty, 0, 0, 0);
+        holder.itemView.setBackgroundResource(R.drawable.navigation_drawer_divider);
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        layoutParams.height = 2;
+        holder.itemView.setLayoutParams(layoutParams);
     }
 
     @Override
@@ -65,11 +79,14 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     }
 
     class SectionViewHolder extends RecyclerView.ViewHolder {
+
         private TextView section;
+        private View itemView;
 
         public SectionViewHolder(View itemView) {
             super(itemView);
-            section = (TextView) itemView.findViewById(R.id.section_text);
+            this.section = (TextView) itemView.findViewById(R.id.section_text);
+            this.itemView = itemView;
         }
     }
 }

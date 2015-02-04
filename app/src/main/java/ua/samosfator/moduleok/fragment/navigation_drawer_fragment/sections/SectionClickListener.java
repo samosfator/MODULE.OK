@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,6 +105,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
     }
 
     private void highlightSelectedSection(View view) {
+        view = ((FrameLayout) view).getChildAt(0);
         TextView sectionTextView = view instanceof MaterialRippleLayout ?
                 ((TextView) ((MaterialRippleLayout) view).getChildAt(0)) : (TextView) view;
         sectionTextView.setTextColor(App.getContext().getResources().getColor(R.color.colorAccent));
@@ -116,11 +118,13 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         int colorGrey200 = appResources.getColor(R.color.grey_200);
 
         for (int i = 0; i < mRecyclerView.getChildCount(); i++) {
-            View recyclerViewChild = mRecyclerView.getChildAt(i);
-            TextView otherSectionTextView = recyclerViewChild instanceof MaterialRippleLayout ?
-                    ((TextView) ((MaterialRippleLayout) recyclerViewChild).getChildAt(0)) : (TextView) recyclerViewChild;
-            otherSectionTextView.setTextColor(textColorPrimaryDark);
-            otherSectionTextView.setBackgroundColor(colorGrey200);
+            if (i != SectionsEnum.EMPTY.INDEX) {
+                View recyclerViewChild = ((FrameLayout) mRecyclerView.getChildAt(i)).getChildAt(0);
+                TextView otherSectionTextView = recyclerViewChild instanceof MaterialRippleLayout ?
+                        ((TextView) (((MaterialRippleLayout) recyclerViewChild).getChildAt(0))) : (TextView) recyclerViewChild;
+                otherSectionTextView.setTextColor(textColorPrimaryDark);
+                otherSectionTextView.setBackgroundColor(colorGrey200);
+            }
         }
     }
 }

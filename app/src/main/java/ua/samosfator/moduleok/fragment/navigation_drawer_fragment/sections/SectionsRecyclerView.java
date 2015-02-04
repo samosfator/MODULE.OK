@@ -62,7 +62,7 @@ public class SectionsRecyclerView {
 
         addLoginOrLogoutSection();
 
-        SectionDrawer divider = new SectionDrawer("", R.drawable.abc_list_divider_mtrl_alpha);
+        SectionDrawer divider = new SectionDrawer("", R.drawable.empty);
         mSections.add(divider);
 
         SectionDrawer updateTimeSection = new SectionDrawer(App.getFormattedUpdateTime(), R.drawable.ic_timer_sand_grey600_24dp);
