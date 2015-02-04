@@ -17,10 +17,6 @@ import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.FragmentUtils;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.LogoutFragment;
-import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
-import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {

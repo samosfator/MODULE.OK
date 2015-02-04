@@ -19,8 +19,6 @@ import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
-import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.notification.ScoreCheckerService;
 

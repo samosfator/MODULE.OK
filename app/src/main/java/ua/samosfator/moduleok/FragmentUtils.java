@@ -4,7 +4,6 @@ import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.LogoutFragment;
 import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
 import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
-import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
 
 public class FragmentUtils {
 
