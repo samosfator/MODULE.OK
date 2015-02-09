@@ -10,7 +10,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:textColor="@color/textColorPrimary"
-        app:pstsIndicatorColor="@color/colorAccent"
+        app:pstsIndicatorColor="@color/red_500"
         app:pstsShouldExpand="true"
         app:pstsTabPaddingLeftRight="4dp"
         xmlns:android="http://schemas.android.com/apk/res/android" />
