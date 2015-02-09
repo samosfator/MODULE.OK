@@ -28,6 +28,8 @@ public class LoginFragment extends Fragment {
     private MaterialEditText login_txt;
     private MaterialEditText password_txt;
 
+    private View rootView;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -41,9 +43,8 @@ public class LoginFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-        initViews(rootView);
-        login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
+        rootView = inflater.inflate(R.layout.fragment_login, container, false);
+        initViews();
         password_txt.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 validateAndStartLogin();
@@ -105,14 +106,14 @@ public class LoginFragment extends Fragment {
         }).start();
     }
 
-    private void initViews(View rootView) {
+    private void initViews() {
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
+        login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
     }
 
-    private void restoreViews(Bundle savedInstanceState) {
-        login_txt.setText(savedInstanceState.getString("login"));
-        password_txt.setText(savedInstanceState.getString("pass"));
+    public LoginFragment restoreView() {
+        return new LoginFragment();
     }
 
     private void showInternetConnectionError() {
