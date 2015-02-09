@@ -17,10 +17,11 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.FragmentUtils;
+import ua.samosfator.moduleok.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
-import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Semester;
 import ua.samosfator.moduleok.parser.Subject;
 
@@ -30,6 +31,8 @@ public class ModulesFragment extends Fragment {
     private static int maxModulesCount;
     static List<Subject> mSubjects = new ArrayList<>();
     private View rootView;
+    private ModulesPagerAdapter modulesPagerAdapter;
+
 
     public ModulesFragment() {
         // Required empty public constructor
@@ -55,8 +58,9 @@ public class ModulesFragment extends Fragment {
 
     private void initTabStrip(View rootView) {
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.modules_viewpager);
-        ModulesPagerAdapter modulesPagerAdapter = new ModulesPagerAdapter(getChildFragmentManager(), maxModulesCount);
+        modulesPagerAdapter = new ModulesPagerAdapter(getChildFragmentManager(), maxModulesCount);
         pager.setAdapter(modulesPagerAdapter);
+        pager.setOffscreenPageLimit(maxModulesCount - 1);
 
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.modules_tabs);
         tabs.setViewPager(pager);
@@ -75,14 +79,14 @@ public class ModulesFragment extends Fragment {
     }
 
     private static void openLoginFragment() {
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, new LoginFragment())
-                .commit();
+        FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
     }
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
-        initTabStrip(rootView);
+        if (FragmentsKeeper.getModules().isVisible()) {
+            FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());
+        }
     }
 
     @Override

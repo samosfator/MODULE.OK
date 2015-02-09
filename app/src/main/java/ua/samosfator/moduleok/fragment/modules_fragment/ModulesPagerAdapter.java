@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 
@@ -21,6 +24,7 @@ class ModulesPagerAdapter extends FragmentPagerAdapter {
             appResources.getString(R.string.module_3_name), appResources.getString(R.string.module_4_name),
             appResources.getString(R.string.module_5_name), appResources.getString(R.string.module_6_name)
     };
+    private List<ModuleFragment> moduleFragmentList = new ArrayList<>(maxModulesCount);
 
     public ModulesPagerAdapter(FragmentManager fm, int maxModulesCount) {
         super(fm);
@@ -39,13 +43,17 @@ class ModulesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        ModuleFragment moduleFragment = new ModuleFragment();
+        if (position >= moduleFragmentList.size()) {
+            ModuleFragment moduleFragment = new ModuleFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("module", position);
+            moduleFragment.setArguments(bundle);
 
-        Bundle bundle = new Bundle();
-        bundle.putInt("module", position);
+            moduleFragmentList.add(moduleFragment);
 
-        moduleFragment.setArguments(bundle);
-
-        return moduleFragment;
+            return moduleFragment;
+        } else {
+            return moduleFragmentList.get(position);
+        }
     }
 }

@@ -1,71 +1,84 @@
 package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.balysv.materialripple.MaterialRippleLayout;
+import com.splunk.mint.Mint;
+import com.splunk.mint.MintLogLevel;
 
+import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
+import ua.samosfator.moduleok.FragmentUtils;
+import ua.samosfator.moduleok.FragmentsKeeper;
+import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.LogoutFragment;
-import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
-import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
 
-    private FragmentActivity mFragmentActivity;
+    private FragmentManager fragmentManager;
     private DrawerLayout mDrawerLayout;
     private RecyclerView mRecyclerView;
 
     public SectionClickListener(FragmentActivity activity, DrawerLayout drawerLayout, RecyclerView recyclerView) {
-        mFragmentActivity = activity;
+        fragmentManager = activity.getSupportFragmentManager();
         mDrawerLayout = drawerLayout;
         mRecyclerView = recyclerView;
     }
 
+    @SuppressLint("CommitTransaction")
     @Override
     public void onItemClick(View view, int position) {
         SectionsEnum clickedSection = SectionsEnum.getSectionById(position);
         switch (clickedSection) {
             case LAST_TOTAL: {
-                mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, new LastTotalFragment())
-                        .commit();
+                if (Auth.isLoggedIn()) {
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLastTotal());
+                } else {
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
+                }
+
                 mDrawerLayout.closeDrawers();
-                highlightSelectedSection(view);
+                SectionHighlighter.highlightSection(mRecyclerView, view);
                 break;
             }
             case MODULES: {
-                mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, new ModulesFragment())
-                        .commit();
+                if (Auth.isLoggedIn()) {
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());
+                } else {
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
+                }
+
                 mDrawerLayout.closeDrawers();
-                highlightSelectedSection(view);
+                SectionHighlighter.highlightSection(mRecyclerView, view);
                 break;
             }
             case LOG_IN: {
                 if (Auth.isLoggedIn()) {
-                    mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, new LogoutFragment())
-                            .commit();
+                    Preferences.save("SESSIONID", "");
+                    Preferences.save("mainPageHtml", "");
+
+                    FragmentsKeeper.setLogin(new LoginFragment());
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
+
+                    EventBus.getDefault().post(new LogoutEvent());
+                    Mint.logEvent("log out", MintLogLevel.Info);
                 } else {
-                    mFragmentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, new LoginFragment())
-                            .commit();
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
                 }
+
                 mDrawerLayout.closeDrawers();
-                highlightSelectedSection(view);
+                SectionHighlighter.highlightSection(mRecyclerView, view);
                 break;
             }
             case EMPTY: {
@@ -85,32 +98,6 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             case VERSION: {
                 Toast.makeText(App.getContext(), App.getContext().getString(R.string.app_version_hint), Toast.LENGTH_SHORT).show();
                 break;
-            }
-        }
-    }
-
-    private void highlightSelectedSection(View view) {
-        removeHighlightFromSections();
-
-        view = ((FrameLayout) view).getChildAt(0);
-        TextView sectionTextView = view instanceof MaterialRippleLayout ?
-                ((TextView) ((MaterialRippleLayout) view).getChildAt(0)) : (TextView) view;
-        sectionTextView.setTextColor(App.getContext().getResources().getColor(R.color.colorAccent));
-        sectionTextView.setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
-    }
-
-    private void removeHighlightFromSections() {
-        Resources appResources = App.getContext().getResources();
-        int textColorPrimaryDark = appResources.getColor(R.color.textColorPrimaryDark);
-        int colorGrey200 = appResources.getColor(R.color.grey_200);
-
-        for (int i = 0; i < mRecyclerView.getChildCount(); i++) {
-            if (i != SectionsEnum.EMPTY.INDEX) {
-                View recyclerViewChild = ((FrameLayout) mRecyclerView.getChildAt(i)).getChildAt(0);
-                TextView otherSectionTextView = recyclerViewChild instanceof MaterialRippleLayout ?
-                        ((TextView) (((MaterialRippleLayout) recyclerViewChild).getChildAt(0))) : (TextView) recyclerViewChild;
-                otherSectionTextView.setTextColor(textColorPrimaryDark);
-                otherSectionTextView.setBackgroundColor(colorGrey200);
             }
         }
     }

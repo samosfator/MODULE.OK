@@ -1,5 +1,6 @@
 package ua.samosfator.moduleok;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,9 +19,10 @@ import com.splunk.mint.MintLogLevel;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
+import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
-import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.notification.ScoreCheckerService;
 
@@ -65,20 +67,10 @@ public class MainActivity extends ActionBarActivity {
         drawerFragment.setup(R.id.navigation_drawer_fragment, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
     }
 
-    private void eraseAccountInfo() {
-        final TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
-        final TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
-
-        runOnUiThread(() -> {
-            studentName_TextView.setText(getString(R.string.sampleStudentName));
-            studentGroup_TextView.setText(getString(R.string.sampleStudentGroup));
-            openLoginFragment();
-        });
-    }
-
     private void initAndSetAccountInfo() {
         if (!Auth.isLoggedIn()) {
             eraseAccountInfo();
+            openLoginFragment();
             return;
         }
 
@@ -98,16 +90,42 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    private void openLastTotalFragment() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new LastTotalFragment())
-                .commit();
+    private void eraseAccountInfo() {
+        final TextView studentName_TextView = (TextView) findViewById(R.id.student_name_txt);
+        final TextView studentGroup_TextView = (TextView) findViewById(R.id.student_group_txt);
+
+        runOnUiThread(() -> {
+            studentName_TextView.setText(getString(R.string.sampleStudentName));
+            studentGroup_TextView.setText(getString(R.string.sampleStudentGroup));
+        });
     }
 
+    @SuppressLint("CommitTransaction")
+    private void openLastTotalFragment() {
+        FragmentUtils.showFragment(getSupportFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
+    }
+
+    @SuppressLint("CommitTransaction")
     private void openLoginFragment() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new LoginFragment())
-                .commit();
+        FragmentUtils.showFragment(getSupportFragmentManager().beginTransaction(), FragmentsKeeper.getLogin());
+    }
+
+    @SuppressLint("CommitTransaction")
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(LoginEvent event) {
+        EventBus.getDefault().post(new RefreshEvent());
+        initAndSetAccountInfo();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(LogoutEvent event) {
+        eraseAccountInfo();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(RefreshEvent event) {
+        StudentKeeper.refreshStudent();
+        EventBus.getDefault().post(new RefreshEndEvent());
     }
 
     @Override
@@ -135,16 +153,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(LoginEvent event) {
-        initAndSetAccountInfo();
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(LogoutEvent event) {
-        eraseAccountInfo();
     }
 
     @Override
