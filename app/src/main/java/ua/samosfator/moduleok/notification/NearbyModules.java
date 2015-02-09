@@ -27,6 +27,7 @@ public class NearbyModules {
     private static void initModulesDatesList() {
         modulesDates.clear();
         List<Subject> subjects = getCurrentSemesterSubjects();
+        System.setProperty("java8.util.Spliterators.assume.oracle.collections.impl", "false");
         StreamSupport.stream(subjects)
                 .map(Subject::getModules)
                 .map(StreamSupport::stream)

@@ -38,6 +38,7 @@ public class ScoreCheckerService extends Service {
     @Override
     public void onCreate() {
         App.registerClassForEventBus(this);
+        System.setProperty("java8.util.Spliterators.assume.oracle.collections.impl", "false");
         Toast.makeText(this, "Congrats! ScoreCheckerService Created", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onCreate");
     }

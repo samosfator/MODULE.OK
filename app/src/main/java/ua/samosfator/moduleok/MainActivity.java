@@ -21,8 +21,6 @@ import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
-import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
-import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.notification.ScoreCheckerService;
 
@@ -44,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
         initToolbar();
         initNavigationDrawer();
 
-        if (Auth.isLoggedIn() && App.hasInternetConnection()) {
+        if (Auth.isLoggedIn() && App.hasInternetConnection() && !App.isServiceRunning(ScoreCheckerService.class)) {
             startService(new Intent(this, ScoreCheckerService.class));
         }
     }

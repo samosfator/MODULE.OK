@@ -1,6 +1,8 @@
 package ua.samosfator.moduleok;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.app.Service;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -76,5 +78,15 @@ public class App extends Application {
 
     public static void setUpdateTime(Date updateTime) {
         App.updateTime = updateTime;
+    }
+
+    public static boolean isServiceRunning(Class<? extends Service> serviceClass) {
+        ActivityManager manager = (ActivityManager) App.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
