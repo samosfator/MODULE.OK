@@ -22,7 +22,6 @@ import ua.samosfator.moduleok.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
-import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.parser.Semester;
 import ua.samosfator.moduleok.parser.Subject;
 
@@ -85,7 +84,9 @@ public class ModulesFragment extends Fragment {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
-        FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());
+        if (FragmentsKeeper.getModules().isVisible()) {
+            FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());
+        }
     }
 
     @Override
