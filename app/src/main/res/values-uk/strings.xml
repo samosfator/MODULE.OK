@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_refresh">Оновити</string>
+    <string name="action_refresh_toast">Оновлення</string>
+    <string name="app_version_hint">Версія додатку</string>
+    <string name="date_hour_divider">\'о\'</string>
+    <string name="drawer_close">Закрити</string>
+    <string name="drawer_open">Відкрити</string>
+    <string name="enter_login_message">Будь ласка, введіть логін</string>
+    <string name="enter_password_message">Будь ласка, введіть пароль</string>
+    <string name="first_semester_name">Перший семестр</string>
+    <string name="feedback_section">Фідбек</string>
+    <string name="last_n_total_section">Нещодавні</string>
+    <string name="last_synchronized_time">Час синхронізації з mod.tanet</string>
+    <string name="login_editText_hint">Логін</string>
+    <string name="login_explanation">Введіть логін і пароль, який Ви використовуєте на mod.tanet.edu.ua</string>
+    <string name="login_section">Увійти</string>
+    <string name="logout_section">Вийти</string>
+    <string name="module_1_name">МОДУЛЬ 1</string>
+    <string name="module_2_name">МОДУЛЬ 2</string>
+    <string name="module_3_name">МОДУЛЬ 3</string>
+    <string name="module_4_name">МОДУЛЬ 4</string>
+    <string name="module_5_name">МОДУЛЬ 5</string>
+    <string name="module_6_name">МОДУЛЬ 6</string>
+    <string name="modules_section">Модулі</string>
+    <string name="no_internet_connection_text">Відстунє з’єднання із Інернетом</string>
+    <string name="notification_new_score_available_title_text">Доступні нові бали!</string>
+    <string name="notification_new_score_detailed_text">Перевірте самі у MODULE.OK!</string>
+    <string name="password_editText_hint">Пароль</string>
+    <string name="sampleStudentGroup">ПТН-23</string>
+    <string name="sampleStudentName">Петро Баклан</string>
+    <string name="second_semester_name">Другий семестр</string>
+    <string name="wrong_credentials_text">Невірний логін або пароль</string>
+    <string name="unresolved_host_error_text">Відсутнє з’єднання з mod.tanet. Спробуйте пізніше.</string>
+    <string name="total_score_name">Підсумкова</string>
+</resources>

@@ -40,7 +40,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'org.jsoup:jsoup:1.8.1'
     compile 'com.rengwuxian.materialedittext:library:1.7.1'
-    compile 'com.balysv:material-ripple:0.9.5-SNAPSHOT@aar'
+    compile 'com.balysv:material-ripple:1.0.0'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.jpardogo.materialtabstrip:library:1.0.7'
     compile "com.splunk.mint:mint:4.0.8"

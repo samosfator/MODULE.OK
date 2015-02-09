@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MODULE.OK</string>
-    <string name="title_activity_main">MODULE.OK</string>
-    <string name="main_toolbar_text">MODULE.OK</string>
+    <string name="app_name" translatable="false">MODULE.OK</string>
+    <string name="title_activity_main" translatable="false">MODULE.OK</string>
+    <string name="main_toolbar_text" translatable="false">MODULE.OK</string>
     <string name="action_refresh">Refresh</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
@@ -11,7 +11,7 @@
     <string name="password_editText_hint">Password</string>
     <string name="login_explanation">Please, enter your login and password that you use for mod.tanet.edu.te.ua</string>
     <string name="wrong_credentials_text">Wrong login or password</string>
-    <string name="unresolved_host_error_text">No connection to mod.tanet</string>
+    <string name="unresolved_host_error_text">No connection to mod.tanet. Try again later</string>
     <string name="action_refresh_toast">Refreshing</string>
     <string name="no_internet_connection_text">No Internet Connection</string>
 
@@ -25,8 +25,7 @@
     <string name="module_5_name">MODULE 5</string>
     <string name="module_6_name">MODULE 6</string>
 
-    <string name="sampleStudentName">Петро Баклан</string>
-    <string name="sampleStudentGroup">ПТН-23</string>
+    <string name="sampleStudentGroup">ABC-23</string>
     <string name="date_hour_divider">\'at\'</string>
 
     <string name="last_n_total_section">Last &amp; Total</string>
@@ -38,8 +37,8 @@
 
     <string name="total_score_name">Total score</string>
     <string name="feedback_section">Feedback</string>
-    <string name="incorrect_message_message">Не вірний логін/пароль.</string>
-    <string name="user_agent">Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.45 Safari/537.36</string>
+    <string name="incorrect_message_message" translatable="false">Не вірний логін/пароль.</string>
+    <string name="user_agent" translatable="false">Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.45 Safari/537.36</string>
     <string name="last_synchronized_time">Last synced with mod.tanet</string>
     <string name="app_version_hint">App version</string>
     <string name="notification_new_score_available_title_text">New score available!</string>
@@ -49,4 +48,5 @@
         <item>@string/first_semester_name</item>
         <item>@string/second_semester_name</item>
     </string-array>
+    <string name="sampleStudentName">Peter Dick</string>
 </resources>
