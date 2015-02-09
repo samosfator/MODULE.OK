@@ -38,25 +38,16 @@ public class ScoreCheckerService extends Service {
     @Override
     public void onCreate() {
         App.registerClassForEventBus(this);
-        System.setProperty("java8.util.Spliterators.assume.oracle.collections.impl", "false");
-        Toast.makeText(this, "Congrats! ScoreCheckerService Created", Toast.LENGTH_LONG).show();
-        Log.d(TAG, "onCreate");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startServiceTimer();
-
-        Toast.makeText(this, "ScoreCheckerService Started", Toast.LENGTH_LONG).show();
-        Log.d(TAG, "onStart");
         return 0;
     }
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "ScoreCheckerService Stopped", Toast.LENGTH_LONG).show();
-        Log.d(TAG, "onDestroy");
-
         stopServiceTimer();
     }
 
@@ -67,7 +58,6 @@ public class ScoreCheckerService extends Service {
 
     public void onEvent(InternetConnectionPresent event) {
         App.registerClassForEventBus(this);
-        Log.d(TAG, "internet presence!");
         startServiceTimer();
     }
 
@@ -76,7 +66,6 @@ public class ScoreCheckerService extends Service {
     }
 
     public void onEvent(InternetConnectionAbsent event) {
-        Log.d(TAG, "internet absence!");
         stopServiceTimer();
     }
 
