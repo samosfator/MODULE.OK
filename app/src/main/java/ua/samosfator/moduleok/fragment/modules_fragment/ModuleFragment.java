@@ -14,7 +14,6 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 
 public class ModuleFragment extends Fragment {

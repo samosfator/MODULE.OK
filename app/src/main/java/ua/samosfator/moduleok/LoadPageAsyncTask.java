@@ -1,16 +1,11 @@
 package ua.samosfator.moduleok;
 
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-
-import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.event.RefreshEndEvent;
 
 class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
 
@@ -18,8 +13,8 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         Document mainPage = Jsoup.parse("<div id=\"content\"></div>");
         try {
-//            mainPage = getFromCustomRemoteSource();
-            mainPage = getFromRemoteSource();
+            mainPage = getFromCustomRemoteSource();
+//            mainPage = getFromRemoteSource();
         } catch (IOException e) {
             e.printStackTrace();
         }
