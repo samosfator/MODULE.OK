@@ -17,6 +17,8 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.FragmentUtils;
+import ua.samosfator.moduleok.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
@@ -78,16 +80,12 @@ public class ModulesFragment extends Fragment {
     }
 
     private static void openLoginFragment() {
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, new LoginFragment())
-                .commit();
+        FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
     }
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, new ModulesFragment())
-                .commit();
+        FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
     }
 
     @Override
