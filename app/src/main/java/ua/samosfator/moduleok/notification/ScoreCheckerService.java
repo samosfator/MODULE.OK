@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,7 +22,7 @@ public class ScoreCheckerService extends Service {
     public static int pendingModulesCount = NearbyModules.getCount();
 
     private Timer timer = new Timer("timer");
-    private TimerTask updateTimeTask = new UpdateTimeTask();
+    private TimerTask scoresChangedTask = new ScoresChangedTask();
     private TimerTask moduleDatesUpdateTask = new ModuleDatesUpdateTask();
 
     public ScoreCheckerService() {
@@ -70,15 +69,21 @@ public class ScoreCheckerService extends Service {
     }
 
     private void startServiceTimer() {
+        scheduleModuleDatesUpdateTask();
+        scheduleScoresChangedTask();
+    }
+
+    private void scheduleModuleDatesUpdateTask() {
         moduleDatesUpdateTask = new ModuleDatesUpdateTask();
         timer.schedule(moduleDatesUpdateTask, 200, TimeUnit.HOURS.toMillis(12));
+    }
 
-        updateTimeTask = new UpdateTimeTask();
+    private void scheduleScoresChangedTask() {
+        scoresChangedTask = new ScoresChangedTask();
         ModuleDatesUpdateTask.updatePendingModulesCount();
         if (pendingModulesCount > 0) {
-            timer.schedule(updateTimeTask, 0, TimeUnit.HOURS.toMillis(2));
-
             Log.d(TAG, "" + pendingModulesCount + " modules in the near 2 days");
+            timer.schedule(scoresChangedTask, 0, TimeUnit.HOURS.toMillis(2));
         } else {
             Log.d(TAG, "No modules dates in the near 2 days");
         }
@@ -86,6 +91,6 @@ public class ScoreCheckerService extends Service {
 
     private void stopServiceTimer() {
         moduleDatesUpdateTask.cancel();
-        updateTimeTask.cancel();
+        scoresChangedTask.cancel();
     }
 }
