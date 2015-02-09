@@ -85,7 +85,7 @@ public class ModulesFragment extends Fragment {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
-        FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
+        FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());
     }
 
     @Override

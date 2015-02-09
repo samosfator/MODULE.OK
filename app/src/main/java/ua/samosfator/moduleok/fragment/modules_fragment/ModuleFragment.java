@@ -20,10 +20,7 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 public class ModuleFragment extends Fragment {
 
     private ModuleSubjectItemAdapter moduleSubjectItemAdapter;
-
-    ///////////////////
     private Map<Integer, RecyclerView> cacheRecyclerView = new HashMap<>();
-    ////////////////////
 
     public ModuleFragment() {
         // Required empty public constructor
