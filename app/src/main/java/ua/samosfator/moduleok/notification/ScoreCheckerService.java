@@ -82,10 +82,13 @@ public class ScoreCheckerService extends Service {
     private void startServiceTimer() {
         moduleDatesUpdateTask = new ModuleDatesUpdateTask();
         timer.schedule(moduleDatesUpdateTask, 200, TimeUnit.HOURS.toMillis(12));
+
         updateTimeTask = new UpdateTimeTask();
         ModuleDatesUpdateTask.updatePendingModulesCount();
         if (pendingModulesCount > 0) {
             timer.schedule(updateTimeTask, 0, TimeUnit.HOURS.toMillis(2));
+
+            Log.d(TAG, "" + pendingModulesCount + " modules in the near 2 days");
         } else {
             Log.d(TAG, "No modules dates in the near 2 days");
         }

@@ -14,7 +14,7 @@
         android:name=".App"
         android:theme="@style/AppTheme">
 
-        <!--<service android:enabled="true" android:name=".notification.ScoreCheckerService" />-->
+        <service android:enabled="true" android:name=".notification.ScoreCheckerService" />
 
         <receiver android:name=".InternetConnectionReceiver">
             <intent-filter>
