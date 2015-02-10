@@ -76,7 +76,7 @@
             android:textColor="@color/cpb_white"
             android:textSize="18sp"
             android:background="@drawable/button_ripple"
-            app:cpb_textIdle="@string/login_editText_hint"
+            app:cpb_textIdle="@string/login_btn_txt"
             app:cpb_colorIndicator="@color/colorAccent"
             app:cpb_colorProgress="@color/grey_200"
             app:cpb_selectorIdle="@drawable/btn_idle_state_selector" />

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="semesters">
+        <item>@string/first_semester_name</item>
+        <item>@string/second_semester_name</item>
+    </string-array>
+</resources>
