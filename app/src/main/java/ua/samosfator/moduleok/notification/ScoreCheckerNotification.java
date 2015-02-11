@@ -38,7 +38,7 @@ public class ScoreCheckerNotification {
                 );
 
         mNotificationBuilder = new NotificationCompat.Builder(App.getContext())
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_stat_m)
                 .setContentTitle(App.getContext().getString(R.string.notification_new_score_available_title_text))
                 .setContentText(App.getContext().getString(R.string.notification_new_score_detailed_text))
                 .setContentIntent(resultPendingIntent)
