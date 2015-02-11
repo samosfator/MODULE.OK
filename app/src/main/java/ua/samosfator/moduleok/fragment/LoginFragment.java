@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 
 import com.dd.CircularProgressButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -24,7 +25,7 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
-    private CircularProgressButton login_button;
+    private Button login_button;
     private MaterialEditText login_txt;
     private MaterialEditText password_txt;
 
@@ -109,7 +110,11 @@ public class LoginFragment extends Fragment {
     private void initViews() {
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
-        login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
+        if (App.is_4_0_OrLater()) {
+            login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
+        } else {
+            login_button = (Button) rootView.findViewById(R.id.btnWithText);
+        }
     }
 
     public LoginFragment restoreView() {
@@ -135,8 +140,12 @@ public class LoginFragment extends Fragment {
         new Handler(Looper.getMainLooper()).post(() -> {
             login_txt.setEnabled(bool);
             password_txt.setEnabled(bool);
-            login_button.setIndeterminateProgressMode(!bool);
-            login_button.setProgress(bool ? 0 : 50);
+            if (App.is_4_0_OrLater()) {
+                ((CircularProgressButton) login_button).setIndeterminateProgressMode(!bool);
+                ((CircularProgressButton) login_button).setProgress(bool ? 0 : 50);
+            } else {
+                login_button.setEnabled(bool);
+            }
         });
     }
 }

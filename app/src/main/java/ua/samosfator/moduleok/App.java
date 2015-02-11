@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -88,5 +89,9 @@ public class App extends Application {
             }
         }
         return false;
+    }
+
+    public static boolean is_4_0_OrLater() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
     }
 }

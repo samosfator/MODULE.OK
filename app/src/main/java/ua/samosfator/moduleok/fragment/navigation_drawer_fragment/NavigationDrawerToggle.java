@@ -1,12 +1,15 @@
 package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Preferences;
 
 public class NavigationDrawerToggle extends ActionBarDrawerToggle {
@@ -22,19 +25,25 @@ public class NavigationDrawerToggle extends ActionBarDrawerToggle {
         drawerLayout.post(this::syncState);
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onDrawerOpened(View drawerView) {
         super.onDrawerOpened(drawerView);
         if (!mUserSawDrawer) {
             saveUserSawDrawerState();
         }
-        activity.invalidateOptionsMenu();
+        if (App.is_4_0_OrLater()) {
+            activity.invalidateOptionsMenu();
+        }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onDrawerClosed(View drawerView) {
         super.onDrawerClosed(drawerView);
-        activity.invalidateOptionsMenu();
+        if (App.is_4_0_OrLater()) {
+            activity.invalidateOptionsMenu();
+        }
     }
 
     private void saveUserSawDrawerState() {
