@@ -8,8 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -25,6 +30,8 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 
 public class LoginFragment extends Fragment {
+
+    private TextView loginExplanationView;
     private Button login_button;
     private MaterialEditText login_txt;
     private MaterialEditText password_txt;
@@ -46,6 +53,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initViews();
+
         password_txt.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 validateAndStartLogin();
@@ -53,9 +61,61 @@ public class LoginFragment extends Fragment {
             }
             return false;
         });
+
         login_button.setOnClickListener(v -> validateAndStartLogin());
 
+        if (App.is_4_0_OrLater()) {
+            animateLoginExplanation();
+        }
         return rootView;
+    }
+
+    private void animateLoginExplanation() {
+        Animation slideUp = AnimationUtils.loadAnimation(App.getContext(), R.anim.slide_up);
+        Animation slideDown = AnimationUtils.loadAnimation(App.getContext(), R.anim.slide_down);
+        slideUp.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rootView.getLayoutParams();
+                params.topMargin -= App.getScreenSize().y * 0.7;
+                rootView.setLayoutParams(params);
+
+                animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
+                animation.setDuration(1);
+                rootView.startAnimation(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+        slideDown.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) rootView.getLayoutParams();
+                params.topMargin += App.getScreenSize().y * 0.7;
+                rootView.setLayoutParams(params);
+
+                animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
+                animation.setDuration(1);
+                rootView.startAnimation(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+        login_txt.setOnFocusChangeListener((v, hasFocus) -> {
+            rootView.startAnimation(hasFocus ? slideUp : slideDown);
+        });
     }
 
     private void validateAndStartLogin() {
@@ -108,6 +168,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void initViews() {
+        loginExplanationView = (TextView) rootView.findViewById(R.id.loginExplanationView);
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
         if (App.is_4_0_OrLater()) {

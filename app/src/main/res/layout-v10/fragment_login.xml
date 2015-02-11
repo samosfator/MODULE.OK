@@ -4,6 +4,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="32dp"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
                 tools:context="ua.samosfator.moduleok.fragment.LoginFragment">
 
     <TextView
@@ -11,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/login_explanation"
-        android:id="@+id/textView"
+        android:id="@+id/loginExplanationView"
         android:padding="16dp"
         android:gravity="center"
         android:layout_marginBottom="24dp"

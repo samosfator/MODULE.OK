@@ -7,3 +7,4 @@
 .floo
 .flooignore
 gradle.properties
+app/manifest-merger-release-report.txt

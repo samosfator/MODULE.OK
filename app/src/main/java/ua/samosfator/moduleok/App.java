@@ -48,7 +48,11 @@ public class App extends Application {
             WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
             Display display = wm.getDefaultDisplay();
             screenSize = new Point();
-            display.getSize(screenSize);
+            if (App.is_4_0_OrLater()) {
+                display.getSize(screenSize);
+            } else {
+                screenSize.set(display.getWidth(), display.getHeight());
+            }
         }
         return screenSize;
     }
