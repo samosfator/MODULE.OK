@@ -113,6 +113,6 @@ public class SectionsRecyclerView {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(UpdateTimeChangeEvent event) {
-        mSections.get(SectionsEnum.UPDATE_TIME.INDEX).setText(App.getFormattedUpdateTime());
+        mSections.get(SectionsEnum.SYNC_TIME.INDEX).setText(App.getFormattedUpdateTime());
     }
 }

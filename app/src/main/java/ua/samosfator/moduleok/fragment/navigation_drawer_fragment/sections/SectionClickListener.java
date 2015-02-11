@@ -14,6 +14,7 @@ import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.Analytics;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.FragmentUtils;
@@ -49,6 +50,8 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
 
                 mDrawerLayout.closeDrawers();
                 SectionHighlighter.highlightSection(mRecyclerView, view);
+
+                Analytics.trackFragmentView("Last & Total");
                 break;
             }
             case MODULES: {
@@ -60,6 +63,8 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
 
                 mDrawerLayout.closeDrawers();
                 SectionHighlighter.highlightSection(mRecyclerView, view);
+
+                Analytics.trackFragmentView("Modules");
                 break;
             }
             case LOG_IN: {
@@ -72,8 +77,11 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
 
                     EventBus.getDefault().post(new LogoutEvent());
                     Mint.logEvent("log out", MintLogLevel.Info);
+
+                    Analytics.trackFragmentView("Log out");
                 } else {
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
+                    Analytics.trackFragmentView("Log in");
                 }
 
                 mDrawerLayout.closeDrawers();
@@ -83,8 +91,10 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             case EMPTY: {
                 break;
             }
-            case UPDATE_TIME: {
+            case SYNC_TIME: {
                 Toast.makeText(App.getContext(), App.getContext().getString(R.string.last_synchronized_time), Toast.LENGTH_SHORT).show();
+
+                Analytics.trackEvent("Click", "Sync time");
                 break;
             }
             case FEEDBACK: {
@@ -92,10 +102,13 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 openVkGroupIntent.setData(Uri.parse("https://vk.com/moduleok"));
                 openVkGroupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 App.getContext().startActivity(openVkGroupIntent);
+
+                Analytics.trackEvent("Click", "Feedback");
                 break;
             }
             case VERSION: {
                 Toast.makeText(App.getContext(), App.getContext().getString(R.string.app_version_hint), Toast.LENGTH_SHORT).show();
+                Analytics.trackEvent("Click", "App version");
                 break;
             }
         }

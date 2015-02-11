@@ -6,7 +6,7 @@ public enum SectionsEnum {
     MODULES(1),
     LOG_IN(2),
     EMPTY(3),
-    UPDATE_TIME(4),
+    SYNC_TIME(4),
     VERSION(5),
     FEEDBACK(6);
 

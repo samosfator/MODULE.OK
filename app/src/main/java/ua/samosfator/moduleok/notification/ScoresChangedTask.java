@@ -1,6 +1,5 @@
 package ua.samosfator.moduleok.notification;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.TimerTask;
 

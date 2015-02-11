@@ -9,12 +9,13 @@ import android.widget.ViewFlipper;
 
 import java.util.List;
 
+import ua.samosfator.moduleok.Analytics;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.animation.AnimationFactory;
-import ua.samosfator.moduleok.parser.Subject;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
+import ua.samosfator.moduleok.parser.Subject;
 
 class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClickListener {
 
@@ -43,6 +44,8 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
         setSubjectTotalScoreBackground();
         toggleTotalScoreTypeface();
         toggleTotalMessage(position);
+
+        Analytics.trackEvent("Click", "Subject Item");
     }
 
     private void animateSubjectTotalScoreChange(View view) {

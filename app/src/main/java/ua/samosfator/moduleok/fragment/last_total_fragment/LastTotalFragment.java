@@ -23,8 +23,8 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
-import ua.samosfator.moduleok.parser.Subject;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
+import ua.samosfator.moduleok.parser.Subject;
 
 public class LastTotalFragment extends Fragment {
 

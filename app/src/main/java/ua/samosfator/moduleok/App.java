@@ -12,15 +12,10 @@ import android.net.NetworkInfo;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -93,20 +88,5 @@ public class App extends Application {
             }
         }
         return false;
-    }
-
-    public enum TrackerName {
-        APP_TRACKER
-    }
-
-    Map<TrackerName, Tracker> mTrackers = new HashMap<>();
-
-    synchronized Tracker getTracker(TrackerName trackerId) {
-        if (!mTrackers.containsKey(trackerId)) {
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            Tracker t = analytics.newTracker(R.xml.app_tracker);
-            mTrackers.put(trackerId, t);
-        }
-        return mTrackers.get(trackerId);
     }
 }

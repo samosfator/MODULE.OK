@@ -140,6 +140,7 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_refresh:
                 if (App.hasInternetConnection()) {
                     Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
+                    Analytics.trackEvent("Click", "Refresh");
                     EventBus.getDefault().post(new RefreshEvent());
                 } else {
                     Toast.makeText(this, getString(R.string.no_internet_connection_text), Toast.LENGTH_SHORT).show();
