@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -26,11 +27,8 @@ public class ScoreCheckerNotification {
     }
 
     private static void buildNotification() {
-        mNotificationBuilder = new NotificationCompat.Builder(App.getContext())
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(App.getContext().getString(R.string.notification_new_score_available_title_text))
-                .setContentText(App.getContext().getString(R.string.notification_new_score_detailed_text));
         Intent resultIntent = new Intent(App.getContext(), MainActivity.class);
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         App.getContext(),
@@ -38,9 +36,15 @@ public class ScoreCheckerNotification {
                         resultIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        mNotificationBuilder.setContentIntent(resultPendingIntent);
-        mNotificationBuilder.setSound(alarmSound);
+
+        mNotificationBuilder = new NotificationCompat.Builder(App.getContext())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(App.getContext().getString(R.string.notification_new_score_available_title_text))
+                .setContentText(App.getContext().getString(R.string.notification_new_score_detailed_text))
+                .setContentIntent(resultPendingIntent)
+                .setSound(alarmSound)
+                .setLights(App.getContext().getResources().getColor(R.color.colorPrimary), 1500, 1500)
+                .setVibrate(new long[]{1000, 1000, 1000, 1000});
     }
 
     private static void pushNotification() {
