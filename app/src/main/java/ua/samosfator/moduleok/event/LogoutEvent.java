@@ -1,4 +1,3 @@
 package ua.samosfator.moduleok.event;
 
-public class LogoutEvent {
-}
+public class LogoutEvent { }

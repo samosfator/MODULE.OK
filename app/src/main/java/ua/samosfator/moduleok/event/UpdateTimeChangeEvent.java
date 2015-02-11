@@ -1,4 +1,3 @@
 package ua.samosfator.moduleok.event;
 
-public class UpdateTimeChangeEvent {
-}
+public class UpdateTimeChangeEvent { }

@@ -24,7 +24,7 @@ import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.parser.Subject;
-import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
+import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
 
 public class LastTotalFragment extends Fragment {
 

@@ -1,4 +1,3 @@
 package ua.samosfator.moduleok.event;
 
-public class InternetConnectionPresent {
-}
+public class InternetConnectionPresent { }

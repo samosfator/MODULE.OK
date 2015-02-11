@@ -1,4 +1,3 @@
 package ua.samosfator.moduleok.event;
 
-public class RefreshEndEvent {
-}
+public class RefreshEndEvent { }

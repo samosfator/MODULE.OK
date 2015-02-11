@@ -22,7 +22,6 @@ import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.recyclerview.RecyclerItemClickListener;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
 
