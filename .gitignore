@@ -6,3 +6,4 @@
 /build
 .floo
 .flooignore
+gradle.properties

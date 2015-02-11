@@ -5,9 +5,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'MODULE.OK'
-            keyPassword 'okmod8cv2'
+            keyPassword KEY_PASSWORD
             storeFile file('/media/vlad/E/moduleok-key.jks')
-            storePassword 'Mod3b7r5'
+            storePassword KEYSTORE_PASSWORD
         }
     }
     compileSdkVersion 21
@@ -38,8 +38,6 @@ android {
     lintOptions {
         abortOnError false
     }
-    productFlavors {
-    }
 }
 
 dependencies {
@@ -48,6 +46,7 @@ dependencies {
     compile 'net.sourceforge.streamsupport:streamsupport:1.1.4'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.3'
+    compile 'com.google.android.gms:play-services-base:6.5.87'
     compile 'org.jsoup:jsoup:1.8.1'
     compile 'com.rengwuxian.materialedittext:library:1.7.1'
     compile 'com.balysv:material-ripple:1.0.0'
