@@ -1,11 +1,14 @@
 package ua.samosfator.moduleok.notification;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.TimerTask;
 
+import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
 import ua.samosfator.moduleok.SessionIdExpiredException;
 import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.parser.Module;
 import ua.samosfator.moduleok.parser.Subject;
 
 public class ScoresChangedTask extends TimerTask {
@@ -17,22 +20,20 @@ public class ScoresChangedTask extends TimerTask {
     }
 
     private boolean areScoresChanged() {
-        List<Subject> oldSubjects = getSubjects();
+        int totalSumAllOldScores = getScoresSum();
+
         try {
             StudentKeeper.refreshStudent();
-        } catch (SessionIdExpiredException ignored) {
-        }
-        List<Subject> newSubjects = getSubjects();
+        } catch (SessionIdExpiredException ignored) { }
 
-        return getTotalSumAllScores(oldSubjects) != getTotalSumAllScores(newSubjects);
+        int totalSumAllNewScores = getScoresSum();
+
+        return totalSumAllOldScores != totalSumAllNewScores;
     }
 
-    private int getTotalSumAllScores(List<Subject> subjects) {
-        final int[] oldTotalScore = {0};
-        StreamSupport.parallelStream(subjects)
-                .map(subject -> StreamSupport.parallelStream(subject.getModules()))
-                .map(modulesStream -> modulesStream.map(module -> oldTotalScore[0] += module.getScore()));
-        return oldTotalScore[0];
+    private int getScoresSum() {
+        List<Subject> subjects = getSubjects();
+        return getTotalSumAllScores(subjects);
     }
 
     private List<Subject> getSubjects() {
@@ -40,5 +41,15 @@ public class ScoresChangedTask extends TimerTask {
                 .getSemesters()
                 .get(StudentKeeper.getCurrentSemesterIndex())
                 .getSubjects();
+    }
+
+    private int getTotalSumAllScores(List<Subject> subjects) {
+        final int[] oldTotalScore = {0};
+        StreamSupport.stream(subjects)
+                .map(subject -> StreamSupport.stream(subject.getModules()))
+                .map(modulesStream -> modulesStream.map(Module::getScore).collect(Collectors.toList()))
+                .map(StreamSupport::stream)
+                .forEach(scoresListStream -> scoresListStream.forEach(score -> oldTotalScore[0] += score));
+        return oldTotalScore[0];
     }
 }

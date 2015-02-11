@@ -31,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.setProperty("java8.util.Spliterators.assume.oracle.collections.impl", "false");
         Mint.initAndStartSession(MainActivity.this, "79d18253");
         Mint.logEvent("start MainActivity", MintLogLevel.Info);
 

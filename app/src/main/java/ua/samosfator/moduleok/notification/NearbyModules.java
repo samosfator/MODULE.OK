@@ -8,6 +8,7 @@ import java.util.List;
 import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
 import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.parser.Module;
 import ua.samosfator.moduleok.parser.Semester;
 import ua.samosfator.moduleok.parser.Semesters;
 import ua.samosfator.moduleok.parser.Subject;
@@ -26,21 +27,22 @@ public class NearbyModules {
 
     private static void initModulesDatesList() {
         modulesDates.clear();
-        List<Subject> subjects = getCurrentSemesterSubjects();
-        System.setProperty("java8.util.Spliterators.assume.oracle.collections.impl", "false");
-        StreamSupport.stream(subjects)
-                .map(Subject::getModules)
-                .map(StreamSupport::stream)
-                .map(modulesStream ->
-                                modulesStream.map(module -> modulesDates.add(module.getDate()))
-                );
+        List<Module> modules = getCurrentSemesterModules();
+        modulesDates = StreamSupport.stream(modules)
+                .map(Module::getDate)
+                .collect(Collectors.toList());
     }
 
-    private static List<Subject> getCurrentSemesterSubjects() {
+    private static List<Module> getCurrentSemesterModules() {
         Semesters semesters = StudentKeeper.getCurrentStudent().getSemesters();
         int currentSemesterIndex = StudentKeeper.getCurrentSemesterIndex();
         Semester currentSemester = semesters.get(currentSemesterIndex);
-        return currentSemester.getSubjects();
+        List<Subject> subjects = currentSemester.getSubjects();
+        List<Module> modules = new ArrayList<>();
+        for (Subject subject : subjects) {
+            modules.addAll(subject.getModules());
+        }
+        return modules;
     }
 
     private static void sortModulesDatesList() {
