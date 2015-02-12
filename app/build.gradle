@@ -4,17 +4,10 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     signingConfigs {
         config {
-            try {
-                keyAlias 'MODULE.OK'
-                keyPassword KEY_PASSWORD
-                storeFile file('/media/vlad/E/moduleok-key.jks')
-                storePassword KEYSTORE_PASSWORD
-            } catch (Exception ignored) {
-            }
             keyAlias 'MODULE.OK'
-            keyPassword 'okmod8cv2'
+            keyPassword KEY_PASSWORD
             storeFile file('/media/vlad/E/moduleok-key.jks')
-            storePassword 'Mod3b7r5'
+            storePassword KEYSTORE_PASSWORD
         }
     }
     compileSdkVersion 21

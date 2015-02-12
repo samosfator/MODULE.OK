@@ -19,6 +19,9 @@ public class ScoreCheckerService extends Service {
 
     private final String TAG = "SERVICE";
 
+    private long modulesDatesUpdateTaskPeriod = TimeUnit.HOURS.toMillis(12);
+    private long scoreChangedTaskPeriod = TimeUnit.HOURS.toMillis(2);
+
     public static int pendingModulesCount = NearbyModules.getCount();
 
     private Timer timer = new Timer("timer");
@@ -42,7 +45,7 @@ public class ScoreCheckerService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startServiceTimer();
-        return 0;
+        return START_STICKY;
     }
 
     @Override
@@ -75,7 +78,7 @@ public class ScoreCheckerService extends Service {
 
     private void scheduleModuleDatesUpdateTask() {
         moduleDatesUpdateTask = new ModuleDatesUpdateTask();
-        timer.schedule(moduleDatesUpdateTask, 200, TimeUnit.HOURS.toMillis(12));
+        timer.schedule(moduleDatesUpdateTask, 200, modulesDatesUpdateTaskPeriod);
     }
 
     private void scheduleScoresChangedTask() {
@@ -83,7 +86,7 @@ public class ScoreCheckerService extends Service {
         ModuleDatesUpdateTask.updatePendingModulesCount();
         if (pendingModulesCount > 0) {
             Log.d(TAG, "" + pendingModulesCount + " modules in the near 2 days");
-            timer.schedule(scoresChangedTask, 0, TimeUnit.HOURS.toMillis(2));
+            timer.schedule(scoresChangedTask, 0, scoreChangedTaskPeriod);
         } else {
             Log.d(TAG, "No modules dates in the near 2 days");
         }
