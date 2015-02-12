@@ -58,10 +58,11 @@ public class NearbyModules {
 
     private static void filterDatesInTwoDayPeriod() {
         long currentTime = new Date().getTime();
-        int twoDaysMilliseconds = 172800000;
+        int oneDayMilliseconds = 86400000;
+        int twoDaysMilliseconds = oneDayMilliseconds * 2;
 
         modulesDates = StreamSupport.stream(modulesDates)
-                .filter(modulesDate -> (modulesDate.getTime() - currentTime) < twoDaysMilliseconds)
+                .filter(modulesDate -> (modulesDate.getTime() - currentTime) < twoDaysMilliseconds || (currentTime - modulesDate.getTime()) < oneDayMilliseconds)
                 .collect(Collectors.toList());
     }
 }
