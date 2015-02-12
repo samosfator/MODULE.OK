@@ -4,10 +4,12 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     signingConfigs {
         config {
-            keyAlias 'MODULE.OK'
-            keyPassword KEY_PASSWORD
-            storeFile file('/media/vlad/E/moduleok-key.jks')
-            storePassword KEYSTORE_PASSWORD
+            try {
+                keyAlias 'MODULE.OK'
+                keyPassword KEY_PASSWORD
+                storeFile file('/media/vlad/E/moduleok-key.jks')
+                storePassword KEYSTORE_PASSWORD
+            } catch (Exception ignored) { }
         }
     }
     compileSdkVersion 21
@@ -16,8 +18,8 @@ android {
         applicationId "ua.samosfator.moduleok"
         minSdkVersion 10
         targetSdkVersion 21
-        versionCode 4
-        versionName "0.5.2"
+        versionCode 5
+        versionName "0.5.3"
     }
     buildTypes {
         release {
@@ -47,10 +49,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.google.android.gms:play-services-base:6.5.87'
     compile 'org.jsoup:jsoup:1.8.1'
-    compile 'com.rengwuxian.materialedittext:library:1.7.1'
+    compile 'com.rengwuxian.materialedittext:library:1.8.2'
     compile 'com.balysv:material-ripple:1.0.0'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.jpardogo.materialtabstrip:library:1.0.7'
-    compile 'com.splunk.mint:mint:4.0.8'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.8'
+    compile 'com.splunk.mint:mint:4.0.9'
     compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 }
