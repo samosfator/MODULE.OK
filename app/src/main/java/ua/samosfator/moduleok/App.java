@@ -1,5 +1,6 @@
 package ua.samosfator.moduleok;
 
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Service;
@@ -43,12 +44,13 @@ public class App extends Application {
         return activeNetwork != null && activeNetwork.isConnected();
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public static Point getScreenSize() {
         if (screenSize == null) {
             WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
             Display display = wm.getDefaultDisplay();
             screenSize = new Point();
-            if (App.is_4_0_OrLater()) {
+            if (App.isAndroidNewerIceCreamSandwich()) {
                 display.getSize(screenSize);
             } else {
                 screenSize.set(display.getWidth(), display.getHeight());
@@ -64,7 +66,7 @@ public class App extends Application {
     }
 
     public static String getVersion() {
-        PackageInfo packageInfo = null;
+        PackageInfo packageInfo;
         try {
             packageInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
             return packageInfo.versionName;
@@ -95,7 +97,7 @@ public class App extends Application {
         return false;
     }
 
-    public static boolean is_4_0_OrLater() {
+    public static boolean isAndroidNewerIceCreamSandwich() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
     }
 }

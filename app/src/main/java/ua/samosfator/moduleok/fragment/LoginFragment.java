@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment {
 
         login_button.setOnClickListener(v -> validateAndStartLogin());
 
-        if (App.is_4_0_OrLater()) {
+        if (App.isAndroidNewerIceCreamSandwich()) {
             animateLoginExplanation();
         }
         return rootView;
@@ -171,7 +171,7 @@ public class LoginFragment extends Fragment {
         loginExplanationView = (TextView) rootView.findViewById(R.id.loginExplanationView);
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
-        if (App.is_4_0_OrLater()) {
+        if (App.isAndroidNewerIceCreamSandwich()) {
             login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
         } else {
             login_button = (Button) rootView.findViewById(R.id.btnWithText);
@@ -201,7 +201,7 @@ public class LoginFragment extends Fragment {
         new Handler(Looper.getMainLooper()).post(() -> {
             login_txt.setEnabled(bool);
             password_txt.setEnabled(bool);
-            if (App.is_4_0_OrLater()) {
+            if (App.isAndroidNewerIceCreamSandwich()) {
                 ((CircularProgressButton) login_button).setIndeterminateProgressMode(!bool);
                 ((CircularProgressButton) login_button).setProgress(bool ? 0 : 50);
             } else {

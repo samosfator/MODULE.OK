@@ -18,14 +18,13 @@ class ModulesPagerAdapter extends FragmentPagerAdapter {
 
     private final int TYPICAL_MODULES_COUNT = 4;
     private int maxModulesCount = TYPICAL_MODULES_COUNT;
+    private List<ModuleFragment> moduleFragmentCacheList = new ArrayList<>(maxModulesCount);
 
     private final String[] titles = {
             appResources.getString(R.string.module_1_name), appResources.getString(R.string.module_2_name),
             appResources.getString(R.string.module_3_name), appResources.getString(R.string.module_4_name),
             appResources.getString(R.string.module_5_name), appResources.getString(R.string.module_6_name)
     };
-    private List<ModuleFragment> moduleFragmentList = new ArrayList<>(maxModulesCount);
-
     public ModulesPagerAdapter(FragmentManager fm, int maxModulesCount) {
         super(fm);
         this.maxModulesCount = maxModulesCount;
@@ -43,17 +42,17 @@ class ModulesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position >= moduleFragmentList.size()) {
+        if (position >= moduleFragmentCacheList.size()) {
             ModuleFragment moduleFragment = new ModuleFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("module", position);
             moduleFragment.setArguments(bundle);
 
-            moduleFragmentList.add(moduleFragment);
+            moduleFragmentCacheList.add(moduleFragment);
 
             return moduleFragment;
         } else {
-            return moduleFragmentList.get(position);
+            return moduleFragmentCacheList.get(position);
         }
     }
 }

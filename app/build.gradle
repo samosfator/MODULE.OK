@@ -18,7 +18,6 @@ android {
         targetSdkVersion 21
         versionCode 4
         versionName "0.5.2"
-        signingConfig signingConfigs.config
     }
     buildTypes {
         release {

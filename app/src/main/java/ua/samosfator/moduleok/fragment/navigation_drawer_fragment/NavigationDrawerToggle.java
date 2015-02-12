@@ -32,7 +32,7 @@ public class NavigationDrawerToggle extends ActionBarDrawerToggle {
         if (!mUserSawDrawer) {
             saveUserSawDrawerState();
         }
-        if (App.is_4_0_OrLater()) {
+        if (App.isAndroidNewerIceCreamSandwich()) {
             activity.invalidateOptionsMenu();
         }
     }
@@ -41,7 +41,7 @@ public class NavigationDrawerToggle extends ActionBarDrawerToggle {
     @Override
     public void onDrawerClosed(View drawerView) {
         super.onDrawerClosed(drawerView);
-        if (App.is_4_0_OrLater()) {
+        if (App.isAndroidNewerIceCreamSandwich()) {
             activity.invalidateOptionsMenu();
         }
     }
