@@ -3,6 +3,10 @@ package ua.samosfator.moduleok;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import ua.samosfator.moduleok.parser.Semesters;
 
 public class Student {
@@ -78,6 +82,19 @@ public class Student {
 
     private Document getMainPageDocument() {
         return Jsoup.parse(mainPageHtml);
+    }
+
+    public String getHashId() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        String textToEncode = getNameSurname() + getGroupName();
+        byte[] encodedDigestBytes = digest.digest(textToEncode.getBytes("UTF-8"));
+
+        StringBuilder hashStringBuilder = new StringBuilder();
+        for (byte encodedDigestByte : encodedDigestBytes) {
+            hashStringBuilder.append(Integer.toString((encodedDigestByte & 0xff) + 0x100, 16).substring(1));
+        }
+
+        return hashStringBuilder.toString();
     }
 
     public static String capitalizeString(String string) {

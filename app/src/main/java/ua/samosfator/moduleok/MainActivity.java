@@ -23,6 +23,7 @@ import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
 import ua.samosfator.moduleok.notification.ScoreCheckerService;
+import ua.samosfator.moduleok.rating.FacultyRatingSender;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -40,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
         initToolbar();
         initNavigationDrawer();
+        new Handler(Looper.myLooper()).postDelayed(FacultyRatingSender::sendTotalScoreOnStart, 1500);
 
         if (Auth.isLoggedIn() && App.hasInternetConnection() && !App.isServiceRunning(ScoreCheckerService.class)) {
             startService(new Intent(this, ScoreCheckerService.class));
@@ -124,6 +126,13 @@ public class MainActivity extends ActionBarActivity {
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
         EventBus.getDefault().post(new RefreshEndEvent());
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEvent(RefreshEndEvent event) {
+        if (Auth.isLoggedIn()) {
+            FacultyRatingSender.sendTotalScoreOnRefresh();
+        }
     }
 
     @Override
