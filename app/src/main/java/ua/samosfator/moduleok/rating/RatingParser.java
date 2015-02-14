@@ -49,7 +49,9 @@ public class RatingParser {
                 .map(StreamSupport::stream)
                 .forEach(scoresListStream -> scoresListStream.forEach(score -> {
                     totalScore[0] += score;
-                    scoresCount[0]++;
+                    if (score != 0) {
+                        scoresCount[0]++;
+                    }
                 }));
 
         rating.setTotalScore(totalScore[0]);

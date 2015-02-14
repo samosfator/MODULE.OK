@@ -58,7 +58,7 @@ public class FacultyRatingSender {
                 sendTotalScore();
                 Preferences.save("lastSendFailed", "false");
 
-                Toast.makeText(App.getContext(), "Faculty total score: " + scoreDifference + "↑", Toast.LENGTH_SHORT).show();
+                Toast.makeText(App.getContext(), "Faculty total score: " + scoreDifference + " ↑", Toast.LENGTH_SHORT).show();
                 Log.d(TOTAL_SCORE_KEY, "send - total scores differ: " + previousScore + " / " + rating.getTotalScore());
             } catch (IOException e) {
                 Preferences.save("lastSendFailed", "true");

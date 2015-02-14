@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
         initToolbar();
         initNavigationDrawer();
-        new Handler(Looper.myLooper()).postDelayed(FacultyRatingSender::sendTotalScoreOnStart, 1500);
+        new Handler(Looper.getMainLooper()).postDelayed(FacultyRatingSender::sendTotalScoreOnStart, 1500);
 
         if (Auth.isLoggedIn() && App.hasInternetConnection() && !App.isServiceRunning(ScoreCheckerService.class)) {
             startService(new Intent(this, ScoreCheckerService.class));
