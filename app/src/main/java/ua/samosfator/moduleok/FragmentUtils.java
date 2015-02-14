@@ -29,6 +29,7 @@ public class FragmentUtils {
             removeOldSameFragments(fragmentTransaction, fragment);
 
             fragmentTransaction.add(R.id.main_container, fragment);
+            fragmentTransaction.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
             fragmentTransaction.show(fragment);
 
             addedFragments.add(fragment);
