@@ -50,7 +50,7 @@ public class FacultyRatingSender {
     }
 
     public static void sendTotalScoreOnRefresh() {
-        int previousScore = rating.getTotalScore();
+        int previousScore = Integer.parseInt(Preferences.read(TOTAL_SCORE_KEY, ""));
         updateUserRating();
         if (previousScore != rating.getTotalScore() || Boolean.valueOf(Preferences.read("lastSendFailed", "false"))) {
             int scoreDifference = rating.getTotalScore() - previousScore;
