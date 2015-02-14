@@ -1,6 +1,8 @@
 package ua.samosfator.moduleok.fragment.last_total_fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -73,7 +75,7 @@ public class LastTotalFragment extends Fragment {
     }
 
     private void reRenderSubjectsList() {
-        mSubjectItemAdapter.notifyItemRangeChanged(0, mSubjectItemAdapter.getItemCount());
+        new Handler(Looper.getMainLooper()).post(() -> mSubjectItemAdapter.notifyItemRangeChanged(0, mSubjectItemAdapter.getItemCount()));
     }
 
     private void openLoginFragment() {

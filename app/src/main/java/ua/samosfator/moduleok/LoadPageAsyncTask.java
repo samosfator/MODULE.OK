@@ -7,7 +7,20 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
+import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
+
+public class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
+
+    private boolean async;
+
+    public LoadPageAsyncTask() {
+
+    }
+
+    public LoadPageAsyncTask(boolean async) {
+        this.async = async;
+    }
 
     @Override
     protected String doInBackground(Void... params) {
@@ -15,6 +28,9 @@ class LoadPageAsyncTask extends AsyncTask<Void, Void, String> {
         try {
 //            mainPage = getFromCustomRemoteSource();
             mainPage = getFromRemoteSource();
+            if (async) {
+                EventBus.getDefault().post(new LoadPageCompleteEvent(mainPage.html()));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

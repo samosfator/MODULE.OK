@@ -13,16 +13,24 @@ public class PageLoader {
         return loadMainPage(forceLoad);
     }
 
+    public static void loadMainPageAsync() {
+        if (!Auth.isLoggedIn()) {
+            throw new IllegalArgumentException("MUST LOG IN AT FIRST");
+        }
+        LoadPageAsyncTask loadPageAsyncTask = new LoadPageAsyncTask(true);
+        loadPageAsyncTask.execute();
+    }
+
     private static String loadMainPage(boolean forceLoad) {
         if (mainPageIsValid(getSavedMainPage()) && !forceLoad) return getSavedMainPage();
 
-        String mainPageHtml = downloadMainPage();
+        String mainPageHtml = downloadMainPageSync();
 
         if (mainPageIsValid(mainPageHtml)) {
             Preferences.save("mainPageHtml", mainPageHtml);
             return mainPageHtml;
         } else {
-            mainPageHtml = downloadMainPage();
+            mainPageHtml = downloadMainPageSync();
             if (mainPageIsValid(mainPageHtml)) {
                 Preferences.save("mainPageHtml", mainPageHtml);
                 return mainPageHtml;
@@ -40,7 +48,7 @@ public class PageLoader {
         return Preferences.read("mainPageHtml", "");
     }
 
-    private static String downloadMainPage() {
+    private static String downloadMainPageSync() {
         LoadPageAsyncTask loadPageAsyncTask = new LoadPageAsyncTask();
         loadPageAsyncTask.execute();
         try {

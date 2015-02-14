@@ -22,6 +22,10 @@ public class StudentKeeper {
         student = new Student(PageLoader.getMainPageHtml(false));
     }
 
+    public static void initStudent(String mainPageHtml) {
+        student = new Student(mainPageHtml);
+    }
+
     public static void refreshStudent() {
         if (!Auth.isLoggedIn()) return;
         student = new Student(PageLoader.getMainPageHtml(true));

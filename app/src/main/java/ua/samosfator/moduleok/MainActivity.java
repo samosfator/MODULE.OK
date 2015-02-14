@@ -17,6 +17,7 @@ import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
@@ -111,28 +112,29 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @SuppressLint("CommitTransaction")
-    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LoginEvent event) {
         EventBus.getDefault().post(new RefreshEvent());
         initAndSetAccountInfo();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LogoutEvent event) {
         eraseAccountInfo();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEvent event) {
         StudentKeeper.refreshStudent();
         EventBus.getDefault().post(new RefreshEndEvent());
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
         if (Auth.isLoggedIn()) {
             FacultyRatingSender.sendTotalScoreOnRefresh();
         }
+    }
+
+    public void onEvent(LoadPageCompleteEvent event) {
+        StudentKeeper.initStudent(event.getMainPageHtml());
+        EventBus.getDefault().post(new RefreshEndEvent());
     }
 
     @Override
@@ -150,7 +152,7 @@ public class MainActivity extends ActionBarActivity {
                 if (App.hasInternetConnection()) {
                     Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
                     Analytics.trackEvent("Click", "Refresh");
-                    EventBus.getDefault().post(new RefreshEvent());
+                    PageLoader.loadMainPageAsync();
                 } else {
                     Toast.makeText(this, getString(R.string.no_internet_connection_text), Toast.LENGTH_SHORT).show();
                 }
