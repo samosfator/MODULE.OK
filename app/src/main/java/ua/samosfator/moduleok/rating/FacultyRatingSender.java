@@ -26,11 +26,11 @@ public class FacultyRatingSender {
             try {
                 sendTotalScore();
 
-                Toast.makeText(App.getContext(), "Faculty total score: " + rating.getTotalScore() + "↑", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(App.getContext(), "Faculty total score: " + rating.getTotalScore() + "↑", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
 
-                Toast.makeText(App.getContext(), "Failed to send total score", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(App.getContext(), "Failed to send total score", Toast.LENGTH_SHORT).show();
             }
             Log.d(TOTAL_SCORE_KEY, "first launch - send total score");
         }
@@ -58,12 +58,12 @@ public class FacultyRatingSender {
                 sendTotalScore();
                 Preferences.save("lastSendFailed", "false");
 
-                Toast.makeText(App.getContext(), "Faculty total score: " + scoreDifference + " ↑", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(App.getContext(), "Faculty total score: " + scoreDifference + " ↑", Toast.LENGTH_SHORT).show();
                 Log.d(TOTAL_SCORE_KEY, "send - total scores differ: " + previousScore + " / " + rating.getTotalScore());
             } catch (IOException e) {
                 Preferences.save("lastSendFailed", "true");
 
-                Toast.makeText(App.getContext(), "Failed to send total score", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(App.getContext(), "Failed to send total score", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         } else {
