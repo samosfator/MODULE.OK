@@ -164,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
 
                 if (App.hasInternetConnection()) {
                     Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
-                    StudentKeeper.initStudent();
+                    new Thread(StudentKeeper::initStudentFromRefresh).start();
                 } else {
                     Toast.makeText(this, getString(R.string.no_internet_connection_text), Toast.LENGTH_SHORT).show();
                 }

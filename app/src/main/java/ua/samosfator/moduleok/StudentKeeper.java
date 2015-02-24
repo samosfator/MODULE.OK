@@ -5,8 +5,6 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.concurrent.ExecutionException;
-
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.student_bean.EmptyStudent;
@@ -22,13 +20,13 @@ public class StudentKeeper {
         Log.d("STUDENT_KEEPER", "Invoking getStudent()");
         if (student == null) {
             Log.d("STUDENT_KEEPER", "student == null: " + String.valueOf(student == null));
-            initStudent();
+            initStudentFromRefresh();
         }
         return student;
     }
 
-    public static void initStudent() {
-        Log.d("STUDENT_KEEPER", "initStudent()");
+    public static void initStudentFromRefresh() {
+        Log.d("STUDENT_KEEPER", "initStudentFromRefresh()");
         try {
             student = new GetScoresJsonAsyncTask().execute().get();
             Log.d("STUDENT_KEEPER", "Posting LoadPageCompleteEvent");
