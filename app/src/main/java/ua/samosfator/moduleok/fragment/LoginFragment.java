@@ -8,12 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
@@ -21,13 +17,13 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
-import java.net.UnknownHostException;
-
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Auth;
+import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
+import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.LoginEvent;
+import ua.samosfator.moduleok.student_bean.EmptyStudent;
 
 public class LoginFragment extends Fragment {
 
@@ -64,58 +60,7 @@ public class LoginFragment extends Fragment {
 
         login_button.setOnClickListener(v -> validateAndStartLogin());
 
-        if (App.isAndroidNewerIceCreamSandwich()) {
-            animateLoginExplanation();
-        }
         return rootView;
-    }
-
-    private void animateLoginExplanation() {
-        Animation slideUp = AnimationUtils.loadAnimation(App.getContext(), R.anim.slide_up);
-        Animation slideDown = AnimationUtils.loadAnimation(App.getContext(), R.anim.slide_down);
-        slideUp.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) rootView.getLayoutParams();
-                params.topMargin -= App.getScreenSize().y * 0.7;
-                rootView.setLayoutParams(params);
-
-                animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
-                animation.setDuration(1);
-                rootView.startAnimation(animation);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-        slideDown.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) rootView.getLayoutParams();
-                params.topMargin += App.getScreenSize().y * 0.7;
-                rootView.setLayoutParams(params);
-
-                animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
-                animation.setDuration(1);
-                rootView.startAnimation(animation);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-        login_txt.setOnFocusChangeListener((v, hasFocus) -> {
-            rootView.startAnimation(hasFocus ? slideUp : slideDown);
-        });
     }
 
     private void validateAndStartLogin() {
@@ -127,10 +72,6 @@ public class LoginFragment extends Fragment {
         if (isReadyForLogin(login, password)) {
             doLogin(login, password);
         }
-    }
-
-    private boolean isReadyForLogin(String login, String password) {
-        return !login.isEmpty() && !password.isEmpty() && App.hasInternetConnection();
     }
 
     private void validateFields(String login, String password) {
@@ -145,24 +86,31 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    private boolean isReadyForLogin(String login, String password) {
+        return !login.isEmpty() && !password.isEmpty() && App.hasInternetConnection();
+    }
+
     private void doLogin(final String login, final String password) {
         enableInputs(false);
         Mint.logEvent("log in", MintLogLevel.Info);
 
-        new Thread(() -> {
-            Auth auth = new Auth();
-            try {
-                auth.signIn(login, password);
-            } catch (UnknownHostException exception) {
-                showUnresolvedHostError();
-            }
+        Preferences.save("login", login);
+        Preferences.save("password", password);
 
-            if (auth.isSuccess()) {
-                Log.d("AUTH_STATUS", String.valueOf(auth.isSuccess()));
-                EventBus.getDefault().post(new LoginEvent());
-            } else {
+        new Thread(() -> {
+            try {
+                StudentKeeper.initStudentFromLogin();
+                if (StudentKeeper.getStudent() instanceof EmptyStudent) {
+                    throw new Exception("Student is empty. Wrong credentials.");
+                } else {
+                    App.setIsLoggedIn(true);
+                    Log.d("LOGGIN_IN", "Posting LoginEvent");
+                    EventBus.getDefault().post(new LoginEvent());
+                }
+            } catch (Exception e) {
                 showCredentialsError();
                 enableInputs(true);
+                App.setIsLoggedIn(false);
             }
         }).start();
     }
@@ -178,23 +126,16 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    public LoginFragment restoreView() {
-        return new LoginFragment();
-    }
-
     private void showInternetConnectionError() {
         login_txt.setError(" ");
         password_txt.setError(getString(R.string.no_internet_connection_text));
     }
 
     private void showCredentialsError() {
-        login_txt.setError(" ");
-        password_txt.setError(getString(R.string.wrong_credentials_text));
-    }
-
-    private void showUnresolvedHostError() {
-        login_txt.setError(" ");
-        password_txt.setError(getString(R.string.unresolved_host_error_text));
+        new Handler(Looper.getMainLooper()).post(() -> {
+            login_txt.setError(" ");
+            password_txt.setError(getString(R.string.wrong_credentials_text));
+        });
     }
 
     private void enableInputs(final boolean bool) {

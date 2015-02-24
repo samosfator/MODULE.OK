@@ -25,7 +25,7 @@
     <string name="module_5_name">MODULE 5</string>
     <string name="module_6_name">MODULE 6</string>
 
-    <string name="sampleStudentGroup">ABC-23</string>
+    <string name="sampleStudentGroup">Group</string>
     <string name="date_hour_divider">\'at\'</string>
 
     <string name="last_n_total_section">Last &amp; Total</string>
@@ -43,6 +43,6 @@
     <string name="app_version_hint">App version</string>
     <string name="notification_new_score_available_title_text">New score available!</string>
     <string name="notification_new_score_detailed_text">Open MODULE.OK to check it out!</string>
-    <string name="sampleStudentName">Peter Dick</string>
+    <string name="sampleStudentName">Name Surname</string>
     <string name="login_btn_txt">Log in</string>
 </resources>

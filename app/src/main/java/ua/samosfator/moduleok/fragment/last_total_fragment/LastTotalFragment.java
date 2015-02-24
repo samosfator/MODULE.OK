@@ -26,7 +26,7 @@ import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
-import ua.samosfator.moduleok.parser.Subject;
+import ua.samosfator.moduleok.student_bean.Subject;
 
 public class LastTotalFragment extends Fragment {
 
@@ -65,13 +65,9 @@ public class LastTotalFragment extends Fragment {
     }
 
     private void initSubjects() {
-        try {
-            int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
-            mSubjects.clear();
-            mSubjects.addAll(StudentKeeper.getCurrentStudent().getSemesters().get(semesterIndex).getSubjects());
-        } catch (IllegalArgumentException e) {
-            openLoginFragment();
-        }
+        int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
+        mSubjects.clear();
+        mSubjects.addAll(StudentKeeper.getStudent().getSemester(semesterIndex).getSubjects());
     }
 
     private void reRenderSubjectsList() {
@@ -84,8 +80,14 @@ public class LastTotalFragment extends Fragment {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
-        initSubjects();
-        reRenderSubjectsList();
+        Log.d("EVENTS-LastTotal", "RefreshEndEvent");
+        try {
+            initSubjects();
+            reRenderSubjectsList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            openLoginFragment();
+        }
     }
 
     @SuppressWarnings("UnusedDeclaration")

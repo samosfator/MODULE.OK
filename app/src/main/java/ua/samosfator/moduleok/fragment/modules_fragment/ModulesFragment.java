@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,8 @@ import ua.samosfator.moduleok.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
-import ua.samosfator.moduleok.parser.Semester;
-import ua.samosfator.moduleok.parser.Subject;
+import ua.samosfator.moduleok.student_bean.Semester;
+import ua.samosfator.moduleok.student_bean.Subject;
 
 public class ModulesFragment extends Fragment {
 
@@ -69,11 +70,12 @@ public class ModulesFragment extends Fragment {
     static void initSubjects() {
         try {
             int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
-            Semester semester = StudentKeeper.getCurrentStudent().getSemesters().get(semesterIndex);
+            Semester semester = StudentKeeper.getStudent().getSemester(semesterIndex);
             maxModulesCount = semester.getMaxModuleCount();
             mSubjects.clear();
             mSubjects.addAll(semester.getSubjects());
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             openLoginFragment();
         }
     }
@@ -84,6 +86,7 @@ public class ModulesFragment extends Fragment {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
+        Log.d("EVENTS-Modules", "RefreshEndEvent");
         if (FragmentsKeeper.getModules().isVisible()) {
             FragmentsKeeper.setModules(new ModulesFragment());
             FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());

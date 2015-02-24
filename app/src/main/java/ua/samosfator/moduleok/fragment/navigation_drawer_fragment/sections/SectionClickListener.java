@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,7 +17,6 @@ import com.splunk.mint.MintLogLevel;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Analytics;
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.FragmentUtils;
 import ua.samosfator.moduleok.FragmentsKeeper;
 import ua.samosfator.moduleok.Preferences;
@@ -42,9 +42,10 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         SectionsEnum clickedSection = SectionsEnum.getSectionById(position);
         switch (clickedSection) {
             case LAST_TOTAL: {
-                if (Auth.isLoggedIn()) {
+                if (App.isLoggedIn()) {
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLastTotal());
                 } else {
+                    Log.d("Sections", "Not logged in");
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
                 }
 
@@ -55,9 +56,10 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 break;
             }
             case MODULES: {
-                if (Auth.isLoggedIn()) {
+                if (App.isLoggedIn()) {
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());
                 } else {
+                    Log.d("Sections", "Not logged in");
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
                 }
 
@@ -68,15 +70,17 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 break;
             }
             case LOG_IN: {
-                if (Auth.isLoggedIn()) {
-                    Preferences.save("SESSIONID", "");
-                    Preferences.save("mainPageHtml", "");
+                if (App.isLoggedIn()) {
+                    Preferences.save("login", "");
+                    Preferences.save("password", "");
+                    Preferences.save("json", "");
 
                     FragmentsKeeper.setLogin(new LoginFragment());
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
 
                     EventBus.getDefault().post(new LogoutEvent());
                     Mint.logEvent("log out", MintLogLevel.Info);
+                    App.setIsLoggedIn(false);
 
                     Analytics.trackFragmentView("Log out");
                 } else {

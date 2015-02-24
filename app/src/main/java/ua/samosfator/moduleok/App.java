@@ -27,6 +27,8 @@ public class App extends Application {
     private static Point screenSize;
     private static Date updateTime;
 
+    private static boolean isLoggedIn;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -99,5 +101,13 @@ public class App extends Application {
 
     public static boolean isAndroidNewerIceCreamSandwich() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
+    }
+
+    public static boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public static void setIsLoggedIn(boolean loginState) {
+        App.isLoggedIn = loginState;
     }
 }

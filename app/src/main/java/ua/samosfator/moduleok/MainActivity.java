@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
-import ua.samosfator.moduleok.notification.ScoreCheckerService;
+import ua.samosfator.moduleok.notification_new.NewScoresService;
 import ua.samosfator.moduleok.rating.FacultyRatingSender;
 
 public class MainActivity extends ActionBarActivity {
@@ -37,15 +38,16 @@ public class MainActivity extends ActionBarActivity {
         Mint.logEvent("start MainActivity", MintLogLevel.Info);
 
         setContentView(R.layout.activity_main);
-        initAndSetAccountInfo();
+        tryToRestorePreviousData();
+        setAccountInfo();
         StudentKeeper.initSemesterIndex();
 
         initToolbar();
         initNavigationDrawer();
         new Handler(Looper.getMainLooper()).postDelayed(FacultyRatingSender::sendTotalScoreOnStart, 1500);
 
-        if (Auth.isLoggedIn() && App.hasInternetConnection() && !App.isServiceRunning(ScoreCheckerService.class)) {
-            startService(new Intent(this, ScoreCheckerService.class));
+        if (App.hasInternetConnection() && !App.isServiceRunning(NewScoresService.class)) {
+            startService(new Intent(this, NewScoresService.class));
         }
     }
 
@@ -68,8 +70,8 @@ public class MainActivity extends ActionBarActivity {
         drawerFragment.setup(R.id.navigation_drawer_fragment, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
     }
 
-    private void initAndSetAccountInfo() {
-        if (!Auth.isLoggedIn()) {
+    private void setAccountInfo() {
+        if (!App.isLoggedIn()) {
             eraseAccountInfo();
             openLoginFragment();
             return;
@@ -80,15 +82,25 @@ public class MainActivity extends ActionBarActivity {
 
         new Handler(Looper.getMainLooper()).post(() -> {
             try {
-                studentName_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getNameSurname());
-                studentGroup_TextView.setText(StudentKeeper.forceInitAndGetCurrentStudent().getGroupName());
+                studentName_TextView.setText(StudentKeeper.getStudent().getShortName());
+                studentGroup_TextView.setText(StudentKeeper.getStudent().getGroup());
 
                 openLastTotalFragment();
-            } catch (SessionIdExpiredException e) {
+            } catch (Exception e) {
+                e.printStackTrace();
                 eraseAccountInfo();
+                Log.d("MAIN", "Opening LoginFragment from setAccountInfo()");
                 openLoginFragment();
             }
         });
+    }
+
+    private void tryToRestorePreviousData() {
+        String json = Preferences.read("json", "");
+        if (json.length() > 0) {
+            StudentKeeper.initStudentFromBackup(json);
+            App.setIsLoggedIn(true);
+        }
     }
 
     private void eraseAccountInfo() {
@@ -111,30 +123,27 @@ public class MainActivity extends ActionBarActivity {
         FragmentUtils.showFragment(getSupportFragmentManager().beginTransaction(), FragmentsKeeper.getLogin());
     }
 
-    @SuppressLint("CommitTransaction")
     public void onEvent(LoginEvent event) {
-        EventBus.getDefault().post(new RefreshEvent());
-        initAndSetAccountInfo();
+        Log.d("EVENTS-Main", "LoginEvent");
+        setAccountInfo();
+        EventBus.getDefault().post(new RefreshEndEvent());
     }
 
     public void onEvent(LogoutEvent event) {
+        Log.d("EVENTS-Main", "LogoutEvent");
         eraseAccountInfo();
     }
 
-    public void onEvent(RefreshEvent event) {
-        StudentKeeper.refreshStudent();
+    public void onEvent(LoadPageCompleteEvent event) {
+        Log.d("EVENTS-Main", "LoadPageCompleteEvent");
         EventBus.getDefault().post(new RefreshEndEvent());
     }
 
     public void onEvent(RefreshEndEvent event) {
-        if (Auth.isLoggedIn()) {
+        Log.d("EVENTS-Main", "RefreshEndEvent");
+        if (App.isLoggedIn()) {
             FacultyRatingSender.sendTotalScoreOnRefresh();
         }
-    }
-
-    public void onEvent(LoadPageCompleteEvent event) {
-        StudentKeeper.initStudent(event.getMainPageHtml());
-        EventBus.getDefault().post(new RefreshEndEvent());
     }
 
     @Override
@@ -152,7 +161,8 @@ public class MainActivity extends ActionBarActivity {
                 if (App.hasInternetConnection()) {
                     Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
                     Analytics.trackEvent("Click", "Refresh");
-                    PageLoader.loadMainPageAsync();
+                    Log.d("MAIN", "Clicking Refresh");
+                    StudentKeeper.initStudent();
                 } else {
                     Toast.makeText(this, getString(R.string.no_internet_connection_text), Toast.LENGTH_SHORT).show();
                 }

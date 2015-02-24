@@ -27,8 +27,8 @@
     <string name="notification_new_score_available_title_text">Доступні нові бали!</string>
     <string name="notification_new_score_detailed_text">Перевірте самі у MODULE.OK!</string>
     <string name="password_editText_hint">Пароль</string>
-    <string name="sampleStudentGroup">ПТН-23</string>
-    <string name="sampleStudentName">Петро Баклан</string>
+    <string name="sampleStudentGroup">Група</string>
+    <string name="sampleStudentName">Прізвище Ім’я</string>
     <string name="second_semester_name">Другий семестр</string>
     <string name="wrong_credentials_text">Невірний логін або пароль</string>
     <string name="unresolved_host_error_text">Відсутнє з’єднання з mod.tanet. Спробуйте пізніше.</string>

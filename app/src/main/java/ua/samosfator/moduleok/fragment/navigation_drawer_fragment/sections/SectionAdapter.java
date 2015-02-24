@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 
 public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHolder> {
@@ -67,11 +66,11 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     }
 
     private boolean isFirstSectionAndLoggedIn(int position) {
-        return Auth.isLoggedIn() && position == 0;
+        return App.isLoggedIn() && position == 0;
     }
 
     private boolean isLastSectionAndLoggedOut(int position) {
-        return !Auth.isLoggedIn() && position == SectionsEnum.LOG_IN.INDEX;
+        return !App.isLoggedIn() && position == SectionsEnum.LOG_IN.INDEX;
     }
 
     private void doHighlightSection(SectionViewHolder holder) {

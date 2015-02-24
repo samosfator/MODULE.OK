@@ -8,7 +8,6 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
 
@@ -18,7 +17,7 @@ public class FacultyRatingSender {
     private static Rating rating = new Rating();
 
     public static void sendTotalScoreOnStart() {
-        if (!Auth.isLoggedIn()) {
+        if (!App.isLoggedIn()) {
             return;
         }
         if (isLaunchFirstTime()) {
@@ -50,7 +49,7 @@ public class FacultyRatingSender {
     }
 
     public static void sendTotalScoreOnRefresh() {
-        int previousScore = Integer.parseInt(Preferences.read(TOTAL_SCORE_KEY, ""));
+        int previousScore = Integer.parseInt(Preferences.read(TOTAL_SCORE_KEY, "0"));
         updateUserRating();
         if (previousScore != rating.getTotalScore() || Boolean.valueOf(Preferences.read("lastSendFailed", "false"))) {
             int scoreDifference = rating.getTotalScore() - previousScore;
@@ -74,6 +73,7 @@ public class FacultyRatingSender {
     private static void sendTotalScore() throws IOException {
         Jsoup.connect(rating.getSendUrl())
                 .userAgent(App.getContext().getResources().getString(R.string.user_agent))
+                .ignoreContentType(true)
                 .get();
     }
 }

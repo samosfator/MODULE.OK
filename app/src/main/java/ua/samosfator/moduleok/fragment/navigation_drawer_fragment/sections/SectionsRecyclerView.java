@@ -4,13 +4,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Auth;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
@@ -75,7 +75,7 @@ public class SectionsRecyclerView {
     }
 
     private void addLoginOrLogoutSection() {
-        if (Auth.isLoggedIn()) {
+        if (App.isLoggedIn()) {
             addLogoutSection();
         } else {
             addLoginSection();
@@ -103,16 +103,19 @@ public class SectionsRecyclerView {
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LoginEvent event) {
+        Log.d("EVENTS-Sections", "LoginEvent");
         mFragmentActivity.runOnUiThread(this::addLoginOrLogoutSection);
     }
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(LogoutEvent event) {
+        Log.d("EVENTS-Sections", "LogoutEvent");
         addLoginOrLogoutSection();
     }
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(UpdateTimeChangeEvent event) {
+        Log.d("EVENTS-Sections", "UpdateTimeChangeEvent");
         mSections.get(SectionsEnum.SYNC_TIME.INDEX).setText(App.getFormattedUpdateTime());
     }
 }

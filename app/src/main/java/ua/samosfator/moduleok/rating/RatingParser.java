@@ -12,8 +12,8 @@ import java.util.List;
 import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
 import ua.samosfator.moduleok.StudentKeeper;
-import ua.samosfator.moduleok.parser.Module;
-import ua.samosfator.moduleok.parser.Subject;
+import ua.samosfator.moduleok.student_bean.Module;
+import ua.samosfator.moduleok.student_bean.Subject;
 
 public class RatingParser {
 
@@ -22,21 +22,20 @@ public class RatingParser {
         Rating rating = new Rating();
 
         try {
-            rating.setUserId(StudentKeeper.getCurrentStudent().getHashId());
+            rating.setUserId(StudentKeeper.getStudent().getHashId());
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        rating.setGroup(StudentKeeper.getCurrentStudent().getGroupName());
+        rating.setGroup(StudentKeeper.getStudent().getGroup());
 
         int currentSemesterIndex = Calendar.getInstance().get(Calendar.MONTH) > 7 ? 0 : 1;
         final int[] totalScore = {0};
         final int[] scoresCount = {0};
         final int[] modulesCount = {0};
 
-        List<Subject> subjects = StudentKeeper.getCurrentStudent()
-                .getSemesters()
-                .get(currentSemesterIndex)
+        List<Subject> subjects = StudentKeeper.getStudent()
+                .getSemester(currentSemesterIndex)
                 .getSubjects();
 
         StreamSupport.stream(subjects)

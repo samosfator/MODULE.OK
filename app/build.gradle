@@ -18,8 +18,8 @@ android {
         applicationId "ua.samosfator.moduleok"
         minSdkVersion 10
         targetSdkVersion 21
-        versionCode 7
-        versionName "0.5.5"
+        versionCode 8
+        versionName "0.5.6"
     }
     buildTypes {
         release {
@@ -45,6 +45,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.6.0'
     compile 'net.sourceforge.streamsupport:streamsupport:1.1.4'
+    compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.google.android.gms:play-services-base:6.5.87'

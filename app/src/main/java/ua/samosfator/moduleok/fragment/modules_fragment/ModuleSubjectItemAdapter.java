@@ -13,8 +13,8 @@ import java.util.List;
 
 import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.parser.Module;
-import ua.samosfator.moduleok.parser.Subject;
+import ua.samosfator.moduleok.student_bean.Module;
+import ua.samosfator.moduleok.student_bean.Subject;
 
 public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubjectItemAdapter.ModuleSubjectItemViewHolder> {
 
@@ -57,7 +57,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         final Module currentModule = modules.get(moduleIndex);
 
         holder.subjectName.setText(currentSubject.getName());
-        holder.subjectDate.setText(currentModule.getFormattedDate());
+        holder.subjectDate.setText(currentModule.getDate());
         holder.subjectWeight.setText(currentModule.getWeight() + "%");
 //        holder.subjectControlType.setText(String.valueOf(currentSubject.getControlType().getControlName() ));
         holder.subjectScore.setText(String.valueOf(currentModule.getScore()));

@@ -14,8 +14,8 @@ import java.util.List;
 import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.parser.Module;
-import ua.samosfator.moduleok.parser.Subject;
+import ua.samosfator.moduleok.student_bean.Module;
+import ua.samosfator.moduleok.student_bean.Subject;
 
 class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.SubjectItemViewHolder> {
 
@@ -37,8 +37,8 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
     public void onBindViewHolder(SubjectItemViewHolder holder, int position) {
         Subject current = data.get(position);
         holder.subjectName.setText(current.getName());
-        holder.subjectDate.setText(current.getLastModule().getFormattedDate());
-        holder.subjectWeight.setText(current.getLastModule().getWeight() + "%");
+        holder.subjectDate.setText(current.getModules().get(current.getModules().size() - 1).getDate());
+        holder.subjectWeight.setText(current.getModules().get(current.getModules().size() - 1).getWeight() + "%");
 //        holder.subjectControlType.setText(String.valueOf(current.getControlType().getControlName()));
         if (areAllModulesPassed(position)) {
             holder.subjectDate.setText(App.getContext().getString(R.string.total_score_name));
