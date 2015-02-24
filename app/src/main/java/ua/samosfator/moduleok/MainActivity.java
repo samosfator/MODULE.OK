@@ -22,9 +22,8 @@ import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
-import ua.samosfator.moduleok.event.RefreshEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
-import ua.samosfator.moduleok.notification_new.NewScoresService;
+import ua.samosfator.moduleok.notification.NewScoresService;
 import ua.samosfator.moduleok.rating.FacultyRatingSender;
 
 public class MainActivity extends ActionBarActivity {
@@ -158,10 +157,13 @@ public class MainActivity extends ActionBarActivity {
 
         switch (id) {
             case R.id.action_refresh:
+                Analytics.trackEvent("Click", "Refresh");
+                Log.d("MAIN", "Clicking Refresh");
+
+                if (!App.isLoggedIn()) break;
+
                 if (App.hasInternetConnection()) {
                     Toast.makeText(this, getString(R.string.action_refresh_toast), Toast.LENGTH_SHORT).show();
-                    Analytics.trackEvent("Click", "Refresh");
-                    Log.d("MAIN", "Clicking Refresh");
                     StudentKeeper.initStudent();
                 } else {
                     Toast.makeText(this, getString(R.string.no_internet_connection_text), Toast.LENGTH_SHORT).show();

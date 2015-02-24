@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <uses-sdk tools:overrideLibrary="com.balysv.materialripple, com.dd.circular.progress.button"/>
 
@@ -18,7 +19,7 @@
         android:name=".App"
         android:theme="@style/AppTheme">
 
-        <!--<service android:enabled="true" android:name=".notification.ScoreCheckerService" />-->
+        <!--<service android:enabled="true" android:name=".notification_new.NewScoresService" />-->
 
         <receiver android:name=".InternetConnectionReceiver">
             <intent-filter>

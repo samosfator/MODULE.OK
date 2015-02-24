@@ -14,7 +14,6 @@ import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
-import ua.samosfator.moduleok.event.UpdateTimeChangeEvent;
 
 public class SectionsRecyclerView {
 
@@ -64,9 +63,6 @@ public class SectionsRecyclerView {
         SectionDrawer divider = new SectionDrawer("", R.drawable.empty);
         mSections.add(divider);
 
-        SectionDrawer updateTimeSection = new SectionDrawer(App.getFormattedUpdateTime(), R.drawable.ic_timer_sand_grey600_24dp);
-        mSections.add(updateTimeSection);
-
         SectionDrawer versionSection = new SectionDrawer("v" + App.getVersion(), R.drawable.ic_information_grey600_24dp);
         mSections.add(versionSection);
 
@@ -111,11 +107,5 @@ public class SectionsRecyclerView {
     public void onEvent(LogoutEvent event) {
         Log.d("EVENTS-Sections", "LogoutEvent");
         addLoginOrLogoutSection();
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void onEvent(UpdateTimeChangeEvent event) {
-        Log.d("EVENTS-Sections", "UpdateTimeChangeEvent");
-        mSections.get(SectionsEnum.SYNC_TIME.INDEX).setText(App.getFormattedUpdateTime());
     }
 }

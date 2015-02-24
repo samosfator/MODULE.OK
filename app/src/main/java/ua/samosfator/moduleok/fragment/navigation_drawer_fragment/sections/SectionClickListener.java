@@ -95,12 +95,6 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             case EMPTY: {
                 break;
             }
-            case SYNC_TIME: {
-                Toast.makeText(App.getContext(), App.getContext().getString(R.string.last_synchronized_time), Toast.LENGTH_SHORT).show();
-
-                Analytics.trackEvent("Click", "Sync time");
-                break;
-            }
             case FEEDBACK: {
                 Intent openVkGroupIntent = new Intent(Intent.ACTION_VIEW);
                 openVkGroupIntent.setData(Uri.parse("https://vk.com/moduleok"));

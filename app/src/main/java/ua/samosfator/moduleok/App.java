@@ -78,17 +78,6 @@ public class App extends Application {
         return "";
     }
 
-    public static String getFormattedUpdateTime() {
-        String formatTemplate = "dd.MM.yy " + mContext.getString(R.string.date_hour_divider) + " kk:mm";
-        DateFormat dateFormat = new SimpleDateFormat(formatTemplate, Locale.getDefault());
-        if (updateTime == null) return "";
-        return dateFormat.format(updateTime);
-    }
-
-    public static void setUpdateTime(Date updateTime) {
-        App.updateTime = updateTime;
-    }
-
     public static boolean isServiceRunning(Class<? extends Service> serviceClass) {
         ActivityManager manager = (ActivityManager) App.getContext().getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
