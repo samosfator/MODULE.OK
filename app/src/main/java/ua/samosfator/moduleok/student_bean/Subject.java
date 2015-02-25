@@ -7,6 +7,7 @@ public class Subject {
     private String name;
     private String controlType;
     private List<Module> modules;
+    private int totalScore;
 
     public String getName() {
         return name;
@@ -37,10 +38,10 @@ public class Subject {
     }
 
     public int getTotalScore() {
-        double totalScore = 0;
-        for (Module module : modules) {
-            totalScore += module.getScore() * module.getWeight() / 100;
-        }
-        return (int) totalScore;
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 }

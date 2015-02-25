@@ -46,7 +46,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
         holder.section.setCompoundDrawablesWithIntrinsicBounds(R.drawable.empty, 0, 0, 0);
         holder.itemView.setBackgroundResource(R.drawable.navigation_drawer_divider);
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
-        layoutParams.height = 2;
+        layoutParams.height = 1;
         layoutParams.topMargin = 14;
         layoutParams.bottomMargin = 16;
         holder.itemView.setLayoutParams(layoutParams);

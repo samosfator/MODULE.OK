@@ -81,12 +81,11 @@ public class LastTotalFragment extends Fragment {
     @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-LastTotal", "RefreshEndEvent");
-        try {
-            initSubjects();
-            reRenderSubjectsList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            openLoginFragment();
+        if (FragmentsKeeper.getLastTotal().isVisible()) {
+            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
+        } else {
+            FragmentsKeeper.setLastTotal(new LastTotalFragment());
         }
     }
 
