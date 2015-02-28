@@ -34,7 +34,16 @@ public class Subject {
     }
 
     public Module getLastModule() {
-        return modules.get(modules.size() - 1);
+        int lastModuleIndex = modules.size() - 1;
+        while (modules.get(lastModuleIndex).getScore() == 0) {
+            lastModuleIndex--;
+        }
+        if (lastModuleIndex <= 0) {
+            return modules.get(lastModuleIndex + 1);
+        } else {
+            return modules.get(lastModuleIndex);
+        }
+
     }
 
     public int getTotalScore() {
