@@ -43,7 +43,6 @@ public class Subject {
         }
 
         return modules.get(lastModuleIndex);
-
     }
 
     public int getTotalScore() {
