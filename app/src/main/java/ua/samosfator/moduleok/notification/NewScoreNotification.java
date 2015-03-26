@@ -41,6 +41,7 @@ public class NewScoreNotification {
 
         mNotificationBuilder = new NotificationCompat.Builder(App.getContext())
                 .setSmallIcon(R.drawable.ic_stat_m)
+                .setAutoCancel(true)
                 .setContentTitle(App.getContext().getString(R.string.notification_new_score_available_title_text))
                 .setContentText(notificationText)
                 .setContentIntent(resultPendingIntent)
