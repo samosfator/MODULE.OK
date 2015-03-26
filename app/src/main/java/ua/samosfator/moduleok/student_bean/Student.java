@@ -1,9 +1,11 @@
 package ua.samosfator.moduleok.student_bean;
 
+import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import ua.samosfator.moduleok.App;
@@ -73,5 +75,34 @@ public class Student {
         }
 
         return hashStringBuilder.toString();
+    }
+
+    public static List<String> getSubjectsDifference(Student oneStudent, Student secondStudent, int semesterIndex) {
+        List<String> modifiedSubjectNames = new ArrayList<>();
+
+        List<Subject> subjectsOneStudent = oneStudent.getSemester(semesterIndex).getSubjects();
+        List<Subject> subjectsSecondStudent = secondStudent.getSemester(semesterIndex).getSubjects();
+
+        for (int i = 0; i < subjectsOneStudent.size(); i++) {
+            Subject subjectOne = subjectsOneStudent.get(i);
+            Subject subjectSecond = subjectsSecondStudent.get(i);
+            subjectOne.getModules();
+
+            int FirstSubjectSum = 0;
+            int SecondSubjectSum = 0;
+
+            List<Module> modules = subjectOne.getModules();
+            for (int i1 = 0; i1 < modules.size(); i1++) {
+                Module moduleOne = subjectOne.getModules().get(i1);
+                Module moduleTwo = subjectSecond.getModules().get(i1);
+                FirstSubjectSum += moduleOne.getScore();
+                SecondSubjectSum += moduleTwo.getScore();
+            }
+            Log.d("calculating scores sum", FirstSubjectSum + ", " + SecondSubjectSum);
+            if (FirstSubjectSum!=SecondSubjectSum){
+                modifiedSubjectNames.add(subjectOne.getName());
+            }
+        }
+        return modifiedSubjectNames;
     }
 }

@@ -45,7 +45,6 @@ public class StudentKeeper {
         } catch (Exception e) {
             e.printStackTrace();
             student = new EmptyStudent();
-            Log.d("STUDENT_KEEPER", "isfl student == null: " + String.valueOf(student == null));
         }
     }
 

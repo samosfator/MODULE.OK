@@ -20,6 +20,7 @@ public class GetScoresJsonAsyncTask extends AsyncTask<Void, Void, Student> {
     private final String apiUrl = "https://moduleok.appspot.com/api/getScores?login=" +
             Preferences.read("login", "") + "&password=" +
             Preferences.read("password", "");
+    private final String customApiUrl = "http://moduleok.hol.es/mock.json";
 
     @Override
     protected Student doInBackground(Void... params) {

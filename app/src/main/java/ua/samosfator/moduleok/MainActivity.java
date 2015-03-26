@@ -17,6 +17,10 @@ import android.widget.Toast;
 import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.event.LoginEvent;
@@ -45,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
         initNavigationDrawer();
         new Handler(Looper.getMainLooper()).postDelayed(FacultyRatingSender::sendTotalScoreOnStart, 1500);
 
-        if (App.hasInternetConnection() && !App.isServiceRunning(NewScoresService.class)) {
+        if (!App.isServiceRunning(NewScoresService.class)) {
             startService(new Intent(this, NewScoresService.class));
         }
     }
