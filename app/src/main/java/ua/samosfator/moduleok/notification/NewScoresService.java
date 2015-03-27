@@ -37,15 +37,13 @@ public class NewScoresService extends Service {
 
             List<String> subjectsDifference = Student.getSubjectsDifference(oldStudent, newStudent, StudentKeeper.getCurrentSemesterIndex());
 
-            //TODO Auto refresh on main activity opening
-            //TODO Investigate empty screen on notification tap. Probably fragment utils issue
             Log.d("SCHEDULER", subjectsDifference.toString());
 
             if (subjectsDifference.size() != 0) {
                 String notificationText = constructNotificationText(subjectsDifference);
                 NewScoreNotification.sendNotification(notificationText);
             }
-        }, 0, 10, TimeUnit.SECONDS);
+        }, 0, 10, TimeUnit.HOURS);
 
         return START_STICKY;
     }

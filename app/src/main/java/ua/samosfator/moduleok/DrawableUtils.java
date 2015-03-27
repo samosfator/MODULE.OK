@@ -9,8 +9,10 @@ public class DrawableUtils {
             return R.drawable.circle_4;
         } else if (score >= 60 && score < 75) {
             return R.drawable.circle_3;
-        } else {
+        } else if (score > 0 && score < 60){
             return R.drawable.circle_2;
+        } else {
+            return R.drawable.circle_0;
         }
     }
 }
