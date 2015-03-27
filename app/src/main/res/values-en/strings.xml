@@ -28,7 +28,7 @@
     <string name="sampleStudentGroup">Group</string>
     <string name="date_hour_divider">\'at\'</string>
 
-    <string name="last_n_total_section">Last &amp; Total</string>
+    <string name="subjects_section">Subjects</string>
     <string name="modules_section">Modules</string>
     <string name="logout_section">Log out</string>
     <string name="login_section">Log in</string>

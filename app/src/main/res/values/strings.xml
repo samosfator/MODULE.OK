@@ -10,7 +10,7 @@
     <string name="enter_password_message">Будь ласка, введіть пароль</string>
     <string name="first_semester_name">Перший семестр</string>
     <string name="feedback_section">Фідбек</string>
-    <string name="last_n_total_section">Нещодавні</string>
+    <string name="subjects_section">Предмети</string>
     <string name="last_synchronized_time">Час синхронізації з mod.tanet</string>
     <string name="login_editText_hint">Логін</string>
     <string name="login_explanation">Введіть логін і пароль, який Ви використовуєте на mod.tanet.edu.ua</string>

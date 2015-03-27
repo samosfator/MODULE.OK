@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.last_total_fragment;
+package ua.samosfator.moduleok.fragment.subjects_fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,12 +28,12 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
 import ua.samosfator.moduleok.student_bean.Subject;
 
-public class LastTotalFragment extends Fragment {
+public class SubjectsFragment extends Fragment {
 
     private List<Subject> mSubjects = new ArrayList<>();
     private SubjectItemAdapter mSubjectItemAdapter;
 
-    public LastTotalFragment() {
+    public SubjectsFragment() {
         // Required empty public constructor
     }
 
@@ -46,7 +46,7 @@ public class LastTotalFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_last_total, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
         initSubjects();
         initSectionAdapter();
         initRecyclerView(rootView);
@@ -82,10 +82,10 @@ public class LastTotalFragment extends Fragment {
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-LastTotal", "RefreshEndEvent");
         if (FragmentsKeeper.getLastTotal().isVisible()) {
-            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentsKeeper.setLastTotal(new SubjectsFragment());
             FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
         } else {
-            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentsKeeper.setLastTotal(new SubjectsFragment());
         }
     }
 

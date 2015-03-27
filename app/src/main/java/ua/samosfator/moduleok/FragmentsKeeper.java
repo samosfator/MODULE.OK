@@ -7,14 +7,14 @@ import java.util.Collections;
 import java.util.List;
 
 import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.subjects_fragment.SubjectsFragment;
 import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 
 public class FragmentsKeeper {
 
     private static List<Fragment> all = Collections.synchronizedList(new ArrayList<>());
 
-    private static Fragment lastTotal = new LastTotalFragment();
+    private static Fragment lastTotal = new SubjectsFragment();
     private static Fragment modules = new ModulesFragment();
     private static LoginFragment login = new LoginFragment();
 

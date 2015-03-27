@@ -6,7 +6,7 @@
               android:layout_height="wrap_content"
               android:layout_margin="0dp"
               android:orientation="horizontal"
-              tools:context="ua.samosfator.moduleok.fragment.last_total_fragment.LastTotalFragment">
+              tools:context="ua.samosfator.moduleok.fragment.subjects_fragment.SubjectsFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

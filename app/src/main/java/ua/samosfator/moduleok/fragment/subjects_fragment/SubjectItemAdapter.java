@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.last_total_fragment;
+package ua.samosfator.moduleok.fragment.subjects_fragment;
 
 import android.content.Context;
 import android.graphics.Typeface;
