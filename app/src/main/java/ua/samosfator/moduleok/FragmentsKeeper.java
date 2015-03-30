@@ -7,16 +7,18 @@ import java.util.Collections;
 import java.util.List;
 
 import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.subjects_fragment.SubjectsFragment;
+import ua.samosfator.moduleok.fragment.detailed_subjects_fragment.DetailedSubjectsFragment;
 import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
+import ua.samosfator.moduleok.fragment.lastntotal_fragment.LastTotalFragment;
 
 public class FragmentsKeeper {
 
     private static List<Fragment> all = Collections.synchronizedList(new ArrayList<>());
 
-    private static Fragment lastTotal = new SubjectsFragment();
+    private static Fragment lastTotal = new LastTotalFragment();
     private static Fragment modules = new ModulesFragment();
     private static LoginFragment login = new LoginFragment();
+    private static DetailedSubjectsFragment detailedSubjectsFragment = new DetailedSubjectsFragment();
 
     public static Fragment getLastTotal() {
         return lastTotal;
@@ -40,6 +42,14 @@ public class FragmentsKeeper {
 
     public static void setLogin(LoginFragment login) {
         FragmentsKeeper.login = login;
+    }
+
+    public static DetailedSubjectsFragment getDetailedSubjectsFragment() {
+        return detailedSubjectsFragment;
+    }
+
+    public static void setDetailedSubjectsFragment(DetailedSubjectsFragment detailedSubjectsFragment) {
+        FragmentsKeeper.detailedSubjectsFragment = detailedSubjectsFragment;
     }
 
     public static List<Fragment> getAll() {

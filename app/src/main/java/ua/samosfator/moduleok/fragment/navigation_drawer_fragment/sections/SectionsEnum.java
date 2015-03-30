@@ -4,10 +4,11 @@ public enum SectionsEnum {
 
     LAST_TOTAL(0),
     MODULES(1),
-    LOG_IN(2),
-    EMPTY(3),
-    VERSION(4),
-    FEEDBACK(5);
+    DETAILED_SUBJECTS(2),
+    LOG_IN(3),
+    EMPTY(4),
+    VERSION(5),
+    FEEDBACK(6);
 
     public final int INDEX;
 

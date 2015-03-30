@@ -15,4 +15,22 @@ public class DrawableUtils {
             return R.drawable.circle_0;
         }
     }
+
+    public static String getModuleName(int moduleIndex) {
+        if (moduleIndex == 0) {
+            return App.getContext().getString(R.string.module_1_name);
+        } else if (moduleIndex == 1) {
+            return App.getContext().getString(R.string.module_2_name);
+        } else if (moduleIndex == 2) {
+            return App.getContext().getString(R.string.module_3_name);
+        } else if (moduleIndex == 3) {
+            return App.getContext().getString(R.string.module_4_name);
+        } else if (moduleIndex == 4) {
+            return App.getContext().getString(R.string.module_5_name);
+        } else if (moduleIndex == 5) {
+            return App.getContext().getString(R.string.module_6_name);
+        } else {
+            return ".";
+        }
+    }
 }

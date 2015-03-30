@@ -52,11 +52,14 @@ public class SectionsRecyclerView {
     private void initSections() {
         mSections = new ArrayList<>();
 
-        SectionDrawer lastTotalSection = new SectionDrawer(App.getContext().getString(R.string.subjects_section), R.drawable.ic_format_list_numbers_grey600_24dp);
+        SectionDrawer lastTotalSection = new SectionDrawer(App.getContext().getString(R.string.lastntotal_section), R.drawable.ic_format_list_numbers_grey600_24dp);
         mSections.add(lastTotalSection);
 
         SectionDrawer modulesSection = new SectionDrawer(App.getContext().getString(R.string.modules_section), R.drawable.ic_file_document_box_grey600_24dp);
         mSections.add(modulesSection);
+
+        SectionDrawer detailedSubjects = new SectionDrawer(mFragmentActivity.getString(R.string.detailed_subjects_section), R.drawable.ic_poll_grey600_24dp);
+        mSections.add(detailedSubjects);
 
         addLoginOrLogoutSection();
 
@@ -89,11 +92,11 @@ public class SectionsRecyclerView {
     }
 
     private void insertSectionToLastPosition(SectionDrawer section) {
-        if (mSections.size() == 2) {
+        if (mSections.size() == 3) {
             mSections.add(section);
         } else {
-            mSections.set(2, section);
-            mSectionAdapter.notifyItemChanged(2);
+            mSections.set(3, section);
+            mSectionAdapter.notifyItemChanged(3);
         }
     }
 

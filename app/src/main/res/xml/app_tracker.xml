@@ -10,7 +10,7 @@
     <screenName name="ua.samosfator.moduleok.fragment.LoginFragment">
         MODULE.OK LoginView
     </screenName>
-    <screenName name="ua.samosfator.moduleok.fragment.subjects_fragment.SubjectsFragment">
+    <screenName name="ua.samosfator.moduleok.fragment.lastntotal_fragment.LastTotalFragment">
         MODULE.OK LastTotalView
     </screenName>
     <screenName name="ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment">

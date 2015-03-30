@@ -25,6 +25,10 @@ public class Subject {
         this.controlType = controlType;
     }
 
+    public boolean isExam() {
+        return getControlType().equals("Екзамен");
+    }
+
     public List<Module> getModules() {
         return modules;
     }
@@ -43,6 +47,19 @@ public class Subject {
         }
 
         return modules.get(lastModuleIndex);
+    }
+
+    public Module getMostValuableModule() {
+        int maxModuleWeight = 0;
+        int maxModuleWeightIndex = 4;
+        for (int i = 0; i < modules.size(); i++) {
+            Module module = modules.get(i);
+            if (module.getWeight() > maxModuleWeight) {
+                maxModuleWeight = module.getWeight();
+                maxModuleWeightIndex = i;
+            }
+        }
+        return modules.get(maxModuleWeightIndex);
     }
 
     public int getTotalScore() {

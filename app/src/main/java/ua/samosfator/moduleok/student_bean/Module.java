@@ -29,4 +29,25 @@ public class Module {
     public void setScore(int score) {
         this.score = score;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Module module = (Module) o;
+
+        if (weight != module.weight) return false;
+        if (score != module.score) return false;
+        return !(date != null ? !date.equals(module.date) : module.date != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = date != null ? date.hashCode() : 0;
+        result = 31 * result + weight;
+        result = 31 * result + score;
+        return result;
+    }
 }

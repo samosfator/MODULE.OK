@@ -1,8 +1,9 @@
-package ua.samosfator.moduleok.fragment.subjects_fragment;
+package ua.samosfator.moduleok.fragment.lastntotal_fragment;
 
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -20,6 +21,7 @@ import ua.samosfator.moduleok.student_bean.Subject;
 class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClickListener {
 
     private List<Subject> mSubjects;
+    private FragmentManager mFragmentManager;
 
     private TextView subjectTotalScoreTextView;
     private TextView subjectDate;
@@ -27,12 +29,19 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
     private int totalScore;
     private int lastScore;
 
-    public SubjectItemOnClickListener(List<Subject> subjects) {
+    public SubjectItemOnClickListener(List<Subject> subjects, FragmentManager fragmentManager) {
         mSubjects = subjects;
+        mFragmentManager = fragmentManager;
     }
 
     @Override
     public void onItemClick(View view, int position) {
+        toggleTotalScore(view, position);
+//        FragmentUtils.showFragment(mFragmentManager.beginTransaction(), FragmentsKeeper.getSubject(mSubjects.get(position)));
+        Analytics.trackEvent("Click", "Subject Item");
+    }
+
+    private void toggleTotalScore(View view, int position) {
         subjectTotalScoreTextView = (TextView) view.findViewById(R.id.subject_total_score);
         subjectDate = (TextView) view.findViewById(R.id.subject_date);
         subjectWeight = (TextView) view.findViewById(R.id.subject_weight);
@@ -44,8 +53,6 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
         setSubjectTotalScoreBackground();
         toggleTotalScoreTypeface();
         toggleTotalMessage(position);
-
-        Analytics.trackEvent("Click", "Subject Item");
     }
 
     private void animateSubjectTotalScoreChange(View view) {

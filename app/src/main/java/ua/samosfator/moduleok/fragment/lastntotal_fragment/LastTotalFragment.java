@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.subjects_fragment;
+package ua.samosfator.moduleok.fragment.lastntotal_fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,12 +28,12 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
 import ua.samosfator.moduleok.student_bean.Subject;
 
-public class SubjectsFragment extends Fragment {
+public class LastTotalFragment extends Fragment {
 
     private List<Subject> mSubjects = new ArrayList<>();
     private SubjectItemAdapter mSubjectItemAdapter;
 
-    public SubjectsFragment() {
+    public LastTotalFragment() {
         // Required empty public constructor
     }
 
@@ -46,7 +46,7 @@ public class SubjectsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_lastntotal, container, false);
         initSubjects();
         initSectionAdapter();
         initRecyclerView(rootView);
@@ -61,7 +61,7 @@ public class SubjectsFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.subjects_recycler_view);
         recyclerView.setAdapter(mSubjectItemAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new SubjectItemOnClickListener(mSubjects)));
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new SubjectItemOnClickListener(mSubjects, getFragmentManager())));
     }
 
     private void initSubjects() {
@@ -70,31 +70,28 @@ public class SubjectsFragment extends Fragment {
         mSubjects.addAll(StudentKeeper.getStudent().getSemester(semesterIndex).getSubjects());
     }
 
-    private void reRenderSubjectsList() {
-        new Handler(Looper.getMainLooper()).post(() -> mSubjectItemAdapter.notifyItemRangeChanged(0, mSubjectItemAdapter.getItemCount()));
-    }
-
     private void openLoginFragment() {
         FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLogin());
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-LastTotal", "RefreshEndEvent");
         if (FragmentsKeeper.getLastTotal().isVisible()) {
-            FragmentsKeeper.setLastTotal(new SubjectsFragment());
+            FragmentsKeeper.setLastTotal(new LastTotalFragment());
             FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
         } else {
-            FragmentsKeeper.setLastTotal(new SubjectsFragment());
+            FragmentsKeeper.setLastTotal(new LastTotalFragment());
         }
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
-
-        initSubjects();
-        reRenderSubjectsList();
+        if (FragmentsKeeper.getLastTotal().isVisible()) {
+            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
+        } else {
+            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+        }
     }
 
     @Override

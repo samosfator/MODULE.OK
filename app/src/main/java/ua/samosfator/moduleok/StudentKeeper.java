@@ -42,7 +42,7 @@ public class StudentKeeper {
         try {
             student = new GetScoresJsonAsyncTask().execute().get();
             Log.d("STUDENT_KEEPER", "isfl student == null: " + String.valueOf(student == null));
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace();
             student = new EmptyStudent();
         }

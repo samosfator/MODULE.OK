@@ -10,18 +10,18 @@
     <string name="enter_password_message">Будь ласка, введіть пароль</string>
     <string name="first_semester_name">Перший семестр</string>
     <string name="feedback_section">Фідбек</string>
-    <string name="subjects_section">Предмети</string>
+    <string name="lastntotal_section">Нещодавні</string>
     <string name="last_synchronized_time">Час синхронізації з mod.tanet</string>
     <string name="login_editText_hint">Логін</string>
     <string name="login_explanation">Введіть логін і пароль, який Ви використовуєте на mod.tanet.edu.ua</string>
     <string name="login_section">Увійти</string>
     <string name="logout_section">Вийти</string>
-    <string name="module_1_name">МОДУЛЬ 1</string>
-    <string name="module_2_name">МОДУЛЬ 2</string>
-    <string name="module_3_name">МОДУЛЬ 3</string>
-    <string name="module_4_name">МОДУЛЬ 4</string>
-    <string name="module_5_name">МОДУЛЬ 5</string>
-    <string name="module_6_name">МОДУЛЬ 6</string>
+    <string name="module_1_name">Модуль 1</string>
+    <string name="module_2_name">Модуль 2</string>
+    <string name="module_3_name">Модуль 3</string>
+    <string name="module_4_name">Модуль 4</string>
+    <string name="module_5_name">Модуль 5</string>
+    <string name="module_6_name">Модуль 6</string>
     <string name="modules_section">Модулі</string>
     <string name="no_internet_connection_text">Відстунє з’єднання із Інернетом</string>
     <string name="notification_new_score_available_title_text">Доступні нові бали!</string>
@@ -39,4 +39,10 @@
     <string name="title_activity_main">MODULE.OK</string>
     <string name="user_agent">Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.45 Safari/537.36</string>
     <string name="login_btn_txt">Увійти</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exam_naming">Екзамен</string>
+    <string name="detailed_subjects_section">Предмети</string>
+    <string name="zalik_score_name">Залік</string>
 </resources>

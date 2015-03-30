@@ -109,6 +109,20 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 Analytics.trackEvent("Click", "App version");
                 break;
             }
+            case DETAILED_SUBJECTS: {
+                if (App.isLoggedIn()) {
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getDetailedSubjectsFragment());
+                } else {
+                    Log.d("Sections", "Not logged in");
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
+                }
+
+                mDrawerLayout.closeDrawers();
+                SectionHighlighter.highlightSection(mRecyclerView, view);
+
+                Analytics.trackFragmentView("Detailed");
+                break;
+            }
         }
     }
 }

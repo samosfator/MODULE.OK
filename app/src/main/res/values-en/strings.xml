@@ -18,17 +18,17 @@
     <string name="first_semester_name">First semester</string>
     <string name="second_semester_name">Second semester</string>
 
-    <string name="module_1_name">MODULE 1</string>
-    <string name="module_2_name">MODULE 2</string>
-    <string name="module_3_name">MODULE 3</string>
-    <string name="module_4_name">MODULE 4</string>
-    <string name="module_5_name">MODULE 5</string>
-    <string name="module_6_name">MODULE 6</string>
+    <string name="module_1_name">Module 1</string>
+    <string name="module_2_name">Module 2</string>
+    <string name="module_3_name">Module 3</string>
+    <string name="module_4_name">Module 4</string>
+    <string name="module_5_name">Module 5</string>
+    <string name="module_6_name">Module 6</string>
 
     <string name="sampleStudentGroup">Group</string>
     <string name="date_hour_divider">\'at\'</string>
 
-    <string name="subjects_section">Subjects</string>
+    <string name="lastntotal_section">Last &amp; Total</string>
     <string name="modules_section">Modules</string>
     <string name="logout_section">Log out</string>
     <string name="login_section">Log in</string>
@@ -45,4 +45,7 @@
     <string name="notification_new_score_detailed_text">Open MODULE.OK to check it out!</string>
     <string name="sampleStudentName">Name Surname</string>
     <string name="login_btn_txt">Log in</string>
+    <string name="exam_naming">Exam</string>
+    <string name="detailed_subjects_section">Subjects</string>
+    <string name="zalik_score_name">Total credit</string>
 </resources>

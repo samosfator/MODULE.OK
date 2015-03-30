@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.subjects_fragment;
+package ua.samosfator.moduleok.fragment.lastntotal_fragment;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -39,7 +39,7 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
         holder.subjectName.setText(current.getName());
         holder.subjectDate.setText(current.getModules().get(current.getModules().size() - 1).getDate());
         holder.subjectWeight.setText(current.getModules().get(current.getModules().size() - 1).getWeight() + "%");
-//        holder.subjectControlType.setText(String.valueOf(current.getControlType().getControlName()));
+//        holder.subjectControlType.setText(String.valueOf(current.getControlType()));
         if (areAllModulesPassed(position)) {
             holder.subjectDate.setText(App.getContext().getString(R.string.total_score_name));
             holder.subjectWeight.setVisibility(View.GONE);
