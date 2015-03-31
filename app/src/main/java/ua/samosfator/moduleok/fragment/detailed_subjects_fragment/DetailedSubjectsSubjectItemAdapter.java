@@ -46,6 +46,10 @@ public class DetailedSubjectsSubjectItemAdapter extends RecyclerView.Adapter<Det
     }
 
     private void displayThisModule(ModuleSubjectItemViewHolder holder, Module module, int position, boolean moduleIsExam) {
+        int leftDp = DrawableUtils.dpToPx(16);
+        int topDp = DrawableUtils.dpToPx(11);
+        int bottomDp = DrawableUtils.dpToPx(-11);
+
         holder.subjectDate.setText(module.getDate());
         holder.subjectWeight.setText(module.getWeight() + "%");
 
@@ -54,15 +58,16 @@ public class DetailedSubjectsSubjectItemAdapter extends RecyclerView.Adapter<Det
         } else if (module.getDate().equals("total")) { //Means that view presents a total score
             holder.subjectName.setText(App.getContext().getString(R.string.total_score_name));
             ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
-            ((LinearLayout) holder.subjectName.getParent()).setPadding(50, 30, 0, -50);
+            ((LinearLayout) holder.subjectName.getParent()).setPadding(leftDp, topDp, 0, bottomDp);
 
             ((LinearLayout) holder.subjectDate.getParent()).removeView(holder.subjectDate);
             ((LinearLayout) holder.subjectWeight.getParent()).removeView(holder.subjectWeight);
             ((LinearLayout) holder.subjectControlType.getParent()).removeView(holder.subjectControlType);
         } else if (module.getDate().equals("total-zalik")) {
+
             holder.subjectName.setText(App.getContext().getString(R.string.zalik_score_name));
             ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
-            ((LinearLayout) holder.subjectName.getParent()).setPadding(50, 30, 0, -50);
+            ((LinearLayout) holder.subjectName.getParent()).setPadding(leftDp, topDp, 0, bottomDp);
 
             ((LinearLayout) holder.subjectDate.getParent()).removeView(holder.subjectDate);
             ((LinearLayout) holder.subjectWeight.getParent()).removeView(holder.subjectWeight);

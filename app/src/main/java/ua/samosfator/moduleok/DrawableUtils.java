@@ -33,4 +33,9 @@ public class DrawableUtils {
             return ".";
         }
     }
+
+    public static int dpToPx(int dp) {
+        final float scale = App.getContext().getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
 }
