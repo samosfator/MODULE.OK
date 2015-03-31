@@ -18,6 +18,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.FragmentUtils;
 import ua.samosfator.moduleok.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
@@ -65,6 +66,7 @@ public class DetailedSubjectsFragment extends Fragment {
         pager.setOffscreenPageLimit(maxSubjectsCount - 1);
 
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.modules_tabs);
+        tabs.setTabPaddingLeftRight(DrawableUtils.dpToPx(16));
         tabs.setViewPager(pager);
     }
 
