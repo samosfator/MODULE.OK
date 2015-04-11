@@ -26,6 +26,7 @@ import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
+import ua.samosfator.moduleok.student_bean.Semester;
 import ua.samosfator.moduleok.student_bean.Subject;
 
 public class LastTotalFragment extends Fragment {
@@ -65,9 +66,21 @@ public class LastTotalFragment extends Fragment {
     }
 
     private void initSubjects() {
-        int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
         mSubjects.clear();
-        mSubjects.addAll(StudentKeeper.getStudent().getSemester(semesterIndex).getSubjects());
+        int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
+        if (semesterIndex == 2) {
+            Semester firstSemester = StudentKeeper.getStudent().getSemester(0);
+            Semester secondSemester = StudentKeeper.getStudent().getSemester(1);
+
+            List<Subject> allSubjects = new ArrayList<>();
+            allSubjects.addAll(firstSemester.getSubjects());
+            allSubjects.addAll(secondSemester.getSubjects());
+
+            mSubjects.addAll(allSubjects);
+        } else {
+            List<Subject> subjects = StudentKeeper.getStudent().getSemester(semesterIndex).getSubjects();
+            mSubjects.addAll(subjects);
+        }
     }
 
     private void openLoginFragment() {

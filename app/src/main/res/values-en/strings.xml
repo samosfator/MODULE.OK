@@ -17,6 +17,7 @@
 
     <string name="first_semester_name">First semester</string>
     <string name="second_semester_name">Second semester</string>
+    <string name="all_semesters_name">Whole year</string>
 
     <string name="module_1_name">Module 1</string>
     <string name="module_2_name">Module 2</string>

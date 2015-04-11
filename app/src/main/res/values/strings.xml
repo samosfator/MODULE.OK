@@ -30,6 +30,7 @@
     <string name="sampleStudentGroup">Група</string>
     <string name="sampleStudentName">Прізвище Ім’я</string>
     <string name="second_semester_name">Другий семестр</string>
+    <string name="all_semesters_name">Увесь рік</string>
     <string name="wrong_credentials_text">Невірний логін або пароль</string>
     <string name="unresolved_host_error_text">Відсутнє з’єднання з mod.tanet. Спробуйте пізніше.</string>
     <string name="total_score_name">Підсумкова</string>

@@ -61,7 +61,7 @@ public class ModulesFragment extends Fragment {
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.modules_viewpager);
         modulesPagerAdapter = new ModulesPagerAdapter(getChildFragmentManager(), maxModulesCount);
         pager.setAdapter(modulesPagerAdapter);
-        pager.setOffscreenPageLimit(maxModulesCount - 1);
+        pager.setOffscreenPageLimit(maxModulesCount);
 
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.modules_tabs);
         tabs.setViewPager(pager);
@@ -69,11 +69,24 @@ public class ModulesFragment extends Fragment {
 
     static void initSubjects() {
         try {
-            int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
-            Semester semester = StudentKeeper.getStudent().getSemester(semesterIndex);
-            maxModulesCount = semester.getMaxModuleCount();
             mSubjects.clear();
-            mSubjects.addAll(semester.getSubjects());
+            int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
+            if (semesterIndex == 2) {
+                Semester firstSemester = StudentKeeper.getStudent().getSemester(0);
+                Semester secondSemester = StudentKeeper.getStudent().getSemester(1);
+
+                List<Subject> allSubjects = new ArrayList<>();
+                allSubjects.addAll(firstSemester.getSubjects());
+                allSubjects.addAll(secondSemester.getSubjects());
+
+                maxModulesCount = firstSemester.getMaxModuleCount() > secondSemester.getMaxModuleCount() ? firstSemester.getMaxModuleCount() : secondSemester.getMaxModuleCount();
+                mSubjects.addAll(allSubjects);
+            } else {
+                Semester semester = StudentKeeper.getStudent().getSemester(semesterIndex);
+                List<Subject> subjects = semester.getSubjects();
+                maxModulesCount = semester.getMaxModuleCount();
+                mSubjects.addAll(subjects);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             openLoginFragment();

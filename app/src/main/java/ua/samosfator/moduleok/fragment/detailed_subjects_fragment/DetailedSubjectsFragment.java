@@ -63,7 +63,7 @@ public class DetailedSubjectsFragment extends Fragment {
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.modules_viewpager);
         detailedSubjectsPagerAdapter = new DetailedSubjectsPagerAdapter(getChildFragmentManager(), mSubjects, maxSubjectsCount);
         pager.setAdapter(detailedSubjectsPagerAdapter);
-        pager.setOffscreenPageLimit(maxSubjectsCount - 1);
+        pager.setOffscreenPageLimit(maxSubjectsCount);
 
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.modules_tabs);
         tabs.setTabPaddingLeftRight(DrawableUtils.dpToPx(16));
@@ -72,11 +72,23 @@ public class DetailedSubjectsFragment extends Fragment {
 
     static void initSubjects() {
         try {
-            int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
-            Semester semester = StudentKeeper.getStudent().getSemester(semesterIndex);
-            maxSubjectsCount = semester.getSubjects().size();
             mSubjects.clear();
-            mSubjects.addAll(semester.getSubjects());
+            int semesterIndex = StudentKeeper.getCurrentSemesterIndex();
+            if (semesterIndex == 2) {
+                Semester firstSemester = StudentKeeper.getStudent().getSemester(0);
+                Semester secondSemester = StudentKeeper.getStudent().getSemester(1);
+
+                List<Subject> allSubjects = new ArrayList<>();
+                allSubjects.addAll(firstSemester.getSubjects());
+                allSubjects.addAll(secondSemester.getSubjects());
+
+                maxSubjectsCount = allSubjects.size();
+                mSubjects.addAll(allSubjects);
+            } else {
+                List<Subject> subjects = StudentKeeper.getStudent().getSemester(semesterIndex).getSubjects();
+                maxSubjectsCount = subjects.size();
+                mSubjects.addAll(subjects);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             openLoginFragment();
