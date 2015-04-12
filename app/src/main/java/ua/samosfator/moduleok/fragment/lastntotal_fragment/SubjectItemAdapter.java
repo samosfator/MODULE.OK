@@ -3,9 +3,11 @@ package ua.samosfator.moduleok.fragment.lastntotal_fragment;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -20,11 +22,13 @@ import ua.samosfator.moduleok.student_bean.Subject;
 class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.SubjectItemViewHolder> {
 
     private LayoutInflater inflater;
+    private int semesterDividerIndex;
     private List<Subject> data = Collections.emptyList();
 
-    public SubjectItemAdapter(Context context, List<Subject> data) {
+    public SubjectItemAdapter(Context context, List<Subject> data, int semesterDividerIndex) {
         inflater = LayoutInflater.from(context);
         this.data = data;
+        this.semesterDividerIndex = semesterDividerIndex;
     }
 
     @Override
@@ -36,10 +40,48 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
     @Override
     public void onBindViewHolder(SubjectItemViewHolder holder, int position) {
         Subject current = data.get(position);
-        holder.subjectName.setText(current.getName());
-        holder.subjectDate.setText(current.getModules().get(current.getModules().size() - 1).getDate());
-        holder.subjectWeight.setText(current.getModules().get(current.getModules().size() - 1).getWeight() + "%");
+
+        try {
+            holder.subjectName.setText(current.getName());
+        } catch (NullPointerException e) {
+            holder.subjectName.setText("");
+        }
+        try {
+            holder.subjectDate.setText(current.getModules().get(current.getModules().size() - 1).getDate());
+        } catch (NullPointerException e) {
+            holder.subjectDate.setText("");
+        }
+        try {
+            holder.subjectWeight.setText(current.getModules().get(current.getModules().size() - 1).getWeight() + "%");
+        } catch (NullPointerException e) {
+            holder.subjectWeight.setText("");
+        }
 //        holder.subjectControlType.setText(String.valueOf(current.getControlType()));
+        if (semesterDividerIndex == position) {
+            ((LinearLayout) holder.subjectName.getParent()).setPadding(DrawableUtils.dpToPx(16), DrawableUtils.dpToPx(0), 0, DrawableUtils.dpToPx(0));
+            ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
+            ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
+            layoutParams.height = DrawableUtils.dpToPx(35);
+            holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_500));
+
+            holder.subjectDate.setVisibility(View.GONE);
+            holder.subjectWeight.setVisibility(View.GONE);
+            holder.subjectScore.setVisibility(View.GONE);
+
+            return;
+        } else {
+            ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_100));
+            ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
+            layoutParams.height = DrawableUtils.dpToPx(65);
+            holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_1000b));
+
+            holder.subjectDate.setVisibility(View.VISIBLE);
+            holder.subjectWeight.setVisibility(View.VISIBLE);
+            holder.subjectScore.setVisibility(View.VISIBLE);
+        }
+
         if (areAllModulesPassed(position)) {
             holder.subjectDate.setText(App.getContext().getString(R.string.total_score_name));
             holder.subjectWeight.setVisibility(View.GONE);
@@ -51,14 +93,23 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
                 holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
             }
         } else {
-            holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
-            holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
+            try {
+                holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
+            } catch (NullPointerException e) {
+                holder.subjectScore.setText("");
+            }
+            try {
+                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
+            } catch (NullPointerException e) {
+                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(0));;
+            }
         }
     }
 
     private boolean areAllModulesPassed(int subjectIndex) {
         List<Module> modules = data.get(subjectIndex).getModules();
         boolean allModulesPassed = true;
+        if (modules == null) return false;
         for (Module module : modules) {
             if (module.getScore() == 0) {
                 allModulesPassed = false;

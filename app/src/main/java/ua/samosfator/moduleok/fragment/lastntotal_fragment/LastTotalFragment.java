@@ -1,8 +1,6 @@
 package ua.samosfator.moduleok.fragment.lastntotal_fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +30,7 @@ import ua.samosfator.moduleok.student_bean.Subject;
 public class LastTotalFragment extends Fragment {
 
     private List<Subject> mSubjects = new ArrayList<>();
+    private int semesterDividerIndex;
     private SubjectItemAdapter mSubjectItemAdapter;
 
     public LastTotalFragment() {
@@ -55,7 +54,7 @@ public class LastTotalFragment extends Fragment {
     }
 
     private void initSectionAdapter() {
-        mSubjectItemAdapter = new SubjectItemAdapter(getActivity(), mSubjects);
+        mSubjectItemAdapter = new SubjectItemAdapter(getActivity(), mSubjects, semesterDividerIndex);
     }
 
     private void initRecyclerView(View rootView) {
@@ -73,7 +72,14 @@ public class LastTotalFragment extends Fragment {
             Semester secondSemester = StudentKeeper.getStudent().getSemester(1);
 
             List<Subject> allSubjects = new ArrayList<>();
+
             allSubjects.addAll(firstSemester.getSubjects());
+            Subject secondSemesterDivider = new Subject();
+            secondSemesterDivider.setName(getString(R.string.second_semester_name));
+            allSubjects.add(secondSemesterDivider);
+
+            semesterDividerIndex = allSubjects.size() - 1;
+
             allSubjects.addAll(secondSemester.getSubjects());
 
             mSubjects.addAll(allSubjects);

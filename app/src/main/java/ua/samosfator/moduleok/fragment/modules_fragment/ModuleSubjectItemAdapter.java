@@ -2,6 +2,7 @@ package ua.samosfator.moduleok.fragment.modules_fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.student_bean.Module;
@@ -42,6 +44,33 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
     @Override
     public void onBindViewHolder(ModuleSubjectItemViewHolder holder, int position) {
         final Subject current = data.get(position);
+
+        if (current.getName().equals(App.getContext().getString(R.string.second_semester_name))) {
+            ((LinearLayout) holder.subjectName.getParent()).setPadding(DrawableUtils.dpToPx(16), DrawableUtils.dpToPx(0), 0, DrawableUtils.dpToPx(0));
+            ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
+            ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
+            layoutParams.height = DrawableUtils.dpToPx(35);
+            holder.subjectName.setText(App.getContext().getString(R.string.second_semester_name));
+            holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_500));
+
+            holder.subjectDate.setVisibility(View.GONE);
+            holder.subjectWeight.setVisibility(View.GONE);
+            holder.subjectScore.setVisibility(View.GONE);
+
+            return;
+        } else {
+            ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_100));
+            ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
+            layoutParams.height = DrawableUtils.dpToPx(65);
+            holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_1000b));
+
+            holder.subjectDate.setVisibility(View.VISIBLE);
+            holder.subjectWeight.setVisibility(View.VISIBLE);
+            holder.subjectScore.setVisibility(View.VISIBLE);
+        }
+
         final List<Module> modules = current.getModules();
         final int modulesCount = modules.size();
         final boolean moduleIsPresent = moduleIndex < modulesCount;

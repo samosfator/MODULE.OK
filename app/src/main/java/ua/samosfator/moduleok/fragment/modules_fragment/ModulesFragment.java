@@ -77,6 +77,11 @@ public class ModulesFragment extends Fragment {
 
                 List<Subject> allSubjects = new ArrayList<>();
                 allSubjects.addAll(firstSemester.getSubjects());
+
+                Subject secondSemesterDivider = new Subject();
+                secondSemesterDivider.setName(App.getContext().getString(R.string.second_semester_name));
+                allSubjects.add(secondSemesterDivider);
+
                 allSubjects.addAll(secondSemester.getSubjects());
 
                 maxModulesCount = firstSemester.getMaxModuleCount() > secondSemester.getMaxModuleCount() ? firstSemester.getMaxModuleCount() : secondSemester.getMaxModuleCount();

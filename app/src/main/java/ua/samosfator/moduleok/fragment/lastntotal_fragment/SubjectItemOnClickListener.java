@@ -36,7 +36,7 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
 
     @Override
     public void onItemClick(View view, int position) {
-        toggleTotalScore(view, position);
+//        toggleTotalScore(view, position);
 //        FragmentUtils.showFragment(mFragmentManager.beginTransaction(), FragmentsKeeper.getSubject(mSubjects.get(position)));
         Analytics.trackEvent("Click", "Subject Item");
     }
