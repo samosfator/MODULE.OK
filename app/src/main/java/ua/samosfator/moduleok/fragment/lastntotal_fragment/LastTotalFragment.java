@@ -30,7 +30,7 @@ import ua.samosfator.moduleok.student_bean.Subject;
 public class LastTotalFragment extends Fragment {
 
     private List<Subject> mSubjects = new ArrayList<>();
-    private int semesterDividerIndex;
+    private int semesterDividerIndex = -100;
     private SubjectItemAdapter mSubjectItemAdapter;
 
     public LastTotalFragment() {

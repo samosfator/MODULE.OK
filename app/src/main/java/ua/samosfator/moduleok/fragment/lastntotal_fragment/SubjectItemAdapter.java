@@ -22,7 +22,7 @@ import ua.samosfator.moduleok.student_bean.Subject;
 class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.SubjectItemViewHolder> {
 
     private LayoutInflater inflater;
-    private int semesterDividerIndex;
+    private int semesterDividerIndex = -100;
     private List<Subject> data = Collections.emptyList();
 
     public SubjectItemAdapter(Context context, List<Subject> data, int semesterDividerIndex) {
