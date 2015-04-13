@@ -17,12 +17,17 @@ import com.splunk.mint.MintLogLevel;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.Analytics;
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.FragmentUtils;
 import ua.samosfator.moduleok.FragmentsKeeper;
+import ua.samosfator.moduleok.MainActivity;
 import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
+import ua.samosfator.moduleok.fragment.detailed_subjects_fragment.DetailedSubjectsFragment;
+import ua.samosfator.moduleok.fragment.lastntotal_fragment.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
 
@@ -53,6 +58,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 SectionHighlighter.highlightSection(mRecyclerView, view);
 
                 Analytics.trackFragmentView("Last & Total");
+                MainActivity.setAppToolbarTitle(DrawableUtils.getSectionNameFor(LastTotalFragment.class));
                 break;
             }
             case MODULES: {
@@ -67,6 +73,22 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 SectionHighlighter.highlightSection(mRecyclerView, view);
 
                 Analytics.trackFragmentView("Modules");
+                MainActivity.setAppToolbarTitle(DrawableUtils.getSectionNameFor(ModulesFragment.class));
+                break;
+            }
+            case DETAILED_SUBJECTS: {
+                if (App.isLoggedIn()) {
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getDetailedSubjectsFragment());
+                } else {
+                    Log.d("Sections", "Not logged in");
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
+                }
+
+                mDrawerLayout.closeDrawers();
+                SectionHighlighter.highlightSection(mRecyclerView, view);
+
+                Analytics.trackFragmentView("Detailed");
+                MainActivity.setAppToolbarTitle(DrawableUtils.getSectionNameFor(DetailedSubjectsFragment.class));
                 break;
             }
             case LOG_IN: {
@@ -86,6 +108,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 } else {
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
                     Analytics.trackFragmentView("Log in");
+                    MainActivity.setAppToolbarTitle(DrawableUtils.getSectionNameFor(LoginFragment.class));
                 }
 
                 mDrawerLayout.closeDrawers();
@@ -107,20 +130,6 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
             case VERSION: {
                 Toast.makeText(App.getContext(), App.getContext().getString(R.string.app_version_hint), Toast.LENGTH_SHORT).show();
                 Analytics.trackEvent("Click", "App version");
-                break;
-            }
-            case DETAILED_SUBJECTS: {
-                if (App.isLoggedIn()) {
-                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getDetailedSubjectsFragment());
-                } else {
-                    Log.d("Sections", "Not logged in");
-                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
-                }
-
-                mDrawerLayout.closeDrawers();
-                SectionHighlighter.highlightSection(mRecyclerView, view);
-
-                Analytics.trackFragmentView("Detailed");
                 break;
             }
         }

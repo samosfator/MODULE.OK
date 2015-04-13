@@ -10,11 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.MainActivity;
 import ua.samosfator.moduleok.Preferences;
+import ua.samosfator.moduleok.R;
 
 public class NavigationDrawerToggle extends ActionBarDrawerToggle {
 
     public static final String KEY_USER_SAW_DRAWER = "user_saw_drawer";
+    private String previousToolbarTitle;
     private boolean mUserSawDrawer;
     private FragmentActivity activity;
 
@@ -29,6 +32,8 @@ public class NavigationDrawerToggle extends ActionBarDrawerToggle {
     @Override
     public void onDrawerOpened(View drawerView) {
         super.onDrawerOpened(drawerView);
+        previousToolbarTitle = MainActivity.getAppToolbarTitle();
+        MainActivity.setAppToolbarTitle(App.getContext().getString(R.string.app_name));
         if (!mUserSawDrawer) {
             saveUserSawDrawerState();
         }
@@ -41,6 +46,9 @@ public class NavigationDrawerToggle extends ActionBarDrawerToggle {
     @Override
     public void onDrawerClosed(View drawerView) {
         super.onDrawerClosed(drawerView);
+        if (MainActivity.getAppToolbarTitle().equals(App.getContext().getString(R.string.app_name))) {
+            MainActivity.setAppToolbarTitle(previousToolbarTitle);
+        }
         if (App.isAndroidNewerIceCreamSandwich()) {
             activity.invalidateOptionsMenu();
         }

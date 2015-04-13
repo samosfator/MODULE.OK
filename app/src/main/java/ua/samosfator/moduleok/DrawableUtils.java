@@ -9,7 +9,7 @@ public class DrawableUtils {
             return R.drawable.circle_4;
         } else if (score >= 60 && score < 75) {
             return R.drawable.circle_3;
-        } else if (score > 0 && score < 60){
+        } else if (score > 0 && score < 60) {
             return R.drawable.circle_2;
         } else {
             return R.drawable.circle_0;
@@ -37,5 +37,21 @@ public class DrawableUtils {
     public static int dpToPx(int dp) {
         final float scale = App.getContext().getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
+    }
+
+    public static String getSectionNameFor(Class fragmentClass) {
+        String className = fragmentClass.getSimpleName();
+        switch (className) {
+            case "LastTotalFragment":
+                return App.getContext().getString(R.string.lastntotal_section);
+            case "ModulesFragment":
+                return App.getContext().getString(R.string.modules_section);
+            case "DetailedSubjectsFragment":
+                return App.getContext().getString(R.string.detailed_subjects_section);
+            case "LoginFragment":
+                return App.getContext().getString(R.string.login_section);
+            default:
+                return App.getContext().getString(R.string.app_name);
+        }
     }
 }

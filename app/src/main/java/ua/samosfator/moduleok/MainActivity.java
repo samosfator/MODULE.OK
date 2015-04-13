@@ -28,7 +28,7 @@ import ua.samosfator.moduleok.rating.FacultyRatingSender;
 
 public class MainActivity extends ActionBarActivity {
 
-    private Toolbar toolbar;
+    private static Toolbar toolbar;
     private boolean doubleBackToExitPressedOnce;
 
     @Override
@@ -59,9 +59,17 @@ public class MainActivity extends ActionBarActivity {
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.app_toolbar);
-        toolbar.setTitle(R.string.main_toolbar_text);
+        toolbar.setTitle(R.string.lastntotal_section);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    public static void setAppToolbarTitle(String title) {
+        toolbar.setTitle(title);
+    }
+
+    public static String getAppToolbarTitle() {
+        return String.valueOf(toolbar.getTitle());
     }
 
     private void initNavigationDrawer() {
