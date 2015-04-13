@@ -17,10 +17,6 @@ import android.widget.Toast;
 import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.event.LoginEvent;
@@ -33,6 +29,7 @@ import ua.samosfator.moduleok.rating.FacultyRatingSender;
 public class MainActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
+    private boolean doubleBackToExitPressedOnce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +176,19 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getString(R.string.back_to_exit_toast), Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
     @Override
