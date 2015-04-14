@@ -45,4 +45,11 @@
     <string name="detailed_subjects_section">Предмети</string>
     <string name="zalik_score_name">Залік</string>
     <string name="back_to_exit_toast">Натисніть назад ще раз аби вийти</string>
+    <string name="days_ago">днів тому</string>
+    <string name="ago">тому</string>
+    <string name="in_future_period">через</string>
+    <string name="days">днів</string>
+    <string name="dniv">днів</string>
+    <string name="dni">дні</string>
+    <string name="den">день</string>
 </resources>

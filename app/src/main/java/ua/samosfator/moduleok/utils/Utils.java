@@ -1,5 +1,10 @@
 package ua.samosfator.moduleok.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import ua.samosfator.moduleok.R;
 
 public class Utils {
@@ -18,7 +23,7 @@ public class Utils {
         }
     }
 
-    public static String getModuleName(int moduleIndex) {
+    public static String getModuleNameFor(int moduleIndex) {
         if (moduleIndex == 0) {
             return App.getContext().getString(R.string.module_1_name);
         } else if (moduleIndex == 1) {
@@ -55,5 +60,56 @@ public class Utils {
             default:
                 return App.getContext().getString(R.string.app_name);
         }
+    }
+
+    public static String getDaysLeftToModule(String date) {
+        int daysLeft = getDaysLeft(date);
+        String daysLeftStr = String.valueOf(daysLeft);
+
+        String dniv = App.getContext().getString(R.string.days);
+        String dni = App.getContext().getString(R.string.dni);
+        String den = App.getContext().getString(R.string.den);
+        String daysCase;
+        String lastChar = daysLeftStr.substring(daysLeftStr.length() - 1);
+
+        if (lastChar.equals("1")) {
+            daysCase = den;
+        } else if ((lastChar.equals("2") || lastChar.equals("3") || lastChar.equals("4"))
+                && (Math.abs(daysLeft) < 10 || Math.abs(daysLeft) > 20)) {
+            daysCase = dni;
+        } else {
+            daysCase = dniv;
+        }
+        boolean isUkrainian = dniv.contains("і");
+
+        if (daysLeft > 0) {
+            if (isUkrainian) {
+                return App.getContext().getString(R.string.in_future_period) + " " + daysLeft + " " + daysCase;
+            } else {
+                return App.getContext().getString(R.string.in_future_period) + " " + daysLeft + " " + App.getContext().getString(R.string.days);
+            }
+        } else {
+            if (isUkrainian) {
+                return -daysLeft + " " + daysCase + " " + App.getContext().getString(R.string.ago);
+            } else {
+                return -daysLeft + " " + App.getContext().getString(R.string.days_ago);
+            }
+        }
+    }
+
+    private static int getDaysLeft(String date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yy");
+        int daysLeft = 0;
+        try {
+            Date parsedDate = simpleDateFormat.parse(date);
+            daysLeft = (int) getDateDiff(parsedDate, new Date(), TimeUnit.DAYS);
+        } catch (ParseException ignored) {
+        }
+        return daysLeft;
+    }
+
+    private static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMs = date1.getTime() - date2.getTime();
+        return timeUnit.convert(diffInMs, TimeUnit.MILLISECONDS);
     }
 }

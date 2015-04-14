@@ -50,34 +50,32 @@ public class DetailedSubjectsSubjectItemAdapter extends RecyclerView.Adapter<Det
         int topDp = Utils.dpToPx(11);
         int bottomDp = Utils.dpToPx(-11);
 
-        holder.subjectDate.setText(module.getDate());
-        holder.subjectWeight.setText(module.getWeight() + "%");
+        holder.subjectDate.setText(module.getWeight() + "%");
+        holder.subjectWeight.setText(Utils.getDaysLeftToModule(module.getDate()));
 
         if (moduleIsExam) {
-            holder.subjectName.setText(App.getContext().getString(R.string.exam_naming));
-        } else if (module.getDate().equals("total")) { //Means that view presents a total score
+            holder.subjectName.setText(module.getDate() + " (" + App.getContext().getString(R.string.exam_naming) + ")");
+        } else if (module.getDate().equals("total")) { //view presents a total score
             holder.subjectName.setText(App.getContext().getString(R.string.total_score_name));
-            ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
-            ((LinearLayout) holder.subjectName.getParent()).setPadding(leftDp, topDp, 0, bottomDp);
-
-            ((LinearLayout) holder.subjectDate.getParent()).removeView(holder.subjectDate);
-            ((LinearLayout) holder.subjectWeight.getParent()).removeView(holder.subjectWeight);
-            ((LinearLayout) holder.subjectControlType.getParent()).removeView(holder.subjectControlType);
+            removeDateWeightViews(holder, leftDp, topDp, bottomDp);
         } else if (module.getDate().equals("total-zalik")) {
-
             holder.subjectName.setText(App.getContext().getString(R.string.zalik_score_name));
-            ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
-            ((LinearLayout) holder.subjectName.getParent()).setPadding(leftDp, topDp, 0, bottomDp);
-
-            ((LinearLayout) holder.subjectDate.getParent()).removeView(holder.subjectDate);
-            ((LinearLayout) holder.subjectWeight.getParent()).removeView(holder.subjectWeight);
-            ((LinearLayout) holder.subjectControlType.getParent()).removeView(holder.subjectControlType);
+            removeDateWeightViews(holder, leftDp, topDp, bottomDp);
         } else {
-            holder.subjectName.setText(Utils.getModuleName(position));
+            holder.subjectName.setText(module.getDate());
         }
 //        holder.subjectControlType.setText(String.valueOf(currentSubject.getControlType().getControlName() ));
         holder.subjectScore.setText(String.valueOf(module.getScore()));
         holder.subjectScore.setBackgroundResource(Utils.getScoreCircleDrawable(module.getScore()));
+    }
+
+    private void removeDateWeightViews(ModuleSubjectItemViewHolder holder, int leftDp, int topDp, int bottomDp) {
+        ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
+        ((LinearLayout) holder.subjectName.getParent()).setPadding(leftDp, topDp, 0, bottomDp);
+
+        ((LinearLayout) holder.subjectDate.getParent()).removeView(holder.subjectDate);
+        ((LinearLayout) holder.subjectWeight.getParent()).removeView(holder.subjectWeight);
+        ((LinearLayout) holder.subjectControlType.getParent()).removeView(holder.subjectControlType);
     }
 
     class ModuleSubjectItemViewHolder extends RecyclerView.ViewHolder {
