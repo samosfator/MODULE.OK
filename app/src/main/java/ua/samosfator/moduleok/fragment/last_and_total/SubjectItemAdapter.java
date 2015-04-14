@@ -27,6 +27,7 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
 
     public SubjectItemAdapter(Context context, List<Subject> data, int semesterDividerIndex) {
         inflater = LayoutInflater.from(context);
+        Collections.sort(data, (a, b) -> a.getLastModule().getDate().compareTo(b.getLastModule().getDate()));
         this.data = data;
         this.semesterDividerIndex = semesterDividerIndex;
     }
