@@ -25,6 +25,12 @@ import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer.NavigationDrawerFragment;
 import ua.samosfator.moduleok.notification.NewScoresService;
 import ua.samosfator.moduleok.rating.FacultyRatingSender;
+import ua.samosfator.moduleok.utils.Analytics;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.FragmentUtils;
+import ua.samosfator.moduleok.utils.FragmentsKeeper;
+import ua.samosfator.moduleok.utils.Preferences;
+import ua.samosfator.moduleok.utils.StudentKeeper;
 
 public class MainActivity extends ActionBarActivity {
 

@@ -55,7 +55,7 @@ ADDED from AndroidManifest.xml:17:9
 		ADDED from AndroidManifest.xml:17:18
 	android:name
 		ADDED from AndroidManifest.xml:17:41
-receiver#ua.samosfator.moduleok.InternetConnectionReceiver
+receiver#ua.samosfator.moduleok.receiver.InternetConnectionReceiver
 ADDED from AndroidManifest.xml:19:9
 	android:name
 		ADDED from AndroidManifest.xml:19:19

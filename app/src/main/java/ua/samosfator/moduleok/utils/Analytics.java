@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.utils;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
@@ -6,6 +6,8 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ua.samosfator.moduleok.R;
 
 public class Analytics {
     public static enum TrackerName {

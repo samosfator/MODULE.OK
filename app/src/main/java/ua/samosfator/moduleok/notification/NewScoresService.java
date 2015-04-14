@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.utils.StudentKeeper;
 import ua.samosfator.moduleok.student_bean.Student;
 
 public class NewScoresService extends Service {

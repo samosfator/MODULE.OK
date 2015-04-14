@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.R;
 
 public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHolder> {

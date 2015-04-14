@@ -10,7 +10,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;

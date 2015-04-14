@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.utils;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -9,6 +9,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.samosfator.moduleok.R;
 
 public class FragmentUtils {
 

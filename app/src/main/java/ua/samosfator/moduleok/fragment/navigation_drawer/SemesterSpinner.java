@@ -7,9 +7,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.utils.StudentKeeper;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 
 class SemesterSpinner {

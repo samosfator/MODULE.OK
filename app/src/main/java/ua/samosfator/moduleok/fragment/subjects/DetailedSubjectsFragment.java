@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.DrawableUtils;
-import ua.samosfator.moduleok.FragmentUtils;
-import ua.samosfator.moduleok.FragmentsKeeper;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.Utils;
+import ua.samosfator.moduleok.utils.FragmentUtils;
+import ua.samosfator.moduleok.utils.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.utils.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.student_bean.Semester;
@@ -66,7 +66,7 @@ public class DetailedSubjectsFragment extends Fragment {
         pager.setOffscreenPageLimit(maxSubjectsCount);
 
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.modules_tabs);
-        tabs.setTabPaddingLeftRight(DrawableUtils.dpToPx(16));
+        tabs.setTabPaddingLeftRight(Utils.dpToPx(16));
         tabs.setViewPager(pager);
     }
 

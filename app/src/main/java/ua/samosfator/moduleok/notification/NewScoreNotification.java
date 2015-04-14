@@ -11,10 +11,8 @@ import android.support.v4.app.NotificationCompat;
 import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
-import java.util.List;
-
-import ua.samosfator.moduleok.Analytics;
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.Analytics;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.MainActivity;
 import ua.samosfator.moduleok.R;
 

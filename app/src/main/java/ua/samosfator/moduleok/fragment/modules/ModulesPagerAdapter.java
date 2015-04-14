@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.R;
 
 class ModulesPagerAdapter extends FragmentPagerAdapter {

@@ -9,9 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.MainActivity;
-import ua.samosfator.moduleok.Preferences;
+import ua.samosfator.moduleok.utils.Preferences;
 import ua.samosfator.moduleok.R;
 
 public class NavigationDrawerToggle extends ActionBarDrawerToggle {

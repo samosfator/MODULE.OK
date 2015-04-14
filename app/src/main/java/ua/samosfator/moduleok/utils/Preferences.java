@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

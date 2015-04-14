@@ -1,6 +1,6 @@
 package ua.samosfator.moduleok.student_bean;
 
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.R;
 
 public class EmptyStudent extends Student {

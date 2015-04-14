@@ -10,9 +10,9 @@ import android.widget.ViewFlipper;
 
 import java.util.List;
 
-import ua.samosfator.moduleok.Analytics;
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.DrawableUtils;
+import ua.samosfator.moduleok.utils.Analytics;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.Utils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.animation.AnimationFactory;
 import ua.samosfator.moduleok.fragment.navigation_drawer.sections.RecyclerItemClickListener;
@@ -77,12 +77,12 @@ class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClic
 
     private void setSubjectTotalScoreBackground() {
         if (isTotalScoreView()) {
-            int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(lastScore);
+            int drawableDependsOnTotalScore = Utils.getScoreCircleDrawable(lastScore);
             new Handler(Looper.getMainLooper()).postDelayed(() ->
                     subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore), 200);
 
         } else {
-            int drawableDependsOnTotalScore = DrawableUtils.getScoreCircleDrawable(totalScore);
+            int drawableDependsOnTotalScore = Utils.getScoreCircleDrawable(totalScore);
             new Handler(Looper.getMainLooper()).postDelayed(() ->
                     subjectTotalScoreTextView.setBackgroundResource(drawableDependsOnTotalScore), 200);
         }

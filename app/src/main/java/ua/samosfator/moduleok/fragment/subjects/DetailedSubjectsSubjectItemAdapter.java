@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.DrawableUtils;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.Utils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.student_bean.Module;
 import ua.samosfator.moduleok.student_bean.Subject;
@@ -46,9 +46,9 @@ public class DetailedSubjectsSubjectItemAdapter extends RecyclerView.Adapter<Det
     }
 
     private void displayThisModule(ModuleSubjectItemViewHolder holder, Module module, int position, boolean moduleIsExam) {
-        int leftDp = DrawableUtils.dpToPx(16);
-        int topDp = DrawableUtils.dpToPx(11);
-        int bottomDp = DrawableUtils.dpToPx(-11);
+        int leftDp = Utils.dpToPx(16);
+        int topDp = Utils.dpToPx(11);
+        int bottomDp = Utils.dpToPx(-11);
 
         holder.subjectDate.setText(module.getDate());
         holder.subjectWeight.setText(module.getWeight() + "%");
@@ -73,11 +73,11 @@ public class DetailedSubjectsSubjectItemAdapter extends RecyclerView.Adapter<Det
             ((LinearLayout) holder.subjectWeight.getParent()).removeView(holder.subjectWeight);
             ((LinearLayout) holder.subjectControlType.getParent()).removeView(holder.subjectControlType);
         } else {
-            holder.subjectName.setText(DrawableUtils.getModuleName(position));
+            holder.subjectName.setText(Utils.getModuleName(position));
         }
 //        holder.subjectControlType.setText(String.valueOf(currentSubject.getControlType().getControlName() ));
         holder.subjectScore.setText(String.valueOf(module.getScore()));
-        holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(module.getScore()));
+        holder.subjectScore.setBackgroundResource(Utils.getScoreCircleDrawable(module.getScore()));
     }
 
     class ModuleSubjectItemViewHolder extends RecyclerView.ViewHolder {

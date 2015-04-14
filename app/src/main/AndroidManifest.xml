@@ -15,22 +15,22 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="false"
-        android:name=".App"
+        android:name=".utils.App"
         android:theme="@style/AppTheme">
 
         <service android:enabled="true" android:name=".notification.NewScoresService" android:exported="false" />
 
-        <receiver android:name=".InternetConnectionReceiver">
+        <receiver android:name=".receiver.InternetConnectionReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".BootCompletedIntentReceiver">
+        <receiver android:name=".receiver.BootCompletedIntentReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".UpgradeReceiver">
+        <receiver android:name=".receiver.UpgradeReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
                 <data android:scheme="package" android:path="ua.samosfator.moduleok" />

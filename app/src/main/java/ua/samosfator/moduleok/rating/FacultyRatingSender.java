@@ -1,14 +1,13 @@
 package ua.samosfator.moduleok.rating;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
 
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Preferences;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.Preferences;
 import ua.samosfator.moduleok.R;
 
 public class FacultyRatingSender {

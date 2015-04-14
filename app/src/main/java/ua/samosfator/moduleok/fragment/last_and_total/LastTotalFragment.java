@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.FragmentUtils;
-import ua.samosfator.moduleok.FragmentsKeeper;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.FragmentUtils;
+import ua.samosfator.moduleok.utils.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.utils.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.fragment.navigation_drawer.sections.RecyclerItemClickListener;

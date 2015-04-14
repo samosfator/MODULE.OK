@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import ua.samosfator.moduleok.student_bean.EmptyStudent;
 import ua.samosfator.moduleok.student_bean.Student;
+import ua.samosfator.moduleok.utils.Preferences;
 
 public class GetScoresJsonAsyncTask extends AsyncTask<Void, Void, Student> {
 

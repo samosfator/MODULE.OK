@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.content.Intent;
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.event.InternetConnectionAbsent;
 import ua.samosfator.moduleok.event.InternetConnectionPresent;
+import ua.samosfator.moduleok.utils.App;
 
 public class InternetConnectionReceiver extends BroadcastReceiver {
 

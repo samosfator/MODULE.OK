@@ -1,17 +1,16 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import ua.samosfator.moduleok.notification.NewScoresService;
+import ua.samosfator.moduleok.utils.App;
 
-public class UpgradeReceiver extends BroadcastReceiver {
+public class BootCompletedIntentReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!App.isServiceRunning(NewScoresService.class)) {
-            Log.d("UPGRADE_RECEIVER", "App is upgraded. Restarting the service!");
+        if (!App.isServiceRunning(NewScoresService.class) && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             context.startService(new Intent(context, NewScoresService.class));
         }
     }

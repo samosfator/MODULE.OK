@@ -11,7 +11,7 @@ import java.util.List;
 
 import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
-import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.utils.StudentKeeper;
 import ua.samosfator.moduleok.student_bean.Module;
 import ua.samosfator.moduleok.student_bean.Subject;
 

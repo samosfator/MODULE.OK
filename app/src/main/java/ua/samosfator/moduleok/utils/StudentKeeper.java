@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.utils;
 
 import android.util.Log;
 
@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import de.greenrobot.event.EventBus;
+import ua.samosfator.moduleok.GetScoresJsonAsyncTask;
 import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.student_bean.EmptyStudent;
 import ua.samosfator.moduleok.student_bean.Student;

@@ -1,6 +1,8 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.utils;
 
-public class DrawableUtils {
+import ua.samosfator.moduleok.R;
+
+public class Utils {
 
     public static int getScoreCircleDrawable(int score) {
         if (score >= 90 && score <= 100) {

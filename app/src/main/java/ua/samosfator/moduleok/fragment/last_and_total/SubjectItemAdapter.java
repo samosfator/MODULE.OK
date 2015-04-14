@@ -13,8 +13,8 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.DrawableUtils;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.Utils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.student_bean.Module;
 import ua.samosfator.moduleok.student_bean.Subject;
@@ -44,10 +44,10 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
 
 //        holder.subjectControlType.setText(String.valueOf(current.getControlType()));
         if (semesterDividerIndex == position) {
-            ((LinearLayout) holder.subjectName.getParent()).setPadding(DrawableUtils.dpToPx(16), DrawableUtils.dpToPx(0), 0, DrawableUtils.dpToPx(0));
+            ((LinearLayout) holder.subjectName.getParent()).setPadding(Utils.dpToPx(16), Utils.dpToPx(0), 0, Utils.dpToPx(0));
             ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
             ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
-            layoutParams.height = DrawableUtils.dpToPx(35);
+            layoutParams.height = Utils.dpToPx(35);
             holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_500));
 
@@ -59,7 +59,7 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
         } else {
             ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_100));
             ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
-            layoutParams.height = DrawableUtils.dpToPx(65);
+            layoutParams.height = Utils.dpToPx(65);
             holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_1000b));
 
@@ -74,9 +74,9 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
             holder.subjectScore.setText(String.valueOf(current.getTotalScore()));
             holder.subjectScore.setTypeface(holder.subjectScore.getTypeface(), Typeface.BOLD);
             if (isTotalScoreView(holder)) {
-                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getTotalScore()));
+                holder.subjectScore.setBackgroundResource(Utils.getScoreCircleDrawable(current.getTotalScore()));
             } else {
-                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
+                holder.subjectScore.setBackgroundResource(Utils.getScoreCircleDrawable(current.getLastModule().getScore()));
             }
         } else {
             try {
@@ -100,9 +100,9 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
                 holder.subjectScore.setText("");
             }
             try {
-                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
+                holder.subjectScore.setBackgroundResource(Utils.getScoreCircleDrawable(current.getLastModule().getScore()));
             } catch (NullPointerException e) {
-                holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(0));;
+                holder.subjectScore.setBackgroundResource(Utils.getScoreCircleDrawable(0));;
             }
         }
     }

@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok;
+package ua.samosfator.moduleok.utils;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
@@ -14,10 +14,7 @@ import android.os.Build;
 import android.view.Display;
 import android.view.WindowManager;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 

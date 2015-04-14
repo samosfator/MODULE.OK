@@ -18,10 +18,10 @@ import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.Preferences;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.Preferences;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.StudentKeeper;
+import ua.samosfator.moduleok.utils.StudentKeeper;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.student_bean.EmptyStudent;
 

@@ -12,8 +12,8 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
-import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.DrawableUtils;
+import ua.samosfator.moduleok.utils.App;
+import ua.samosfator.moduleok.utils.Utils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.student_bean.Module;
 import ua.samosfator.moduleok.student_bean.Subject;
@@ -46,10 +46,10 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         final Subject current = data.get(position);
 
         if (current.getName().equals(App.getContext().getString(R.string.second_semester_name))) {
-            ((LinearLayout) holder.subjectName.getParent()).setPadding(DrawableUtils.dpToPx(16), DrawableUtils.dpToPx(0), 0, DrawableUtils.dpToPx(0));
+            ((LinearLayout) holder.subjectName.getParent()).setPadding(Utils.dpToPx(16), Utils.dpToPx(0), 0, Utils.dpToPx(0));
             ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_300));
             ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
-            layoutParams.height = DrawableUtils.dpToPx(35);
+            layoutParams.height = Utils.dpToPx(35);
             holder.subjectName.setText(App.getContext().getString(R.string.second_semester_name));
             holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_500));
@@ -62,7 +62,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         } else {
             ((LinearLayout) holder.subjectName.getParent().getParent()).setBackgroundColor(App.getContext().getResources().getColor(R.color.grey_100));
             ViewGroup.LayoutParams layoutParams = ((LinearLayout) holder.subjectName.getParent().getParent()).getLayoutParams();
-            layoutParams.height = DrawableUtils.dpToPx(65);
+            layoutParams.height = Utils.dpToPx(65);
             holder.subjectName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             holder.subjectName.setTextColor(App.getContext().getResources().getColor(R.color.grey_1000b));
 
@@ -90,7 +90,7 @@ public class ModuleSubjectItemAdapter extends RecyclerView.Adapter<ModuleSubject
         holder.subjectWeight.setText(currentModule.getWeight() + "%");
 //        holder.subjectControlType.setText(String.valueOf(currentSubject.getControlType().getControlName() ));
         holder.subjectScore.setText(String.valueOf(currentModule.getScore()));
-        holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(currentModule.getScore()));
+        holder.subjectScore.setBackgroundResource(Utils.getScoreCircleDrawable(currentModule.getScore()));
     }
 
     private void doNotDisplayThisSubject(ModuleSubjectItemViewHolder holder) {

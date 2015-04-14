@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.samosfator.moduleok.App;
+import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.student_bean.Subject;
 
 class DetailedSubjectsPagerAdapter extends FragmentPagerAdapter {
