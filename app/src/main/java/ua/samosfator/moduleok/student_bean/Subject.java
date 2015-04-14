@@ -46,7 +46,7 @@ public class Subject {
             }
         }
 
-        return modules.get(lastModuleIndex);
+        return modules.get(0);
     }
 
     public Module getMostValuableModule() {

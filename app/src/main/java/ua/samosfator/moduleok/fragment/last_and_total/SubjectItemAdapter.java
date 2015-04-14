@@ -41,21 +41,6 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
     public void onBindViewHolder(SubjectItemViewHolder holder, int position) {
         Subject current = data.get(position);
 
-        try {
-            holder.subjectName.setText(current.getName());
-        } catch (NullPointerException e) {
-            holder.subjectName.setText("");
-        }
-        try {
-            holder.subjectDate.setText(current.getModules().get(current.getModules().size() - 1).getDate());
-        } catch (NullPointerException e) {
-            holder.subjectDate.setText("");
-        }
-        try {
-            holder.subjectWeight.setText(current.getModules().get(current.getModules().size() - 1).getWeight() + "%");
-        } catch (NullPointerException e) {
-            holder.subjectWeight.setText("");
-        }
 //        holder.subjectControlType.setText(String.valueOf(current.getControlType()));
         if (semesterDividerIndex == position) {
             ((LinearLayout) holder.subjectName.getParent()).setPadding(DrawableUtils.dpToPx(16), DrawableUtils.dpToPx(0), 0, DrawableUtils.dpToPx(0));
@@ -93,6 +78,21 @@ class SubjectItemAdapter extends RecyclerView.Adapter<SubjectItemAdapter.Subject
                 holder.subjectScore.setBackgroundResource(DrawableUtils.getScoreCircleDrawable(current.getLastModule().getScore()));
             }
         } else {
+            try {
+                holder.subjectName.setText(current.getName());
+            } catch (NullPointerException e) {
+                holder.subjectName.setText("");
+            }
+            try {
+                holder.subjectDate.setText(current.getLastModule().getDate());
+            } catch (NullPointerException e) {
+                holder.subjectDate.setText("");
+            }
+            try {
+                holder.subjectWeight.setText(current.getLastModule().getWeight() + "%");
+            } catch (NullPointerException e) {
+                holder.subjectWeight.setText("");
+            }
             try {
                 holder.subjectScore.setText(String.valueOf(current.getLastModule().getScore()));
             } catch (NullPointerException e) {
