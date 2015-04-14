@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
+package ua.samosfator.moduleok.fragment.navigation_drawer.sections;
 
 public enum SectionsEnum {
 

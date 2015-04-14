@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
+package ua.samosfator.moduleok.fragment.navigation_drawer.sections;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -25,9 +25,9 @@ import ua.samosfator.moduleok.Preferences;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.detailed_subjects_fragment.DetailedSubjectsFragment;
-import ua.samosfator.moduleok.fragment.lastntotal_fragment.LastTotalFragment;
-import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
+import ua.samosfator.moduleok.fragment.subjects.DetailedSubjectsFragment;
+import ua.samosfator.moduleok.fragment.last_and_total.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.modules.ModulesFragment;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
 

@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
+package ua.samosfator.moduleok.fragment.navigation_drawer.sections;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;

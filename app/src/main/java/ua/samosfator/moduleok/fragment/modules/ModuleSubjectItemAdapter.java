@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.modules_fragment;
+package ua.samosfator.moduleok.fragment.modules;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

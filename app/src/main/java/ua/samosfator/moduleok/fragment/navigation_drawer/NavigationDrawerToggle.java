@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
+package ua.samosfator.moduleok.fragment.navigation_drawer;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

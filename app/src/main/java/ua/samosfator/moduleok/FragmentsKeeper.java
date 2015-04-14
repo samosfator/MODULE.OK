@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.List;
 
 import ua.samosfator.moduleok.fragment.LoginFragment;
-import ua.samosfator.moduleok.fragment.detailed_subjects_fragment.DetailedSubjectsFragment;
-import ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment;
-import ua.samosfator.moduleok.fragment.lastntotal_fragment.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.subjects.DetailedSubjectsFragment;
+import ua.samosfator.moduleok.fragment.modules.ModulesFragment;
+import ua.samosfator.moduleok.fragment.last_and_total.LastTotalFragment;
 
 public class FragmentsKeeper {
 

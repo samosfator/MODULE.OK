@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.lastntotal_fragment;
+package ua.samosfator.moduleok.fragment.last_and_total;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

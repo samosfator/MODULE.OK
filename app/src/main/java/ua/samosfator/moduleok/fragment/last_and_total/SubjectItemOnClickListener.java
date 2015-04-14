@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.lastntotal_fragment;
+package ua.samosfator.moduleok.fragment.last_and_total;
 
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -15,7 +15,7 @@ import ua.samosfator.moduleok.App;
 import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.animation.AnimationFactory;
-import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
+import ua.samosfator.moduleok.fragment.navigation_drawer.sections.RecyclerItemClickListener;
 import ua.samosfator.moduleok.student_bean.Subject;
 
 class SubjectItemOnClickListener implements RecyclerItemClickListener.OnItemClickListener {

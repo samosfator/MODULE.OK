@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.modules_fragment;
+package ua.samosfator.moduleok.fragment.modules;
 
 import android.content.res.Resources;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.detailed_subjects_fragment;
+package ua.samosfator.moduleok.fragment.subjects;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.student_bean.Subject;
 
 class DetailedSubjectsPagerAdapter extends FragmentPagerAdapter {

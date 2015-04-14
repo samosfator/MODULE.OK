@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.lastntotal_fragment;
+package ua.samosfator.moduleok.fragment.last_and_total;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +23,7 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
-import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.RecyclerItemClickListener;
+import ua.samosfator.moduleok.fragment.navigation_drawer.sections.RecyclerItemClickListener;
 import ua.samosfator.moduleok.student_bean.Semester;
 import ua.samosfator.moduleok.student_bean.Subject;
 

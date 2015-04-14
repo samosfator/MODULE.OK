@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment;
+package ua.samosfator.moduleok.fragment.navigation_drawer;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.R;
-import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections.SectionsRecyclerView;
+import ua.samosfator.moduleok.fragment.navigation_drawer.sections.SectionsRecyclerView;
 
 public class NavigationDrawerFragment extends Fragment {
 

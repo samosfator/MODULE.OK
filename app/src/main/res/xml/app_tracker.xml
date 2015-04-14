@@ -10,10 +10,10 @@
     <screenName name="ua.samosfator.moduleok.fragment.LoginFragment">
         MODULE.OK LoginView
     </screenName>
-    <screenName name="ua.samosfator.moduleok.fragment.lastntotal_fragment.LastTotalFragment">
+    <screenName name="ua.samosfator.moduleok.fragment.last_and_total.LastTotalFragment">
         MODULE.OK LastTotalView
     </screenName>
-    <screenName name="ua.samosfator.moduleok.fragment.modules_fragment.ModulesFragment">
+    <screenName name="ua.samosfator.moduleok.fragment.modules.ModulesFragment">
         MODULE.OK ModulesView
     </screenName>
     <!--  The following value should be replaced with correct property id. -->

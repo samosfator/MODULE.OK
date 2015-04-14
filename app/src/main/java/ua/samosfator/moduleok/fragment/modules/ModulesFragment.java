@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.detailed_subjects_fragment;
+package ua.samosfator.moduleok.fragment.modules;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,33 +18,31 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import ua.samosfator.moduleok.App;
-import ua.samosfator.moduleok.DrawableUtils;
 import ua.samosfator.moduleok.FragmentUtils;
 import ua.samosfator.moduleok.FragmentsKeeper;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.StudentKeeper;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
-import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.student_bean.Semester;
 import ua.samosfator.moduleok.student_bean.Subject;
 
-public class DetailedSubjectsFragment extends Fragment {
+public class ModulesFragment extends Fragment {
 
     private static FragmentManager fragmentManager;
-    private static int maxSubjectsCount;
+    private static int maxModulesCount;
     static List<Subject> mSubjects = new ArrayList<>();
     private View rootView;
-    private DetailedSubjectsPagerAdapter detailedSubjectsPagerAdapter;
+    private ModulesPagerAdapter modulesPagerAdapter;
 
 
-    public DetailedSubjectsFragment() {
+    public ModulesFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onResume() {
         App.registerClassForEventBus(this);
-        Mint.logEvent("view DetailedSubjectsFragment", MintLogLevel.Info);
+        Mint.logEvent("view ModulesFragment", MintLogLevel.Info);
         super.onResume();
     }
 
@@ -61,12 +59,11 @@ public class DetailedSubjectsFragment extends Fragment {
 
     private void initTabStrip(View rootView) {
         ViewPager pager = (ViewPager) rootView.findViewById(R.id.modules_viewpager);
-        detailedSubjectsPagerAdapter = new DetailedSubjectsPagerAdapter(getChildFragmentManager(), mSubjects, maxSubjectsCount);
-        pager.setAdapter(detailedSubjectsPagerAdapter);
-        pager.setOffscreenPageLimit(maxSubjectsCount);
+        modulesPagerAdapter = new ModulesPagerAdapter(getChildFragmentManager(), maxModulesCount);
+        pager.setAdapter(modulesPagerAdapter);
+        pager.setOffscreenPageLimit(maxModulesCount);
 
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) rootView.findViewById(R.id.modules_tabs);
-        tabs.setTabPaddingLeftRight(DrawableUtils.dpToPx(16));
         tabs.setViewPager(pager);
     }
 
@@ -80,13 +77,19 @@ public class DetailedSubjectsFragment extends Fragment {
 
                 List<Subject> allSubjects = new ArrayList<>();
                 allSubjects.addAll(firstSemester.getSubjects());
+
+                Subject secondSemesterDivider = new Subject();
+                secondSemesterDivider.setName(App.getContext().getString(R.string.second_semester_name));
+                allSubjects.add(secondSemesterDivider);
+
                 allSubjects.addAll(secondSemester.getSubjects());
 
-                maxSubjectsCount = allSubjects.size();
+                maxModulesCount = firstSemester.getMaxModuleCount() > secondSemester.getMaxModuleCount() ? firstSemester.getMaxModuleCount() : secondSemester.getMaxModuleCount();
                 mSubjects.addAll(allSubjects);
             } else {
-                List<Subject> subjects = StudentKeeper.getStudent().getSemester(semesterIndex).getSubjects();
-                maxSubjectsCount = subjects.size();
+                Semester semester = StudentKeeper.getStudent().getSemester(semesterIndex);
+                List<Subject> subjects = semester.getSubjects();
+                maxModulesCount = semester.getMaxModuleCount();
                 mSubjects.addAll(subjects);
             }
         } catch (Exception e) {
@@ -99,23 +102,14 @@ public class DetailedSubjectsFragment extends Fragment {
         FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void onEvent(RefreshEndEvent event) {
-        Log.d("EVENTS-Subjects", "RefreshEndEvent");
-        if (FragmentsKeeper.getDetailedSubjectsFragment().isVisible()) {
-            FragmentsKeeper.setDetailedSubjectsFragment(new DetailedSubjectsFragment());
-            FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getDetailedSubjectsFragment());
+        Log.d("EVENTS-Modules", "RefreshEndEvent");
+        if (FragmentsKeeper.getModules().isVisible()) {
+            FragmentsKeeper.setModules(new ModulesFragment());
+            FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getModules());
         } else {
-            FragmentsKeeper.setDetailedSubjectsFragment(new DetailedSubjectsFragment());
-        }
-    }
-
-    public void onEvent(SemesterChangedEvent event) {
-        Log.d("EVENTS-Detailed", "SemesterChangedEvent");
-        if (FragmentsKeeper.getDetailedSubjectsFragment().isVisible()) {
-            FragmentsKeeper.setDetailedSubjectsFragment(new DetailedSubjectsFragment());
-            FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getDetailedSubjectsFragment());
-        } else {
-            FragmentsKeeper.setDetailedSubjectsFragment(new DetailedSubjectsFragment());
+            FragmentsKeeper.setModules(new ModulesFragment());
         }
     }
 

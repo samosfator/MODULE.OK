@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.navigation_drawer_fragment.sections;
+package ua.samosfator.moduleok.fragment.navigation_drawer.sections;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;

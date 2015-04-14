@@ -22,7 +22,7 @@ import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.event.RefreshEndEvent;
-import ua.samosfator.moduleok.fragment.navigation_drawer_fragment.NavigationDrawerFragment;
+import ua.samosfator.moduleok.fragment.navigation_drawer.NavigationDrawerFragment;
 import ua.samosfator.moduleok.notification.NewScoresService;
 import ua.samosfator.moduleok.rating.FacultyRatingSender;
 
