@@ -95,21 +95,21 @@ public class AllScoresFragment extends Fragment {
 
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-LastTotal", "RefreshEndEvent");
-        if (FragmentsKeeper.getLastTotal().isVisible()) {
-            FragmentsKeeper.setLastTotal(new AllScoresFragment());
-            FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
+        if (FragmentsKeeper.getAllScores().isVisible()) {
+            FragmentsKeeper.setAllScores(new AllScoresFragment());
+            FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getAllScores());
         } else {
-            FragmentsKeeper.setLastTotal(new AllScoresFragment());
+            FragmentsKeeper.setAllScores(new AllScoresFragment());
         }
     }
 
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
-        if (FragmentsKeeper.getLastTotal().isVisible()) {
-            FragmentsKeeper.setLastTotal(new AllScoresFragment());
-            FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
+        if (FragmentsKeeper.getAllScores().isVisible()) {
+            FragmentsKeeper.setAllScores(new AllScoresFragment());
+            FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getAllScores());
         } else {
-            FragmentsKeeper.setLastTotal(new AllScoresFragment());
+            FragmentsKeeper.setAllScores(new AllScoresFragment());
         }
     }
 

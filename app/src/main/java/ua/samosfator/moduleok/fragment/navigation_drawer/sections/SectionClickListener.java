@@ -46,9 +46,9 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
     public void onItemClick(View view, int position) {
         SectionsEnum clickedSection = SectionsEnum.getSectionById(position);
         switch (clickedSection) {
-            case LAST_TOTAL: {
+            case ALL_SCORES: {
                 if (App.isLoggedIn()) {
-                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLastTotal());
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getAllScores());
                 } else {
                     Log.d("Sections", "Not logged in");
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());

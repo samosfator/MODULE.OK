@@ -99,7 +99,7 @@ public class MainActivity extends ActionBarActivity {
                 studentName_TextView.setText(StudentKeeper.getStudent().getShortName());
                 studentGroup_TextView.setText(StudentKeeper.getStudent().getGroup());
 
-                openLastTotalFragment();
+                openModulesFragment();
             } catch (Exception e) {
                 e.printStackTrace();
                 eraseAccountInfo();
@@ -128,8 +128,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @SuppressLint("CommitTransaction")
-    private void openLastTotalFragment() {
-        FragmentUtils.showFragment(getSupportFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
+    private void openModulesFragment() {
+        FragmentUtils.showFragment(getSupportFragmentManager().beginTransaction(), FragmentsKeeper.getModules());
     }
 
     @SuppressLint("CommitTransaction")
