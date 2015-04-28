@@ -50,7 +50,7 @@ public class Utils {
         String className = fragmentClass.getSimpleName();
         switch (className) {
             case "LastTotalFragment":
-                return App.getContext().getString(R.string.lastntotal_section);
+                return App.getContext().getString(R.string.allscores_section);
             case "ModulesFragment":
                 return App.getContext().getString(R.string.modules_section);
             case "DetailedSubjectsFragment":

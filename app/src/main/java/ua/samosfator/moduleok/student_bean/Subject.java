@@ -38,6 +38,7 @@ public class Subject {
     }
 
     public Module getLastModule() {
+        if (modules == null) return new EmptyModule();
         int lastModuleIndex = modules.size() - 1;
         while (modules.get(lastModuleIndex).getScore() == 0) {
             lastModuleIndex--;
@@ -76,5 +77,15 @@ public class Subject {
             sum = module.getScore();
         }
         return sum;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "name='" + name + '\'' +
+                ", controlType='" + controlType + '\'' +
+                ", modules=" + modules +
+                ", totalScore=" + totalScore +
+                '}';
     }
 }

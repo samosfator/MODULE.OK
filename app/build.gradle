@@ -19,8 +19,8 @@ android {
         applicationId "ua.samosfator.moduleok"
         minSdkVersion 10
         targetSdkVersion 21
-        versionCode 14
-        versionName "0.6.2"
+        versionCode 15
+        versionName "0.6.3"
     }
     buildTypes {
         release {

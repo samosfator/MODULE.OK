@@ -65,7 +65,7 @@ action#android.net.conn.CONNECTIVITY_CHANGE
 ADDED from AndroidManifest.xml:21:17
 	android:name
 		ADDED from AndroidManifest.xml:21:25
-meta-data#com.google.android.gms.version
+meta-subjects#com.google.android.gms.version
 ADDED from AndroidManifest.xml:25:9
 MERGED from com.google.android.gms:play-services-base:6.5.87:21:9
 	android:value

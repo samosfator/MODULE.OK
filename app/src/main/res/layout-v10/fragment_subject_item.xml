@@ -5,7 +5,7 @@
               android:layout_height="wrap_content"
               android:layout_margin="0dp"
               android:orientation="horizontal"
-              tools:context="ua.samosfator.moduleok.fragment.last_and_total.LastTotalFragment">
+              tools:context="ua.samosfator.moduleok.fragment.all_scores.AllScoresFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

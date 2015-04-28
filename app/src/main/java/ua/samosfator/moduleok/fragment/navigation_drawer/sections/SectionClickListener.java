@@ -26,7 +26,7 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.subjects.DetailedSubjectsFragment;
-import ua.samosfator.moduleok.fragment.last_and_total.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.all_scores.AllScoresFragment;
 import ua.samosfator.moduleok.fragment.modules.ModulesFragment;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
@@ -58,7 +58,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 SectionHighlighter.highlightSection(mRecyclerView, view);
 
                 Analytics.trackFragmentView("Last & Total");
-                MainActivity.setAppToolbarTitle(Utils.getSectionNameFor(LastTotalFragment.class));
+                MainActivity.setAppToolbarTitle(Utils.getSectionNameFor(AllScoresFragment.class));
                 break;
             }
             case MODULES: {

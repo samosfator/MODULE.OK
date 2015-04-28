@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.last_and_total;
+package ua.samosfator.moduleok.fragment.all_scores;
 
 import android.graphics.Typeface;
 import android.os.Handler;

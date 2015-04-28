@@ -9,13 +9,13 @@ import java.util.List;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.subjects.DetailedSubjectsFragment;
 import ua.samosfator.moduleok.fragment.modules.ModulesFragment;
-import ua.samosfator.moduleok.fragment.last_and_total.LastTotalFragment;
+import ua.samosfator.moduleok.fragment.all_scores.AllScoresFragment;
 
 public class FragmentsKeeper {
 
     private static List<Fragment> all = Collections.synchronizedList(new ArrayList<>());
 
-    private static Fragment lastTotal = new LastTotalFragment();
+    private static Fragment lastTotal = new AllScoresFragment();
     private static Fragment modules = new ModulesFragment();
     private static LoginFragment login = new LoginFragment();
     private static DetailedSubjectsFragment detailedSubjectsFragment = new DetailedSubjectsFragment();

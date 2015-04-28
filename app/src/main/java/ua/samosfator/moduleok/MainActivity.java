@@ -65,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.app_toolbar);
-        toolbar.setTitle(R.string.lastntotal_section);
+        toolbar.setTitle(R.string.allscores_section);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

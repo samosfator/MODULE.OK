@@ -29,7 +29,7 @@
     <string name="sampleStudentGroup">Group</string>
     <string name="date_hour_divider">\'at\'</string>
 
-    <string name="lastntotal_section">Last &amp; Total</string>
+    <string name="allscores_section">All &amp; Scores</string>
     <string name="modules_section">Modules</string>
     <string name="logout_section">Log out</string>
     <string name="login_section">Log in</string>

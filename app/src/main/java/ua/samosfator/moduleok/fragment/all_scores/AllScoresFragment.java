@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.last_and_total;
+package ua.samosfator.moduleok.fragment.all_scores;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,13 +27,13 @@ import ua.samosfator.moduleok.fragment.navigation_drawer.sections.RecyclerItemCl
 import ua.samosfator.moduleok.student_bean.Semester;
 import ua.samosfator.moduleok.student_bean.Subject;
 
-public class LastTotalFragment extends Fragment {
+public class AllScoresFragment extends Fragment {
 
     private List<Subject> mSubjects = new ArrayList<>();
     private int semesterDividerIndex = -100;
     private SubjectItemAdapter mSubjectItemAdapter;
 
-    public LastTotalFragment() {
+    public AllScoresFragment() {
         // Required empty public constructor
     }
 
@@ -46,7 +46,7 @@ public class LastTotalFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_lastntotal, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_all_scores, container, false);
         initSubjects();
         initSectionAdapter();
         initRecyclerView(rootView);
@@ -96,20 +96,20 @@ public class LastTotalFragment extends Fragment {
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-LastTotal", "RefreshEndEvent");
         if (FragmentsKeeper.getLastTotal().isVisible()) {
-            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentsKeeper.setLastTotal(new AllScoresFragment());
             FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
         } else {
-            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentsKeeper.setLastTotal(new AllScoresFragment());
         }
     }
 
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
         if (FragmentsKeeper.getLastTotal().isVisible()) {
-            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentsKeeper.setLastTotal(new AllScoresFragment());
             FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLastTotal());
         } else {
-            FragmentsKeeper.setLastTotal(new LastTotalFragment());
+            FragmentsKeeper.setLastTotal(new AllScoresFragment());
         }
     }
 
