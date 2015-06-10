@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
 import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.utils.FragmentUtils;
 import ua.samosfator.moduleok.utils.FragmentsKeeper;
@@ -102,7 +103,7 @@ public class ModulesFragment extends Fragment {
         FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @Subscribe
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-Modules", "RefreshEndEvent");
         if (FragmentsKeeper.getModules().isVisible()) {

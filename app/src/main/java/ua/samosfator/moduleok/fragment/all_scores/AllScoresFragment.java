@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
 import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.utils.FragmentUtils;
 import ua.samosfator.moduleok.utils.FragmentsKeeper;
@@ -93,6 +94,7 @@ public class AllScoresFragment extends Fragment {
         FragmentUtils.showFragment(getFragmentManager().beginTransaction(), FragmentsKeeper.getLogin());
     }
 
+    @Subscribe
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-LastTotal", "RefreshEndEvent");
         if (FragmentsKeeper.getAllScores().isVisible()) {
@@ -103,6 +105,7 @@ public class AllScoresFragment extends Fragment {
         }
     }
 
+    @Subscribe
     public void onEvent(SemesterChangedEvent event) {
         Log.d("SEMESTER_CHANGED_EVENT", "SemesterIndex:" + StudentKeeper.getCurrentSemesterIndex());
         if (FragmentsKeeper.getAllScores().isVisible()) {

@@ -18,6 +18,7 @@ import com.splunk.mint.Mint;
 import com.splunk.mint.MintLogLevel;
 
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
 import ua.samosfator.moduleok.event.LoadPageCompleteEvent;
 import ua.samosfator.moduleok.event.LoginEvent;
 import ua.samosfator.moduleok.event.LogoutEvent;
@@ -137,22 +138,26 @@ public class MainActivity extends ActionBarActivity {
         FragmentUtils.showFragment(getSupportFragmentManager().beginTransaction(), FragmentsKeeper.getLogin());
     }
 
+    @Subscribe
     public void onEvent(LoginEvent event) {
         Log.d("EVENTS-Main", "LoginEvent");
         setAccountInfo();
         EventBus.getDefault().post(new RefreshEndEvent());
     }
 
+    @Subscribe
     public void onEvent(LogoutEvent event) {
         Log.d("EVENTS-Main", "LogoutEvent");
         eraseAccountInfo();
     }
 
+    @Subscribe
     public void onEvent(LoadPageCompleteEvent event) {
         Log.d("EVENTS-Main", "LoadPageCompleteEvent");
         EventBus.getDefault().post(new RefreshEndEvent());
     }
 
+    @Subscribe
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-Main", "RefreshEndEvent");
         if (App.isLoggedIn()) {

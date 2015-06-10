@@ -120,7 +120,7 @@ public class LoginFragment extends Fragment {
         login_txt = (MaterialEditText) rootView.findViewById(R.id.login_editText);
         password_txt = (MaterialEditText) rootView.findViewById(R.id.password_editText);
         if (App.isAndroidNewerIceCreamSandwich()) {
-            login_button = (CircularProgressButton) rootView.findViewById(R.id.btnWithText);
+            login_button = (Button) rootView.findViewById(R.id.btnWithText);
         } else {
             login_button = (Button) rootView.findViewById(R.id.btnWithText);
         }

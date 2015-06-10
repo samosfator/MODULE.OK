@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
 import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.SemesterChangedEvent;
@@ -62,7 +63,7 @@ public class ModuleFragment extends Fragment {
         cacheRecyclerView.put(getArguments().getInt("module"), recyclerView);
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @Subscribe
     public void onEvent(SemesterChangedEvent event) {
         Log.d("EVENTS-Module", "SemesterChangedEvent");
         ModulesFragment.initSubjects();

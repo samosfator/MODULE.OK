@@ -10,6 +10,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.Subscribe;
 import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LoginEvent;
@@ -100,13 +101,13 @@ public class SectionsRecyclerView {
         }
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @Subscribe
     public void onEvent(LoginEvent event) {
         Log.d("EVENTS-Sections", "LoginEvent");
         mFragmentActivity.runOnUiThread(this::addLoginOrLogoutSection);
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @Subscribe
     public void onEvent(LogoutEvent event) {
         Log.d("EVENTS-Sections", "LogoutEvent");
         addLoginOrLogoutSection();

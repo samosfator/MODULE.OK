@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
 import ua.samosfator.moduleok.utils.App;
 import ua.samosfator.moduleok.utils.Utils;
 import ua.samosfator.moduleok.utils.FragmentUtils;
@@ -99,6 +100,7 @@ public class DetailedSubjectsFragment extends Fragment {
         FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
     }
 
+    @Subscribe
     public void onEvent(RefreshEndEvent event) {
         Log.d("EVENTS-Subjects", "RefreshEndEvent");
         if (FragmentsKeeper.getDetailedSubjectsFragment().isVisible()) {
@@ -109,6 +111,7 @@ public class DetailedSubjectsFragment extends Fragment {
         }
     }
 
+    @Subscribe
     public void onEvent(SemesterChangedEvent event) {
         Log.d("EVENTS-Detailed", "SemesterChangedEvent");
         if (FragmentsKeeper.getDetailedSubjectsFragment().isVisible()) {
