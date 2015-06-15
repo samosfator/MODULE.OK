@@ -29,7 +29,7 @@
     <string name="sampleStudentGroup">Group</string>
     <string name="date_hour_divider">\'at\'</string>
 
-    <string name="allscores_section">All &amp; Scores</string>
+    <string name="home_section">Home</string>
     <string name="modules_section">Modules</string>
     <string name="logout_section">Log out</string>
     <string name="login_section">Log in</string>
@@ -54,4 +54,5 @@
     <string name="ago">ago</string>
     <string name="in_future_period">in</string>
     <string name="days">days</string>
+    <string name="nearest_modules">Nearest Modules</string>
 </resources>

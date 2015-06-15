@@ -53,14 +53,14 @@ public class SectionsRecyclerView {
     private void initSections() {
         mSections = new ArrayList<>();
 
+        SectionDrawer lastTotalSection = new SectionDrawer(App.getContext().getString(R.string.home_section), R.drawable.ic_format_list_numbers_grey600_24dp);
+        mSections.add(lastTotalSection);
+
         SectionDrawer modulesSection = new SectionDrawer(App.getContext().getString(R.string.modules_section), R.drawable.ic_file_document_box_grey600_24dp);
         mSections.add(modulesSection);
 
         SectionDrawer detailedSubjects = new SectionDrawer(mFragmentActivity.getString(R.string.detailed_subjects_section), R.drawable.ic_poll_grey600_24dp);
         mSections.add(detailedSubjects);
-
-        SectionDrawer lastTotalSection = new SectionDrawer(App.getContext().getString(R.string.allscores_section), R.drawable.ic_format_list_numbers_grey600_24dp);
-        mSections.add(lastTotalSection);
 
         addLoginOrLogoutSection();
 

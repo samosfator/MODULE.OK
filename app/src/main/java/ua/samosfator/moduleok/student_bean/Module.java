@@ -50,4 +50,13 @@ public class Module {
         result = 31 * result + score;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "date='" + date + '\'' +
+                ", weight=" + weight +
+                ", score=" + score +
+                '}';
+    }
 }

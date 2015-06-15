@@ -1,4 +1,4 @@
-package ua.samosfator.moduleok.fragment.all_scores;
+package ua.samosfator.moduleok.fragment.home;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

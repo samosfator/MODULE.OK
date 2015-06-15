@@ -1,6 +1,10 @@
 package ua.samosfator.moduleok.student_bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class Subject {
 
@@ -38,16 +42,33 @@ public class Subject {
     }
 
     public Module getLastModule() {
-        if (modules == null) return new EmptyModule();
+        if (modules == null || modules.size() < 1) return new EmptyModule();
         int lastModuleIndex = modules.size() - 1;
-        while (modules.get(lastModuleIndex).getScore() == 0) {
+        while (modules.get(lastModuleIndex).getScore() == 0 && lastModuleIndex >= 0) {
             lastModuleIndex--;
-            if (lastModuleIndex < 0) {
-                return modules.get(0);
-            }
         }
 
-        return modules.get(0);
+        return modules.get(lastModuleIndex);
+    }
+
+    public Module getNearestModule() {
+        if (modules == null || modules.size() < 1) return new EmptyModule();
+        int nearestModuleIndex = modules.size() - 1;
+        try {
+            while (modules.get(nearestModuleIndex).getScore() != 0 && nearestModuleIndex > 0) {
+                nearestModuleIndex--;
+            }
+        } catch (Exception e) {
+            System.out.println(modules.size());
+            System.out.println(nearestModuleIndex);
+            System.out.println(modules);
+            throw e;
+        }
+        if (nearestModuleIndex == 0) {
+            return new EmptyModule();
+        }
+
+        return modules.get(nearestModuleIndex);
     }
 
     public Module getMostValuableModule() {
@@ -77,6 +98,21 @@ public class Subject {
             sum = module.getScore();
         }
         return sum;
+    }
+
+    public static class ModulesByDateComparator implements Comparator<Module> {
+
+        @Override
+        public int compare(Module a, Module b) {
+            SimpleDateFormat dateParser = new SimpleDateFormat("dd.mm.yy", Locale.getDefault());
+
+            try {
+                return dateParser.parse(a.getDate()).compareTo(dateParser.parse(b.getDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
     }
 
     @Override

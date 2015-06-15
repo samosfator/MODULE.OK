@@ -26,7 +26,7 @@ import ua.samosfator.moduleok.R;
 import ua.samosfator.moduleok.event.LogoutEvent;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.subjects.DetailedSubjectsFragment;
-import ua.samosfator.moduleok.fragment.all_scores.AllScoresFragment;
+import ua.samosfator.moduleok.fragment.home.HomeFragment;
 import ua.samosfator.moduleok.fragment.modules.ModulesFragment;
 
 public class SectionClickListener implements RecyclerItemClickListener.OnItemClickListener {
@@ -48,7 +48,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
         switch (clickedSection) {
             case ALL_SCORES: {
                 if (App.isLoggedIn()) {
-                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getAllScores());
+                    FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getHome());
                 } else {
                     Log.d("Sections", "Not logged in");
                     FragmentUtils.showFragment(fragmentManager.beginTransaction(), FragmentsKeeper.getLogin());
@@ -58,7 +58,7 @@ public class SectionClickListener implements RecyclerItemClickListener.OnItemCli
                 SectionHighlighter.highlightSection(mRecyclerView, view);
 
                 Analytics.trackFragmentView("Last & Total");
-                MainActivity.setAppToolbarTitle(Utils.getSectionNameFor(AllScoresFragment.class));
+                MainActivity.setAppToolbarTitle(Utils.getSectionNameFor(HomeFragment.class));
                 break;
             }
             case MODULES: {

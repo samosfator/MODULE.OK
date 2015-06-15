@@ -9,23 +9,23 @@ import java.util.List;
 import ua.samosfator.moduleok.fragment.LoginFragment;
 import ua.samosfator.moduleok.fragment.subjects.DetailedSubjectsFragment;
 import ua.samosfator.moduleok.fragment.modules.ModulesFragment;
-import ua.samosfator.moduleok.fragment.all_scores.AllScoresFragment;
+import ua.samosfator.moduleok.fragment.home.HomeFragment;
 
 public class FragmentsKeeper {
 
     private static List<Fragment> all = Collections.synchronizedList(new ArrayList<>());
 
-    private static Fragment allScores = new AllScoresFragment();
+    private static Fragment home = new HomeFragment();
     private static Fragment modules = new ModulesFragment();
     private static LoginFragment login = new LoginFragment();
     private static DetailedSubjectsFragment detailedSubjectsFragment = new DetailedSubjectsFragment();
 
-    public static Fragment getAllScores() {
-        return allScores;
+    public static Fragment getHome() {
+        return home;
     }
 
-    public static void setAllScores(Fragment allScores) {
-        FragmentsKeeper.allScores = allScores;
+    public static void setHome(Fragment home) {
+        FragmentsKeeper.home = home;
     }
 
     public static Fragment getModules() {
@@ -59,7 +59,7 @@ public class FragmentsKeeper {
 
     private static void populateFragmentsList() {
         all.clear();
-        all.add(allScores);
+        all.add(home);
         all.add(modules);
         all.add(login);
     }

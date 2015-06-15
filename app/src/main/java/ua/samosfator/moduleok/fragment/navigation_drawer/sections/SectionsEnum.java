@@ -2,9 +2,9 @@ package ua.samosfator.moduleok.fragment.navigation_drawer.sections;
 
 public enum SectionsEnum {
 
-    MODULES(0),
-    DETAILED_SUBJECTS(1),
-    ALL_SCORES(2),
+    ALL_SCORES(0),
+    MODULES(1),
+    DETAILED_SUBJECTS(2),
     LOG_IN(3),
     EMPTY(4),
     VERSION(5),

@@ -23,4 +23,18 @@ public class Semester {
         }
         return maxModuleCount;
     }
+
+    public static Subject getSubjectByModule(List<Subject> subjects, Module module) {
+        Subject soughtSubject = null;
+        for (Subject subject : subjects) {
+            for (Module m : subject.getModules()) {
+                if (m.getWeight() == module.getWeight()
+                        && m.getDate().equals(module.getDate())
+                        && m.getScore() == module.getScore()) {
+                    soughtSubject = subject;
+                }
+            }
+        }
+        return soughtSubject;
+    }
 }

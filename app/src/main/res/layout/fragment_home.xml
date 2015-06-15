@@ -1,0 +1,253 @@
+<FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_100"
+        android:padding="15dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+            android:id="@+id/home_cardview"
+            android:layout_width="match_parent"
+            app:contentPadding="15dp"
+            app:cardElevation="2dp"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nearest_modules"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            <FrameLayout
+                    android:id="@+id/first_next_module"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                              xmlns:tools="http://schemas.android.com/tools"
+                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                              android:id="@+id/subject_item_layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_margin="0dp"
+                              android:orientation="horizontal"
+                              tools:context="ua.samosfator.moduleok.fragment.home.HomeFragment">
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                            android:layout_width="match_parent"
+                            app:rippleDimension="10dp"
+                            app:rippleHover="true"
+                            app:rippleOverlay="true"
+                            android:layout_height="match_parent">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:padding="8dp"
+                                android:layout_height="wrap_content">
+
+                            <ViewFlipper
+                                    android:id="@+id/subject_score_view_flipper"
+                                    android:layout_width="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_height="wrap_content">
+
+                                <TextView
+                                        android:id="@+id/subject_score"
+                                        android:layout_width="@dimen/score_wrapper_size"
+                                        android:layout_height="@dimen/score_wrapper_size"
+                                        android:text="75"
+                                        android:textColor="@color/textColorPrimary"
+                                        android:gravity="center"
+                                        android:textSize="22sp"
+                                        android:background="@drawable/circle_2"/>
+
+                            </ViewFlipper>
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="16dp"
+                                    android:gravity="center_vertical"
+                                    tools:ignore="RtlHardcoded,RtlSymmetry">
+
+                                <TextView
+                                        android:id="@+id/subject_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Філософія"
+                                        android:singleLine="true"
+                                        android:textColor="@color/primary_text_default_material_light"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="20sp"/>
+
+                                <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:orientation="horizontal"
+                                        android:paddingLeft="2dp"
+                                        android:paddingTop="4dp"
+                                        android:layout_height="wrap_content">
+
+                                    <TextView
+                                            android:id="@+id/finish_flag"
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:layout_marginLeft="-24dp"
+                                            android:layout_marginTop="-4dp"/>
+
+                                    <TextView
+                                            android:id="@+id/subject_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="02.02.14"
+                                            android:textColor="@color/grey_700"
+                                            android:layout_gravity="center_vertical"/>
+
+                                    <TextView
+                                            android:id="@+id/subject_weight"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="40%"
+                                            android:textColor="@color/grey_500"
+                                            android:paddingLeft="8dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="14sp"/>
+
+                                    <TextView
+                                            android:id="@+id/subject_control_type"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text=""
+                                            android:textColor="@color/grey_200"
+                                            android:paddingLeft="8dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="14sp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                    android:id="@+id/second_next_module"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                              xmlns:tools="http://schemas.android.com/tools"
+                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                              android:id="@+id/second_subject_item_layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_margin="0dp"
+                              android:orientation="horizontal"
+                              tools:context="ua.samosfator.moduleok.fragment.home.HomeFragment">
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                            android:layout_width="match_parent"
+                            app:rippleDimension="10dp"
+                            app:rippleHover="true"
+                            app:rippleOverlay="true"
+                            android:layout_height="match_parent">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:padding="8dp"
+                                android:layout_height="wrap_content">
+
+                            <ViewFlipper
+                                    android:id="@+id/second_subject_score_view_flipper"
+                                    android:layout_width="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_height="wrap_content">
+
+                                <TextView
+                                        android:id="@+id/second_subject_score"
+                                        android:layout_width="@dimen/score_wrapper_size"
+                                        android:layout_height="@dimen/score_wrapper_size"
+                                        android:text="90"
+                                        android:textColor="@color/textColorPrimary"
+                                        android:gravity="center"
+                                        android:textSize="22sp"
+                                        android:background="@drawable/circle_2"/>
+                            </ViewFlipper>
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="16dp"
+                                    android:gravity="center_vertical"
+                                    tools:ignore="RtlHardcoded,RtlSymmetry">
+
+                                <TextView
+                                        android:id="@+id/second_subject_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Політологія"
+                                        android:singleLine="true"
+                                        android:textColor="@color/primary_text_default_material_light"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="20sp"/>
+
+                                <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:orientation="horizontal"
+                                        android:paddingLeft="2dp"
+                                        android:paddingTop="4dp"
+                                        android:layout_height="wrap_content">
+
+                                    <TextView
+                                            android:id="@+id/second_subject_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="02.02.14"
+                                            android:textColor="@color/grey_700"
+                                            android:layout_gravity="center_vertical"/>
+
+                                    <TextView
+                                            android:id="@+id/second_subject_weight"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="40%"
+                                            android:textColor="@color/grey_500"
+                                            android:paddingLeft="8dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="14sp"/>
+
+                                    <TextView
+                                            android:id="@+id/second_subject_control_type"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text=""
+                                            android:textColor="@color/grey_200"
+                                            android:paddingLeft="8dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="14sp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/toolbar_dropshadow"/>
+</FrameLayout>

@@ -10,7 +10,7 @@
     <string name="enter_password_message">Будь ласка, введіть пароль</string>
     <string name="first_semester_name">Перший семестр</string>
     <string name="feedback_section">Фідбек</string>
-    <string name="allscores_section">Усі бали</string>
+    <string name="home_section">Головна</string>
     <string name="last_synchronized_time">Час синхронізації з mod.tanet</string>
     <string name="login_editText_hint">Логін</string>
     <string name="login_explanation">Введіть логін і пароль, який Ви використовуєте на mod.tanet.edu.ua</string>
@@ -55,4 +55,5 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nearest_modules">Найближчі модулі</string>
 </resources>
