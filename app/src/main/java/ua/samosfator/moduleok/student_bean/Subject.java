@@ -100,6 +100,47 @@ public class Subject {
         return sum;
     }
 
+    public int tryToPredictScore() {
+        int passedModulesNumber = getPassedModulesNumber();
+        int allModulesNumber = modules.size();
+
+        if (allModulesNumber - passedModulesNumber == 1) {
+            double lastModuleWeight = modules.get(allModulesNumber - 1).getWeight();
+            double passedModulesTotalFraction = 0;
+            for (Module module : modules) {
+                passedModulesTotalFraction += module.getScore() * (module.getWeight() / 100.0);
+            }
+            double lastModulePredictedScore = ((90 - passedModulesTotalFraction) / (lastModuleWeight / 100.0));
+            if (lastModulePredictedScore < 100) {
+                return (int) Math.round(lastModulePredictedScore);
+            } else {
+                lastModulePredictedScore = ((75 - passedModulesTotalFraction) / (lastModuleWeight / 100.0));
+                if (lastModulePredictedScore < 100) {
+                    return (int) Math.round(lastModulePredictedScore);
+                } else {
+                    lastModulePredictedScore = ((60 - passedModulesTotalFraction) / (lastModuleWeight / 100.0));
+                    if (lastModulePredictedScore < 100) {
+                        return (int) Math.round(lastModulePredictedScore);
+                    } else {
+                        return 0;
+                    }
+                }
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    public int getPassedModulesNumber() {
+        int count = 0;
+        for (Module module : modules) {
+            if (module.isPassed()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static class ModulesByDateComparator implements Comparator<Module> {
 
         @Override

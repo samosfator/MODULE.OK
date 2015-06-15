@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
         Subject firstNearestModulesSubject = nearestModulesSubjects.get(0);
 
         firstModuleNameTextView.setText(firstNearestModulesSubject.getName());
-        predictedScoreFirstModuleTextView.setText(String.valueOf(firstNearestModule.getScore()));
+        predictedScoreFirstModuleTextView.setText(String.valueOf(firstNearestModulesSubject.tryToPredictScore()));
         firstModuleDateTextView.setText(firstNearestModule.getDate());
         firstModuleWeightTextView.setText(firstNearestModule.getWeight() + "%");
 
@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
         Subject secondNearestModulesSubject = nearestModulesSubjects.get(1);
 
         secondModuleNameTextView.setText(secondNearestModulesSubject.getName());
-        predictedScoreSecondModuleTextView.setText(String.valueOf(secondNearestModule.getScore()));
+        predictedScoreSecondModuleTextView.setText(String.valueOf(secondNearestModulesSubject.tryToPredictScore()));
         secondModuleDateTextView.setText(secondNearestModule.getDate());
         secondModuleWeightTextView.setText(secondNearestModule.getWeight() + "%");
 

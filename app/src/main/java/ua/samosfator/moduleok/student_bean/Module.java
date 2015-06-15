@@ -30,6 +30,10 @@ public class Module {
         this.score = score;
     }
 
+    public boolean isPassed() {
+        return score != 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
