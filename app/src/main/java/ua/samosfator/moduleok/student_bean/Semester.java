@@ -1,5 +1,7 @@
 package ua.samosfator.moduleok.student_bean;
 
+import java8.util.stream.StreamSupport;
+
 import java.util.List;
 
 public class Semester {
@@ -28,13 +30,18 @@ public class Semester {
         Subject soughtSubject = null;
         for (Subject subject : subjects) {
             for (Module m : subject.getModules()) {
-                if (m.getWeight() == module.getWeight()
-                        && m.getDate().equals(module.getDate())
-                        && m.getScore() == module.getScore()) {
+                if (m.equals(module)) {
                     soughtSubject = subject;
                 }
             }
         }
         return soughtSubject;
+    }
+
+    public double getAverageScore() {
+        return StreamSupport.stream(subjects)
+                .mapToDouble(Subject::getAverageScore)
+                .average()
+                .getAsDouble();
     }
 }

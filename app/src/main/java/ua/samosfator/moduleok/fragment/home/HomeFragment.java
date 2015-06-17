@@ -45,13 +45,14 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        mSubjects = StudentKeeper.getStudent().getSemester(StudentKeeper.getCurrentSemesterIndex()).getSubjects();
+        Semester semester = StudentKeeper.getStudent().getSemester(StudentKeeper.getCurrentSemesterIndex());
+        mSubjects = semester.getSubjects();
         mCardView = (CardView) rootView.findViewById(R.id.home_cardview);
 
         FrameLayout firstNextModule = (FrameLayout) mCardView.findViewById(R.id.first_next_module);
         FrameLayout secondNextModule = (FrameLayout) mCardView.findViewById(R.id.second_next_module);
 
-//        TextView predictedScoreFirstModuleTextView = (TextView) firstNextModule.findViewById(R.id.subject_score);
+        TextView averageScoreTextView = (TextView) rootView.findViewById(R.id.average_score_textview);
 //        TextView predictedScoreSecondModuleTextView = (TextView) secondNextModule.findViewById(R.id.second_subject_score);
 
         TextView firstModuleNameTextView = (TextView) firstNextModule.findViewById(R.id.subject_name);
@@ -61,6 +62,9 @@ public class HomeFragment extends Fragment {
         TextView secondModuleDateTextView = (TextView) secondNextModule.findViewById(R.id.second_subject_date);
         TextView secondModuleWeightTextView = (TextView) secondNextModule.findViewById(R.id.second_subject_weight);
 
+
+        /////////////////////
+        averageScoreTextView.setText(String.format("%.2f", semester.getAverageScore()));
 
         List<Module> nearestModules = getNearestModules();
         List<Subject> nearestModulesSubjects = getNearestModulesSubjects(nearestModules);

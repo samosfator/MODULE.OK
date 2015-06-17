@@ -1,5 +1,6 @@
 package ua.samosfator.moduleok.student_bean;
 
+import java8.util.stream.StreamSupport;
 import ua.samosfator.moduleok.utils.PredictedScore;
 
 import java.text.ParseException;
@@ -138,6 +139,13 @@ public class Subject {
         } else {
             return PredictedScore.emptyInstance();
         }
+    }
+
+    public double getAverageScore() {
+        return StreamSupport.stream(modules)
+                .mapToDouble(Module::getScore)
+                .average()
+                .getAsDouble();
     }
 
     public int getPassedModulesNumber() {
