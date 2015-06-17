@@ -20,10 +20,7 @@ import ua.samosfator.moduleok.event.SemesterChangedEvent;
 import ua.samosfator.moduleok.student_bean.Module;
 import ua.samosfator.moduleok.student_bean.Semester;
 import ua.samosfator.moduleok.student_bean.Subject;
-import ua.samosfator.moduleok.utils.App;
-import ua.samosfator.moduleok.utils.FragmentUtils;
-import ua.samosfator.moduleok.utils.FragmentsKeeper;
-import ua.samosfator.moduleok.utils.StudentKeeper;
+import ua.samosfator.moduleok.utils.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,8 +51,8 @@ public class HomeFragment extends Fragment {
         FrameLayout firstNextModule = (FrameLayout) mCardView.findViewById(R.id.first_next_module);
         FrameLayout secondNextModule = (FrameLayout) mCardView.findViewById(R.id.second_next_module);
 
-        TextView predictedScoreFirstModuleTextView = (TextView) firstNextModule.findViewById(R.id.subject_score);
-        TextView predictedScoreSecondModuleTextView = (TextView) secondNextModule.findViewById(R.id.second_subject_score);
+//        TextView predictedScoreFirstModuleTextView = (TextView) firstNextModule.findViewById(R.id.subject_score);
+//        TextView predictedScoreSecondModuleTextView = (TextView) secondNextModule.findViewById(R.id.second_subject_score);
 
         TextView firstModuleNameTextView = (TextView) firstNextModule.findViewById(R.id.subject_name);
         TextView firstModuleDateTextView = (TextView) firstNextModule.findViewById(R.id.subject_date);
@@ -77,7 +74,20 @@ public class HomeFragment extends Fragment {
         Subject firstNearestModulesSubject = nearestModulesSubjects.get(0);
 
         firstModuleNameTextView.setText(firstNearestModulesSubject.getName());
-        predictedScoreFirstModuleTextView.setText(String.valueOf(firstNearestModulesSubject.tryToPredictScore()));
+
+//        PredictedScore scorePredictionFirst = firstNearestModulesSubject.getScorePrediction();
+//        int predictedFirstScore = scorePredictionFirst.getSufficientScore();
+//        int desiredTotalScoreFirst = scorePredictionFirst.getDesiredTotalScore();
+//        predictedScoreFirstModuleTextView.setText(String.valueOf(predictedFirstScore));
+//
+//        if (desiredTotalScoreFirst >= 90) {
+//            predictedScoreFirstModuleTextView.setBackgroundResource(R.drawable.circle_5_prediction);
+//        } else if (desiredTotalScoreFirst >= 75) {
+//            predictedScoreFirstModuleTextView.setBackgroundResource(R.drawable.circle_4_prediction);
+//        } else if (desiredTotalScoreFirst >= 60) {
+//            predictedScoreFirstModuleTextView.setBackgroundResource(R.drawable.circle_3_prediction);
+//        }
+
         firstModuleDateTextView.setText(firstNearestModule.getDate());
         firstModuleWeightTextView.setText(firstNearestModule.getWeight() + "%");
 
@@ -89,7 +99,7 @@ public class HomeFragment extends Fragment {
         Subject secondNearestModulesSubject = nearestModulesSubjects.get(1);
 
         secondModuleNameTextView.setText(secondNearestModulesSubject.getName());
-        predictedScoreSecondModuleTextView.setText(String.valueOf(secondNearestModulesSubject.tryToPredictScore()));
+
         secondModuleDateTextView.setText(secondNearestModule.getDate());
         secondModuleWeightTextView.setText(secondNearestModule.getWeight() + "%");
 

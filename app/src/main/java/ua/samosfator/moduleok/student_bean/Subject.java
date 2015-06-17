@@ -1,5 +1,7 @@
 package ua.samosfator.moduleok.student_bean;
 
+import ua.samosfator.moduleok.utils.PredictedScore;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -100,7 +102,8 @@ public class Subject {
         return sum;
     }
 
-    public int tryToPredictScore() {
+    public PredictedScore getScorePrediction() {
+        PredictedScore predictedScore;
         int passedModulesNumber = getPassedModulesNumber();
         int allModulesNumber = modules.size();
 
@@ -112,22 +115,28 @@ public class Subject {
             }
             double lastModulePredictedScore = ((90 - passedModulesTotalFraction) / (lastModuleWeight / 100.0));
             if (lastModulePredictedScore < 100) {
-                return (int) Math.round(lastModulePredictedScore);
+                int sufficientScore = (int) Math.round(lastModulePredictedScore);
+                predictedScore = new PredictedScore(allModulesNumber, passedModulesNumber, 90, sufficientScore);
+                return predictedScore;
             } else {
                 lastModulePredictedScore = ((75 - passedModulesTotalFraction) / (lastModuleWeight / 100.0));
                 if (lastModulePredictedScore < 100) {
-                    return (int) Math.round(lastModulePredictedScore);
+                    int sufficientScore = (int) Math.round(lastModulePredictedScore);
+                    predictedScore = new PredictedScore(allModulesNumber, passedModulesNumber, 75, sufficientScore);
+                    return predictedScore;
                 } else {
                     lastModulePredictedScore = ((60 - passedModulesTotalFraction) / (lastModuleWeight / 100.0));
                     if (lastModulePredictedScore < 100) {
-                        return (int) Math.round(lastModulePredictedScore);
+                        int sufficientScore = (int) Math.round(lastModulePredictedScore);
+                        predictedScore = new PredictedScore(allModulesNumber, passedModulesNumber, 60, sufficientScore);
+                        return predictedScore;
                     } else {
-                        return 0;
+                        return PredictedScore.emptyInstance();
                     }
                 }
             }
         } else {
-            return 0;
+            return PredictedScore.emptyInstance();
         }
     }
 
